@@ -1,0 +1,10 @@
+<h1>Login Below</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Username:</p>
+    <input type="text" name="username" />
+    <p>Password:</p>
+    <input type="password" name="password" />
+    <input type="submit" />
+</form>

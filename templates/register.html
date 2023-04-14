@@ -1,0 +1,16 @@
+<h1>Sign Up Below</h1>
+{% if registered %}
+      Registrasi berhasil
+{% endif %}
+<form method="POST" action="register">
+    {% csrf_token %}
+    <p>Username:</p>
+    <input type="text" name="username" />
+    <p>Email:</p>
+    <input type="email" name="email" />
+    <p>Password:</p>
+    <input type="password" name="password1" />
+    <p>Confirm Password:</p>
+    <input type="password" name="password2" />
+    <input type="submit" />
+</form>
