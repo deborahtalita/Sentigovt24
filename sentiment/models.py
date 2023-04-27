@@ -7,4 +7,9 @@ class Tweet(models.Model):
     user_name = models.TextField(default=None)
     created_at = models.TextField(default=None)
     # text_preprocessed
-    # sentiment
+    sentiment = models.TextField(default=None)
+
+class Bacapres(models.Model):
+    name = models.TextField(default=None)
+    keyword = models.TextField(default=None)
+    desc = models.TextField(default=None)
