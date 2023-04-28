@@ -1,0 +1,12 @@
+<h1>Form Bacapres</h1>
+
+<form method="POST" action="bacapres">
+    {% csrf_token %}
+    <p>Nama:</p>
+    <input type="text" name="name" />
+    <p>Keyword:</p>
+    <input type="text" name="keyword" />
+    <p>Description:</p>
+    <input type="text" name="desc" />
+    <input type="submit" />
+</form>
