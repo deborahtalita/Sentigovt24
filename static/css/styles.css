@@ -1,0 +1,214 @@
+@font-face {
+    font-family: 'BigShouldersDisplay-Bold';
+    src: url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf');
+    src: url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf') format('ttf'),
+        url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-SemiBold';
+    src: url('../fonts/Poppins/Poppins-SemiBold.otf');
+    src: url('../fonts/Poppins/Poppins-SemiBold.otf') format('otf'),
+        url('../fonts/Poppins/Poppins-SemiBold.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Medium';
+    src: url('../fonts/Poppins/Poppins-Medium.otf');
+    src: url('../fonts/Poppins/Poppins-Medium.otf') format('otf'),
+        url('../fonts/Poppins/Poppins-Medium.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('../fonts/Poppins/Poppins-Regular.otf');
+    src: url('../fonts/Poppins/Poppins-Regular.otf') format('otf'),
+        url('../fonts/Poppins/Poppins-Regular.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('../fonts/Poppins/Poppins-Bold.otf');
+    src: url('../fonts/Poppins/Poppins-Bold.otf') format('otf'),
+        url('../fonts/Poppins/Poppins-Bold.otf') format('truetype');
+}
+
+.header{
+    background: #6100FF;
+    background: linear-gradient(38deg, #3fefc9 0%, rgb(128, 28, 209) 59%, #00FFB2 100%);
+    height: 120vh;
+}
+
+.title {
+    font-family: BigShouldersDisplay-Bold;
+    font-size: 30px;
+}
+
+.menubar {
+    font-family: Poppins-Medium;
+    font-size: 13px;
+}
+
+.login {
+    font-family: Poppins-Semibold;
+    font-size: 13px;
+}
+
+.register {
+    font-family: Poppins-Semibold;
+    font-size: 13px;
+    background-color: #7B5BFF;
+}
+
+.typeWebsite    {
+    font-family: Poppins-Regular;
+    font-size: 20px;
+}
+
+.slogan {
+    font-family: Poppins-Semibold;
+    font-size: 55px;
+}
+
+.subSlogan {
+    font-family: Poppins-Regular;
+    font-size: 12px;
+}
+
+.subSlogan span {
+    font-family: Poppins-Bold;
+}
+
+.getStarted {
+    font-family: Poppins-SemiBold;
+    font-size: 12px;
+}
+
+.bacapresTitle {
+    font-family: Poppins-SemiBold;
+    font-size: 35px;
+    color: #1E1D4C;
+}
+
+.bacapresSubTitle {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #1E1D4C;
+}
+
+.bacapresSubTitle span {
+    font-family: Poppins-Bold;
+}
+
+.featuresTitle {
+    font-family: Poppins-SemiBold;
+    font-size: 35px;
+    color: #1E1D4C;
+}
+
+.featuresSubTitle {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #1E1D4C;
+}
+
+.cardFeatures {
+    border-color: #C2C2C2;
+    height: 542px;
+}
+
+.cardTitle {
+    font-family: Poppins-SemiBold;
+    font-size: 20px;
+    color: #1E1D4C;
+}
+
+.more {
+    border-color: #C2C2C2;
+}
+
+.faqBackground {
+    background: #6100FF;
+    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
+    height: 85vh;
+}
+
+.faqTitle {
+    font-family: Poppins-Semibold;
+    font-size: 35px;
+}
+
+.faqSubTitle {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+}
+
+.faqQuestion {
+    font-family: poppins-regular;
+    font-size: 15px;
+}
+
+.descFeatures {
+    font-family: Poppins-Regular;
+    font-size: 12px;
+    color: #1E1D4C;
+}
+
+.quoteText {
+    font-family: Poppins-Regular;
+    font-size: 30px;
+}
+
+.quoteText span{
+    font-family: Poppins-SemiBold;
+    font-size: 20px;
+}
+
+.footerBackground {
+    background: #6100FF;
+    background: linear-gradient(38deg, #590f74 0%, rgb(37, 16, 117) 59%, #044f21 100%);
+    height: 50vh;
+}
+
+.footerTitle {
+    font-family: BigShouldersDisplay-Bold;
+    font-size: 30px;
+}
+
+.footerMenuBar {
+    font-family: Poppins-SemiBold;
+    font-size: 15px;
+}
+
+/* Login */
+.loginBackground, .registerBackground {
+    background: #6100FF;
+    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
+}
+
+.welcomeText {
+    font-family: Poppins-SemiBold;
+    font-size: 45px;
+    color: #1E1D4C;
+}
+
+.descWelcome {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #969696;
+}
+
+.email, .password {
+    font-family: Poppins-Medium;
+    font-size: 15px;
+}
+
+.backButton {
+    font-family: Poppins-Bold;
+    font-size: 20px;
+}
+
+.dontHaveAccount {
+    font-family: Poppins-regular;
+
+}

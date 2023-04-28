@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script defer src="{% static 'js/cdn.min.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <title>Document</title>
+</head>
+<body class="bg-white">
+    <!-- Start Navigasi -->
+    <div class="container mx-auto">
+        <nav class="flex justify-between items-center mt-4 mx-20">
+            <div class="title text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOV24</a></div>
+            <ul class=" menubar text-black flex gap-16 pl-20">
+                <li class="hover:opacity-75 transition-opacity"><a href="#">HOME</a></li>
+                <li class="hover:opacity-75 transition-opacity"><a href="#">FEATURES</a></li>
+                <li class="hover:opacity-75 transition-opacity"><a href="#">FAQ</a></li>
+            </ul>
+            <div class="flex gap-6 items-center">
+                <a href="{% url 'login' %}" class="login hover:opacity-75 transition-opacity">Log In</a>
+                <a href="{% url 'register' %}"><button class="register px-10 py-3 rounded-lg text-white">Register</button></a>
+            </div>
+        </nav>
+    </div>
+    <!-- End Navigasi -->
+    <!-- Start Header-->
+    <header class="Header" id="headerId">
+        <div class="relative headerContent mx-8 mt-4" id="headerContentId">
+            <div class="header w-full bg-no-repeat rounded-2xl">
+                <div class="flex flex-col text-center absolute top-0 left-1/2 transform -translate-x-1/2">
+                    <div class="typeWebsite text-white mt-16">Website Sentiment Analysis</div>
+                    <div class="slogan text-white mt-3">See Beyond the Noise in <br /> The 2024 Race</div>
+                    <div class="subSlogan text-white mt-8">Navigate the upcoming presidential election with our
+                        <span>powerful</span> <br /> sentiment analysis app, providing <span>insights</span> you can
+                        <span>trust</span>
+                    </div>
+                    <button type="button"
+                        class="getStarted text-white mt-9 items-center flex justify-center border-2 rounded-lg mx-auto py-3 px-9">
+                        Get Started
+                        <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col text-center absolute top-0 left-1/2 transform -translate-x-1/2">
+                <div class="typeWebsite text-white mt-16">Website Sentiment Analysis</div>
+                <div class="slogan text-white mt-3">See Beyond the Noise in <br /> The 2024 Race</div>
+                <div class="subSlogan text-white mt-8">Navigate the upcoming presidential election with our
+                    <span>powerful</span> <br /> sentiment analysis app, providing <span>insights</span> you can
+                    <span>trust</span>
+                </div>
+                <button type="button"
+                    class="getStarted text-white mt-9 items-center flex justify-center border-2 rounded-lg mx-auto py-3 px-9">
+                    Get Started
+                    <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <img class="absolute -bottom-20 left-1/2 pr-10  transform -translate-x-1/2"
+                src="../../static/media/icons/modelBackground.svg" alt="modelAplication">
+            <img class="absolute top-24 left-24" src="../../static/media/icons/like1.svg" alt="like 1">
+            <img class="absolute top-44 right-24" src="../../static/media/icons/like2.svg" alt="like 2">
+            <img class="absolute bottom-64 left-36" src="../../static/media/icons/bar.svg" alt="bar">
+            <img class="absolute -bottom-20 right-0" src="../../static/media/icons/line.svg" alt="line">
+            <img class="absolute right-96 top-80" src="../../static/media/icons/pie.svg" alt="pie">
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- Start Bacapres -->
+    <section class="bacapres" id="bacapresId">
+        <div class="bacapresContent" id="bacapresContentId">
+            <div class="container mx-auto">
+                <div class="bacapresTitle flex justify-center mt-44">Presidential Candidate</div>
+                <div class="bacapresSubTitle flex justify-center">This presidential candidate has been determined by the
+                    trusted survey agency <span>"Poltracking"</span></div>
+                <div class="flex gap-5 justify-center mt-12">
+                    <img src="../../static/media/icons/Agus.svg" alt="Agus Harimurti">
+                    <img src="../../static/media/icons/Airlangga.svg" alt="Airlangga Hartanto">
+                    <img src="../../static/media/icons/Anies.svg" alt="Anies Baswedan">
+                    <img src="../../static/media/icons/Erick.svg" alt="Erick Thohir">
+                    <img src="../../static/media/icons/Ganjar.svg" alt="Ganjar Pranowo">
+                    <img src="../../static/media/icons/Khofifah.svg" alt="Khofifah Indar">
+                    <img src="../../static/media/icons/Prabowo.svg" alt="Prabowo Subianto">
+                    <img src="../../static/media/icons/Puan.svg" alt="Puan Maharani">
+                    <img src="../../static/media/icons/Ridwan.svg" alt="Ridwan Kamil">
+                    <img src="../../static/media/icons/Sandiaga.svg" alt="Sandiaga Uno">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Bacapres -->
+    <!-- Start Features -->
+    <section class="features" id="featuresId">
+        <div class="featuresContent" id="featuresContentId">
+            <div class="container mx-auto">
+                <div class="featuresTitle flex justify-center mt-28">Best Features</div>
+                <div class="featuresSubTitle flex justify-center">There are several features available to assist in
+                    sentiment analysis</div>
+                <div class="grid grid-cols-3 gap-8 mx-32 mt-12">
+                    <div
+                        class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl py-14">
+                        <div class="cardTitle text-center">Manual Prediction Sentiment <br /> Analysis</div>
+                        <img class="m-auto" src="../../static/media/icons/Features1.svg" alt="Features 1" />
+                        <div class="mx-14 pb-10 text-center descFeatures">Don't let sentiment get overlooked, use the
+                            prediction manual for more accurate <br /> analysis!</div>
+                        <a href="#" class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
+                                src="../../static/media/icons/more.svg" alt="More"></a>
+                    </div>
+                    <div
+                        class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl  py-14">
+                        <div class="cardTitle text-center">Ranking Of Presidential <br /> Candidate</div>
+                        <img class="m-auto" src="../../static/media/icons/Features2.svg" alt="Features 2" />
+                        <div class="mx-14 pb-10 text-center descFeatures">Referring to the process of evaluating and
+                            ranking presidential candidates based on various criteria</div>
+                        <a href="#" class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
+                                src="../../static/media/icons/more.svg" alt="More"></a>
+                    </div>
+                    <div
+                        class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl  py-14">
+                        <div class="cardTitle text-center">Real - Time Prediction</div>
+                        <img class="m-auto" src="../../static/media/icons/Features3.svg" alt="Features 3" />
+                        <div class="mx-14 pb-10 text-center descFeatures">This feature can help users to understand
+                            possible future outcomes or scenarios and make more informed decisions in real time</div>
+                        <a href="#" class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
+                                src="../../static/media/icons/more.svg" alt="More"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Features -->
+    <!-- Start FAQ -->
+    <section class="faq" id="faqId">
+        <div class="faqContent relative mx-8 mt-40" id="faqContentId">
+            <div class="faqBackground w-full bg-no-repeat rounded-2xl">
+                <div class="flex flex-col text-center mx-32">
+                    <div class="faqTitle text-white mt-20 ">FAQ</div>
+                    <div class="faqSubTitle text-white mb-16">Frequently asked questions about the application</div>
+                    <div class="flex justify-center items-start">
+                        <div class="w-full">
+                            <ul class="flex flex-col">
+                                <li class="bg-white my-2 shadow-lg faqQuestion" x-data="accordion(1)">
+                                    <h2 @click="handleClick()"
+                                        class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
+                                        <span>When will my order arrive?</span><svg :class="handleRotate()"
+                                            class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                            </path>
+                                        </svg>
+                                    </h2>
+                                    <div x-ref="tab" :style="handleToggle()"
+                                        class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all">
+                                        <p class="p-5 text-gray-900">Shipping time is set by our delivery partners,
+                                            according to the delivery method chosen by you. Additional details can be
+                                            found in the order confirmation
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="bg-white my-2 shadow-lg faqQuestion" x-data="accordion(2)">
+                                    <h2 @click="handleClick()"
+                                        class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
+                                        <span>How do I track my order?</span>
+                                        <svg :class="handleRotate()"
+                                            class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                            </path>
+                                        </svg>
+                                    </h2>
+                                    <div class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all"
+                                        x-ref="tab" :style="handleToggle()">
+                                        <p class="p-5 text-gray-900">
+                                            Once shipped, you’ll get a confirmation email that includes a tracking
+                                            number and additional information regarding tracking your order.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="bg-white my-2 shadow-lg faqQuestion" x-data="accordion(3)">
+                                    <h2 @click="handleClick()"
+                                        class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
+                                        <span>What’s your return policy?</span>
+                                        <svg :class="handleRotate()"
+                                            class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                            </path>
+                                        </svg>
+                                    </h2>
+                                    <div class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all"
+                                        x-ref="tab" :style="handleToggle()">
+                                        <p class="p-5 text-gray-900">
+                                            We allow the return of all items within 30 days of your original order’s
+                                            date. If you’re interested in returning your items, send us an email with
+                                            your order number and we’ll ship a return label.
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End FAQ -->
+    <!-- Start Quote -->
+    <section class="quote" id="quoteId">
+        <div class=" quoteContent" id="quoteContentId">
+            <div class="flex mt-32 justify-center text-center items-center">
+                <div class="h-80 w-80 bg-black mr-20 rounded-full"></div>
+                <div class="quoteText text-black">"Your vote is your voice as an American <br /> citizen. It's your
+                    opportunity to be heard, to <br /> hold elected officials accountable, and to <br /> stand up for
+                    issues that you care about." <br /> <span>-- Debbie Wasserman Schultz --</span></div>
+            </div>
+        </div>
+    </section>
+    <!-- End Quote -->
+    <!-- Start Footer -->
+    <section class="footer" id="footerId">
+        <div class="footerContent relative mx-8 mt-40 mb-10" id="footerContentId">
+            <div class="footerBackground w-full bg-no-repeat rounded-2xl">
+                <div class="flex flex-col mx-14">
+                    <div class="footerTitle text-white mt-20 "><a href="#">SENTIGOV24</a></div>
+                    <div class="flex gap-10 footerMenuBar mt-10 text-white">
+                        <a href="#">Overview</a>
+                        <a href="#">Features</a>
+                        <a href="#">Preacing</a>
+                        <a href="#">Help</a>
+                        <a href="#">Privacy</a>
+                    </div>
+                    <div class="mt-16 border-2 rounded-full">
+                        <hr />
+                    </div>
+                    <div class="flex flex-row-reverse gap-10 footerMenuBar mt-10 text-white">
+                        <a href="#">Cookies</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Term</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Footer -->
+    <!-- Start Button Back to Top -->
+    <!-- <section class="progressButton" id="progressId">
+        <div class="progress">
+            <span class="progressValue">&#x1F815;</span>
+        </div>
+    </section> -->
+    <!-- End Button Back to Top -->
+</body>
+</html>
