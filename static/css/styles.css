@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 @font-face {
     font-family: 'BigShouldersDisplay-Bold';
     src: url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf');
@@ -33,7 +37,8 @@
         url('../fonts/Poppins/Poppins-Bold.otf') format('truetype');
 }
 
-.header{
+/* Header */
+.headerBackground{
     background: #6100FF;
     background: linear-gradient(38deg, #3fefc9 0%, rgb(128, 28, 209) 59%, #00FFB2 100%);
     height: 120vh;
@@ -49,17 +54,6 @@
     font-size: 13px;
 }
 
-.login {
-    font-family: Poppins-Semibold;
-    font-size: 13px;
-}
-
-.register {
-    font-family: Poppins-Semibold;
-    font-size: 13px;
-    background-color: #7B5BFF;
-}
-
 .typeWebsite    {
     font-family: Poppins-Regular;
     font-size: 20px;
@@ -68,6 +62,11 @@
 .slogan {
     font-family: Poppins-Semibold;
     font-size: 55px;
+}
+
+.sloganBag2 {
+    position: absolute;
+    top: 250px;
 }
 
 .subSlogan {
@@ -84,6 +83,19 @@
     font-size: 12px;
 }
 
+.login {
+    font-family: Poppins-Semibold;
+    font-size: 13px;
+}
+
+.register {
+    font-family: Poppins-Semibold;
+    font-size: 13px;
+    background-color: #7B5BFF;
+}
+/* Header */
+
+/* Bacapres */
 .bacapresTitle {
     font-family: Poppins-SemiBold;
     font-size: 35px;
@@ -99,7 +111,9 @@
 .bacapresSubTitle span {
     font-family: Poppins-Bold;
 }
+/* Bacapres */
 
+/* Best Features */
 .featuresTitle {
     font-family: Poppins-SemiBold;
     font-size: 35px;
@@ -127,6 +141,72 @@
     border-color: #C2C2C2;
 }
 
+.descFeatures {
+    font-family: Poppins-Regular;
+    font-size: 12px;
+    color: #1E1D4C;
+}
+
+.popup .overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: #2c2c2c;
+    opacity: 70%;
+    z-index: 1;
+    display: none;
+}
+
+.popup .content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #fff;
+    z-index: 2;
+    padding: 50px 80px 50px 80px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.popup .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
+    color:#fff;
+    font-size: 25px;
+    font-weight: 600;
+    padding-left: 3px;
+    border-radius: 50%;
+}
+
+.titlePopup {
+    font-family: Poppins-semibold;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+.descPopup {
+    font-family: poppins-regular;
+    font-size: 18px;
+}
+
+.popup.active .overlay {
+    display: block;
+}
+
+.popup.active .content {
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+/* Best Features */
+
+/* FAQ */
 .faqBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
@@ -147,13 +227,9 @@
     font-family: poppins-regular;
     font-size: 15px;
 }
+/* FAQ */
 
-.descFeatures {
-    font-family: Poppins-Regular;
-    font-size: 12px;
-    color: #1E1D4C;
-}
-
+/* Quote */
 .quoteText {
     font-family: Poppins-Regular;
     font-size: 30px;
@@ -163,11 +239,13 @@
     font-family: Poppins-SemiBold;
     font-size: 20px;
 }
+/* Quote */
 
+/* Footer */
 .footerBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #590f74 0%, rgb(37, 16, 117) 59%, #044f21 100%);
-    height: 50vh;
+    height: 45vh;
 }
 
 .footerTitle {
@@ -179,6 +257,7 @@
     font-family: Poppins-SemiBold;
     font-size: 15px;
 }
+/* Footer */
 
 /* Login */
 .loginBackground, .registerBackground {
@@ -210,5 +289,31 @@
 
 .dontHaveAccount {
     font-family: Poppins-regular;
-
 }
+/* Login */
+
+/* To Top */
+.to-top {
+    background: linear-gradient(38deg, #ce64fc 100%, rgb(123, 94, 239) 20%, #538bde 0%);
+    position: fixed;
+    bottom:16px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .4s;
+}
+
+.to-top.active {
+    bottom: 32px;
+    pointer-events: auto;
+    opacity: 1;
+}
+/* To Top */
