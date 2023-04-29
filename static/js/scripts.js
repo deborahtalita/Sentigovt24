@@ -18,3 +18,35 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 })
+
+function togglePopup1() {
+    document.getElementById("popupId-1").classList.toggle("active");
+}
+
+function togglePopup2() {
+    document.getElementById("popupId-2").classList.toggle("active");
+}
+
+function togglePopup3() {
+    document.getElementById("popupId-3").classList.toggle("active");
+}
+
+window.onload = function () {
+    const toTop = document.querySelector(".to-top");
+
+    window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 100) {
+            toTop.classList.add("active");
+        } else {
+            toTop.classList.remove("active");
+        }
+    });
+};
+
+// typing text animation script
+var typed = new Typed(".typing", {
+    strings: ["See Beyond the Noise in <br/> The 2024 Race", "Your voice is yours,<br/> use it wisely", "Together we can change the future"],
+    typeSpeed: 100,
+    backSpeed: 60,
+    loop: true
+});
