@@ -263,6 +263,7 @@ html {
 .loginBackground, .registerBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
+    padding: 120px;
 }
 
 .welcomeText {
