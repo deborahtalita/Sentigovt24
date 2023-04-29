@@ -259,10 +259,11 @@ html {
 }
 /* Footer */
 
-/* Login */
+/* Login & Register */
 .loginBackground, .registerBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
+    padding: 120px;
 }
 
 .welcomeText {
@@ -277,7 +278,7 @@ html {
     color: #969696;
 }
 
-.email, .password {
+.email, .password, .confirmPassword, .username {
     font-family: Poppins-Medium;
     font-size: 15px;
 }
@@ -287,10 +288,14 @@ html {
     font-size: 20px;
 }
 
-.dontHaveAccount {
+.dontHaveAccount, .haveAccount {
     font-family: Poppins-regular;
 }
-/* Login */
+
+.email span, .password span, .confirmPassword span, .username span {
+    color: red;
+}
+/* Login & Register*/
 
 /* To Top */
 .to-top {
