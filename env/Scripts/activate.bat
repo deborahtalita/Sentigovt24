@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Kuliah\Semester 6\TA\django\Sentigovt24\env
+set VIRTUAL_ENV=D:\1. PENTING\GitHub\Sentigovt24\env
 
 if not defined PROMPT set PROMPT=$P$G
 
