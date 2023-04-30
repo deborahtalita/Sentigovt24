@@ -16,18 +16,18 @@
     <section class="login" id="loginId">
         <div class="loginContent" id="loginContentId">
             <div class="bg-white grid grid-cols-2">
-                <div class="loginBackground context h-screen bg-no-repeat"><img src="../../static/media/icons/phone1.svg" alt="Phone1"/></div>
+                <div class="loginBackground context h-screen bg-no-repeat"><img src="{% static 'media/icons/Phone1.svg' %}" alt="Phone1"/></div>
                 <div class="container px-40">
                     <div class="flex flex-col mt-32">
                         <div class="welcomeText">Hello, Sentizens !</div>
                         <div class="descWelcome">Sign In for more better features</div>
-                        <form class="mt-14 space-y-6" action="login" method="POST">
+                        <form class="mt-14 space-y-6" action="{% url 'login' %}" method="POST">
                             {% csrf_token %}
                             <div class="relative">
                                 <label class="email ml-3 text-gray-700 tracking-wide">Email<span> *</span></label>
                                 <input
                                     class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg focus:border-indigo-500"
-                                    type="email" placeholder="mail@gmail.com" required>
+                                    type="email" name="username" placeholder="mail@gmail.com" required>
                             </div>
                             <div class="mt-8 content-center">
                                 <label class="password ml-3 text-gray-700 tracking-wide">
@@ -35,7 +35,7 @@
                                 </label>
                                 <input
                                     class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500"
-                                    type="password" placeholder="Enter your password" required>
+                                    type="password" name="password" placeholder="Enter your password" required>
                             </div>
                             <div>
                                 <button type="submit"

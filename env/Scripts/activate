@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Kuliah\Semester 6\TA\django\Sentigovt24\env"
+VIRTUAL_ENV="D:\1. PENTING\GitHub\Sentigovt24\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
