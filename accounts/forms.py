@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from accounts.models import User
 
 class SignUpForm(UserCreationForm):
@@ -16,3 +16,6 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label='email')
