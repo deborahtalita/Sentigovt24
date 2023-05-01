@@ -13,7 +13,7 @@
 
 <body class="bg-white">
     <!-- Start Button Back to Top -->
-    <a href="#" class="to-top text-white"><img src="../static/media/icons/up.svg" alt="Up" /></a>
+    <a href="#" class="to-top text-white"><img src="{% static 'media/icons/up.svg' %}" alt="Up" /></a>
     <!-- End Button Back to Top -->
     <!-- Start Navigasi -->
     <div class="container mx-auto">
@@ -59,12 +59,12 @@
                 </div>
             </div>
             <img class="absolute -bottom-20 left-1/2 pr-10  transform -translate-x-1/2"
-                src="../../static/media/icons/modelBackground.svg" alt="modelAplication">
-            <img class="absolute top-24 left-24" src="../../static/media/icons/like1.svg" alt="like 1">
-            <img class="absolute top-44 right-24" src="../../static/media/icons/like2.svg" alt="like 2">
-            <img class="absolute bottom-64 left-36" src="../../static/media/icons/bar.svg" alt="bar">
-            <img class="absolute -bottom-20 right-0" src="../../static/media/icons/line.svg" alt="line">
-            <img class="absolute right-96 top-80" src="../../static/media/icons/pie.svg" alt="pie">
+                src="{% static 'media/icons/modelBackground.svg' %}" alt="modelBackground">
+            <img class="absolute top-24 left-24" src="{% static 'media/icons/like1.svg' %}" alt="like 1">
+            <img class="absolute top-44 right-24" src="{% static 'media/icons/like2.svg' %}" alt="like 2">
+            <img class="absolute bottom-64 left-36" src="{% static 'media/icons/bar.svg' %}" alt="bar">
+            <img class="absolute -bottom-20 right-0" src="{% static 'media/icons/line.svg' %}" alt="line">
+            <img class="absolute right-96 top-80" src="{% static 'media/icons/pie.svg' %}" alt="pie">
         </div>
     </header>
     <!-- End Header -->
@@ -76,16 +76,16 @@
                 <div class="bacapresSubTitle flex justify-center">This presidential candidate has been determined by the
                     trusted survey agency <span>"Poltracking"</span></div>
                 <div class="flex gap-5 justify-center mt-12">
-                    <img src="../../static/media/icons/Agus.svg" alt="Agus Harimurti">
-                    <img src="../../static/media/icons/Airlangga.svg" alt="Airlangga Hartanto">
-                    <img src="../../static/media/icons/Anies.svg" alt="Anies Baswedan">
-                    <img src="../../static/media/icons/Erick.svg" alt="Erick Thohir">
-                    <img src="../../static/media/icons/Ganjar.svg" alt="Ganjar Pranowo">
-                    <img src="../../static/media/icons/Khofifah.svg" alt="Khofifah Indar">
-                    <img src="../../static/media/icons/Prabowo.svg" alt="Prabowo Subianto">
-                    <img src="../../static/media/icons/Puan.svg" alt="Puan Maharani">
-                    <img src="../../static/media/icons/Ridwan.svg" alt="Ridwan Kamil">
-                    <img src="../../static/media/icons/Sandiaga.svg" alt="Sandiaga Uno">
+                    <img src="{% static 'media/icons/Agus.svg' %}" alt="Agus Harimurti">
+                    <img src="{% static 'media/icons/Airlangga.svg' %}" alt="Airlangga Hartanto">
+                    <img src="{% static 'media/icons/Anies.svg' %}" alt="Anies Baswedan">
+                    <img src="{% static 'media/icons/Erick.svg' %}" alt="Erick Thohir">
+                    <img src="{% static 'media/icons/Ganjar.svg' %}" alt="Ganjar Pranowo">
+                    <img src="{% static 'media/icons/Khofifah.svg' %}" alt="Khofifah Indar">
+                    <img src="{% static 'media/icons/Prabowo.svg' %}" alt="Prabowo Subianto">
+                    <img src="{% static 'media/icons/Puan.svg' %}" alt="Puan Maharani">
+                    <img src="{% static 'media/icons/Ridwan.svg' %}" alt="Ridwan Kamil">
+                    <img src="{% static 'media/icons/Sandiaga.svg' %}" alt="Sandiaga Uno">
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
     <div class="popup" id="popupId-1">
         <div class="overlay"></div>
         <div class="content rounded-2xl">
-            <button class="close-btn" onclick="togglePopup1()"><img src="../static/media/icons/close.svg"
+            <button class="close-btn" onclick="togglePopup1()"><img src="{% static 'media/icons/close.svg' %}"
                     alt="close" /></button>
             <div class="titlePopup">Manual Prediction Sentiment Analysis</div>
             <p class="descPopup text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan
@@ -110,7 +110,7 @@
     <div class="popup" id="popupId-2">
         <div class="overlay"></div>
         <div class="content rounded-2xl">
-            <button class="close-btn" onclick="togglePopup2()"><img src="../static/media/icons/close.svg"
+            <button class="close-btn" onclick="togglePopup2()"><img src="{% static 'media/icons/close.svg' %}"
                     alt="close" /></button>
             <div class="titlePopup">Ranking Of Presidential Candidate</div>
             <p class="descPopup text-justify leading-loose">Pada fitur ini, tersedia peringkat dari bakal calon presiden
@@ -124,7 +124,7 @@
     <div class="popup" id="popupId-3">
         <div class="overlay"></div>
         <div class="content rounded-2xl">
-            <button class="close-btn" onclick="togglePopup3()"><img src="../static/media/icons/close.svg"
+            <button class="close-btn" onclick="togglePopup3()"><img src="{% static 'media/icons/close.svg' %}"
                     alt="close" /></button>
             <div class="titlePopup">Real - Time Prediction</div>
             <p class="descPopup text-justify leading-loose">Pada fitur ini, data yang ditampilkan akan selalu bersifat
@@ -144,32 +144,32 @@
                     <div
                         class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl py-14">
                         <div class="cardTitle text-center">Manual Prediction Sentiment <br /> Analysis</div>
-                        <img class="m-auto" src="../../static/media/icons/Features1.svg" alt="Features 1" />
+                        <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1" />
                         <div class="mx-14 pb-10 text-center descFeatures">Don't let sentiment get overlooked, use the
                             prediction manual for more accurate <br /> analysis!</div>
                         <button onclick="togglePopup1()"
                             class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
-                                src="../../static/media/icons/more.svg" alt="More"></button>
+                                src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                     <div
                         class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl  py-14">
                         <div class="cardTitle text-center">Ranking Of Presidential <br /> Candidate</div>
-                        <img class="m-auto" src="../../static/media/icons/Features2.svg" alt="Features 2" />
+                        <img class="m-auto" src="{% static 'media/icons/Features2.svg' %}" alt="Features 2" />
                         <div class="mx-14 pb-10 text-center descFeatures">Referring to the process of evaluating and
                             ranking presidential candidates based on various criteria</div>
                         <button onclick="togglePopup2()"
                             class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
-                                src="../../static/media/icons/more.svg" alt="More"></button>
+                                src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                     <div
                         class="flex flex-col justify-between relative cardFeatures border-2 rounded-2xl shadow-xl  py-14">
                         <div class="cardTitle text-center">Real - Time Prediction</div>
-                        <img class="m-auto" src="../../static/media/icons/Features3.svg" alt="Features 3" />
+                        <img class="m-auto" src="{% static 'media/icons/Features3.svg' %}" alt="Features 3" />
                         <div class="mx-14 pb-10 text-center descFeatures">This feature can help users to understand
                             possible future outcomes or scenarios and make more informed decisions in real time</div>
                         <button onclick="togglePopup3()"
                             class="more absolute border-2 p-3 rounded-lg bottom-5 right-5"><img
-                                src="../../static/media/icons/more.svg" alt="More"></button>
+                                src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                 </div>
             </div>
@@ -256,7 +256,7 @@
     <section class="quote" id="quoteId">
         <div class=" quoteContent" id="quoteContentId">
             <div class="flex mt-32 justify-center text-center items-center">
-                <div class="h-80 w-80 mr-20 rounded-full"><img src="../static/media/icons/JokoWidodo.svg"
+                <div class="h-80 w-80 mr-20 rounded-full"><img src="{% static 'media/icons/JokoWidodo.svg' %}"
                         alt="Joko Widodo"></div>
                 <div class="quoteText text-black">"Suara rakyat adalah kekuatan terbesar <br> dalam membangun demokrasi
                     yang sehat" <br /> <span>-- Joko Widodo (Presiden RI) --</span></div>
