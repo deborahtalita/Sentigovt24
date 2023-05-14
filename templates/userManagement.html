@@ -1,0 +1,1294 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+User Management
+{% endblock %}
+
+{% block content %}
+<div class="pl-[280px] pr-6 pb-6 pt-24 ">
+    <div class="flex flex-col gap-5">
+        <div class="bg-white py-6 px-10 rounded-xl h-fit">
+            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">User Management</div>
+            <hr class="border-[#C2C2C2] my-5" />
+            <form action="#" class="flex">
+                <div class='max-w-md'>
+                    <div
+                        class="relative flex items-center w-full h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                        <div class="grid place-items-center h-full w-12 text-gray-300">
+                            <img class="h-5 w-5" src="{% static 'media/icons/search.svg' %}" alt="">
+                        </div>
+                        <input class="peer h-full w-[232px] outline-none text-sm text-gray-700 pr-4" type="text"
+                            name="search" placeholder="Search" />
+                    </div>
+                </div>
+                <button type="submit"
+                    class="SearchButton flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">
+                    Search
+                </button>
+            </form>
+        </div>
+        <div class="bg-white p-6 rounded-xl h-fit">
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase border-b">
+                        <tr>
+                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                                No
+                            </th>
+                            <th scope="col" class="headerList text-[12px] mx-36 py-3 text-center">
+                                Name User
+                            </th>
+                            <th scope="col" class="headerList text-[12px] py-3 text-center">
+                                <div x-data="{ isOpen: false }" class="relative inline-block">
+                                    <!-- Dropdown toggle button -->
+                                    <button @click="isOpen = !isOpen"
+                                        class="itemTabel border-2 rounded-full text-[12px] relative z-10 flex justify-between items-center py-2 w-52 px-3 uppercase">
+                                        <img class="w-5 h-5 mx-1 mr-2" src="{% static 'media/icons/status.svg' %}"
+                                            alt="Status" />
+                                        <span class="mx-1">Status</span>
+                                        <img class="w-5 h-5 mx-1" src="{% static 'media/icons/dropSentiment.svg' %}"
+                                            alt="Drop Sentiment" />
+                                    </button>
+                                    <!-- Dropdown menu -->
+                                    <div x-show="isOpen" @click="isOpen = false" @click.away="isOpen = false"
+                                        x-transition:enter="transition ease-out duration-100"
+                                        x-transition:enter-start="opacity-0 scale-90"
+                                        x-transition:enter-end="opacity-100 scale-100"
+                                        x-transition:leave="transition ease-in duration-100"
+                                        x-transition:leave-start="opacity-100 scale-100"
+                                        x-transition:leave-end="opacity-0 scale-90"
+                                        class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
+                                        <a href="#"
+                                            class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                            All Status
+                                        </a>
+                                        <a href="#"
+                                            class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                            Administrator
+                                        </a>
+                                        <a href="#"
+                                            class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                            Member
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col" class="headerList text-[12px] py-3 text-center">
+                                Delete
+                            </th>
+                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                                1
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 1, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4  ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                2
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 1, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                3
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 2, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                4
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 2, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                5
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 1, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                6
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 2, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                7
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 1, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                8
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 2, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                9
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 1, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"
+                                class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                                10
+                            </th>
+                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                                Lorem Ipsum
+                            </td>
+                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                                <div class="text-gray-900 antialiased">
+                                    <div class="flex justify-center">
+                                        <div class="w-full max-w-xs mx-auto">
+                                            <div class="space-y-1"
+                                                x-data="Components.customSelect({ open: false, value: 2, selected: 2 })"
+                                                x-init="init()">
+                                                <div class="relative">
+                                                    <span class="inline-block w-full rounded-md shadow-sm">
+                                                        <button x-ref="button" @click="onButtonClick()" type="button" title="status"
+                                                            aria-haspopup="listbox" :aria-expanded="open"
+                                                            aria-labelledby="assigned-to-label"
+                                                            class="cursor-default relative border w-52 border-gray-300 rounded-full bg-white pl-3 pr-10 py-2 focus:outline-none transition ease-in-out duration-150">
+                                                            <div class="flex justify-center space-x-3 pl-7">
+                                                                <span
+                                                                    x-text="['Member','Administrator'][value - 1]"
+                                                                    class="block truncate"></span>
+                                                            </div>
+                                                            <span
+                                                                class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                                                <svg class="h-5 w-5 text-gray-400" fill="currentColor"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </span>
+                                                    <div x-show="open" @focusout="onEscape()" @click.away="open = false"
+                                                        x-description="Select popover, show/hide based on select state."
+                                                        x-transition:leave="transition ease-in duration-100"
+                                                        x-transition:leave-start="opacity-100"
+                                                        x-transition:leave-end="opacity-0"
+                                                        class="absolute mt-1 w-full rounded-2xl bg-white shadow-lg border-2 z-50"
+                                                        style="display: none;">
+                                                        <ul @keydown.enter.stop.prevent="onOptionSelect()"
+                                                            @keydown.space.stop.prevent="onOptionSelect()"
+                                                            @keydown.escape="onEscape()"
+                                                            @keydown.arrow-up.prevent="onArrowUp()"
+                                                            @keydown.arrow-down.prevent="onArrowDown()" x-ref="listbox"
+                                                            tabindex="-1" role="listbox"
+                                                            aria-labelledby="assigned-to-label"
+                                                            :aria-activedescendant="activeDescendant"
+                                                            class="rounded-md p-2 text-base leading-6 shadow-xs overflow-auto focus:outline-none">
+                                                            <li id="assigned-to-option-1" role="option"
+                                                                @click="choose(1)" @mouseenter="selected = 1"
+                                                                @mouseleave="selected = null"
+                                                                :class="{ 'text-black bg-gray-100': selected === 1, 'text-gray-900': !(selected === 1) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 1, 'font-normal': !(value === 1) }"
+                                                                        class="font-normal block truncate">
+                                                                        Member
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 1"
+                                                                    :class="{'text-blue-400': selected === 1, 'text-indigo-600': !(selected === 1) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                            <li id="assigned-to-option-2" role="option"
+                                                                @click="choose(2)" @mouseenter="selected = 2"
+                                                                @mouseleave="selected = null" aria-selected="true"
+                                                                :class="{ 'text-black bg-gray-100': selected === 2, 'text-gray-900': !(selected === 2) }"
+                                                                class="rounded-lg text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9">
+                                                                <div class="flex items-center space-x-3">
+                                                                    <span
+                                                                        :class="{ 'font-semibold': value === 2, 'font-normal': !(value === 2) }"
+                                                                        class="font-normal block truncate">
+                                                                        Administrator
+                                                                    </span>
+                                                                </div>
+                                                                <span x-show="value === 2"
+                                                                    :class="{'text-blue-400': selected === 2, 'text-indigo-600': !(selected === 2) }"
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                                                                    style="display: none;">
+                                                                    <svg class="h-5 w-5" fill="currentColor"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="itemTabel text-[12px] py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                            </td>
+                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                                <a class="flex justify-center" href="#"><img
+                                        src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex items-center justify-end">
+                <div class="items-center">
+                    <a href="#"
+                        class="tableActive px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
+                    <a href="#"
+                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
+                    <a href="#"
+                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
+                    <a href="#"
+                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
+                    <a href="#"
+                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
+                    <a href="#"
+                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
+                </div>
+            </div>
+        </div>
+        <div class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+        </div>
+    </div>
+</div>
+<script defer src="{% static 'js/selectBox.js' %}"></script>
+{% endblock %}

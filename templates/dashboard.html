@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<!-- Start  Grid-->
+<div class="pl-[280px] pr-6 pb-6 pt-24 ">
+    <div class="grid grid-cols-6 grid-flow-col gap-4">
+        <!-- Start Count Tweet -->
+        <section class="flex h-40 rounded-2xl bg-white col-span-4 items-center justify-between px-20">
+            <div class="flex flex-col">
+                <div class="titleTotal text-[15px]">Total</div>
+                <div class="countTotal text-[40px]">107.000</div>
+            </div>
+            <div class="flex gap-12 text-lg font-semibold text-gray-500">
+                <div class="flex-col text-center">
+                    <img src="{% static 'media/icons/smile.svg' %}" alt="Smile">
+                    <div>40000</div>
+                </div>
+                <div class="flex-col text-center">
+                    <img src="{% static 'media/icons/flat.svg' %}" alt="Smile">
+                    <div>42000</div>
+                </div>
+                <div class="flex-col text-center">
+                    <img src="{% static 'media/icons/angry.svg' %}" alt="Smile">
+                    <div>25000</div>
+                </div>
+            </div>
+        </section>
+        <!-- End Count Tweet -->
+        <!-- Start Chart Tren -->
+        <section class="h-[542px] p-6 rounded-2xl bg-white col-span-4 pb-10">
+            <div class="flex items-center justify-between">
+                <div class="titleChart text-[12px] text-[#1E1D4C]">Tren Sentiment Analysis</div>
+                <div class=" flex gap-2">
+                    <button onclick="displayChart('chart-display2')" id="chooseChart2" class="chooseChart border-2 px-4 py-2 rounded-lg text-white bg-[#C2C2C2]">Bar</button>
+                    <button onclick="displayChart('chart-display1')" id="chooseChart1" class="chooseChart activeTren border-2 px-4 py-2 rounded-lg text-white bg-[#C2C2C2]">Line</button>
+                </div>
+            </div>
+            <!-- Chart Line -->
+            <div id="chart-display" class="mt-7"></div>
+        </section>
+        <!-- End Chart Tren -->
+        <!-- Start Ranking -->
+        <section class="h-[720px] p-6 rounded-2xl row-span-4 bg-white col-span-2">
+            <div class="titleRanking text-[12px] text-[#1E1D4C]">Ranking Of Presidential Candidates</div>
+            <div class="mt-7 space-y-2">
+                <button class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Ganjar Pranowo</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>26,6%</div>
+                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Prabowo.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Prabowo Subianti</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>19,7%</div>
+                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Anies.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Anies Baswedan</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>17,7%</div>
+                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Agus.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Agus Harimurti Yudhoyono</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>4,7%</div>
+                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ridwan.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Ridwan Kamil</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>3,9%</div>
+                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Erick.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Erick Thohir</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>2,8%</div>
+                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Sandiaga.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Sandiaga Uno</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>2,4%</div>
+                        <img src="{% static 'media/icons/samaDenganGray.svg' %}" alt="Sama Dengan Gray"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Puan.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Puan Maharani</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>2,2%</div>
+                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Khofifah.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Khofifah Indar Parawansa</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>2,2%</div>
+                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                    </div>
+                </button>
+                <hr>
+                <button
+                    class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Airlangga.svg' %}" alt="Photo Bacapres">
+                        <h1 class="nameBakalCalon text-[12px] capitalize">Airlangga Hartanto</h1>
+                    </div>
+                    <div class="tokoh text-[12px] flex gap-4">
+                        <div>1,7%</div>
+                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                    </div>
+                </button>
+            </div>
+        </section>
+        <!-- End Ranking -->
+    </div>
+    <!-- End  Grid-->
+    <!-- Start Table List Tweet -->
+    <section class="p-6 rounded-2xl bg-gray-50">
+        <div class="flex justify-between">
+            <div class="titleTable text-[12px] text-[#1E1D4C] mb-3">List Tweet Sentiment Analysis</div>
+            <button class="border-2 px-4 py-2 rounded-lg hover:bg-gray-300 hover:text-white">Download CSV</button>
+        </div>
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase border-b">
+                    <tr>
+                        <th scope="col" class="headerList text-[12px] px-6 py-3">
+                            No
+                        </th>
+                        <th scope="col" class="headerList text-[12px] mx-36 py-3 text-center">
+                            Name User
+                        </th>
+                        <th scope="col" class="headerList text-[12px] px-10 py-3 text-center">
+                            Tweet
+                        </th>
+                        <th scope="col" class="headerList text-[12px] py-3 text-center">
+                            <div x-data="{ isOpen: false }" class="relative inline-block">
+                                <!-- Dropdown toggle button -->
+                                <button @click="isOpen = !isOpen" class="itemTabel text-[12px] relative z-10 flex items-center p-2 uppercase">
+                                    <span class="mx-1">Sentiment</span>
+                                    <img class="w-5 h-5 mx-1" src="{% static 'media/icons/dropSentiment.svg' %}" alt="Drop Sentiment"/>
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div
+                                    x-show="isOpen" 
+                                    @click="isOpen = false" 
+                                    @click.away="isOpen = false"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="opacity-0 scale-90"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-100"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-90"
+                                    class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
+                                    <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        All Sentiment
+                                    </a>
+                                    <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        Positive
+                                    </a>
+                                    <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        Negative
+                                    </a>
+                                    <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        Netral
+                                    </a>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                            Date
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <th scope="row" class="nomerTabel text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                            1
+                        </th>
+                        <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            Lorem Ipsum
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </td>
+                        <td class="itemTabel text-[12px] text-black py-4 text-center ">
+                            <div class="bg-green-300 p-1 rounded-full">
+                                Positive
+                            </div>
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-6 py-4 text-center">
+                            DD/MM/YYYY
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            2
+                        </th>
+                        <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            Lorem Ipsum
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </td>
+                        <td class="itemTabel text-[12px] text-black py-4 text-center">
+                            <div class="bg-green-300 p-1 rounded-full">
+                                Positive
+                            </div>
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-6 py-4 text-center">
+                            DD/MM/YYYY
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            3
+                        </th>
+                        <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            Lorem Ipsum
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </td>
+                        <td class="itemTabel text-[12px] text-black py-4 text-center">
+                            <div class="bg-green-300 p-1 rounded-full">
+                                Positive
+                            </div>
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-6 py-4 text-center">
+                            DD/MM/YYYY
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            4
+                        </th>
+                        <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            Lorem Ipsum
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </td>
+                        <td class="itemTabel text-[12px] text-black py-4 text-center">
+                            <div class="bg-red-300 p-1 rounded-full">
+                                Negative
+                            </div>
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-6 py-4 text-center">
+                            DD/MM/YYYY
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            5
+                        </th>
+                        <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            Lorem Ipsum
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </td>
+                        <td class="itemTabel text-[12px] text-black py-4 text-center">
+                            <div class="bg-gray-400 p-1 rounded-full">
+                                Netral
+                            </div>
+                        </td>
+                        <td class="itemTabel text-[12px] text-black px-6 py-4 text-center">
+                            DD/MM/YYYY
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex items-center justify-end">
+            <div class="items-center">
+                <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
+            </div>
+        </div>
+    </section>
+    <!-- End Table List Tweet -->
+    <!-- Start Footer -->
+    <footer class="footerDashboard text-[12px] text-[#1E1D4C] mt-5 ml-5 mr-5 flex justify-end">
+        Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+    </footer>
+    <!-- End Footer -->
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="pl-[280px] pr-6 pb-6 pt-24 ">
+    <div class="flex flex-col gap-5">
+        <div class="bg-white py-6 px-10 rounded-xl h-fit">
+            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Personal Data</div>
+            <hr class="border-[#C2C2C2] my-5" />
+        </div>
+        <div class="popup" id="popupId-1">
+            <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
+            <div
+                class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
+                <button
+                    class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full"
+                    onclick="togglePopup1()"><img src="{% static 'media/icons/close.svg' %}" alt="close" /></button>
+                <div class="titlePopup text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
+                <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan
+                    prediksi sesuai dengan
+                    nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari.
+                    Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga
+                    hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas
+                    oleh
+                    seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur
+                    ini
+                    hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri
+                    menjadi
+                    bagian dari anggota.</p>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl h-fit">
+            <form action="" method="PUT" enctype="multipart/form-data">
+                <div id="photoProfile">
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Photo Profile</div>
+                    <div class="flex items-center justify-between px-5">
+                        <div class="flex items-center gap-5">
+                            <img class="py-5" src="{% static 'media/icons/ProfileDefault.svg' %}" alt="ProfileEdit">
+                            <div class="namaProfile text-[#1E1D4C]">Super Administrator</div>
+                        </div>
+                        <!-- Ini Masih bingung -->
+                        <input type="file" class="filepond" name="file" multiple>
+                        <!-- Ini Masih bingung -->
+                    </div>
+                </div>
+                <hr class="border-[#C2C2C2] my-5" />
+                <div id="personalInformation">
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-6">Personal Information</div>
+                    <div class="flex flex-col gap-5">
+                        <div class="relative">
+                            <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
+                            <input
+                                class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg"
+                                type="text" name="name" placeholder="Masukan Nama" value="Super Administrator" required>
+                        </div>
+                        <div class="relative">
+                            <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
+                            <input
+                                class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg"
+                                type="email" name="email" placeholder="Masukan Email"
+                                value="super.administrator@gmail.com" readonly>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <hr class="border-[#C2C2C2] my-5" />
+            <div id="changePassword">
+                <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-6">Change Password</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
