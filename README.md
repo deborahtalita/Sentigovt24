@@ -24,21 +24,15 @@ COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 ```
-5. Create new file CSS (tailwind.css) in directory static/css and add import Tailwind.
-```css
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-```
-6. Create two new folders and an input.css file inside the static/css/ folder.
+5. Create two new folders and an input.css file inside the static/css/ folder.
 ```bash
 static
 └── css
     └── input.css
 ```
-7. Install Tailwind (npm install -D tailwindcss).
-8. Using the Tailwind CLI create a new tailwind.config.js file (npx tailwindcss init).
-9. Configure the template paths using the content value inside the Tailwind configuration file.
+6. Install Tailwind (npm install -D tailwindcss).
+7. Using the Tailwind CLI create a new tailwind.config.js file (npx tailwindcss init).
+8. Configure the template paths using the content value inside the Tailwind configuration file.
 ```javascript
 module.exports = {
   content: [
@@ -50,19 +44,19 @@ module.exports = {
   plugins: [],
 }
 ```
-10. Import the Tailwind CSS directives inside the input.css file.
+9. Import the Tailwind CSS directives inside the input.css file.
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
-11. Add in package.json file.
+10. Add in package.json file.
 ```json
 "scripts": {
     "dev": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
   },
 ```
-12. Run the following command to watch for changes and compile the Tailwind CSS code (npm run dev)
+11. Run the following command to watch for changes and compile the Tailwind CSS code (npm run dev)
 ### Running Application
 `py manage.py runserver`
 
