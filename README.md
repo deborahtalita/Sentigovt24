@@ -60,5 +60,8 @@ module.exports = {
 ### Running Application
 `py manage.py runserver`
 
+### Sweet Alert 2 Installation:
+1. Install Sweet Alert 2 (npm install sweetalert2).
+
 
 
