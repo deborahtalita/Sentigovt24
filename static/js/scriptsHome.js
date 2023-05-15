@@ -21,14 +21,21 @@ document.addEventListener('alpine:init', () => {
 
 function togglePopup1() {
     document.getElementById("popupId-1").classList.toggle("active");
+    $('body').addClass('overflow-hidden');
 }
 
 function togglePopup2() {
     document.getElementById("popupId-2").classList.toggle("active");
+    $('body').addClass('overflow-hidden');
 }
 
 function togglePopup3() {
     document.getElementById("popupId-3").classList.toggle("active");
+    $('body').addClass('overflow-hidden');
+}
+
+function closeModal() {
+    $('body').removeClass('overflow-hidden');
 }
 
 window.onload = function () {

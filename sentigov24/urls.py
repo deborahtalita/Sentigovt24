@@ -28,6 +28,9 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
     path('userManagement/', views.userManagement, name='userManagement'),
+    path('userManagement/editUser/', views.editUser, name='editUser'),
     path('bacapresManagement/', views.bacapresManagement, name='bacapresManagement'),
     path('bacapresManagement/createBacapres/', views.createBacapres, name='createBacapres'),
+    path('bacapresManagement/editBacapres/', views.editBacapres, name='editBacapres'),
+    
 ]

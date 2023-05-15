@@ -63,5 +63,30 @@ module.exports = {
 ### Sweet Alert 2 Installation:
 1. Install Sweet Alert 2 (npm install sweetalert2).
 
+### FrowBite Installation:
+1. Install FlowBite (npm install flowbite).
+2. Require Flowbite as a plugin inside the tailwind.config.js file.
+```javascript
+module.exports = {
+
+    plugins: [
+        require('flowbite/plugin')
+    ]
+
+}
+```
+3. Include Flowbite inside the content value of the tailwind.config.js file.
+```javascript
+module.exports = {
+  content: [
+      './**/*.{html,js}'
+      './node_modules/flowbite/**/*.js'
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
 

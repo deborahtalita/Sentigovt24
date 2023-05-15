@@ -9,71 +9,79 @@ Profile
 {% block content %}
 <div class="pl-[280px] pr-6 pb-6 pt-24 ">
     <div class="flex flex-col gap-5">
-        <div class="bg-white py-6 px-10 rounded-xl h-fit">
+        <!-- Start Header Profile -->
+        <header class="bg-white py-6 px-10 rounded-xl h-fit">
             <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Personal Data</div>
-            <hr class="border-[#C2C2C2] my-5" />
-        </div>
-        <div class="popup" id="popupId-1">
-            <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
-            <div
-                class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
-                <button
-                    class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full"
-                    onclick="togglePopup1()"><img src="{% static 'media/icons/close.svg' %}" alt="close" /></button>
-                <div class="titlePopup text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
-                <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan
-                    prediksi sesuai dengan
-                    nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari.
-                    Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga
-                    hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas
-                    oleh
-                    seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur
-                    ini
-                    hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri
-                    menjadi
-                    bagian dari anggota.</p>
-            </div>
-        </div>
+            <hr class="border-[#C2C2C2] my-5">
+        </header>
+        <!-- End Header Profile -->
+        <!-- Start Data Profile -->
         <div class="bg-white p-6 rounded-xl h-fit">
             <form action="" method="PUT" enctype="multipart/form-data">
                 <div id="photoProfile">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Photo Profile</div>
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
                             <img class="py-5" src="{% static 'media/icons/ProfileDefault.svg' %}" alt="ProfileEdit">
                             <div class="namaProfile text-[#1E1D4C]">Super Administrator</div>
                         </div>
-                        <!-- Ini Masih bingung -->
-                        <input type="file" class="filepond" name="file" multiple>
-                        <!-- Ini Masih bingung -->
+                        <div class="w-[50%]">
+                            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
+                            <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF</p>
+                        </div>
                     </div>
                 </div>
-                <hr class="border-[#C2C2C2] my-5" />
+                <hr class="border-[#C2C2C2] my-5">
                 <div id="personalInformation">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-6">Personal Information</div>
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">Personal Information</div>
                     <div class="flex flex-col gap-5">
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
-                            <input
-                                class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg"
-                                type="text" name="name" placeholder="Masukan Nama" value="Super Administrator" required>
+                            <input class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" type="text" name="name" placeholder="Masukan Nama" value="Super Administrator" required>
                         </div>
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
-                            <input
-                                class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg"
-                                type="email" name="email" placeholder="Masukan Email"
-                                value="super.administrator@gmail.com" readonly>
+                            <input type="text" id="disabled-email" aria-label="disabled-email" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" value="super.administrator@gmail.com" disabled readonly>
                         </div>
                     </div>
                 </div>
+                <hr class="border-[#C2C2C2] my-5" />
+                <div id="changePassword">
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">Change Password</div>
+                    <div class="relative">
+                        <label class="text-gray-700 tracking-wide text-[15px]">Password</label>
+                        <input type="password" id="disabled-password" aria-label="disabled-password" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" value="12345Admin" disabled readonly>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button id="btn-confirm" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
+                </div>
+                <!-- Apakan muncul apabila telah klik tombol change password -->
+                <div class="changePasswordHidden mt-8 rounded-lg p-6 bg-blue-400 hidden mb-8">
+                    <div class="mb-6 text-lg font-bold text-white">Change password</div>
+                    <div class="mb-5">
+                        <label class="tracking-wide text-[15px] font-bold">Confirm Current Password</label>
+                        <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Lama">
+                    </div>
+                    <div>
+                        <label class="tracking-wide text-[15px] font-bold">New Password</label>
+                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Terbaru">
+                    </div>
+                </div>
+                <!-- Apakan muncul apabila telah klik tombol change password -->
+                <div class="flex justify-end items-center gap-5">
+                    <a href="{% url 'profile' %}" class="font-bold text-[#1E1D4C]">Discard</a>
+                    <button id="saveEdit" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
+                </div>
             </form>
-            <hr class="border-[#C2C2C2] my-5" />
-            <div id="changePassword">
-                <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-6">Change Password</div>
-            </div>
         </div>
+        <!-- End Data Profile -->
+        <!-- Start Footer -->
+        <footer class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+        </footer>
+        <!-- End Footer -->
     </div>
 </div>
-
 {% endblock %}

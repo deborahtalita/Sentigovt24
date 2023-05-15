@@ -29,6 +29,10 @@ def userManagement(request):
     context = {'active_page': 'user management'}
     return render(request, 'userManagement.html', context)
 
+def editUser(request):
+    context = {'active_page': 'user management'}
+    return render(request, 'editUser.html', context)
+
 def bacapresManagement(request):
     context = {'active_page': 'bacapres management'}
     return render(request, 'bacapresManagement.html', context)
@@ -36,3 +40,7 @@ def bacapresManagement(request):
 def createBacapres(request):
     context = {'active_page': 'bacapres management'}
     return render(request, 'createBacapres.html', context)
+
+def editBacapres(request):
+    context = {'active_page': 'bacapres management'}
+    return render(request, 'editBacapres.html', context)

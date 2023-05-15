@@ -84,7 +84,7 @@
     <div class="popup" id="popupId-1">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
-            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup1()"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
+            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup1(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="titlePopup text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
             <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari. Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari anggota.</p>
         </div>
@@ -92,7 +92,7 @@
     <div class="popup" id="popupId-2">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
-            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup2()"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
+            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup2(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="titlePopup text-[40px] mb-[25px]">Ranking Of Presidential Candidate</div>
             <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, tersedia peringkat dari bakal calon presiden yang telah ditetapkan pada aplikasi. Fitur ini akan selalu berubah setiap 1 hari terakhir secara otomatis dengan menampilkan setiap persen keunggulan dari masing - masing bakal calon presiden serta jumlah persen naik dan turunnya bakal calon presiden. Selain itu, fitur ini juga memberitahukan secara langsung bahwa bakal calon presiden siapakah yang selalu diunggulkan dan tidak diunggulkan dari sisi pandang opini sosial media.</p>
         </div>
@@ -100,7 +100,7 @@
     <div class="popup" id="popupId-3">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
-            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup3()"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
+            <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup3(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="titlePopup text-[40px] mb-[25px]">Real - Time Prediction</div>
             <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, data yang ditampilkan akan selalu bersifat terbaru, oleh karena itu pengguna tidak perlu melakukannya secara manual melainkan hanya dengan memasuki aplikasi maka akan terlihat data terbaru secara otomatis. Namun, walaupun begitu pengguna masih dapat melakukan prediksi secara manual jika ingin melakukannya hanya untuk 1 bakal calon presiden atau lebih dalam kurun waktu tertentu selama 7 hari terakhir.</p>
         </div>

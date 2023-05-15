@@ -9,34 +9,31 @@ Bacapres Management
 {% block content %}
 <div class="pl-[280px] pr-6 pb-6 pt-24 ">
     <div class="flex flex-col gap-5">
-        <div class="bg-white py-6 px-10 rounded-xl h-fit">
+        <!-- Start Header Bacapres Management -->
+        <header class="bg-white py-6 px-10 rounded-xl h-fit">
             <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Bacapres Management</div>
-            <hr class="border-[#C2C2C2] my-5"/>
+            <hr class="border-[#C2C2C2] my-5">
             <div class="flex items-center justify-between mb-5">
                 <form action="#" class="flex">
                     <div class='max-w-md'>
-                        <div
-                            class="relative flex items-center w-full h-9 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                        <div class="relative flex items-center w-full h-9 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
                             <div class="grid place-items-center h-full w-12 text-gray-300">
-                                <img class="h-5 w-5" src="{% static 'media/icons/search.svg' %}" alt="">
+                                <img class="h-5 w-5" src="{% static 'media/icons/search.svg' %}" alt="search">
                             </div>
-                            <input class="peer h-full w-[232px] outline-none text-sm text-gray-700 pr-4" type="text"
-                                name="search" placeholder="Search" />
+                            <input class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
                         </div>
                     </div>
-                    <button type="submit"
-                        class="SearchButton font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">
-                        Search
-                    </button>
+                    <button type="submit" class="SearchButton font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                 </form>
                 <div class="ml-6">
-                    <a href="{% url 'createBacapres' %}"><button
-                            class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
+                    <a href="{% url 'createBacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
                 </div>
             </div>
-        </div>
-        <div class="bg-white p-6 rounded-xl h-fit">
+        </header>
+        <!-- Start Header Bacapres Management -->
+        <section class="bg-white p-6 rounded-xl h-fit">
             <div class="relative overflow-x-auto">
+                <!-- Start Table Bacapres Management -->
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase border-b">
                         <tr>
@@ -69,10 +66,10 @@ Bacapres Management
                                 Ganjar Pranowo
                             </td>
                             <td class="itemTabel text-[12px] py-4  ">
-                                <a id="btn-delete" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                                <a id="btn-delete-Bacapres" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
                             <td class="itemTabel text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                                <a class="flex justify-center" href="{% url 'editBacapres' %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
@@ -230,28 +227,28 @@ Bacapres Management
                         </tr>
                     </tbody>
                 </table>
+                <!-- End Table Bacapres Management -->
             </div>
+            <!-- Start Pagination -->
             <div class="flex items-center justify-end">
                 <div class="items-center">
-                    <a href="#"
-                        class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
-                    <a href="#"
-                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
-                    <a href="#"
-                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
+                    <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
                     <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                    <a href="#"
-                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
-                    <a href="#"
-                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
-                    <a href="#"
-                        class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
+                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
                 </div>
             </div>
-        </div>
-        <div class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+            <!-- End Pagination -->
+        </section>
+       
+        <!-- Start Footer Bacapres Management -->
+        <footer class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
             Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
-        </div>
+        </footer>
+        <!-- End Footer Bacapres Management -->
     </div>
 </div>
 {% endblock %}
