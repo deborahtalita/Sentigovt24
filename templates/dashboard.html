@@ -154,9 +154,40 @@
         </section>
         <!-- End Chart Tren -->
         <!-- Start Ranking -->
-        <section class="h-[720px] p-6 rounded-2xl row-span-4 bg-white col-span-2">
+        <section class="h-[720px] p-6 rounded-2xl row-span-4 bg-white col-span-2 overflow-y-auto">
             <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C]">Ranking Of Presidential Candidates</div>
-            <div class="mt-7 space-y-2">
+            <div class="flex justify-end py-3 text-center text-[#1E1D4C]">
+                <div x-data="{ isOpen: false }" class="relative border-2 rounded-lg mt-3">
+                    <!-- Dropdown toggle button -->
+                    <button @click="isOpen = !isOpen" class="itemTabel text-[12px] relative z-10 flex items-center p-2 uppercase font-[poppins-semibold]">
+                        <span class="mx-1">Sentiment</span>
+                        <img class="w-5 h-5 mx-1" src="{% static 'media/icons/dropSentiment.svg' %}" alt="Drop Sentiment"/>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div
+                        x-show="isOpen" 
+                        @click="isOpen = false" 
+                        @click.away="isOpen = false"
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-100"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-90"
+                        class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
+                        <a href="#" class="font-[Inter-Semibold] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                            A-Z
+                        </a>
+                        <a href="#" class="font-[Inter-Semibold] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                            Persentage
+                        </a>
+                        <a href="#" class="font-[Inter-Semibold] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                            Poltracking
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 space-y-2">
                 <button class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                     <div class="flex items-center gap-2">
                         <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
