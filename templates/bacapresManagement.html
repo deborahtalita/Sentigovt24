@@ -11,7 +11,7 @@ Bacapres Management
     <div class="flex flex-col gap-5">
         <!-- Start Header Bacapres Management -->
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
-            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Bacapres Management</div>
+            <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">Bacapres Management</div>
             <hr class="border-[#C2C2C2] my-5">
             <div class="flex items-center justify-between mb-5">
                 <form action="#" class="flex">
@@ -23,7 +23,7 @@ Bacapres Management
                             <input class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
                         </div>
                     </div>
-                    <button type="submit" class="SearchButton font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                    <button type="submit" class="font-[poppins-light] font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                 </form>
                 <div class="ml-6">
                     <a href="{% url 'createBacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
@@ -34,194 +34,194 @@ Bacapres Management
         <section class="bg-white p-6 rounded-xl h-fit">
             <div class="relative overflow-x-auto">
                 <!-- Start Table Bacapres Management -->
-                <table class="w-full text-sm text-left text-gray-500">
+                <table class="w-full text-sm text-left text-gray-500 mb-5">
                     <thead class="text-xs text-gray-700 uppercase border-b">
                         <tr>
-                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] px-6 py-3 text-center">
                                 No
                             </th>
-                            <th scope="col" class="headerList text-[12px] mx-36 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] mx-36 py-3 text-center">
                                 Photo
                             </th>
-                            <th scope="col" class="headerList text-[12px] px-3 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] px-3 py-3 text-center">
                                 Name Bacapres
                             </th>
-                            <th scope="col" class="headerList text-[12px] py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] py-3 text-center">
                                 Delete
                             </th>
-                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] px-6 py-3 text-center">
                                 Edit
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                                 1
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Ganjar Pranowo
                             </td>
-                            <td class="itemTabel text-[12px] py-4  ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4  ">
                                 <a id="btn-delete-Bacapres" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="{% url 'editBacapres' %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 2
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Prabowo.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Prabowo Subianto
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 3
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Anies.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Anies Baswedan
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 4
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Agus.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Agus Harimurti Yudhoyono
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 5
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Ridwan.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Ridwan Kamil
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 6
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Erick.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Erick Thohir
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 7
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Sandiaga.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Sandiaga Uno
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 8
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Puan.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Puan Maharani
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 9
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Khofifah.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Khofifah Indar Parawansa
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 10
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Airlangga.svg' %}" alt="Photo Bacapres">
                             </td>
-                            <td class="itemTabel text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                                 Airlangga Hartanto
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
@@ -243,9 +243,8 @@ Bacapres Management
             </div>
             <!-- End Pagination -->
         </section>
-       
         <!-- Start Footer Bacapres Management -->
-        <footer class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+        <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
             Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
         </footer>
         <!-- End Footer Bacapres Management -->

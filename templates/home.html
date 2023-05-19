@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -21,15 +21,15 @@
     <!-- Start Navigasi -->
     <div class="container mx-auto">
         <nav class="flex justify-between items-center mt-4 mx-20" id="navbarId">
-            <div class="title text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOV24</a></div>
-            <ul class=" menubar text-[13px] text-black flex gap-16 pl-20">
+            <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOV24</a></div>
+            <ul class="font-[Poppins-Medium] text-[13px] text-black flex gap-16 pl-20">
                 <li class="hover:opacity-75 transition-opacity"><a href="#headerId">HOME</a></li>
                 <li class="hover:opacity-75 transition-opacity"><a href="#featuresId">FEATURES</a></li>
                 <li class="hover:opacity-75 transition-opacity"><a href="#faqId">FAQ</a></li>
             </ul>
             <div class="flex gap-6 items-center">
-                <a href="{% url 'login' %}" class="login text-[13px] hover:opacity-75 transition-opacity">Log In</a>
-                <a href="{% url 'register' %}"><button class="register bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Register</button></a>
+                <a href="{% url 'login' %}" class="font-[Poppins-Semibold] text-[13px] hover:opacity-75 transition-opacity">Log In</a>
+                <a href="{% url 'register' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Register</button></a>
             </div>
         </nav>
     </div>
@@ -39,13 +39,13 @@
         <div class="relative headerContent mx-8 mt-4" id="headerContentId">
             <div class="bg-gradient-to-br from-purple-700 to-blue-500 bg-pink-500 h-[120vh] w-full bg-no-repeat rounded-2xl">
                 <div class="text-center absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <div class="typeWebsite text-[20px] text-white mt-16">Website Sentiment Analysis</div>
-                    <div class="slogan text-[55px] text-white mt-3"><span class="typing"></span></div>
+                    <div class="font-[Poppins-Regular] text-[20px] text-white mt-16">Website Sentiment Analysis</div>
+                    <div class="font-[Poppins-Semibold] text-[55px] text-white mt-3"><span class="typing"></span></div>
                 </div>
                 <div class="absolute top-[250px] left-1/2 transform -translate-x-1/2">
-                    <div class="subSlogan text-[12px] text-white mt-8 text-center">Navigate the upcoming presidential election with our <span>powerful</span> <br> sentiment analysis app, providing <span>insights</span> you can <span>trust</span></div>
+                    <div class="font-[Poppins-Regular] text-[12px] text-white mt-8 text-center">Navigate the upcoming presidential election with our <span class="font-[Poppins-Bold]">powerful</span> <br> sentiment analysis app, providing <span>insights</span> you can <span>trust</span></div>
                     <a href="{% url 'dashboard' %}">
-                        <button type="button" class="getStarted text-[12px] text-white mt-9 items-center flex justify-center border-2 rounded-lg mx-auto py-3 px-9">Get Started<img src="{% static 'media/icons/started.svg' %}" class="w-5 h-5 ml-2 -mr-1" alt="Get Started"/></button>
+                        <button type="button" class="font-[Poppins-SemiBold] text-[12px] text-white mt-9 items-center flex justify-center border-2 rounded-lg mx-auto py-3 px-9">Get Started<img src="{% static 'media/icons/started.svg' %}" class="w-5 h-5 ml-2 -mr-1" alt="Get Started"/></button>
                     </a>
                 </div>
             </div>
@@ -62,8 +62,8 @@
     <section class="bacapres" id="bacapresId">
         <div class="bacapresContent" id="bacapresContentId">
             <div class="container mx-auto">
-                <div class="bacapresTitle text-[35px] text-[#1E1D4C] flex justify-center mt-44">Presidential Candidate</div>
-                <div class="bacapresSubTitle text-[15px] text-[#1E1D4C] flex justify-center">This presidential candidate has been determined by the trusted survey agency <span>"Poltracking"</span></div>
+                <div class="font-[Poppins-SemiBold] text-[35px] text-[#1E1D4C] flex justify-center mt-44">Presidential Candidate</div>
+                <div class="font-[Poppins-Regular] text-[15px] text-[#1E1D4C] flex justify-center">This presidential candidate has been determined by the trusted survey agency <span class="font-[Poppins-Bold]">"Poltracking"</span></div>
                 <div class="flex gap-5 justify-center mt-12">
                     <img src="{% static 'media/icons/Agus.svg' %}" alt="Agus Harimurti">
                     <img src="{% static 'media/icons/Airlangga.svg' %}" alt="Airlangga Hartanto">
@@ -85,48 +85,48 @@
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup1(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
-            <div class="titlePopup text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
-            <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari. Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari anggota.</p>
+            <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
+            <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari. Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari anggota.</p>
         </div>
     </div>
     <div class="popup" id="popupId-2">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup2(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
-            <div class="titlePopup text-[40px] mb-[25px]">Ranking Of Presidential Candidate</div>
-            <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, tersedia peringkat dari bakal calon presiden yang telah ditetapkan pada aplikasi. Fitur ini akan selalu berubah setiap 1 hari terakhir secara otomatis dengan menampilkan setiap persen keunggulan dari masing - masing bakal calon presiden serta jumlah persen naik dan turunnya bakal calon presiden. Selain itu, fitur ini juga memberitahukan secara langsung bahwa bakal calon presiden siapakah yang selalu diunggulkan dan tidak diunggulkan dari sisi pandang opini sosial media.</p>
+            <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Ranking Of Presidential Candidate</div>
+            <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, tersedia peringkat dari bakal calon presiden yang telah ditetapkan pada aplikasi. Fitur ini akan selalu berubah setiap 1 hari terakhir secara otomatis dengan menampilkan setiap persen keunggulan dari masing - masing bakal calon presiden serta jumlah persen naik dan turunnya bakal calon presiden. Selain itu, fitur ini juga memberitahukan secara langsung bahwa bakal calon presiden siapakah yang selalu diunggulkan dan tidak diunggulkan dari sisi pandang opini sosial media.</p>
         </div>
     </div>
     <div class="popup" id="popupId-3">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup3(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
-            <div class="titlePopup text-[40px] mb-[25px]">Real - Time Prediction</div>
-            <p class="descPopup text-[18px] text-justify leading-loose">Pada fitur ini, data yang ditampilkan akan selalu bersifat terbaru, oleh karena itu pengguna tidak perlu melakukannya secara manual melainkan hanya dengan memasuki aplikasi maka akan terlihat data terbaru secara otomatis. Namun, walaupun begitu pengguna masih dapat melakukan prediksi secara manual jika ingin melakukannya hanya untuk 1 bakal calon presiden atau lebih dalam kurun waktu tertentu selama 7 hari terakhir.</p>
+            <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Real - Time Prediction</div>
+            <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, data yang ditampilkan akan selalu bersifat terbaru, oleh karena itu pengguna tidak perlu melakukannya secara manual melainkan hanya dengan memasuki aplikasi maka akan terlihat data terbaru secara otomatis. Namun, walaupun begitu pengguna masih dapat melakukan prediksi secara manual jika ingin melakukannya hanya untuk 1 bakal calon presiden atau lebih dalam kurun waktu tertentu selama 7 hari terakhir.</p>
         </div>
     </div>
     <section class="features" id="featuresId">
         <div class="featuresContent" id="featuresContentId">
             <div class="container mx-auto">
-                <div class="featuresTitle text-[35px] text-[#1E1D4C] flex justify-center mt-28">Best Features</div>
-                <div class="featuresSubTitle text-[15px] text-[#1E1D4C] flex justify-center">There are several features available to assist in sentiment analysis</div>
+                <div class="font-[Poppins-SemiBold] text-[35px] text-[#1E1D4C] flex justify-center mt-28">Best Features</div>
+                <div class="font-[Poppins-Regular] text-[15px] text-[#1E1D4C] flex justify-center">There are several features available to assist in sentiment analysis</div>
                 <div class="grid grid-cols-3 gap-8 mx-32 mt-12">
                     <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="cardTitle text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
+                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
                         <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1"/>
-                        <div class="mx-14 pb-10 text-center descFeatures text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
+                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
                         <button onclick="togglePopup1()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                     <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="cardTitle text-[20px] text-[#1E1D4C] text-center">Ranking Of Presidential <br> Candidate</div>
+                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Ranking Of Presidential <br> Candidate</div>
                         <img class="m-auto" src="{% static 'media/icons/Features2.svg' %}" alt="Features 2"/>
-                        <div class="mx-14 pb-10 text-center descFeatures text-[12px] text-[#1E1D4C]">Referring to the process of evaluating and ranking presidential candidates based on various criteria</div>
+                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Referring to the process of evaluating and ranking presidential candidates based on various criteria</div>
                         <button onclick="togglePopup2()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                     <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="cardTitle text-[20px] text-[#1E1D4C] text-center">Real - Time Prediction</div>
+                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Real - Time Prediction</div>
                         <img class="m-auto" src="{% static 'media/icons/Features3.svg' %}" alt="Features 3"/>
-                        <div class="mx-14 pb-10 text-center descFeatures text-[12px] text-[#1E1D4C]">This feature can help users to understand possible future outcomes or scenarios and make more informed decisions in real time</div>
+                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">This feature can help users to understand possible future outcomes or scenarios and make more informed decisions in real time</div>
                         <button onclick="togglePopup3()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                 </div>
@@ -139,12 +139,12 @@
         <div class="faqContent relative mx-8 mt-40" id="faqContentId">
             <div class="bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 h-[85vh] w-full bg-no-repeat rounded-2xl">
                 <div class="flex flex-col text-center mx-32">
-                    <div class="faqTitle text-[35px] text-white mt-20 ">FAQ</div>
-                    <div class="faqSubTitle text-[15px] text-white mb-16">Frequently asked questions about the application</div>
+                    <div class="font-[Poppins-Semibold] text-[35px] text-white mt-20 ">FAQ</div>
+                    <div class="font-[Poppins-Regular] text-[15px] text-white mb-16">Frequently asked questions about the application</div>
                     <div class="flex justify-center items-start">
                         <div class="w-full">
                             <ul class="flex flex-col">
-                                <li class="bg-white my-2 shadow-lg faqQuestion text-[15px]" x-data="accordion(1)">
+                                <li class="bg-white my-2 shadow-lg font-[Poppins-Regular] text-[15px]" x-data="accordion(1)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
                                         <span>Apakah aplikasi ini berbayar ?</span><svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
@@ -154,7 +154,7 @@
                                         <p class="p-5 text-gray-900">Seluruh dari aplikasi ini gratis tanpa ada bayaran apapun, termasuk ketika telah mendaftar menjadi member</p>
                                     </div>
                                 </li>
-                                <li class="bg-white my-2 shadow-lg faqQuestion" x-data="accordion(2)">
+                                <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(2)">
                                     <h2 @click="handleClick()"
                                         class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
                                         <span>Apakah pengguna dapat menggunakan tanpa daftar terlebih dahulu ?</span>
@@ -166,7 +166,7 @@
                                         <p class="p-5 text-gray-900">Ya, pengguna dapat menggunakan aplikasi ini tanpa perlu mendaftar terlebih dahulu namun dengan beberapa keterbatasan fitur</p>
                                     </div>
                                 </li>
-                                <li class="bg-white my-2 shadow-lg faqQuestion" x-data="accordion(3)">
+                                <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(3)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
                                         <span>Untuk apa aplikasi ini digunakan ?</span>
                                         <svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
@@ -190,7 +190,7 @@
         <div class=" quoteContent" id="quoteContentId">
             <div class="flex mt-32 justify-center text-center items-center">
                 <div class="h-80 w-80 mr-20 rounded-full"><img src="{% static 'media/icons/JokoWidodo.svg' %}" alt="Joko Widodo"></div>
-                <div class="quoteText text-[30px] text-black">"Suara rakyat adalah kekuatan terbesar <br> dalam membangun demokrasi yang sehat" <br> <span class="text-[20px]">-- Joko Widodo (Presiden RI) --</span></div>
+                <div class="font-[Poppins-Regular] text-[30px] text-black">"Suara rakyat adalah kekuatan terbesar <br> dalam membangun demokrasi yang sehat" <br> <span class="text-[20px] font-[Poppins-SemiBold]">-- Joko Widodo (Presiden RI) --</span></div>
             </div>
         </div>
     </section>
@@ -200,8 +200,8 @@
         <div class="footerContent relative mx-8 mt-40 mb-10" id="footerContentId">
             <div class="footerBackground h-[45vh] w-full bg-no-repeat rounded-2xl">
                 <div class="flex flex-col mx-14">
-                    <div class="footerTitle text-[30px] text-white mt-12 "><a href="#">SENTIGOV24</a></div>
-                    <div class="flex gap-10 footerMenuBar text-[15px] mt-10 text-white">
+                    <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-white mt-12 "><a href="#">SENTIGOV24</a></div>
+                    <div class="flex gap-10 font-[Poppins-SemiBold] text-[15px] mt-10 text-white">
                         <a href="#">Overview</a>
                         <a href="#">Features</a>
                         <a href="#">Preacing</a>
@@ -211,7 +211,7 @@
                     <div class="mt-16 border-2 rounded-full">
                         <hr>
                     </div>
-                    <div class="flex flex-row-reverse gap-10 footerMenuBar mt-10 text-white">
+                    <div class="flex flex-row-reverse gap-10 font-[Poppins-SemiBold] mt-10 text-white">
                         <a href="#">Cookies</a>
                         <a href="#">Privacy</a>
                         <a href="#">Term</a>

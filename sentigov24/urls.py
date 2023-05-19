@@ -27,10 +27,10 @@ urlpatterns = [
     path('manualSearch/', views.manualSearch, name='manualSearch'),
     path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
+    path('history/detailHistory/', views.detailHistory, name='detailHistory'),
     path('userManagement/', views.userManagement, name='userManagement'),
     path('userManagement/editUser/', views.editUser, name='editUser'),
     path('bacapresManagement/', views.bacapresManagement, name='bacapresManagement'),
     path('bacapresManagement/createBacapres/', views.createBacapres, name='createBacapres'),
     path('bacapresManagement/editBacapres/', views.editBacapres, name='editBacapres'),
-    
 ]

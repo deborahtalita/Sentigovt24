@@ -11,7 +11,7 @@ User Management
     <div class="flex flex-col gap-5">
         <!-- Start Header User Management -->
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
-            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">User Management</div>
+            <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">User Management</div>
             <hr class="border-[#C2C2C2] my-5" />
             <form action="#" class="flex">
                 <div class='max-w-md'>
@@ -22,23 +22,23 @@ User Management
                         <input class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
                     </div>
                 </div>
-                <button type="submit" class="SearchButton flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                <button type="submit" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
             </form>
         </header>
         <!-- End Header User Management -->
         <section class="bg-white p-6 rounded-xl h-fit">
             <div class="relative overflow-x-auto">
                 <!-- Start Table User Management -->
-                <table class="w-full text-sm text-left text-gray-500">
+                <table class="w-full text-sm text-left text-gray-500 mb-5">
                     <thead class="text-xs text-gray-700 uppercase border-b">
                         <tr>
-                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] px-6 py-3 text-center">
                                 No
                             </th>
-                            <th scope="col" class="headerList text-[12px] mx-36 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] mx-36 py-3 text-center">
                                 Name User
                             </th>
-                            <th scope="col" class="headerList text-[12px] py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] py-3 text-center">
                                 <div x-data="{ isOpen: false }" class="relative inline-block">
                                     <!-- Dropdown toggle button -->
                                     <button @click="isOpen = !isOpen" class="itemTabel border-2 rounded-full text-[12px] relative z-10 flex justify-between items-center py-2 w-52 px-3 uppercase">
@@ -58,194 +58,194 @@ User Management
                                         x-transition:leave-start="opacity-100 scale-100"
                                         x-transition:leave-end="opacity-0 scale-90"
                                         class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
-                                        <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                             All Status
                                         </a>
-                                        <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                             Administrator
                                         </a>
-                                        <a href="#" class="itemTabel text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                        <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                             Member
                                         </a>
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="headerList text-[12px] py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] py-3 text-center">
                                 Delete
                             </th>
-                            <th scope="col" class="headerList text-[12px] px-6 py-3 text-center">
+                            <th scope="col" class="font-[Inter-Semibold] text-[12px] px-6 py-3 text-center">
                                 Edit
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                                 1
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Member
                             </td>
-                            <td class="itemTabel text-[12px] py-4  ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4  ">
                                 <a id="btn-delete-User" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="{% url 'editUser' %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 2
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Member
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 3
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Administrator
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 4
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Administrator
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 5
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Member
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 6
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Administrator
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 7
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Member
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 8
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Administrator
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr class="border-b">
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 9
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Member
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row" class="nomerTabel text-[12px] px-6 py-4 font-medium text-center text-gray-900">
+                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
                                 10
                             </th>
-                            <td class="itemTabel text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                                 Lorem Ipsum
                             </td>
-                            <td class="itemTabel text-[12px] text-black py-4 whitespace-nowrap text-center">
+                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
                                 Administrator
                             </td>
-                            <td class="itemTabel text-[12px] py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
-                            <td class="itemTabel text-[12px] px-6 py-4 ">
+                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
                                 <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
@@ -268,11 +268,10 @@ User Management
             <!-- End Pagination -->
         </section>
         <!-- Start Footer -->
-        <footer class="footerDashboard text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+        <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
             Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
         </footer>
         <!-- End Footer -->
     </div>
 </div>
-<script defer src="{% static 'js/selectBox.js' %}"></script>
 {% endblock %}

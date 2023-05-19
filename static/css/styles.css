@@ -1,7 +1,3 @@
-html {
-    scroll-behavior: smooth;
-}
-
 @font-face {
     font-family: 'BigShouldersDisplay-Bold';
     src: url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf');
@@ -58,85 +54,6 @@ html {
         url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
 }
 
-/* Header */
-.title {
-    font-family: BigShouldersDisplay-Bold;
-}
-
-.menubar {
-    font-family: Poppins-Medium;
-}
-
-.typeWebsite {
-    font-family: Poppins-Regular;
-}
-
-.slogan {
-    font-family: Poppins-Semibold;
-}
-
-.subSlogan {
-    font-family: Poppins-Regular;
-}
-
-.subSlogan span {
-    font-family: Poppins-Bold;
-}
-
-.getStarted {
-    font-family: Poppins-SemiBold;
-}
-
-.login {
-    font-family: Poppins-Semibold;
-}
-
-.register, .logout {
-    font-family: Poppins-Semibold;
-}
-
-/* Header */
-
-/* Bacapres */
-.bacapresTitle {
-    font-family: Poppins-SemiBold;
-}
-
-.bacapresSubTitle {
-    font-family: Poppins-Regular;
-}
-
-.bacapresSubTitle span {
-    font-family: Poppins-Bold;
-}
-
-/* Bacapres */
-
-/* Best Features */
-.featuresTitle {
-    font-family: Poppins-SemiBold;
-}
-
-.featuresSubTitle {
-    font-family: Poppins-Regular;
-}
-
-.cardTitle {
-    font-family: Poppins-SemiBold;
-}
-
-.descFeatures {
-    font-family: Poppins-Regular;
-}
-
-.titlePopup {
-    font-family: Poppins-semibold;
-}
-
-.descPopup {
-    font-family: poppins-regular;
-}
-
 .popup.active .overlay {
     display: block;
 }
@@ -145,75 +62,12 @@ html {
     transition: all 300ms ease-in-out;
     transform: translate(-50%, -50%) scale(1);
 }
-/* Best Features */
 
-/* FAQ */
-.faqTitle {
-    font-family: Poppins-Semibold;
-}
-
-.faqSubTitle {
-    font-family: Poppins-Regular;
-}
-
-.faqQuestion {
-    font-family: poppins-regular;
-}
-/* FAQ */
-
-/* Quote */
-.quoteText {
-    font-family: Poppins-Regular;
-}
-
-.quoteText span {
-    font-family: Poppins-SemiBold;
-}
-
-/* Quote */
-
-/* Footer */
 .footerBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #590f74 0%, rgb(37, 16, 117) 59%, #044f21 100%);
 }
 
-.footerTitle {
-    font-family: BigShouldersDisplay-Bold;
-}
-
-.footerMenuBar {
-    font-family: Poppins-SemiBold;
-}
-/* Footer */
-
-/* Login & Register */
-.welcomeText {
-    font-family: Poppins-SemiBold;
-}
-
-.descWelcome {
-    font-family: Poppins-Regular;
-}
-
-.email,
-.password,
-.confirmPassword,
-.name {
-    font-family: Poppins-Medium;
-}
-
-.backButton {
-    font-family: Poppins-Bold;
-}
-
-.dontHaveAccount,
-.haveAccount {
-    font-family: Poppins-regular;
-}
-/* Login & Register*/
-
-/* To Top */
 .to-top {
     background: linear-gradient(38deg, #ce64fc 100%, rgb(123, 94, 239) 20%, #538bde 0%);
 }
@@ -222,74 +76,6 @@ html {
     bottom: 32px;
     pointer-events: auto;
     opacity: 1;
-}
-/* To Top */
-
-/* Dashboard */
-.textItem {
-    font-family: poppins-medium;
-}
-
-.nameProfile {
-    font-family: Poppins-semibold;
-}
-
-.statusProfile {
-    font-family: poppins-regular;
-}
-
-.titleTotal {
-    font-family: poppins-regular;
-}
-
-.countTotal {
-    font-family: poppins-semibold;
-}
-
-.titleRanking,
-.titleChart,
-.titleTable,
-.titleProfile {
-    font-family: poppins-semibold;
-}
-
-.nameBakalCalon {
-    font-family: poppins-regular;
-}
-
-.headerList,
-.nomerTabel {
-    font-family: Inter-Semibold;
-}
-
-.itemTabel {
-    font-family: Inter-Regular;
-}
-
-.footerDashboard {
-    font-family: poppins-regular;
-}
-
-.tokoh {
-    font-family: poppins-bold;
-}
-
-.chooseChart, .choosePhoto {
-    font-family: poppins-regular;
-}
-/* Dashboard */
-
-/* User Management */
-.titleUserManagement {
-    font-family: poppins-medium;
-}
-
-.searchButton {
-    font-family: poppins-light;
-}
-
-.namaProfile {
-    font-family: poppins-semibold;
 }
 
 .activeRanking, .activeRanking:hover {
@@ -310,6 +96,28 @@ html {
 .nameBacapres {
     font-family: poppins-regular;
 }
+
+/* Start Multi Select */
+[x-cloak] {
+    display: none;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #333;
+}
+
+.svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+/* End Multi Select */
 
 
 

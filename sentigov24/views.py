@@ -11,12 +11,16 @@ def register(request):
     return render(request, 'register.html')
 
 def dashboard(request):
-    context = {'active_page': 'dashboard'}
+    context = {'active_page': 'dashboard',
+               'title': 'Dashboard'
+               }
     return render(request, 'dashboard.html', context)
 
 def manualSearch(request):
-    context = {'active_page': 'manual search'}
-    return render(request, 'manualSearch.html', context)
+    context = {'active_page': 'manual search',
+               'title': 'Manual Search'
+               }
+    return render(request, 'dashboard.html', context)
 
 def profile(request):
     return render(request, 'profile.html')
@@ -24,6 +28,11 @@ def profile(request):
 def history(request):
     context = {'active_page': 'history'}
     return render(request, 'history.html', context)
+
+def detailHistory(request):
+    context = {'active_page': 'history',
+               'title': 'History'}
+    return render(request, 'dashboard.html', context)
 
 def userManagement(request):
     context = {'active_page': 'user management'}

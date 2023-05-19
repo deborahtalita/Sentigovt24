@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
     <header class="z-40 h-[67px] fixed flex justify-end items-center w-screen bg-white border-b-2 border-gray-300">
         <div class="mr-20 flex items-center">
             <div class="ml-6">
-                <a href="{% url 'home' %}"><button class="logout bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log Out</button></a>
+                <a href="{% url 'home' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log Out</button></a>
             </div>
         </div>
     </header>
@@ -30,15 +30,15 @@
     <!-- Start  Side Navbar-->
     <aside class="fixed top-0 left-0 z-40 w-60 h-screen" aria-label="Sidebar">
         <div class="bg-[#222222] px-4 py-4 overflow-y-auto h-full">
-            <ul class="space-y-2 textItem text-[12px]">
+            <ul class="space-y-2 font-[poppins-medium] text-[12px]">
                 <li class="flex justify-center mb-10 border-b-2">
-                    <a href="{% url 'home' %}" class="title text-[30px] text-white hover:opacity-75 transition-opacity">SENTIGOV24</a>
+                    <a href="{% url 'home' %}" class="font-[BigShouldersDisplay-Bold] text-[30px] text-white hover:opacity-75 transition-opacity">SENTIGOV24</a>
                 </li>
                 <li class="flex flex-col items-center mt-9">
                     <img src="{% static 'media/icons/ProfileDefault.svg' %}" alt="Profile">
                     <a href="{% url 'profile' %}" class="text-center">
-                        <div class="nameProfile text-[15px] text-white mt-3">Super Administrator</div>
-                        <div class="statusProfile text-[12px] text-white mb-9">Super Administrator</div>
+                        <div class="font-[Poppins-semibold] text-[15px] text-white mt-3">Super Administrator</div>
+                        <div class="font-[poppins-regular] text-[12px] text-white mb-9">Super Administrator</div>
                     </a>
                 </li>
                 <li>
@@ -78,14 +78,15 @@
     <!-- Start Content -->
     {% block content %}{% endblock %}
     <!-- End Content -->
+    <script defer src="{% static 'js/activeInDashboard.js' %}"></script>
     <script defer src="{% static 'js/alpine.js' %}"></script>
     <script defer src="{% static 'ApexChart/dist/apexcharts.js' %}"></script>
     <script defer src="{% static 'js/chart.js' %}"></script>
     <script defer src="{% static 'js/activePage.js' %}"></script>
     <script defer src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-    <script defer src="{% static 'js/activeInDashboard.js' %}"></script>
     <script defer src="{% static 'js/popupSweetAlert2.js' %}"></script>
     <script defer src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </body>
 
