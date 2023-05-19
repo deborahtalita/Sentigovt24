@@ -78,7 +78,8 @@
     opacity: 1;
 }
 
-.activeRanking, .activeRanking:hover {
+.activeRanking,
+.activeRanking:hover {
     background-color: rgb(99 102 241);
     color: #ffffff;
 }
@@ -88,7 +89,8 @@
     color: #1E1D4C;
 }
 
-.activePagination, .activePagination:hover {
+.activePagination,
+.activePagination:hover {
     background-color: gray;
     color: #ffffff;
 }
@@ -118,8 +120,3 @@
     stroke-width: 1;
 }
 /* End Multi Select */
-
-
-
-
-
