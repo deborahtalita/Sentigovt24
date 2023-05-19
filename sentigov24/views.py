@@ -5,10 +5,17 @@ def home(request):
     return render(request, 'home.html')
 
 def login(request):
-    return render(request, 'login.html')
+    context = {'verifikasi_email': 'true',
+               'verifikasi_password': 'true'
+               }
+    return render(request, 'login.html', context)
 
 def register(request):
-    return render(request, 'register.html')
+    context = {'verifikasi_email': 'true',
+               'verifikasi_password': 'true',
+               'verifikasi_confirmPassword':'true'
+               }
+    return render(request, 'register.html', context)
 
 def dashboard(request):
     context = {'active_page': 'dashboard',
