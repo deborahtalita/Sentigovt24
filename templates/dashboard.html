@@ -16,16 +16,9 @@
             <form action="#" method="#">
                 <!-- Multi Select bacapres -->
                 <select title="select" x-cloak id="select">
-                    <option value="Ganjar">Ganjar Pranowo</option>
-                    <option value="Prabowo">Prabowo Subianto</option>
-                    <option value="Anies">Anies Baswedan</option>
-                    <option value="Agus">Agus harimurti Yudhoyono</option>
-                    <option value="Ridwan">Ridwan Kamil</option>
-                    <option value="Erick">Erick Thohir</option>
-                    <option value="Sandiaga">Sandiaga Uno</option>
-                    <option value="Puan">Puan Maharani</option>
-                    <option value="Khofifah">Khofifah Indar Parawansa</option>
-                    <option value="Airlangga">Airlangga Hartanto</option>
+                    {% for tokoh in bacapres %}
+                    <option value={{tokoh.id}}>{{tokoh.name}}</option>
+                    {% endfor %}
                 </select>
                 <div x-data="dropdown()" x-init="loadOptions()" class="w-full flex flex-col mb-3 mx-auto">
                     <input name="values" type="hidden" x-bind:value="selectedValues()">
@@ -122,20 +115,20 @@
         <section class="flex h-40 rounded-2xl bg-white col-span-4 items-center justify-between px-20">
             <div class="flex flex-col">
                 <div class="font-[poppins-regular] text-[15px]">Total</div>
-                <div class="font-[poppins-semibold] text-[40px]">107.000</div>
+                <div class="font-[poppins-semibold] text-[40px]">{{total_tweet}}</div>
             </div>
             <div class="flex gap-12 text-lg font-semibold text-gray-500">
                 <div class="flex-col text-center">
                     <img src="{% static 'media/icons/smile.svg' %}" alt="Smile">
-                    <div>40000</div>
+                    <div>{{sentiment.negative}}</div>
                 </div>
                 <div class="flex-col text-center">
                     <img src="{% static 'media/icons/flat.svg' %}" alt="Flat">
-                    <div>42000</div>
+                    <div>{{pos_sentiment}}</div>
                 </div>
                 <div class="flex-col text-center">
                     <img src="{% static 'media/icons/angry.svg' %}" alt="Flat">
-                    <div>25000</div>
+                    <div>{{sentiment.neutral}}</div>
                 </div>
             </div>
         </section>
@@ -245,113 +238,68 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for tweet in page_obj %}
+                        {% with item_number=page_obj.start_index|add:forloop.counter0 %}
                     <tr class="border-b">
                         <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                            1
+                            {{item_number}}
                         </th>
                         <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            Lorem Ipsum
+                            {{tweet.user_name}}
                         </td>
                         <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            {{tweet.text}}
                         </td>
                         <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
+                        {% if tweet.sentiment == "positive" %}
                             <div class="bg-green-300 p-1 rounded-full">
-                                Positive
-                            </div>
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            DD/MM/YYYY
-                        </td>
-                    </tr>
-                    <tr class="border-b">
-                        <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                            2
-                        </th>
-                        <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            Lorem Ipsum
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center">
-                            <div class="bg-green-300 p-1 rounded-full">
-                                Positive
-                            </div>
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            DD/MM/YYYY
-                        </td>
-                    </tr>
-                    <tr class="border-b">
-                        <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                            3
-                        </th>
-                        <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            Lorem Ipsum
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center">
-                            <div class="bg-green-300 p-1 rounded-full">
-                                Positive
-                            </div>
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            DD/MM/YYYY
-                        </td>
-                    </tr>
-                    <tr class="border-b">
-                        <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                            4
-                        </th>
-                        <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            Lorem Ipsum
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center">
+                        {% elif tweet.sentiment == "negative" %}
                             <div class="bg-red-300 p-1 rounded-full">
-                                Negative
-                            </div>
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            DD/MM/YYYY
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                            5
-                        </th>
-                        <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            Lorem Ipsum
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center">
+                        {% else %}
                             <div class="bg-gray-400 p-1 rounded-full">
-                                Netral
+                        {% endif %}
+                                {{tweet.sentiment}}
                             </div>
                         </td>
                         <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            DD/MM/YYYY
+                            {{tweet.created_at}}
                         </td>
                     </tr>
+                        {% endwith %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="flex items-center justify-end">
             <div class="items-center">
-                <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
+                    <a href="?page={{page_obj.previous_page_number}}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{page_obj.number}}</a>
+                    {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                        <a href="?page={{ num }}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{num}}</a>
+                    {% endif %}
+
+                    {% if page_num == page_obj.number|add:3 and page_obj.paginator.num_pages > page_obj.number|add:4 %}
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
+                    {% elif page_num == page_obj.number|add:-3 and page_obj.number > 4 %}
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{page_obj.next_page_number}}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{page_obj.paginator.num_pages}}</a>
+                {% endif %}
+                <!-- <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
                 <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
                 <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
                 <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
+                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a> -->
             </div>
         </div>
     </section>
