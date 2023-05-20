@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
 
     # apps
     'sentiment',
@@ -58,7 +59,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'sentigovt2.urls'
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/login-success'
+LOGIN_REDIRECT_URL = '/dashboard'
 
 TEMPLATES = [
     {
@@ -131,12 +132,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'staticfiles')
 ]
 
 TAILWIND_CSS = 'static/css/tailwind.css'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+COMPRESS_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,3 +154,7 @@ AUTHENTICATION_BACKENDS = ['accounts.auth.Login']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 3600  # Contoh durasi 1 jam (dalam detik)

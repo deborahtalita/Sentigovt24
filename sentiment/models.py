@@ -4,12 +4,18 @@ class Tweet(models.Model):
     # id = models.AutoField()
     tweet_id = models.TextField(default=None)
     text = models.TextField(default=None)
-    user_name = models.TextField(default=None)
-    created_at = models.TextField(default=None)
-    # text_preprocessed
+    user_name = models.CharField(default=None)
+    created_at = models.DateTimeField(default=None)
+    text_preprocessed = models.TextField(default=None)
     sentiment = models.TextField(default=None)
+    bacapres = models.IntegerField(default=None)
 
 class Bacapres(models.Model):
-    name = models.TextField(default=None)
-    keyword = models.TextField(default=None)
-    desc = models.TextField(default=None)
+    name = models.CharField(default=None, max_length=50)
+    desc = models.CharField(default=None, null=True)
+    keyword = models.CharField(default=None,max_length=50)
+    avatar = models.ImageField(default='default.jpg', upload_to='bacapres_pics/')
+
+# class BacapresKeyword(models.Model):
+#     keyword = models.CharField(max_length=50)
+#     bacapres = models.ForeignKey(Bacapres, on_delete=models.CASCADE)

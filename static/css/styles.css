@@ -1,7 +1,3 @@
-html {
-    scroll-behavior: smooth;
-}
-
 @font-face {
     font-family: 'BigShouldersDisplay-Bold';
     src: url('../fonts/BigShouldersDisplay/BigShouldersDisplay-Bold.ttf');
@@ -31,169 +27,31 @@ html {
 }
 
 @font-face {
+    font-family: 'Poppins-light';
+    src: url('../fonts/Poppins/Poppins-Light.otf');
+    src: url('../fonts/Poppins/Poppins-Light.otf') format('otf'),
+        url('../fonts/Poppins/Poppins-Light.otf') format('truetype');
+}
+
+@font-face {
     font-family: 'Poppins-Bold';
     src: url('../fonts/Poppins/Poppins-Bold.otf');
     src: url('../fonts/Poppins/Poppins-Bold.otf') format('otf'),
         url('../fonts/Poppins/Poppins-Bold.otf') format('truetype');
 }
 
-/* Header */
-.headerBackground{
-    background: #6100FF;
-    background: linear-gradient(38deg, #3fefc9 0%, rgb(128, 28, 209) 59%, #00FFB2 100%);
-    height: 120vh;
+@font-face {
+    font-family: 'Inter-Semibold';
+    src: url('../fonts/Inter/Inter-SemiBold.ttf');
+    src: url('../fonts/Inter/Inter-SemiBold.ttf') format('ttf'),
+        url('../fonts/Inter/Inter-SemiBold.ttf') format('truetype');
 }
 
-.title {
-    font-family: BigShouldersDisplay-Bold;
-    font-size: 30px;
-}
-
-.menubar {
-    font-family: Poppins-Medium;
-    font-size: 13px;
-}
-
-.typeWebsite    {
-    font-family: Poppins-Regular;
-    font-size: 20px;
-}
-
-.slogan {
-    font-family: Poppins-Semibold;
-    font-size: 55px;
-}
-
-.sloganBag2 {
-    position: absolute;
-    top: 250px;
-}
-
-.subSlogan {
-    font-family: Poppins-Regular;
-    font-size: 12px;
-}
-
-.subSlogan span {
-    font-family: Poppins-Bold;
-}
-
-.getStarted {
-    font-family: Poppins-SemiBold;
-    font-size: 12px;
-}
-
-.login {
-    font-family: Poppins-Semibold;
-    font-size: 13px;
-}
-
-.register {
-    font-family: Poppins-Semibold;
-    font-size: 13px;
-    background-color: #7B5BFF;
-}
-/* Header */
-
-/* Bacapres */
-.bacapresTitle {
-    font-family: Poppins-SemiBold;
-    font-size: 35px;
-    color: #1E1D4C;
-}
-
-.bacapresSubTitle {
-    font-family: Poppins-Regular;
-    font-size: 15px;
-    color: #1E1D4C;
-}
-
-.bacapresSubTitle span {
-    font-family: Poppins-Bold;
-}
-/* Bacapres */
-
-/* Best Features */
-.featuresTitle {
-    font-family: Poppins-SemiBold;
-    font-size: 35px;
-    color: #1E1D4C;
-}
-
-.featuresSubTitle {
-    font-family: Poppins-Regular;
-    font-size: 15px;
-    color: #1E1D4C;
-}
-
-.cardFeatures {
-    border-color: #C2C2C2;
-    height: 542px;
-}
-
-.cardTitle {
-    font-family: Poppins-SemiBold;
-    font-size: 20px;
-    color: #1E1D4C;
-}
-
-.more {
-    border-color: #C2C2C2;
-}
-
-.descFeatures {
-    font-family: Poppins-Regular;
-    font-size: 12px;
-    color: #1E1D4C;
-}
-
-.popup .overlay {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: #2c2c2c;
-    opacity: 70%;
-    z-index: 1;
-    display: none;
-}
-
-.popup .content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: #fff;
-    z-index: 2;
-    padding: 50px 80px 50px 80px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.popup .close-btn {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
-    color:#fff;
-    font-size: 25px;
-    font-weight: 600;
-    padding-left: 3px;
-    border-radius: 50%;
-}
-
-.titlePopup {
-    font-family: Poppins-semibold;
-    font-size: 40px;
-    margin-bottom: 25px;
-}
-
-.descPopup {
-    font-family: poppins-regular;
-    font-size: 18px;
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url('../fonts/Inter/Inter-Regular.ttf');
+    src: url('../fonts/Inter/Inter-Regular.ttf') format('ttf'),
+        url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
 }
 
 .popup.active .overlay {
@@ -204,116 +62,14 @@ html {
     transition: all 300ms ease-in-out;
     transform: translate(-50%, -50%) scale(1);
 }
-/* Best Features */
 
-/* FAQ */
-.faqBackground {
-    background: #6100FF;
-    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
-    height: 85vh;
-}
-
-.faqTitle {
-    font-family: Poppins-Semibold;
-    font-size: 35px;
-}
-
-.faqSubTitle {
-    font-family: Poppins-Regular;
-    font-size: 15px;
-}
-
-.faqQuestion {
-    font-family: poppins-regular;
-    font-size: 15px;
-}
-/* FAQ */
-
-/* Quote */
-.quoteText {
-    font-family: Poppins-Regular;
-    font-size: 30px;
-}
-
-.quoteText span{
-    font-family: Poppins-SemiBold;
-    font-size: 20px;
-}
-/* Quote */
-
-/* Footer */
 .footerBackground {
     background: #6100FF;
     background: linear-gradient(38deg, #590f74 0%, rgb(37, 16, 117) 59%, #044f21 100%);
-    height: 45vh;
 }
 
-.footerTitle {
-    font-family: BigShouldersDisplay-Bold;
-    font-size: 30px;
-}
-
-.footerMenuBar {
-    font-family: Poppins-SemiBold;
-    font-size: 15px;
-}
-/* Footer */
-
-/* Login & Register */
-.loginBackground, .registerBackground {
-    background: #6100FF;
-    background: linear-gradient(38deg, #bd5be1 0%, rgb(123, 94, 239) 59%, #538bde 100%);
-    padding: 120px;
-}
-
-.welcomeText {
-    font-family: Poppins-SemiBold;
-    font-size: 45px;
-    color: #1E1D4C;
-}
-
-.descWelcome {
-    font-family: Poppins-Regular;
-    font-size: 15px;
-    color: #969696;
-}
-
-.email, .password, .confirmPassword, .username {
-    font-family: Poppins-Medium;
-    font-size: 15px;
-}
-
-.backButton {
-    font-family: Poppins-Bold;
-    font-size: 20px;
-}
-
-.dontHaveAccount, .haveAccount {
-    font-family: Poppins-regular;
-}
-
-.email span, .password span, .confirmPassword span, .username span {
-    color: red;
-}
-/* Login & Register*/
-
-/* To Top */
 .to-top {
     background: linear-gradient(38deg, #ce64fc 100%, rgb(123, 94, 239) 20%, #538bde 0%);
-    position: fixed;
-    bottom:16px;
-    right: 32px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: all .4s;
 }
 
 .to-top.active {
@@ -321,4 +77,46 @@ html {
     pointer-events: auto;
     opacity: 1;
 }
-/* To Top */
+
+.activeRanking,
+.activeRanking:hover {
+    background-color: rgb(99 102 241);
+    color: #ffffff;
+}
+
+.activeTren {
+    background-color: #ffffff;
+    color: #1E1D4C;
+}
+
+.activePagination,
+.activePagination:hover {
+    background-color: gray;
+    color: #ffffff;
+}
+
+.nameBacapres {
+    font-family: poppins-regular;
+}
+
+/* Start Multi Select */
+[x-cloak] {
+    display: none;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #333;
+}
+
+.svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+/* End Multi Select */

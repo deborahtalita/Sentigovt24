@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load compress %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}" />
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% endcompress %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <title>SENTIGOV24 | Register</title>
 </head>
@@ -16,36 +19,37 @@
     <section class="register" id="registerId">
         <div class="registerContent" id="registerContentId">
             <div class="bg-white grid grid-cols-2">
-                <div class="registerBackground context h-screen bg-no-repeat"><img src="{% static 'media/icons/Phone2.svg' %}" alt="Phone2"/></div>
+                <div class="bg-gradient-to-br from-purple-700 to-blue-500 bg-pink-500 p-[120px] context h-screen bg-no-repeat"><img
+                        src="{% static 'media/icons/Phone2.svg' %}" alt="Phone2" /></div>
                 <div class="container px-40">
                     <div class="flex flex-col mt-20">
-                        <div class="welcomeText">Hello, Sentizens !</div>
-                        <div class="descWelcome">Join us to see Indonesian leaders</div>
+                        <div class="font-[Poppins-SemiBold] text-[45px] text-[#1E1D4C]">Hello, Sentizens !</div>
+                        <div class="font-[Poppins-Regular] text-[15px] text-[#969696]">Join us to see Indonesian leaders</div>
                         <form class="space-y-6" action="register" method="POST">
                             {% csrf_token %}
                             <div class="relative">
-                                <label class="email ml-3 text-gray-700 tracking-wide">Email<span> *</span></label>
+                                <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Email<span class="text-red-500"> *</span></label>
                                 <input
                                     class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg focus:border-indigo-500"
                                     type="email" placeholder="mail@gmail.com" required>
                             </div>
                             <div class="mt-8 content-center">
-                                <label class="username ml-3 text-gray-700 tracking-wide">Username<span> *</span></label>
+                                <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Name<span class="text-red-500"> *</span></label>
                                 <input
                                     class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg focus:border-indigo-500"
-                                    type="text" placeholder="Enter your username" required>
+                                    type="text" placeholder="Enter your name" required>
                             </div>
                             <div class="mt-8 content-center">
-                                <label class="password ml-3 text-gray-700 tracking-wide">
-                                    Password<span> *</span>
+                                <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">
+                                    Password<span class="text-red-500"> *</span>
                                 </label>
                                 <input
                                     class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500"
                                     type="password" placeholder="Enter your password" required>
                             </div>
                             <div class="mt-8 content-center">
-                                <label class="confirmPassword ml-3 text-gray-700 tracking-wide">
-                                    Confirm Password<span> *</span>
+                                <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">
+                                    Confirm Password<span class="text-red-500"> *</span>
                                 </label>
                                 <input
                                     class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500"
@@ -57,11 +61,10 @@
                                     Register
                                 </button>
                             </div>
-                            <p
-                                class=" haveAccount flex flex-col items-center justify-center text-center text-gray-500">
+                            <p class=" font-[Poppins-regular] flex flex-col items-center justify-center text-center text-gray-500">
                                 <span>Have an account?</span>
                                 <a href="{% url 'login' %}"
-                                    class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300 font-bold">Sign
+                                    class="text-indigo-400 hover:text-blue-500 no-underline hover:no-underline cursor-pointer transition ease-in duration-300 font-bold">Sign
                                     In</a>
                             </p>
                         </form>
@@ -71,9 +74,10 @@
         </div>
     </section>
     <!-- End Register -->
-    <div class="backButton" id="backButtonId">
-        <div class="absolute top-0 right-0 mt-4 mr-6 text-gray-600 hover:opacity-75 transition-opacity"><a
+    <div class="font-[Poppins-Bold]" id="backButtonId">
+        <div class="absolute top-0 right-0 mt-4 mr-6 text-gray-600 hover:opacity-75 transition-opacity text-[20px]"><a
                 href="{% url 'home' %}">BACK</a></div>
     </div>
 </body>
+
 </html>

@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
 from .forms import SignUpForm, LoginForm
 
 # Create your views here.
@@ -23,9 +24,16 @@ def register(request):
 def regsuccess(request):
     return render(request, 'success-register.html')
 
-@login_required
+@login_required(login_url='login/')
 def loginsuccess(request):
     return render(request, 'success-login.html')
+
+def logout_request(request):
+    logout(request)
+    print("berhasil logout")
+    return render(request,'home.html')
+
+# def update_role(request)
 
 class webLoginView(LoginView):
     form_class = LoginForm

@@ -1,5 +1,12 @@
 {
   "devDependencies": {
     "tailwindcss": "^3.3.2"
+  },
+  "scripts": {
+    "dev": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "dependencies": {
+    "flowbite": "^1.6.5",
+    "sweetalert2": "^11.7.5"
   }
 }

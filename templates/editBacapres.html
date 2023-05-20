@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Bacapres Management
+{% endblock %}
+
+{% block content %}
+<div class="pl-[280px] pr-6 pb-6 pt-24 ">
+    <div class="flex flex-col gap-5">
+        <!-- Start Header Edit Bacapres Management -->
+        <header class="bg-white py-6 px-10 rounded-xl h-fit">
+            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Bacapres Management</div>
+            <hr class="border-[#C2C2C2] my-5">
+            <div class="nameBacapres text-[#1E1D4C] text-[15px]">Ganjar Pranowo</div>
+        </header>
+        <!-- End Header Edit Bacapres Management -->
+        <!-- Start Form Edit Bacapres -->
+        <section class="bg-white p-6 rounded-xl h-fit">
+            <form action="#" method="PUT" enctype="multipart/form-data">
+                <!-- Start Form Edit Foto Bacapres -->
+                <div id="photoProfile">
+                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
+                    <div class="flex items-center justify-between px-5">
+                        <div class="flex items-center gap-5">
+                            <img class="py-5" src="{% static 'media/icons/Ganjar.svg' %}" alt="ProfileEdit">
+                            <div class="font-[poppins-semibold] text-[#1E1D4C]">Ganjar Pranowo</div>
+                        </div>
+                        <div class="w-[50%]">
+                            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
+                            <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Form Edit Foto Bacapres -->
+                <!-- Start Edit Data Bacapres -->
+                <div class="flex flex-col gap-5">
+                    <div class="relative">
+                        <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
+                        <input class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" type="text" name="name" placeholder="Masukan Nama" value="Ganjar Pranowo" required>
+                    </div>
+                    <div class="relative">
+                        <label class="text-gray-700 tracking-wide text-[15px]">Keyword</label>
+                        <input type="text" aria-label="keyword" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Keyword" value="Ganjar Pranowo" required>
+                    </div>
+                    <div class="relative">
+                        <label class="text-gray-700 tracking-wide text-[15px]">Description</label>
+                        <textarea type="textarea" aria-label="description" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" required>Ganjar Number 1#</textarea>
+                    </div>
+                </div>
+                <!-- End Edit Data Bacapres -->
+                <div class="flex justify-end items-center gap-5 mt-8">
+                    <a href="{% url 'editBacapres' %}" class="font-bold text-[#1E1D4C]">Discard</a>
+                    <button id="saveEditBacapres" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
+                </div>
+            </form>
+        </section>
+        <!-- End Form Edit Bacapres -->
+        <!-- Start Footer Bacapres Management -->
+        <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
+            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+        </footer>
+        <!-- End Footer Bacapres Management -->
+    </div>
+</div>
+{% endblock %}

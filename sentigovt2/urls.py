@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from . import views
@@ -21,6 +23,21 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('sentiment/', include('sentiment.urls')),
+    path('setcookie', views.setcookie, name='setcookie'),
+    path('sentiment/', include('sentiment.urls', namespace='sentiment')),
     path('', include('accounts.urls')),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('manualSearch/', views.manualSearch, name='manualSearch'),
+    path('profile/', views.profile, name='profile'),
+    path('history/', views.history, name='history'),
+    path('userManagement/', views.userManagement, name='userManagement'),
+    path('userManagement/editUser/', views.editUser, name='editUser'),
+    # path('bacapresManagement/', views.bacapresManagement, name='bacapresManagement'),
+    # path('bacapresManagement/createBacapres/', views.createBacapres, name='createBacapres'),
+    # path('bacapresManagement/editBacapres/', views.editBacapres, name='editBacapres'),
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
