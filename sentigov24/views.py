@@ -18,9 +18,12 @@ def register(request):
     return render(request, 'register.html', context)
 
 def dashboard(request):
+    dummy_list = ['Ganjar Pranowo', 'Anies Baswedan', 'Puan Maharani', 'Ridwan Kamil']
     context = {'active_page': 'dashboard',
-               'title': 'Dashboard'
+               'title': 'Dashboard',
+               'dummy_list': dummy_list,
                }
+    if dummy_list: context['active_item'] = dummy_list[0]
     return render(request, 'dashboard.html', context)
 
 def manualSearch(request):

@@ -168,115 +168,19 @@
                 <!-- Dropdown Select Filter -->
             </div>
             <div class="mt-3 space-y-2">
-                <button class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                {% for item in dummy_list %}
+                <button {% if item == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                     <div class="flex items-center gap-2">
                         <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Ganjar Pranowo</h1>
+                        <h1 class="font-[poppins-regular] text-[12px] capitalize">{{ item }}</h1>
                     </div>
                     <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>26,6%</div>
+                        <div>100%</div>
                         <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
                     </div>
                 </button>
+                {% endfor %}
                 <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Prabowo.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Prabowo Subianti</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>19,7%</div>
-                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Anies.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Anies Baswedan</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>17,7%</div>
-                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Agus.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Agus Harimurti Yudhoyono</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>4,7%</div>
-                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ridwan.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Ridwan Kamil</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>3,9%</div>
-                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Erick.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Erick Thohir</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>2,8%</div>
-                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Sandiaga.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Sandiaga Uno</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>2,4%</div>
-                        <img src="{% static 'media/icons/samaDenganGray.svg' %}" alt="Sama Dengan Gray"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Puan.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Puan Maharani</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>2,2%</div>
-                        <img src="{% static 'media/icons/downRed.svg' %}" alt="Down Red"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Khofifah.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Khofifah Indar Parawansa</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>2,2%</div>
-                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
-                    </div>
-                </button>
-                <hr>
-                <button class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                    <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Airlangga.svg' %}" alt="Photo Bacapres">
-                        <h1 class="font-[poppins-regular] text-[12px] capitalize">Airlangga Hartanto</h1>
-                    </div>
-                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>1,7%</div>
-                        <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
-                    </div>
-                </button>
             </div>
         </section>
         <!-- End Ranking -->
