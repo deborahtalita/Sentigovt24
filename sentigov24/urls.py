@@ -25,6 +25,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('manualSearch/', views.manualSearch, name='manualSearch'),
+    path('get-data/', views.get_data, name='get_data'),
     path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
     path('history/detailHistory/', views.detailHistory, name='detailHistory'),

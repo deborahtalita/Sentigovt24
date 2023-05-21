@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -18,13 +19,32 @@ def register(request):
     return render(request, 'register.html', context)
 
 def dashboard(request):
+    context = {}
     dummy_list = ['Ganjar Pranowo', 'Anies Baswedan', 'Puan Maharani', 'Ridwan Kamil']
-    context = {'active_page': 'dashboard',
-               'title': 'Dashboard',
-               'dummy_list': dummy_list,
-               }
     if dummy_list: context['active_item'] = dummy_list[0]
+    context['dates'] = ['2023-05-15', '2023-05-16', '2023-05-17', '2023-05-18', '2023-05-19', '2023-05-20', '2023-05-21']
+    context['active_page'] = 'dashboard'
+    context['title'] = 'Dashboard'
+    context['dummy_list'] = dummy_list
     return render(request, 'dashboard.html', context)
+
+def get_data(request):
+    context = [
+        {
+            'name': 'Positive',
+            'data': [45, 52, 38, 45, 19, 23, 2],
+        },
+        {
+            'name': 'Negative',
+            'data':  [10, 25, 12, 32, 41, 20, 36],
+        },
+        {
+            'name': 'Neutral',
+            'data':  [30, 20, 15, 40, 45, 50, 5],
+
+        }
+    ]
+    return JsonResponse({'series': context})
 
 def manualSearch(request):
     context = {}
