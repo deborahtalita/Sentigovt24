@@ -3,6 +3,9 @@ from . import views
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 
+
+app_name = 'account'
+
 urlpatterns = [
     path('register', views.register, name="register"),
     path('register-success', views.regsuccess, name="regsuccess"),

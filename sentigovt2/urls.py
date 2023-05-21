@@ -23,10 +23,9 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('setcookie', views.setcookie, name='setcookie'),
     path('sentiment/', include('sentiment.urls', namespace='sentiment')),
-    path('', include('accounts.urls')),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('bacapres/', include('bacapres.urls', namespace='bacapres')),
+    path('', include('accounts.urls', namespace='account')),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('manualSearch/', views.manualSearch, name='manualSearch'),
     path('profile/', views.profile, name='profile'),

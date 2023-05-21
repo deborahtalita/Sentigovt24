@@ -22,7 +22,7 @@
     <header class="z-40 h-[67px] fixed flex justify-end items-center w-screen bg-white border-b-2 border-gray-300">
         <div class="mr-20 flex items-center">
             <div class="ml-6">
-                <a href="{% url 'logout' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log Out</button></a>
+                <a href="{% url 'account:logout' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log Out</button></a>
             </div>
         </div>
     </header>
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a {% if active_page == 'bacapres management' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg"  href="{% url 'sentiment:bacapres_list' %}">
+                    <a {% if active_page == 'bacapres management' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg"  href="{% url 'bacapres:bacapres_list' %}">
                         <img class="flex-shrink-0 w-6 h-6" src="{% static 'media/icons/bacapres.svg' %}" alt="Bacapres Management"/>
                         <span class="ml-3 text-white ">Bacapres Management</span>
                     </a>

@@ -26,7 +26,7 @@ Bacapres Management
                     <button type="submit" class="font-[poppins-light] font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                 </form>
                 <div class="ml-6">
-                    <a href="{% url 'createBacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
+                    <a href="{% url 'bacapres:create_bacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
                 </div>
             </div>
         </header>
@@ -55,176 +55,25 @@ Bacapres Management
                         </tr>
                     </thead>
                     <tbody>
+                        {% for tokoh in obj_list %}
                         <tr class="border-b">
                             <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                                1
+                                {{forloop.counter}}
                             </th>
                             <td class="py-4">
                                 <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Ganjar Pranowo
+                                {{tokoh.name}}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] py-4  ">
-                                <a id="btn-delete-Bacapres" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                                <a id="btn-delete-Bacapres" class="flex justify-center" href="{% url 'bacapres:delete_bacapres' id=tokoh.id %}"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="{% url 'editBacapres' %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                                <a class="flex justify-center" href="{% url 'bacapres:edit_bacapres' id=tokoh.id %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                2
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Prabowo.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Prabowo Subianto
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                3
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Anies.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Anies Baswedan
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                4
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Agus.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Agus Harimurti Yudhoyono
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                5
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Ridwan.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Ridwan Kamil
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                6
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Erick.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Erick Thohir
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                7
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Sandiaga.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Sandiaga Uno
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                8
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Puan.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Puan Maharani
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                9
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Khofifah.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Khofifah Indar Parawansa
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                10
-                            </th>
-                            <td class="py-4">
-                                <img class="mx-auto w-12 h-12" src="{% static 'media/icons/Airlangga.svg' %}" alt="Photo Bacapres">
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                Airlangga Hartanto
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <!-- End Table Bacapres Management -->
