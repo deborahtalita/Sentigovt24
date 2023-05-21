@@ -27,9 +27,10 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 def manualSearch(request):
-    context = {'active_page': 'manual search',
-               'title': 'Manual Search'
-               }
+    context = {}
+    context['active_page'] = 'manual search'
+    context['title'] = 'Manual Search'
+    context['result'] = 'false'
     return render(request, 'dashboard.html', context)
 
 def profile(request):

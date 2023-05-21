@@ -1198,6 +1198,18 @@ input:checked + .toggle-bg {
   top: 250px;
 }
 
+.bottom-12 {
+  bottom: 3rem;
+}
+
+.bottom-8 {
+  bottom: 2rem;
+}
+
+.bottom-20 {
+  bottom: 5rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -3608,6 +3620,16 @@ input:checked + .toggle-bg {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
 }
 
 .font-\[600\] {
