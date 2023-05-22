@@ -1286,14 +1286,6 @@ input:checked + .toggle-bg {
   margin: auto;
 }
 
-.m-48 {
-  margin: 12rem;
-}
-
-.m-12 {
-  margin: 3rem;
-}
-
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -3554,6 +3546,11 @@ input:checked + .toggle-bg {
   font-family: poppins-semibold;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .text-\[12px\] {
   font-size: 12px;
 }
@@ -3726,6 +3723,11 @@ input:checked + .toggle-bg {
   letter-spacing: 0.025em;
 }
 
+.text-\[\#05FF00\] {
+  --tw-text-opacity: 1;
+  color: rgb(5 255 0 / var(--tw-text-opacity));
+}
+
 .text-\[\#1E1D4C\] {
   --tw-text-opacity: 1;
   color: rgb(30 29 76 / var(--tw-text-opacity));
@@ -3735,9 +3737,19 @@ input:checked + .toggle-bg {
   color: rgb(51 102 153 / .35);
 }
 
+.text-\[\#838383\] {
+  --tw-text-opacity: 1;
+  color: rgb(131 131 131 / var(--tw-text-opacity));
+}
+
 .text-\[\#969696\] {
   --tw-text-opacity: 1;
   color: rgb(150 150 150 / var(--tw-text-opacity));
+}
+
+.text-\[\#FF0000\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 0 0 / var(--tw-text-opacity));
 }
 
 .text-black {
