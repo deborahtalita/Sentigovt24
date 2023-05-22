@@ -17,7 +17,7 @@
             {% csrf_token %}
                 <!-- Multi Select bacapres -->
                 <select title="select" name="search_field" x-cloak id="select" multiple="" form="manualSearch">
-                    {% for tokoh in bacapres %}
+                    {% for tokoh in bacapres_opt %}
                     <option value="{{tokoh.id}}">{{tokoh.name}}</option>
                     {% endfor %}
                 </select>
@@ -168,7 +168,7 @@
             </div>
             <div class="mt-3 space-y-2">
                 {% for tokoh in bacapres%}
-                <button class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                <button id ="selected_bacapres" data-id="{{tokoh.id}}" {% if item == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                     <div class="flex items-center gap-2">
                         <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
                         <h1 class="font-[poppins-regular] text-[12px] capitalize">{{tokoh.name}}</h1>

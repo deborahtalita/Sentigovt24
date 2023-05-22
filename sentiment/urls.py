@@ -11,7 +11,9 @@ urlpatterns = [
     path('crawl', views.crawl, name="index"),
     path('scrape', views.scrape, name="index"),
     path('test', views.preprocess, name="index"),
-    path('search', views.search, name="search")
+    path('search', views.search, name="search"),
+    path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),
+    path('getAllTotalTweet/', views.getAllTotalTweet, name='getAllTotalTweet'),
     # path('view', views.coba, name="index"),
 ]
 

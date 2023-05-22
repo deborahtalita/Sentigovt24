@@ -37,7 +37,7 @@ class TextPreprocessing(models.TextField):
         print(text)
 
         # handleReduplicationWord
-        text = re.sub(r'\b(\w+)-\1\b', r'\1', text)
+        re.sub(r'\b(\w+)-\1\b', r'\1', text, flags=re.IGNORECASE)
 
         # removePunctuation
         text = text.translate(str.maketrans(string.punctuation, " " * len(string.punctuation)))
@@ -79,7 +79,7 @@ class TextPreprocessing(models.TextField):
         return word_tokenize(document)
        
     def normalizeSlangWords(self, document):
-        slang_word_source=[line.strip('\n').strip('\r') for line in open('slang_word_dictionary.txt')]
+        slang_word_source=[line.strip('\n').strip('\r') for line in open('normalize_dictionary.txt')]
         slang_word_dict={}
 
         for i in slang_word_source: 

@@ -1,18 +1,6 @@
-// Menghilangkan tampilan yang tidak perlu ditampilkan
-let currentDisplay = 'chart-display1';
-
-function displayChart(id) {
-    const currentDisplayElement = document.getElementById(currentDisplay);
-    currentDisplayElement.classList.add('hidden');
-
-    const selectedDisplayElement = document.getElementById(id);
-    selectedDisplayElement.classList.remove('hidden');
-    currentDisplay = id;
-}
-
 // Grafik Tren All Tweet
-function displayChartTotal(chartId) {
-    $.getJSON("/getAllTotalTweet/", function (response) {
+function displayChartTotal() {
+    $.getJSON("/sentiment/getAllTotalTweet/", function (response) {
         var options = {
             chart: {
                 width: "100%",
@@ -22,35 +10,7 @@ function displayChartTotal(chartId) {
             dataLabels: {
                 enabled: false
             },
-            series: [{
-                    name: "Airlangga Hartanto",
-                    data: [45, 52, 38, 45, 19, 40, 47]
-                },
-                {
-                    name: "Anies Baswedan",
-                    data: [100, 67, 38, 80, 19, 30, 79]
-                },
-                {
-                    name: "Gajar Pranowo",
-                    data: [58, 50, 38, 90, 64, 53, 32]
-                },
-                {
-                    name: "Khofifah Indar Parawansa",
-                    data: [70, 102, 38, 20, 70, 23, 20]
-                },
-                {
-                    name: "Sandiaga Uno",
-                    data: [20, 100, 120, 45, 100, 24, 37]
-                },
-                {
-                    name: "Prabowo Subianto",
-                    data: [140, 40, 38, 45, 94, 43, 60]
-                },
-                {
-                    name: "Prabowo Subianto",
-                    data: [140, 40, 38, 45, 94, 43, 60]
-                }
-            ],
+            series: response.bacapres_total_tweet_per_day,
             fill: {
                 type: "gradient",
                 gradient: {
@@ -64,25 +24,28 @@ function displayChartTotal(chartId) {
                 width: 2,
             },
             xaxis: {
-                categories: ["01/05/2023", "02/05/2023", "03/05/2023", "04/05/2023", "05/05/2023", "06/05/2023", "07/05/2023"],
+                categories: response.dates,
             }
         };
         const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
         chart.render();
-    })
-    
+    })  
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    displayChartTotal();
+});
 
 // Grafik Tren
 let currentChart = null; // Grafik yang sedang ditampilkan
-function displayChart(chartId) {
+function displayChart(chartId, id) {
     if (currentChart) {
         currentChart.destroy(); // Menghancurkan grafik yang sedang ditampilkan sebelumnya
     }
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
-        $.getJSON("/getAllTotalSentiment/", function (response) {
+        $.getJSON("/sentiment/getAllTotalSentiment/", function (response) {
             var options = {
                 chart: {
                     width: "100%",
@@ -92,7 +55,7 @@ function displayChart(chartId) {
                 dataLabels: {
                     enabled: false
                 },
-                series: response.total_sentiment_per_day[11],
+                series: response.total_sentiment_per_day[id],
                 stroke: {
                     width: [2, 2, 2], // mengatur lebar garis
                 },
@@ -117,9 +80,9 @@ function displayChart(chartId) {
         })
     } else if (chartId === 'chart-button2') {
         // Membuat grafik 2
-        $.getJSON("/getAllTotalSentiment/", function (response) {
+        $.getJSON("/sentiment/getAllTotalSentiment/", function (response) {
             var options = {
-                series: response.total_sentiment_per_day[11],
+                series: response.total_sentiment_per_day[id],
                 chart: {
                     type: 'bar',
                     width: "100%",

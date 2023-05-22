@@ -11,6 +11,16 @@ buttonsRanking.forEach(button => {
     });
 });
 
+buttonsRanking.forEach(button => {
+    button.addEventListener('click', function() {
+        // Get the ID value from the data-id attribute
+        var id = this.getAttribute('data-id');
+        // Send the ID value to your Django views
+        
+        displayChart(chartId,id)
+    });
+});
+
 buttonsTren.forEach(button => {
     button.addEventListener('click', () => {
         buttonsTren.forEach(btn => {

@@ -2,7 +2,6 @@ ganjar
 pranowo
 prabowo
 subianto
-djojohadikusumo
 anies
 rasyid
 baswedan
@@ -13,14 +12,12 @@ ahy
 mochamad
 ridwan
 kamil
-kang
 emil
 erick
 thohir
 sandiaga
 salahuddin
 uno
-sandi
 puan
 maharani
 nakshatra
@@ -30,6 +27,4 @@ khofifah
 indar
 parawansa
 airlangga
-hartanto
-sunan
-kalijaga
+hartarto
