@@ -35,13 +35,12 @@ def get_data(request):
             'data': [45, 52, 38, 45, 19, 23, 2],
         },
         {
-            'name': 'Negative',
+            'name': 'Neutral',
             'data':  [10, 25, 12, 32, 41, 20, 36],
         },
         {
-            'name': 'Neutral',
+            'name': 'Negative',
             'data':  [30, 20, 15, 40, 45, 50, 5],
-
         }
     ]
     return JsonResponse({'series': context})

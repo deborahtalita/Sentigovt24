@@ -1,15 +1,3 @@
-// Menghilangkan tampilan yang tidak perlu ditampilkan
-let currentDisplay = 'chart-display1';
-
-function displayChart(id) {
-    const currentDisplayElement = document.getElementById(currentDisplay);
-    currentDisplayElement.classList.add('hidden');
-
-    const selectedDisplayElement = document.getElementById(id);
-    selectedDisplayElement.classList.remove('hidden');
-    currentDisplay = id;
-}
-
 // Menampilkan Chart untuk Tren All Tweet
 var options = {
     chart: {
