@@ -4,7 +4,7 @@ from sentiment.crawl import crawl_tweet, MyStreamListener
 from sentiment.scrape import scrape_tweet
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from sentiment.models import Tweet
+from sentiment.models import Tweet, History
 from bacapres.models import Bacapres
 from .forms.bacapres_form import BacapresForm
 from django.contrib import messages
@@ -164,7 +164,8 @@ def search(request):
         context['result'] = 'true'
         
 #        #tweet list with pagination
-        tokoh_tweets = Tweet.objects.filter(bacapres=11).order_by('-created_at')
+        cur_bacapres = bacapres.first()
+        tokoh_tweets = Tweet.objects.filter(bacapres=cur_bacapres.id).order_by('-created_at')
         paginator = Paginator(tokoh_tweets, 10)  # 10 items per page
         page_number = request.GET.get('page')  # Get the current page number from the request
         page_obj = paginator.get_page(page_number)
@@ -233,7 +234,7 @@ def getDates():
 
     return dates
 
-def getAllTotalSentiment(request):
+def getAllTotalSentiment(request, id):
     context = {}
 
     dates = getDates()
@@ -242,7 +243,7 @@ def getAllTotalSentiment(request):
     # get bacapres
     if request.session.get('selected_options') != None:
         selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
+        bacapres = Bacapres.objects.filter(id=id).order_by('id')
     else:
         bacapres = Bacapres.objects.all().order_by('id')
 
@@ -286,3 +287,15 @@ def getAllTotalSentiment(request):
     # print(total_sentiment_per_day)
     context['total_sentiment_per_day'] = total_sentiment_per_day
     return JsonResponse(context)
+
+def getHistoryList(request):
+    context = {}
+
+    history = History.objects.prefetch_related('bacapres').all().order_by('id')
+    data = {}
+    for item in history:
+        print(item.id)
+        for z in item.bacapres.all():
+            print(z.name)
+    data['obj_list'] = history
+    return render(request, 'history.html', data)

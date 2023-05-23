@@ -79,176 +79,25 @@ User Management
                         </tr>
                     </thead>
                     <tbody>
+                    {% for item in obj_list %}
                         <tr class="border-b">
                             <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                                1
+                                {{forloop.counter}}
                             </th>
                             <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
+                                {{item.first_name}}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Member
+                                {{item.role}}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] py-4  ">
-                                <a id="btn-delete-User" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
+                                <a id="btn-delete-User" class="flex justify-center" href="{% url 'account:deleteUser' id=item.id %}"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="{% url 'editUser' %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
+                                <a class="flex justify-center" href="{% url 'account:editUser' id=item.id %}"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                2
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Member
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                3
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Administrator
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                4
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Administrator
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                5
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Member
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                6
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Administrator
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                7
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Member
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                8
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Administrator
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                9
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Member
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                10
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                                Administrator
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-edit.svg' %}" alt="Edit"></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <!-- End Table User Management -->

@@ -154,5 +154,5 @@ function displayChart(chartId, id) {
 }
 // Menampilkan grafik default saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
-    displayChart('chart-button1');
+    displayChart('chart-button1',next(iter(response.bacapres_total_tweet_per_day)));
 });

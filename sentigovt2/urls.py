@@ -28,7 +28,6 @@ urlpatterns = [
     path('', include('accounts.urls', namespace='account')),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('manualSearch/', views.manualSearch, name='manualSearch'),
-    path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
     path('userManagement/', views.userManagement, name='userManagement'),
     # path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),

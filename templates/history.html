@@ -70,176 +70,25 @@ History
                         </tr>
                     </thead>
                     <tbody>
+                        {% for item in obj_list %}
                         <tr class="border-b hover:bg-[#c2c2c2]">
                             <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                                1
+                                {{forloop.counter}}
                             </th>
                             <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('detailHistory')">
-                                Ganjar Pranowo, Prabowo Subianto
+                                {% for z in item.bacapres.all %} {{z.name}}{% ifchanged %}{% if not forloop.last %},{% endif %}{% endifchanged %}{%endfor%}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
+                                {{item.start_date|date:"Y-m-d"}}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
+                                {{item.end_date|date:"Y-m-d"}}
                             </td>
                             <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                                 <a id="btn-delete-history" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
                             </td>
                         </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                2
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Anies Baswedan, Ganjar Pranowo, Puan Maharani
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                3
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Airlangga Hartanto, Anies Baswedan, Ridwan Kamil
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                4
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Agus Harimurti Yudhoyono, Airlangga Hartanto, Anies Baswedan, Erick Thohir, Ganjar Pranowo, Khofifah Indar Parawansa, Prabowo Subianto, Puan Maharani, Ridwan Kamil, Sandiaga Uno
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                5
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                6
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                7
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                8
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                9
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 font-medium text-center text-gray-900">
-                                10
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center">
-                                Lorem Ipsum
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                DD/MM/YYYY 00:00:00
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4 ">
-                                <a class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
+                        {% endfor%}
                     </tbody>
                 </table>
                 <!-- End Table -->

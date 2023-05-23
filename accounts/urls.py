@@ -8,8 +8,10 @@ app_name = 'account'
 
 urlpatterns = [
     path('register', views.register, name="register"),
-    path('register-success', views.regsuccess, name="regsuccess"),
     path('login/', views.webLoginView.as_view(), name='login'),
-    path('logout/', views.logout_request, name="logout"),
-    path('login-success', views.loginsuccess, name="logsuccess"),
+    path('logout/', views.logoutRequest, name="logout"),
+    path('profile', views.getProfile, name="profile"),
+    path('account', views.userAccountList, name="userManagement"),
+    path('account/delete/<int:id>', views.deleteUser, name="deleteUser"),
+    path('editUser/<int:id>', views.editUser, name="editUser")
 ]

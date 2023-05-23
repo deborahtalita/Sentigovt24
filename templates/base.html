@@ -36,9 +36,9 @@
                 </li>
                 <li class="flex flex-col items-center mt-9">
                     <img src="{% static 'media/icons/ProfileDefault.svg' %}" alt="Profile">
-                    <a href="{% url 'profile' %}" class="text-center">
-                        <div class="font-[Poppins-semibold] text-[15px] text-white mt-3">Super Administrator</div>
-                        <div class="font-[poppins-regular] text-[12px] text-white mb-9">Super Administrator</div>
+                    <a href="{% url 'account:profile' %}" class="text-center">
+                        <div class="font-[Poppins-semibold] text-[15px] text-white mt-3">{% if auth_user %} {{auth_user.first_name}} {% else %} Guest {% endif %}</div>
+                        <div class="font-[poppins-regular] text-[12px] text-white mb-9">{% if auth_user %} {{auth_user.role}} {% else %} Guest {% endif %}</div>
                     </a>
                 </li>
                 <li>
@@ -54,13 +54,13 @@
                     </a>
                 </li>
                 <li>
-                    <a {% if active_page == 'history' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg" href="{% url 'history' %}">
+                    <a {% if active_page == 'history' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg" href="{% url 'sentiment:getHistoryList' %}">
                         <img class="flex-shrink-0 w-6 h-6" src="{% static 'media/icons/history.svg' %}" alt="History"/>
                         <span class="ml-3 text-white ">History</span>
                     </a>
                 </li>
                 <li>
-                    <a {% if active_page == 'user management' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg"  href="{% url 'userManagement' %}">
+                    <a {% if active_page == 'user management' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg"  href="{% url 'account:userManagement' %}">
                         <img class="flex-shrink-0 w-6 h-6" src="{% static 'media/icons/user.svg' %}" alt="User Management"/>
                         <span class="ml-3 text-white ">User Management</span>
                     </a>

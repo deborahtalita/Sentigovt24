@@ -2,6 +2,7 @@
 const buttonsRanking = document.querySelectorAll('.rankingButton');
 const buttonsTren = document.querySelectorAll('.chooseChart');
 
+
 buttonsRanking.forEach(button => {
     button.addEventListener('click', () => {
         buttonsRanking.forEach(btn => {
@@ -11,15 +12,15 @@ buttonsRanking.forEach(button => {
     });
 });
 
-buttonsRanking.forEach(button => {
-    button.addEventListener('click', function() {
-        // Get the ID value from the data-id attribute
-        var id = this.getAttribute('data-id');
-        // Send the ID value to your Django views
+// buttonsRanking.forEach(button => {
+//     button.addEventListener('click', function() {
+//         // Get the ID value from the data-id attribute
+//         var id = this.getAttribute('data-id');
+//         // Send the ID value to your Django views
         
-        displayChart(chartId,id)
-    });
-});
+//         displayChart(chartId,id)
+//     });
+// });
 
 buttonsTren.forEach(button => {
     button.addEventListener('click', () => {

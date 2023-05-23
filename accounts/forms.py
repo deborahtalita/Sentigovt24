@@ -16,5 +16,9 @@ class SignUpForm(UserCreationForm):
             user.save()
         return user
 
+# class UpdateProfileForm(forms.ModelForm):
+
+
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='email')
