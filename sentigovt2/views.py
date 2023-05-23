@@ -60,8 +60,11 @@ def dashboard(request):
 
     # get bacapres
     bacapres = Bacapres.objects.all().order_by('id')
-    if bacapres: context['active_item'] = bacapres.first()
     context['bacapres'] = bacapres
+    active_item = bacapres.first()
+    if active_item: context['active_item'] = active_item.id
+    
+    print(active_item.id)
 
     #tweet list with pagination
     paginator = Paginator(tokoh_tweets, 10)  # 10 items per page

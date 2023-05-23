@@ -1,47 +1,14 @@
-// Grafik Tren All Tweet
-function displayChartTotal() {
-    $.getJSON("/sentiment/getAllTotalTweet/", function (response) {
-        var options = {
-            chart: {
-                width: "100%",
-                height: "90%",
-                type: "area",
-            },
-            dataLabels: {
-                enabled: false
-            },
-            series: response.bacapres_total_tweet_per_day,
-            fill: {
-                type: "gradient",
-                gradient: {
-                    shadeIntensity: 1,
-                    opacityFrom: 0,
-                    opacityTo: 0,
-                    stops: [0, 90, 100]
-                }
-            },
-            stroke: {
-                width: 2,
-            },
-            xaxis: {
-                categories: response.dates,
-            }
-        };
-        const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
-        chart.render();
-    })  
-}
+let currentId = null;
+let currentChart = null;
 
-document.addEventListener("DOMContentLoaded", function () {
-    displayChartTotal();
-});
-
-// Grafik Tren
-let currentChart = null; // Grafik yang sedang ditampilkan
-function displayChart(chartId, id) {
-    if (currentChart) {
-        currentChart.destroy(); // Menghancurkan grafik yang sedang ditampilkan sebelumnya
+function displayChart(chartId, Id) {
+    if (currentId && currentChart) {
+        delete currentId;
+        currentChart.destroy();
     }
+
+    currentId = Id;
+    console.log(currentId);
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
@@ -55,7 +22,7 @@ function displayChart(chartId, id) {
                 dataLabels: {
                     enabled: false
                 },
-                series: response.total_sentiment_per_day[id],
+                series: response.total_sentiment_per_day[Id],
                 stroke: {
                     width: [2, 2, 2], // mengatur lebar garis
                 },
@@ -82,7 +49,7 @@ function displayChart(chartId, id) {
         // Membuat grafik 2
         $.getJSON("/sentiment/getAllTotalSentiment/", function (response) {
             var options = {
-                series: response.total_sentiment_per_day[id],
+                series: response.total_sentiment_per_day[Id],
                 chart: {
                     type: 'bar',
                     width: "100%",
@@ -152,7 +119,80 @@ function displayChart(chartId, id) {
         }
     });
 }
+
+// Grafik Tren All Tweet
+function displayChartTotal() {
+    $.getJSON("/sentiment/getAllTotalTweet/", function (response) {
+        var options = {
+            chart: {
+                width: "100%",
+                height: "90%",
+                type: "area",
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: response.bacapres_total_tweet_per_day,
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                }
+            },
+            stroke: {
+                width: 2,
+            },
+            xaxis: {
+                categories: response.dates,
+            }
+        };
+        const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
+        chart.render();
+    })  
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    displayChartTotal();
+});
+
 // Menampilkan grafik default saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
-    displayChart('chart-button1',next(iter(response.bacapres_total_tweet_per_day)));
+    var chartType = getCurrentChartType();
+    var displayOption = getCurrentDisplayOption();
+    displayChart(chartType, displayOption);
+    }
+);
+
+document.querySelectorAll(".chart-button").forEach(function(button) {
+    button.addEventListener("click", function() {
+        var chartType = button.getAttribute("id");
+        console.log(chartType)
+        var displayOption = getCurrentDisplayOption();
+        console.log(displayOption)
+        displayChart(chartType, displayOption);
+    });
 });
+
+document.querySelectorAll(".rankingButton").forEach(function(button) {
+    button.addEventListener("click", function() {
+        var chartType = getCurrentChartType();
+        console.log(chartType)
+        var displayOption = button.getAttribute("data-id");
+        console.log(displayOption)
+        displayChart(chartType, displayOption);
+    });
+});
+
+function getCurrentChartType() {
+    var activeButton = document.querySelector(".chart-button.activeTren");
+    return activeButton ? activeButton.getAttribute("id") : null;
+}
+
+function getCurrentDisplayOption() {
+    var activeButton = document.querySelector(".rankingButton.activeRanking");
+    console.log(activeButton)
+    return activeButton ? activeButton.getAttribute("data-id") : null;
+}

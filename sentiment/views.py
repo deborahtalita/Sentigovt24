@@ -160,7 +160,10 @@ def search(request):
         # get selected bacapres
         bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
         context['bacapres'] = bacapres
-        if bacapres: context['active_item'] = bacapres.first()
+        active_item = bacapres.first()
+        if active_item: context['active_item'] = active_item.id
+        
+        print(active_item.id)
         context['result'] = 'true'
         
 #        #tweet list with pagination
@@ -234,7 +237,7 @@ def getDates():
 
     return dates
 
-def getAllTotalSentiment(request, id):
+def getAllTotalSentiment(request):
     context = {}
 
     dates = getDates()
@@ -243,7 +246,7 @@ def getAllTotalSentiment(request, id):
     # get bacapres
     if request.session.get('selected_options') != None:
         selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id=id).order_by('id')
+        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
     else:
         bacapres = Bacapres.objects.all().order_by('id')
 
