@@ -27,15 +27,6 @@ urlpatterns = [
     path('bacapres/', include('bacapres.urls', namespace='bacapres')),
     path('', include('accounts.urls', namespace='account')),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('manualSearch/', views.manualSearch, name='manualSearch'),
-    path('history/', views.history, name='history'),
-    path('userManagement/', views.userManagement, name='userManagement'),
-    # path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),
-    # path('getAllTotalTweet/', views.getAllTotalTweet, name='getAllTotalTweet'),
-    path('userManagement/editUser/', views.editUser, name='editUser'),
-    # path('bacapresManagement/', views.bacapresManagement, name='bacapresManagement'),
-    # path('bacapresManagement/createBacapres/', views.createBacapres, name='createBacapres'),
-    # path('bacapresManagement/editBacapres/', views.editBacapres, name='editBacapres'),
 ]
 
 if settings.DEBUG:

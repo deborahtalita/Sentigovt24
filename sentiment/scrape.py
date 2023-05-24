@@ -7,10 +7,8 @@ from .models import Bacapres
 load_dotenv()
 
 
-# until_time = int(time.time())
-# since_time = until_time - 3600
-until_time = 1684505921
-since_time = 1684831022
+until_time = int(time.time())
+since_time = until_time - 3600
 print(since_time, " ", until_time)
 
 dt_utc = datetime.datetime.utcnow()

@@ -49,7 +49,6 @@ def dashboard(request):
     if 'selected_end_date' in request.session:
         del request.session['selected_end_date']
 
-    # tokoh_tweets = Tweet.objects.filter(bacapres=11).order_by('-created_at')
     # get bacapres
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres'] = bacapres
@@ -73,8 +72,6 @@ def dashboard(request):
                                             'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
-    # print(bacapres_total_sentiment)
-    # print(bacapres_total_tweet)
     
     active_item = bacapres.first()
     if active_item: context['active_item'] = active_item.id
@@ -102,37 +99,3 @@ def getDates():
         cur_date += timedelta(days=1)
 
     return dates
-
-def manualSearch(request):
-    context = {}
-
-    # bacapres
-    bacapres = Bacapres.objects.all()
-    context['bacapres'] = bacapres
-
-    context['active_page'] = 'manual search'
-    context['title'] = 'Manual Search'
-    return render(request, 'dashboard.html', context)
-
-def profile(request):
-    return render(request, 'profile.html')
-
-def history(request):
-    context = {'active_page': 'history'}
-    return render(request, 'history.html', context)
-
-def userManagement(request):
-    context = {'active_page': 'user management'}
-    return render(request, 'userManagement.html', context)
-
-def editUser(request):
-    context = {'active_page': 'user management'}
-    return render(request, 'editUser.html', context)
-
-def createBacapres(request):
-    context = {'active_page': 'bacapres management'}
-    return render(request, 'createBacapres.html', context)
-
-def editBacapres(request):
-    context = {'active_page': 'bacapres management'}
-    return render(request, 'editBacapres.html', context)
