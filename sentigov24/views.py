@@ -84,7 +84,7 @@ def get_data_table_history(request):
     ]
 
     page = int(request.GET.get('page', 1))
-    dataPerPage = 5
+    dataPerPage = 10
     startIndex = (page - 1) * dataPerPage
     endIndex = startIndex + dataPerPage
     paginatedData = data[startIndex:endIndex]
@@ -133,7 +133,40 @@ def get_data_table_dashboard(request):
     ]
 
     page = int(request.GET.get('page', 1))
-    dataPerPage = 5
+    dataPerPage = 10
+    startIndex = (page - 1) * dataPerPage
+    endIndex = startIndex + dataPerPage
+    paginatedData = data[startIndex:endIndex]
+    totalPages = len(data) // dataPerPage + (len(data) % dataPerPage > 0)
+    response = {
+        'results': paginatedData,
+        'total_pages': totalPages
+    }
+    return JsonResponse(response)
+
+def get_data_table_user(request):
+    data = [
+        {'no': 1, 'name': 'Lorem Ipsum 1', 'status': 'Member'},
+        {'no': 2, 'name': 'Lorem Ipsum 2', 'status': 'Administrator'},
+        {'no': 3, 'name': 'Lorem Ipsum 3', 'status': 'Member'},
+        {'no': 4, 'name': 'Lorem Ipsum 4', 'status': 'Member'},
+        {'no': 5, 'name': 'Lorem Ipsum 5', 'status': 'Member'},
+        {'no': 6, 'name': 'Lorem Ipsum 6', 'status': 'Administrator'},
+        {'no': 7, 'name': 'Lorem Ipsum 7', 'status': 'Member'},
+        {'no': 8, 'name': 'Lorem Ipsum 8', 'status': 'Member'},
+        {'no': 9, 'name': 'Lorem Ipsum 9', 'status': 'Member'},
+        {'no': 10, 'name': 'Lorem Ipsum 10', 'status': 'Member'},
+        {'no': 11, 'name': 'Lorem Ipsum 11', 'status': 'Member'},
+        {'no': 12, 'name': 'Lorem Ipsum 12', 'status': 'Member'},
+        {'no': 13, 'name': 'Lorem Ipsum 13', 'status': 'Member'},
+        {'no': 14, 'name': 'Lorem Ipsum 14', 'status': 'Member'},
+        {'no': 15, 'name': 'Lorem Ipsum 15', 'status': 'Member'},
+        {'no': 16, 'name': 'Lorem Ipsum 16', 'status': 'Member'},
+        # Tambahkan data dummy lainnya sesuai kebutuhan
+    ]
+
+    page = int(request.GET.get('page', 1))
+    dataPerPage = 10
     startIndex = (page - 1) * dataPerPage
     endIndex = startIndex + dataPerPage
     paginatedData = data[startIndex:endIndex]
@@ -152,6 +185,40 @@ def manualSearch(request):
     context['result'] = 'false'
     return render(request, 'dashboard.html', context)
 
+def get_data_table_bacapres(request):
+    data = [
+        {'no': 1, 'name': 'Lorem Ipsum 1', 'img_bacapres':'/static/media/icons/Ganjar.svg'},
+        {'no': 2, 'name': 'Lorem Ipsum 2', 'img_bacapres':'/static/media/icons/Erick.svg'},
+        {'no': 3, 'name': 'Lorem Ipsum 3', 'img_bacapres':'/static/media/icons/Anies.svg'},
+        {'no': 4, 'name': 'Lorem Ipsum 4', 'img_bacapres':'/static/media/icons/Puan.svg'},
+        {'no': 5, 'name': 'Lorem Ipsum 5', 'img_bacapres':'/static/media/icons/Khofifah.svg'},
+        {'no': 6, 'name': 'Lorem Ipsum 6', 'img_bacapres':'/static/media/icons/Prabowo.svg'},
+        {'no': 7, 'name': 'Lorem Ipsum 7', 'img_bacapres':'/static/media/icons/Ridwan.svg'},
+        {'no': 8, 'name': 'Lorem Ipsum 8', 'img_bacapres':'/static/media/icons/Sandiaga.svg'},
+        {'no': 9, 'name': 'Lorem Ipsum 9', 'img_bacapres':'/static/media/icons/Agus.svg'},
+        {'no': 10, 'name': 'Lorem Ipsum 10', 'img_bacapres':'/static/media/icons/Airlangga.svg'},
+        # Tambahkan data dummy lainnya sesuai kebutuhan
+    ]
+
+    page = int(request.GET.get('page', 1))
+    dataPerPage = 10
+    startIndex = (page - 1) * dataPerPage
+    endIndex = startIndex + dataPerPage
+    paginatedData = data[startIndex:endIndex]
+    totalPages = len(data) // dataPerPage + (len(data) % dataPerPage > 0)
+    response = {
+        'results': paginatedData,
+        'total_pages': totalPages
+    }
+    return JsonResponse(response)
+
+
+def manualSearch(request):
+    context = {}
+    context['active_page'] = 'manual search'
+    context['title'] = 'Manual Search'
+    context['result'] = 'false'
+    return render(request, 'dashboard.html', context)
 
 def profile(request):
     return render(request, 'profile.html')

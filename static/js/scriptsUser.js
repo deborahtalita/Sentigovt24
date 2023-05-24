@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
     // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
-    function getDataHistory(page) {
-        $.getJSON(`/get-data-table-history/?page=${page}`, function (response) {
+    function getDataUser(page) {
+        $.getJSON(`/get-data-table-user/?page=${page}`, function (response) {
             // Mendapatkan data dari response
             const data = response.results;
             const totalPages = response.total_pages;
@@ -12,21 +12,21 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.empty();
 
             for (let i = 0; i < data.length; i++) {
-                const row = `<tr class="border-b hover:bg-[#c2c2c2]">
+                const row = `<tr class="border-b">
                 <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                     ${data[i].no}
                 </th>
-                <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('detailHistory')">
-                    ${data[i].bacapres}
+                <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                    ${data[i].name}
                 </td>
-                <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                    ${data[i].tgl_start}
+                <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
+                    ${data[i].status}
                 </td>
-                <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                    ${data[i].tgl_end}
+                <td class="font-[Inter-Regular] text-[12px] py-4 ">
+                    <a id="btn-delete-User" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                    <a id="btn-delete-history" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
+                    <a class="flex justify-center" href="{% url 'editUser' %}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
                 </td>
             </tr>`;
                 tableBody.append(row);
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const page = parseInt($(this).text());
                 if (page !== currentPage) {
                     currentPage = page;
-                    getDataHistory(currentPage);
+                    getDataUser(currentPage);
                 }
             });
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const page = parseInt($(this).text());
                 if (page !== currentPage) {
                     currentPage = page;
-                    getDataHistory(currentPage);
+                    getDataUser(currentPage);
                     // Menghapus kelas "active" dari semua tombol halaman
                     $(".page-button").removeClass("activePagination");
                     // Menambahkan kelas "active" pada tombol halaman yang dipilih
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Menambahkan event listener untuk tombol delete
-        $(document).on("click", "#btn-delete-history", function (event) {
+        $(document).on("click", "#btn-delete-User", function (event) {
             event.preventDefault(); // Mencegah aksi default dari link
             const deleteButton = $(this);
             // Tampilkan dialog konfirmasi SweetAlert2
@@ -104,19 +104,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Mengambil data saat halaman dimuat
-    getDataHistory(currentPage);
+    getDataUser(currentPage);
 
     // Event listener untuk tombol sebelumnya
     $("#prev-button").on("click", function () {
         if (currentPage > 1) {
             currentPage--;
-            getDataHistory(currentPage);
+            getDataUser(currentPage);
         }
     });
 
     // Event listener untuk tombol selanjutnya
     $("#next-button").on("click", function () {
         currentPage++;
-        getDataHistory(currentPage);
+        getDataUser(currentPage);
     });
 });
