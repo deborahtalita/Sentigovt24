@@ -19,9 +19,13 @@ import json
 import pytz 
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
+import os
 
-vectorizer = pickle.load(open("TFIDFvec.pickle","rb"))
-classifier = joblib.load("MultinomialNBModel.joblib")
+vectorizer_path = os.path.join(os.path.dirname(__file__), '../utils/vectorizers/TFIDFvec.pickle')
+classifier_path = os.path.join(os.path.dirname(__file__), '../utils/models/MultinomialNBModel.joblib')
+
+vectorizer = pickle.load(open(vectorizer_path,"rb"))
+classifier = joblib.load(classifier_path)
 # get times
 dt_utc = datetime.utcnow()
 timezone = pytz.timezone('Asia/Jakarta')

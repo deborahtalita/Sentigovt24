@@ -8,14 +8,21 @@ import Sastrawi
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import swifter
 from django.db import models
+import os
 
 
 nltk.download('punkt')
 nltk.download('stopwords')
+utils_path = os.path.join(os.path.dirname(__file__), '../utils/')
 
 class TextPreprocessing(models.TextField):
     preprocessed_text = ''
     text = models.TextField()
+
+    def removeIrrelevantTweet(text):
+        text = [item for item in text if any(keyword.lower() in item.get('text').lower() for keyword in item.get('bacapres').split(" "))]
+        
+        return text
 
     def data_cleaning(self, text):
         text = str(text)
@@ -79,7 +86,8 @@ class TextPreprocessing(models.TextField):
         return word_tokenize(document)
        
     def normalizeSlangWords(self, document):
-        slang_word_source=[line.strip('\n').strip('\r') for line in open('normalize_dictionary.txt')]
+        file_path = os.path.join(os.path.dirname(__file__), '../utils/dictionaries/normalize_dictionary.txt')
+        slang_word_source=[line.strip('\n').strip('\r') for line in open(file_path)]
         slang_word_dict={}
 
         for i in slang_word_source: 
@@ -90,7 +98,8 @@ class TextPreprocessing(models.TextField):
     
     def negationHandlingPOS(self, document):
         ct = CRFTagger()
-        ct.set_model_file('all_indo_man_tag_corpus_model.crf.tagger')
+        file_path = os.path.join(os.path.dirname(__file__), '../utils/models/all_indo_man_tag_corpus_model.crf.tagger')
+        ct.set_model_file(file_path)
         pos_tagged_document = ct.tag_sents([document])
 
         words = []
@@ -121,8 +130,9 @@ class TextPreprocessing(models.TextField):
             neg_word = 0
         return [words[i][0] for i in range(len(words))]
     
-    def removeStopWords(self, words):   
-        additional_stopwords = [line.rstrip() for line in open('stopword_add_dictionary.txt')]
+    def removeStopWords(self, words):
+        file_path = os.path.join(os.path.dirname(__file__), '../utils/dictionaries/stopword_add_dictionary.txt')
+        additional_stopwords = [line.rstrip() for line in open(file_path)]
         list_stopwords = stopwords.words('indonesian')
         list_stopwords.extend(additional_stopwords)
         list_stopwords = set(list_stopwords) 
