@@ -14,7 +14,7 @@ from django.http import JsonResponse
 dt_utc = datetime.utcnow()
 timezone = pytz.timezone('Asia/Jakarta')
 today = dt_utc.replace(tzinfo=pytz.utc).astimezone(timezone)
-seven_days_ago = today - timedelta(days=7)
+seven_days_ago = today - timedelta(days=6)
 
 # Create your views here.
 def setcookie(request):
@@ -37,30 +37,39 @@ def home(request):
         response.set_cookie('session_id', unique_id, max_age=3600)
     return response
 
-@login_required
 def dashboard(request):
     context = {}
 
     if 'selected_options' in request.session:
         del request.session['selected_options']
-    tokoh_tweets = Tweet.objects.filter(bacapres=11).order_by('-created_at')
 
-    # total tweet
-    total = tokoh_tweets.count()
-    context['total_tweet'] = total
-
-    neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
-    pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
-    neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
-    
-    # total tweet per classification
-    context['sentiment'] = {'negative':neg_sentiment,
-                            'positive':pos_sentiment,
-                            'neutral':neu_sentiment}
-
+    # tokoh_tweets = Tweet.objects.filter(bacapres=11).order_by('-created_at')
     # get bacapres
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres'] = bacapres
+
+    #  get tweets
+    tweets = Tweet.objects.filter(created_at__gte=seven_days_ago)
+
+    # total tweet & tweet per sentiment
+    bacapres_total_tweet = {}
+    bacapres_total_sentiment = {}
+    for res in bacapres:
+        tokoh_tweets = tweets.filter(bacapres=res.id)
+        total = tokoh_tweets.count()
+        bacapres_total_tweet[res.id] = total
+
+        neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
+        pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
+        neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
+        bacapres_total_sentiment[res.id] = {'negative':neg_sentiment,
+                                            'positive':pos_sentiment,
+                                            'neutral':neu_sentiment}
+    context['bacapres_total_tweet'] = bacapres_total_tweet
+    context['bacapres_total_sentiment'] = bacapres_total_sentiment
+    print(bacapres_total_sentiment)
+    print(bacapres_total_tweet)
+    
     active_item = bacapres.first()
     if active_item: context['active_item'] = active_item.id
     
@@ -81,7 +90,7 @@ def getDates():
     i = 0
 
     cur_date = seven_days_ago
-    while cur_date < today:
+    while cur_date <= today:
         date = cur_date.strftime('%Y-%m-%d') 
         dates.append(date)
         cur_date += timedelta(days=1)

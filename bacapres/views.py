@@ -3,14 +3,17 @@ from django.urls import reverse_lazy
 from .models import Bacapres
 from .forms import BacapresForm
 from django.contrib import messages
+from sentigovt2.decorators import role_required
 
-# Create your views here.
+
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def bacapres_list(request):
     bacapres = Bacapres.objects.all().order_by('id')
     data = {}
     data['obj_list'] = bacapres
     return render(request, 'bacapresManagement.html', data)
 
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def create_bacapres(request):
     context = {}
     form = BacapresForm(request.POST, request.FILES)
@@ -25,7 +28,7 @@ def create_bacapres(request):
     context['form'] = form
     return render(request, 'createBacapres.html', context)
 
-
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def edit_bacapres(request, id):
     context = {}
     bacapres = get_object_or_404(Bacapres,id=id)
@@ -38,6 +41,7 @@ def edit_bacapres(request, id):
     context['object'] = bacapres
     return render(request,'editBacapres.html', context)
 
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def delete_bacapres(request, id):
     context = {}
     try:

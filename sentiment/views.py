@@ -26,7 +26,7 @@ classifier = joblib.load("MultinomialNBModel.joblib")
 dt_utc = datetime.utcnow()
 timezone = pytz.timezone('Asia/Jakarta')
 today = dt_utc.replace(tzinfo=pytz.utc).astimezone(timezone)
-seven_days_ago = today - timedelta(days=7)
+seven_days_ago = today - timedelta(days=6)
 
 timezone = pytz.timezone('Asia/Jakarta')
 
@@ -213,7 +213,7 @@ def getAllTotalTweet(request):
         series_data = {'name':res.name,'data':[]}
         cur_date = seven_days_ago
         tokoh_tweets = tweet.filter(bacapres=res.id)
-        while cur_date < today:
+        while cur_date <= today:
             date = cur_date.strftime('%Y-%m-%d')
             total_tweet_per_day = tokoh_tweets.filter(created_at=date).count()
             series_data['data'].append(total_tweet_per_day)
@@ -230,7 +230,7 @@ def getDates():
     i = 0
 
     cur_date = seven_days_ago
-    while cur_date < today:
+    while cur_date <= today:
         date = cur_date.strftime('%Y-%m-%d') 
         dates.append(date)
         cur_date += timedelta(days=1)
@@ -267,7 +267,7 @@ def getAllTotalSentiment(request):
         neutral = {'name':'Neutral', 'data':[]}
 
         cur_date = seven_days_ago
-        while cur_date < today:
+        while cur_date <= today:
             date = cur_date.strftime('%Y-%m-%d')
             tokoh_tweets = tweet.filter(bacapres=res.id).filter(created_at=date)
             # print(date)
@@ -291,6 +291,7 @@ def getAllTotalSentiment(request):
     context['total_sentiment_per_day'] = total_sentiment_per_day
     return JsonResponse(context)
 
+@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}
 

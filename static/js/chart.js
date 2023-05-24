@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Menampilkan grafik default saat halaman dimuat
 document.addEventListener("DOMContentLoaded", function () {
     var chartType = getCurrentChartType();
-    var displayOption = getCurrentDisplayOption();
+    var displayOption = getSelectedBacapresOption();
     displayChart(chartType, displayOption);
     }
 );
@@ -170,7 +170,7 @@ document.querySelectorAll(".chart-button").forEach(function(button) {
     button.addEventListener("click", function() {
         var chartType = button.getAttribute("id");
         console.log(chartType)
-        var displayOption = getCurrentDisplayOption();
+        var displayOption = getSelectedBacapresOption();
         console.log(displayOption)
         displayChart(chartType, displayOption);
     });
@@ -191,7 +191,7 @@ function getCurrentChartType() {
     return activeButton ? activeButton.getAttribute("id") : null;
 }
 
-function getCurrentDisplayOption() {
+function getSelectedBacapresOption() {
     var activeButton = document.querySelector(".rankingButton.activeRanking");
     console.log(activeButton)
     return activeButton ? activeButton.getAttribute("data-id") : null;

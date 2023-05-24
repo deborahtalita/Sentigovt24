@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from .forms import SignUpForm, LoginForm
 from .models import User
+from sentigovt2.decorators import role_required
 
 # Create your views here.
 
@@ -33,12 +34,14 @@ def getProfile(request):
     context['user'] = user
     return render(request, 'profile.html', context)
 
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def userAccountList(request):
     user = User.objects.all().filter(is_active=True).order_by('id')
     data = {}
     data['obj_list'] = user
     return render(request, 'userManagement.html', data)
 
+@role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def deleteUser(request, id):
     context = {}
     try:
