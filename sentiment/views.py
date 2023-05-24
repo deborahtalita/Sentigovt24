@@ -291,6 +291,41 @@ def getAllTotalSentiment(request):
     context['total_sentiment_per_day'] = total_sentiment_per_day
     return JsonResponse(context)
 
+def getTotalTweet(request):
+    context= {}
+    # get bacapres
+    if request.session.get('selected_options') != None:
+        selected_options = request.session.get('selected_options')
+        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
+    else:
+        bacapres = Bacapres.objects.all().order_by('id')
+
+    # get tweets
+    if (request.session.get('selected_start_date') != None) and (request.session.get('selected_end_date') != None):
+        start_date = convertDate(request.session.get('selected_start_date'))
+        end_date = convertDate(request.session.get('selected_end_date'))
+        tweets = Tweet.objects.filter(created_at__range=(start_date,end_date))
+    else:
+        tweets = Tweet.objects.filter(created_at__gte=seven_days_ago)
+    
+    # total tweet & tweet per sentiment
+    bacapres_total_tweet = {}
+    bacapres_total_sentiment = {}
+    for res in bacapres:
+        tokoh_tweets = tweets.filter(bacapres=res.id)
+        total = tokoh_tweets.count()
+        bacapres_total_tweet[res.id] = total
+
+        neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
+        pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
+        neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
+        bacapres_total_sentiment[res.id] = {'negative':neg_sentiment,
+                                            'positive':pos_sentiment,
+                                            'neutral':neu_sentiment}
+    context['bacapres_total_tweet'] = bacapres_total_tweet
+    context['bacapres_total_sentiment'] = bacapres_total_sentiment
+    return JsonResponse(context)
+
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}

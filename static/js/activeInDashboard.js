@@ -31,24 +31,6 @@ buttonsPagination.forEach(button => {
     });
 });
 
-function getSelectedBacapresOption() {
-    var activeButton = document.querySelector(".rankingButton.activeRanking");
-    console.log(activeButton)
-    return activeButton ? activeButton.getAttribute("data-id") : null;
-}
-
-function setValueByBacapres(){
-    var selectedBacapres = getSelectedBacapresOption();
-}
-
-document.querySelectorAll(".rankingButton").forEach(function(button) {
-    button.addEventListener("click", function() {
-        var displayOption = button.getAttribute("data-id");
-        
-        displayChart(chartType, displayOption);
-    });
-});
-
 // Multi Select
 function dropdown() {
     return {

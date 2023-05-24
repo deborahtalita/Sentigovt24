@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var chartType = getCurrentChartType();
     var displayOption = getSelectedBacapresOption();
     displayChart(chartType, displayOption);
+    displayTotalTweet(displayOption);
     }
 );
 
@@ -183,6 +184,8 @@ document.querySelectorAll(".rankingButton").forEach(function(button) {
         var displayOption = button.getAttribute("data-id");
         console.log(displayOption)
         displayChart(chartType, displayOption);
+        // Mengambil data-id yang baru untuk jumlah tweet dan sentiment
+        displayTotalTweet(displayOption)
     });
 });
 
@@ -195,4 +198,23 @@ function getSelectedBacapresOption() {
     var activeButton = document.querySelector(".rankingButton.activeRanking");
     console.log(activeButton)
     return activeButton ? activeButton.getAttribute("data-id") : null;
+}
+
+// function menampilkan jumlah tweet dan sentiment
+let currentTotal = null;
+function displayTotalTweet(Id) {
+    if (currentTotal) {
+        delete currentTotal;
+    }
+    currentTotal = Id;
+    $.getJSON("/sentiment/getTotalTweet/", function (response) {
+        // Menampilkan data total tweet
+        document.getElementById("total-display").innerText = response.bacapres_total_tweet[currentTotal];
+        // Menampilkan data sentiment positive
+        document.getElementById("total-positive").innerText = response.bacapres_total_sentiment[currentTotal]['positive'];
+        // Menampilkan data sentiment neutral
+        document.getElementById("total-neutral").innerText = response.bacapres_total_sentiment[currentTotal]['neutral'];
+        // Menampilkan data sentiment negative
+        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment[currentTotal]['negative'];
+    })
 }

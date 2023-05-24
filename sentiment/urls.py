@@ -14,6 +14,7 @@ urlpatterns = [
     path('search', views.search, name="search"),
     path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),
     path('getAllTotalTweet/', views.getAllTotalTweet, name='getAllTotalTweet'),
+    path('getTotalTweet/', views.getTotalTweet, name='getTotalTweet'),
     path('history', views.getHistoryList, name="getHistoryList")
     # path('view', views.coba, name="index"),
 ]
