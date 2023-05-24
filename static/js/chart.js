@@ -229,7 +229,15 @@ function displayChartTotal() {
             width: 2,
         },
         xaxis: {
-            categories: response.dates,
+            categories: [
+                    "01/05/2023",
+                    "02/05/2023",
+                    "03/05/2023",
+                    "04/05/2023",
+                    "05/05/2023",
+                    "06/05/2023",
+                    "07/05/2023"
+                ],
         }
     };
     const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);

@@ -6,7 +6,7 @@ const navLinks = document.querySelectorAll('.itemActive').forEach(link => {
     }
 })
 
-// Href
+// Href Detail History
 function goToDetailPage(url) {
     window.location.href = url;
 }
