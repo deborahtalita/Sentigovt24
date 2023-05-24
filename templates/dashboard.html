@@ -128,20 +128,20 @@
             <section class="flex h-40 rounded-2xl bg-white col-span-4 items-center justify-between px-20">
                 <div class="flex flex-col">
                     <div class="font-[poppins-regular] text-[15px]">Total</div>
-                    <div class="font-[poppins-semibold] text-[40px]">107.000</div>
+                    <div id="total-display" class="font-[poppins-semibold] text-[40px]"></div>
                 </div>
                 <div class="flex gap-12 text-lg font-semibold text-gray-500">
                     <div class="flex-col text-center">
                         <img src="{% static 'media/icons/smileGreen.svg' %}" alt="Smile">
-                        <div class="text-[#05FF00]">40000</div>
+                        <div id="total-positive" class="text-[#05FF00]"></div>
                     </div>
                     <div class="flex-col text-center">
                         <img src="{% static 'media/icons/flatGray.svg' %}" alt="Flat">
-                        <div class="text-[#838383]">42000</div>
+                        <div id="total-neutral" class="text-[#838383]"></div>
                     </div>
                     <div class="flex-col text-center">
                         <img src="{% static 'media/icons/angryRed.svg' %}" alt="Flat">
-                        <div class="text-[#FF0000]">25000</div>
+                        <div id="total-negative" class="text-[#FF0000]"></div>
                     </div>
                 </div>
             </section>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="mt-3 space-y-2">
                     {% for item in bacapres %}
-                    <button id="rankingBacapres" data-id="{{ item.id }}" onclick="getId(this.getAttribute('data-id'))" {% if item.name == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                    <button data-id="{{ item.id }}" {% if item.name == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                         <div class="flex items-center gap-2">
                             <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
                             <h1 class="font-[poppins-regular] text-[12px] capitalize">{{ item.name }}</h1>

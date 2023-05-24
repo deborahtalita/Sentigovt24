@@ -36,9 +36,7 @@ function dropdown() {
             return this.show === true
         },
         select(index, event) {
-
             if (!this.options[index].selected) {
-
                 this.options[index].selected = true;
                 this.options[index].element = event.target;
                 this.selected.push(index);
@@ -52,7 +50,6 @@ function dropdown() {
             this.options[option].selected = false;
             this.selected.splice(index, 1);
 
-
         },
         loadOptions() {
             const options = document.getElementById('select').options;
@@ -63,7 +60,6 @@ function dropdown() {
                     selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
                 });
             }
-
 
         },
         selectedValues() {
