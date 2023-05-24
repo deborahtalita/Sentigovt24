@@ -62,6 +62,9 @@ function dropdown() {
 
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
+    // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
+    const maxVisibleButtons = 5;
+
     // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
     function getDataDashboard(page) {
         $.getJSON(`/get-data-table-dashboard/?page=${page}`, function (response) {
@@ -118,9 +121,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Membuat tombol nomor halaman
             const pageButtons = $("#page-buttons");
-            for (let i = 1; i <= totalPages; i++) {
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+            if (endPage - startPage + 1 < maxVisibleButtons) {
+                startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
                 const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
                 pageButtons.append(button);
+            }
+
+            // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
+            if (startPage > 1) {
+                const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.prepend(ellipsisStart);
+            }
+
+            // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
+            if (endPage < totalPages) {
+                const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.append(ellipsisEnd);
             }
 
             // Menambahkan event listener untuk tombol nomor halaman
