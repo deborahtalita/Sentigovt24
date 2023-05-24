@@ -7,14 +7,16 @@ from .models import Bacapres
 load_dotenv()
 
 
-until_time = int(time.time())
-since_time = until_time - 7200
+# until_time = int(time.time())
+# since_time = until_time - 3600
+until_time = 1684505921
+since_time = 1684831022
 print(since_time, " ", until_time)
 
 dt_utc = datetime.datetime.utcnow()
-print(dt_utc)
+# print(dt_utc)
 timezone = pytz.timezone('Asia/Jakarta')
-print(timezone)
+# print(timezone)
 
 def scrape_tweet():
     tweets = []
@@ -32,7 +34,8 @@ def scrape_tweet():
             'created_at':tweet_date.replace(tzinfo=pytz.utc).astimezone(timezone),
             'user_name':tweet.user.username,
             'text':tweet.content,
-            'bacapres':query.id
+            'bacapres':query.id,
+            'keyword':query.name,
             }
             print(i)
             i=i+1

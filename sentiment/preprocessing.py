@@ -15,16 +15,14 @@ nltk.download('punkt')
 nltk.download('stopwords')
 utils_path = os.path.join(os.path.dirname(__file__), '../utils/')
 
-class TextPreprocessing(models.TextField):
-    preprocessed_text = ''
-    text = models.TextField()
+class TextPreprocessing():
 
-    def removeIrrelevantTweet(text):
-        text = [item for item in text if any(keyword.lower() in item.get('text').lower() for keyword in item.get('bacapres').split(" "))]
-        
-        return text
+    def removeIrrelevantTweet(self, tweets):
+        tweets = [item for item in tweets if any(keyword.lower() in item.get('text').lower() for keyword in item.get('keyword').split(" "))]
 
-    def data_cleaning(self, text):
+        return tweets
+
+    def removeNoiseText(self, text):
         text = str(text)
         
         # removeHastagsMentionsUrl
@@ -41,14 +39,12 @@ class TextPreprocessing(models.TextField):
 
         # removeNumber
         text = re.sub(r"\d+", "", text)
-        print(text)
 
         # handleReduplicationWord
         re.sub(r'\b(\w+)-\1\b', r'\1', text, flags=re.IGNORECASE)
 
         # removePunctuation
         text = text.translate(str.maketrans(string.punctuation, " " * len(string.punctuation)))
-        print(text)
 
         # removeMultipleChar
         full_capital_words = re.findall(r'\b[A-Z]+\b', text)
@@ -139,18 +135,12 @@ class TextPreprocessing(models.TextField):
         return [word for word in words if word not in list_stopwords]
     
     def getFinalPreprocessingResult(self, document):
-        return ' '.join(document)
-    
-    def __init__(self, text):
-        cleaned_data = self.data_cleaning(text=text)        
+        document = str(document)
+        cleaned_data = self.removeNoiseText(document)        
         casefolded_data = self.caseFolding(cleaned_data)
         tokenized_data = self.wordTokenize(casefolded_data)
         normalized_text = self.normalizeSlangWords(tokenized_data)
-        normalized_text = self.wordRetokenize(normalized_text)
+        normalized_text =self.wordRetokenize(normalized_text)
         negHandling_text = self.negationHandlingPOS(normalized_text)
         filtered_text = self.removeStopWords(negHandling_text)
-
-        final_text = self.getFinalPreprocessingResult(filtered_text)
-
-        self.preprocessed_text = final_text
-        # print(self.preprocessed_text)
+        return ' '.join(filtered_text)

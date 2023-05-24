@@ -42,6 +42,12 @@ def dashboard(request):
 
     if 'selected_options' in request.session:
         del request.session['selected_options']
+    
+    if 'selected_start_date' in request.session:
+        del request.session['selected_start_date']
+    
+    if 'selected_end_date' in request.session:
+        del request.session['selected_end_date']
 
     # tokoh_tweets = Tweet.objects.filter(bacapres=11).order_by('-created_at')
     # get bacapres
@@ -49,7 +55,7 @@ def dashboard(request):
     context['bacapres'] = bacapres
 
     #  get tweets
-    tweets = Tweet.objects.filter(created_at__gte=seven_days_ago)
+    tweets = Tweet.objects.filter(created_at__gte=seven_days_ago).order_by('-created_at')
 
     # total tweet & tweet per sentiment
     bacapres_total_tweet = {}
@@ -67,8 +73,8 @@ def dashboard(request):
                                             'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
-    print(bacapres_total_sentiment)
-    print(bacapres_total_tweet)
+    # print(bacapres_total_sentiment)
+    # print(bacapres_total_tweet)
     
     active_item = bacapres.first()
     if active_item: context['active_item'] = active_item.id

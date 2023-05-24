@@ -97,13 +97,14 @@ def crawl(request):
 @csrf_exempt
 def scrape(request):
     if request.method == 'POST':
+        preprocessor = TextPreprocessing()
         data = scrape_tweet()
 
+        data = preprocessor.removeIrrelevantTweet(data)
         result = []
 
         for i in range(0, len(data)):
-            preprocessed = TextPreprocessing(data[i]['text'])
-            preprocessed_text = preprocessed.preprocessed_text
+            preprocessed_text = preprocessor.getFinalPreprocessingResult(data[i]['text'])
             sentiment = predict(preprocessed_text)
 
             obj_tweet = Tweet(
@@ -158,8 +159,6 @@ def search(request):
         request.session['selected_start_date'] = start
         request.session['selected_end_date'] = end
 
-        # get tweet with a given date range
-        # tweet = Tweet.objects.filter(created_at__range=(start_date, end_date))
 
         # get selected bacapres
         bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
@@ -170,19 +169,17 @@ def search(request):
         print(active_item.id)
         context['result'] = 'true'
         
-#        #tweet list with pagination
+#       #tweet list with pagination
+        start_date = convertDate(request.session.get('selected_start_date'))
+        end_date = convertDate(request.session.get('selected_end_date'))
         cur_bacapres = bacapres.first()
-        tokoh_tweets = Tweet.objects.filter(bacapres=cur_bacapres.id).order_by('-created_at')
+        tokoh_tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres=cur_bacapres.id).order_by('-created_at')
         paginator = Paginator(tokoh_tweets, 10)  # 10 items per page
         page_number = request.GET.get('page')  # Get the current page number from the request
         page_obj = paginator.get_page(page_number)
         context['page_obj'] = page_obj
     else:
-        # get bacapres
-
         options = request.session.get('selected_options')
-        print("get_sessions",options)
-        context       
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres_opt'] = bacapres 
 
@@ -218,16 +215,23 @@ def getAllTotalTweet(request):
         cur_date = seven_days_ago
         tokoh_tweets = tweet.filter(bacapres=res.id)
         while cur_date <= today:
-            date = cur_date.strftime('%Y-%m-%d')
-            total_tweet_per_day = tokoh_tweets.filter(created_at=date).count()
+            day = cur_date - timedelta(days=1)
+            total_tweet_per_day = tokoh_tweets.filter(created_at__range=(day,cur_date)).count()
             series_data['data'].append(total_tweet_per_day)
             cur_date += timedelta(days=1)
-        bacapres_total_tweet_per_day.append(series_data)
-    # print(bacapres_total_tweet_per_day)        
+        bacapres_total_tweet_per_day.append(series_data)       
     context['bacapres_total_tweet_per_day'] = bacapres_total_tweet_per_day
 
     
     return JsonResponse(context)
+
+def coba(request):
+    tweet = Tweet.objects.filter(created_at__gte=seven_days_ago)
+    cur_date = seven_days_ago + timedelta(days=1)
+    day = seven_days_ago + timedelta(days=2)
+    print(cur_date, " ", day)
+    total_tweet_per_day = Tweet.objects.filter(created_at__range=(cur_date,day)).count()
+    print(total_tweet_per_day)
 
 def getDates():
     dates = []
@@ -272,8 +276,8 @@ def getAllTotalSentiment(request):
 
         cur_date = seven_days_ago
         while cur_date <= today:
-            date = cur_date.strftime('%Y-%m-%d')
-            tokoh_tweets = tweet.filter(bacapres=res.id).filter(created_at=date)
+            day = cur_date - timedelta(days=1)
+            tokoh_tweets = tweet.filter(bacapres=res.id).filter(created_at__range=(day,cur_date))
             # print(date)
 
             neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
