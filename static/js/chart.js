@@ -1,5 +1,7 @@
-let currentId = null;
+// Variabel menyimpan temporary data dari Chart
 let currentChart = null;
+// Variabel menyimpan temporary data-id dari Chart
+let currentId = null;
 
 function displayChart(chartId, Id) {
     if (currentId && currentChart) {

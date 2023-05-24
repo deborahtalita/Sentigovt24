@@ -334,6 +334,37 @@ def getTotalTweet(request):
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
     return JsonResponse(context)
 
+def getTweets(request):
+    context = {}
+
+    #tweet list with pagination
+    bacapres = Tweet.objects.all().order_by('id')
+    active_item = bacapres.first().id
+    bacapres_id = int(request.GET.get('bacapres', active_item))
+    tokoh_tweets = Tweet.objects.filter(bacapres=bacapres_id).order_by('-created_at')
+    paginator = Paginator(tokoh_tweets, 10)  # 10 items per page
+    page_number = int(request.GET.get('page', 1))# Get the current page number from the request
+    page_obj = paginator.get_page(page_number)
+    
+    data_items = []
+    for item in page_obj:
+        date = item.created_at
+        data_item = {
+            'no': item.id,
+            'name': item.user_name,
+            'tweet': item.text,
+            'sentiment': item.sentiment,
+            'date': date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
+        }
+        data_items.append(data_item)
+    
+    context = {
+        'total_pages':paginator.num_pages,
+        'results': data_items,
+    }
+    
+    return JsonResponse(context)
+
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}

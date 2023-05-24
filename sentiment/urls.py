@@ -15,6 +15,7 @@ urlpatterns = [
     path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),
     path('getAllTotalTweet/', views.getAllTotalTweet, name='getAllTotalTweet'),
     path('getTotalTweet/', views.getTotalTweet, name='getTotalTweet'),
+    path('getTweets', views.getTweets, name='getTweets'),
     path('history', views.getHistoryList, name="getHistoryList"),
     path('coba', views.coba, name="coba")
     # path('view', views.coba, name="index"),
@@ -23,4 +24,5 @@ urlpatterns = [
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)
+        
         

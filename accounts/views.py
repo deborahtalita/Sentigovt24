@@ -12,15 +12,16 @@ from sentigovt2.decorators import role_required
 
 def register(request):
     context = {}
-    form = SignUpForm(request.POST,request.FILES)
+    form = SignUpForm(request.POST)
     context['registered'] = False
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return render(request, 'success-register.html')
+            return redirect(reverse_lazy('dashboard'))
         else:
             print(form.errors.as_data())
     context['form'] = form
+    print(form)
     return render(request, 'register.html',context)
 
 def logoutRequest(request):

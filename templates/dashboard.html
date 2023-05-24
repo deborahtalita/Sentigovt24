@@ -243,69 +243,16 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for tweet in page_obj %}
-                        {% with item_number=page_obj.start_index|add:forloop.counter0 %}
-                    <tr class="border-b">
-                        <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                            {{item_number}}
-                        </th>
-                        <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                            {{tweet.user_name}}
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                            {{tweet.text}}
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
-                        {% if tweet.sentiment == "positive" %}
-                            <div class="bg-green-300 p-1 rounded-full">
-                        {% elif tweet.sentiment == "negative" %}
-                            <div class="bg-red-300 p-1 rounded-full">
-                        {% else %}
-                            <div class="bg-gray-400 p-1 rounded-full">
-                        {% endif %}
-                                {{tweet.sentiment}}
-                            </div>
-                        </td>
-                        <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                            {{tweet.created_at|date:"Y-m-d"}} {{tweet.created_at|time:"H:i:s"}}
-                        </td>
-                    </tr>
-                        {% endwith %}
-                    {% endfor %}
-                </tbody>
+                <tbody id="table-body"></tbody>
             </table>
         </div>
-        <div class="flex items-center justify-end">
+        <div class="flex items-center justify-end mt-5">
             <div class="items-center">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
-                    <a href="?page={{page_obj.previous_page_number}}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">previous</a>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{page_obj.number}}</a>
-                    {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
-                        <a href="?page={{ num }}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{num}}</a>
-                    {% endif %}
-
-                    {% if page_num == page_obj.number|add:3 and page_obj.paginator.num_pages > page_obj.number|add:4 %}
-                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                    {% elif page_num == page_obj.number|add:-3 and page_obj.number > 4 %}
-                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                    {% endif %}
-                {% endfor %}
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{page_obj.next_page_number}}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">{{page_obj.paginator.num_pages}}</a>
-                {% endif %}
-                <!-- <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
-                <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a> -->
+                <div class="pagination">
+                    <button id="prev-button" class="font-[Inter-Regular] px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">Prev</button>
+                    <span id="page-buttons"></span>
+                    <button id="next-button" class="font-[Inter-Regular] px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">Next</button>
+                </div>
             </div>
         </div>
     </section>
@@ -316,4 +263,6 @@
     </footer>
     <!-- End Footer -->
 </div>
+<script defer src="{% static 'js/scriptsDashboard.js' %}"></script>
+<script defer src="{% static 'js/chart.js' %}"></script>
 {% endblock %}

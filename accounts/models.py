@@ -12,6 +12,7 @@ class User(AbstractUser):
     
     base_role = Role.MEMBER
 
+    email = models.EmailField(unique=True)
     role = models.CharField(max_length=50, choices=Role.choices)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
