@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                     ${data[i].end_date}
                 </td>
-                <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                    <a id="btn-delete-history" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
+                <td class="font-[Inter-Regular] text-[12px] py-4  ">
+                    <a data-id="${data[i].no}" id="btn-delete-bacapres" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
+            </td>
                 </td>
             </tr>`;
                 tableBody.append(row);
@@ -106,10 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Menambahkan event listener untuk tombol delete
-        $(document).on("click", "#btn-delete-history", function (event) {
+        $(document).on("click", "#btn-delete-bacapres", function (event) {
             event.preventDefault(); // Mencegah aksi default dari link
             const deleteButton = $(this);
-            // Tampilkan dialog konfirmasi SweetAlert2
+            const id = deleteButton.data('id');
+            console.log(id);
+            //Tampilkan dialog konfirmasi SweetAlert2
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -120,13 +123,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirmButtonText: "Yes, delete it!",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Hapus baris dari tabel setelah penghapusan berhasil
-                    const url = `/sentiment/history/delete/${data[i].no}/`;
+                    const url = `/sentiment/history/delete/${id}`; // Ganti yourDataId dengan ID data yang ingin dihapus
+                    var token = '{{csrf_token}}';
                     $.ajax({
                         url: url,
                         type: "DELETE",
+                        headers: { "X-CSRFToken": getCookie("csrftoken") },
                         success: function (response) {
                             Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                            location.reload()
                             // Lakukan tindakan tambahan setelah penghapusan data berhasil
                         },
                         error: function (xhr, status, error) {
@@ -137,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+
     }
 
     // Mengambil data saat halaman dimuat
@@ -156,3 +162,20 @@ document.addEventListener("DOMContentLoaded", function () {
         getDataHistory(currentPage);
     });
 });
+
+// Helper function to get the value of a cookie
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Check if the cookie name matches the given name
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
