@@ -476,7 +476,7 @@ def getHistoryList(request):
         return JsonResponse(context, safe=False)
     else:
         context['active_page'] = 'history'
-        return render(request, 'history.html', context)
+        return render(request, 'history/history.html', context)
 
 
 def getDetailHistory(request, id):

@@ -22,7 +22,7 @@ def register(request):
             print(form.errors.as_data())
     context['form'] = form
     print(form)
-    return render(request, 'register.html',context)
+    return render(request, 'accounts/register.html',context)
 
 def logoutRequest(request):
     logout(request)
@@ -33,7 +33,7 @@ def getProfile(request):
     context = {}
     user = request.user
     context['user'] = user
-    return render(request, 'profile.html', context)
+    return render(request, 'accounts/profile.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def userAccountList(request):
@@ -70,4 +70,4 @@ def editUser(request, id):
 
 class webLoginView(LoginView):
     form_class = LoginForm
-    template_name = "login.html"
+    template_name = "accounts/login.html"

@@ -11,7 +11,7 @@ def bacapres_list(request):
     bacapres = Bacapres.objects.all().order_by('id')
     data = {}
     data['obj_list'] = bacapres
-    return render(request, 'bacapresManagement.html', data)
+    return render(request, 'bacapres/bacapresManagement.html', data)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def create_bacapres(request):
@@ -26,7 +26,7 @@ def create_bacapres(request):
             messages.error(request, 'Error saving form')
             print(form.errors.as_data())
     context['form'] = form
-    return render(request, 'createBacapres.html', context)
+    return render(request, 'bacapres/createBacapres.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def edit_bacapres(request, id):
@@ -39,7 +39,7 @@ def edit_bacapres(request, id):
             return redirect(reverse_lazy('bacapres:bacapres_list'))
     context['form'] = form
     context['object'] = bacapres
-    return render(request,'editBacapres.html', context)
+    return render(request,'bacapres/editBacapres.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def delete_bacapres(request, id):
