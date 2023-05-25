@@ -17,7 +17,7 @@ class History(models.Model):
 
     tweet = models.ManyToManyField(Tweet)
     bacapres = models.ManyToManyField(Bacapres)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.CASCADE, null=True)
 
 # class Bacapres(models.Model):
 #     name = models.CharField(default=None, max_length=50)

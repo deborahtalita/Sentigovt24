@@ -44,10 +44,7 @@ def edit_bacapres(request, id):
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def delete_bacapres(request, id):
     context = {}
-    try:
-        bacapres = get_object_or_404(Bacapres, id=id)
-        bacapres.delete()
-        return redirect(reverse_lazy('bacapres:bacapres_list'))
-    except Bacapres.DoesNotExist:
-        print("Object not found")
-        return redirect(reverse_lazy('bacapres:bacapres_list'))
+    
+    bacapres = get_object_or_404(Bacapres, id=id)
+    bacapres.delete()
+    return redirect(reverse_lazy('bacapres:bacapres_list'))

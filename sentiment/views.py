@@ -12,6 +12,7 @@ from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
 from .helpers.date_helper import convertDate, getDates
+from .helpers.session_helper import isGuestLimitAccess
 
 # default time
 timezone = pytz.timezone('Asia/Jakarta')
@@ -57,11 +58,11 @@ def scrape(request):
 
 def manualSearch(request):
     context = {}
-    if request.method == 'POST':
+    if request.method == 'POST' and isGuestLimitAccess(request.COOKIES) == False:
         selected_options = request.POST.getlist('search_field')
         start = request.POST.get('start_date')
         end = request.POST.get('end_date')
-
+        
         selected_options = [int(x) for x in selected_options[0].split(',')]
 
         # assign request to session
@@ -87,13 +88,19 @@ def manualSearch(request):
         tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
 
         #  get auth user
-        user = User.objects.get(id=request.user.id)
+        if request.user.is_authenticated:
+            print(request.user.id)
+            user = User.objects.get(id=request.user.id)
+            history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
+        else:
+            history = History.objects.create(start_date=start_date,end_date=end_date)
 
         #  save manual search to history
-        history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
+
         history.bacapres.add(*bacapres)
         history.tweet.add(*tweets)
-
+    # elif isGuestLimitAccess(request.COOKIES):
+    #     context['result'] = False
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres_opt'] = bacapres 
 

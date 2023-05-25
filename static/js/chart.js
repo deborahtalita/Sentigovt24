@@ -14,7 +14,7 @@ function displayChart(chartId, Id) {
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
-        $.getJSON("/sentiment/getAllTotalSentiment/", function (response) {
+        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
             var options = {
                 chart: {
                     width: "100%",
@@ -49,7 +49,7 @@ function displayChart(chartId, Id) {
         })
     } else if (chartId === 'chart-button2') {
         // Membuat grafik 2
-        $.getJSON("/sentiment/getAllTotalSentiment/", function (response) {
+        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
             var options = {
                 series: response.total_sentiment_per_day[Id],
                 chart: {

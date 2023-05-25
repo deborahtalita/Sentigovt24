@@ -27,7 +27,7 @@ def register(request):
 def logoutRequest(request):
     logout(request)
     print("berhasil logout")
-    return render(request,'home.html')
+    return redirect(reverse_lazy('home'))
 
 def getProfile(request):
     context = {}
