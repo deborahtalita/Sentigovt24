@@ -13,14 +13,14 @@ User Management
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
             <div class="titleUserManagement text-[40px] text-[#1E1D4C]">User Management</div>
             <hr class="border-[#C2C2C2] my-5">
-            <div class="nameBacapres text-[#1E1D4C] text-[15px]">Lorem Ipsum</div>
+            <div class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">Lorem Ipsum</div>
         </header>
         <!-- End Header User -->
         <!-- Start Data User -->
         <div class="bg-white p-6 rounded-xl h-fit">
             <form action="" method="PUT" enctype="multipart/form-data">
                 <div id="photoProfile">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
                             <img class="py-5" src="{% static 'media/icons/ProfileDefault.svg' %}" alt="ProfileEdit">
@@ -35,15 +35,15 @@ User Management
                 </div>
                 <hr class="border-[#C2C2C2] my-5">
                 <div id="personalInformation">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">User Information</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3 py-2">User Information</div>
                     <div class="flex flex-col gap-5">
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
-                            <input class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" type="text" name="name" placeholder="Masukan Nama" value="Lorem Ipsum" required>
+                            <input class="bg-gray-100 w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg cursor-not-allowed" type="text" name="name" placeholder="Masukan Nama" value="Lorem Ipsum" required>
                         </div>
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
-                            <input type="text" id="disabled-email" aria-label="disabled-email" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" value="lorem@gmail.com">
+                            <input type="text" id="disabled-email" aria-label="disabled-email" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" value="lorem@gmail.com">
                         </div>
                         <!-- Dropdown Select Status -->
                         <div>
@@ -57,13 +57,6 @@ User Management
                     </div>
                 </div>
                 <hr class="border-[#C2C2C2] my-5" />
-                <div id="changePassword">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">Change Password</div>
-                    <div class="relative">
-                        <label class="text-gray-700 tracking-wide text-[15px]">Password</label>
-                        <input type="password" id="disabled-password" aria-label="disabled-password" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" value="12Lorem">
-                    </div>
-                </div>
                 <div class="mt-6">
                     <button id="btn-confirm" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
                 </div>

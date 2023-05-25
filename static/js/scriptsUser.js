@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <a id="btn-delete-User" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                    <a class="flex justify-center" href="{% url 'editUser' %}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
+                    <a class="flex justify-center" href="/userManagement/editUser/"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
                 </td>
             </tr>`;
                 tableBody.append(row);

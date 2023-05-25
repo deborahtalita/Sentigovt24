@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${data[i].name}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] py-4  ">
-                    <a id="btn-delete-bacapres" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
+                    <a data-id="${i+1}" id="btn-delete-bacapres" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                    <a class="flex justify-center" href="{% url 'editBacapres' %}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
+                    <a class="flex justify-center" href="/bacapresManagement/editBacapres/"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
                 </td>
             </tr>`;
                 tableBody.append(row);
@@ -100,7 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
         $(document).on("click", "#btn-delete-bacapres", function (event) {
             event.preventDefault(); // Mencegah aksi default dari link
             const deleteButton = $(this);
-            // Tampilkan dialog konfirmasi SweetAlert2
+            const id = deleteButton.data('id');
+            console.log(id);
+            //Tampilkan dialog konfirmasi SweetAlert2
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -111,15 +113,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirmButtonText: "Yes, delete it!",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Hapus baris dari tabel setelah penghapusan berhasil
-                    const row = deleteButton.closest("tr");
-                    row.remove();
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    const url = `/delete-bacapres/${id}/`; // Ganti yourDataId dengan ID data yang ingin dihapus
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        success: function (response) {
+                            Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                            // Lakukan tindakan tambahan setelah penghapusan data berhasil
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
+                            // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
+                        }
+                    });
                 }
             });
         });
@@ -140,29 +146,5 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#next-button").on("click", function () {
         currentPage++;
         getDataBacapres(currentPage);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var myButton = document.getElementById('btn-delete-Bacapres');
-
-    myButton.addEventListener('click', function () {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
     });
 });
