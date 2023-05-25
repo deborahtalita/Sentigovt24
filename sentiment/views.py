@@ -502,6 +502,17 @@ def getDetailHistory(request, id):
 
     return render(request, 'dashboard.html', context)
 
+def deleteHistory(request, id):
+    context = {}
+    try:
+        history = get_object_or_404(History, id=id)
+        history.delete()
+        # return redirect(reverse_lazy('sentiment:getHistoryList'))
+        return JsonResponse({'message': 'Data deleted successfully'})
+    except History.DoesNotExist:
+        print("Object not found")
+        # return redirect(reverse_lazy('sentiment:getHistoryList'))
+        return JsonResponse({'message': 'Invalid request method'})
 
 
 

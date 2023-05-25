@@ -18,12 +18,9 @@ urlpatterns = [
     path('getTweets', views.getTweets, name='getTweets'),
     path('history', views.getHistoryList, name="getHistoryList"),
     path('history/detail/<int:id>', views.getDetailHistory, name="getDetailHistory"),
+    path('history/delete/<int:id>', views.deleteHistory, name="deleteHistory"),
     path('coba', views.coba, name="coba")
     # path('view', views.coba, name="index"),
 ]
-
-if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)
         
         

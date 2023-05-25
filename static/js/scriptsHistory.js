@@ -121,14 +121,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Hapus baris dari tabel setelah penghapusan berhasil
-                    const row = deleteButton.closest("tr");
-                    row.remove();
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    const url = `/sentiment/history/delete/${data[i].no}/`;
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        success: function (response) {
+                            Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                            // Lakukan tindakan tambahan setelah penghapusan data berhasil
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
+                            // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
+                        }
+                    });
                 }
             });
         });

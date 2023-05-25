@@ -25,12 +25,12 @@ Bacapres Management
                     <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
-                            <img class="py-5" src="{% static 'media/icons/Ganjar.svg' %}" alt="ProfileEdit">
+                            <img class="py-5" src="{{object.image.url}}" alt="ProfileEdit">
                             <div class="font-[poppins-semibold] text-[#1E1D4C]">{{object.name}}</div>
                         </div>
                         <div class="w-[50%]">
                             <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" name="avatar" id="file_input" type="file">
                             <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF</p>
                         </div>
                     </div>

@@ -32,7 +32,7 @@ def create_bacapres(request):
 def edit_bacapres(request, id):
     context = {}
     bacapres = get_object_or_404(Bacapres,id=id)
-    form = BacapresForm(request.POST or None, instance=bacapres)
+    form = BacapresForm(request.POST,request.FILES, instance=bacapres)
     if request.method == "POST":
         if form.is_valid():
             form.save()
