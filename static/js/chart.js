@@ -188,6 +188,8 @@ document.querySelectorAll(".rankingButton").forEach(function(button) {
         displayChart(chartType, displayOption);
         // Mengambil data-id yang baru untuk jumlah tweet dan sentiment
         displayTotalTweet(displayOption)
+        // Display data tweet
+        getDataDashboard(displayOption, 1)
     });
 });
 

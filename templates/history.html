@@ -69,26 +69,7 @@ History
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {% for item in obj_list %}
-                        <tr class="border-b hover:bg-[#c2c2c2]">
-                            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                                {{forloop.counter}}
-                            </th>
-                            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('detailHistory')">
-                                {% for z in item.bacapres.all %} {{z.name}}{% ifchanged %}{% if not forloop.last %},{% endif %}{% endifchanged %}{%endfor%}
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                {{item.start_date|date:"Y-m-d"}}
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                                {{item.end_date|date:"Y-m-d"}}
-                            </td>
-                            <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                                <a id="btn-delete-history" class="flex justify-center" href="#"><img src="{% static 'media/icons/btn-delete.svg' %}" alt="Delete"></a>
-                            </td>
-                        </tr>
-                        {% endfor%}
+                    <tbody id="table-body"></tbody>
                     </tbody>
                 </table>
                 <!-- End Table -->
@@ -96,13 +77,11 @@ History
             <!-- Start Pagination -->
             <div class="flex items-center justify-end">
                 <div class="items-center">
-                    <a href="#" class="activePagination px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">1</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">2</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">3</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md">...</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">12</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">13</a>
-                    <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">14</a>
+                    <div class="pagination">
+                        <button id="prev-button" class="font-[Inter-Regular] px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">Prev</button>
+                        <span id="page-buttons"></span>
+                        <button id="next-button" class="font-[Inter-Regular] px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">Next</button>
+                    </div>
                 </div>
             </div>
             <!-- End Pagination -->
@@ -114,4 +93,5 @@ History
         <!-- End Footer -->
     </div>
 </div>
+<script defer src="{% static 'js/scriptsHistory.js' %}"></script>
 {% endblock %}

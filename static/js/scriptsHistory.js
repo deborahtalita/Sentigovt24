@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
+    // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
+    const maxVisibleButtons = 5;
+
     // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
     function getDataHistory(page) {
-        $.getJSON(`/get-data-table-history/?page=${page}`, function (response) {
+        $.getJSON(`/sentiment/history?page=${page}`, function (response) {
             // Mendapatkan data dari response
             const data = response.results;
             const totalPages = response.total_pages;
@@ -12,18 +15,27 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.empty();
 
             for (let i = 0; i < data.length; i++) {
+                var bacapres = data[i].bacapres
+                var bacapres_result = ""
+                bacapres.forEach(function(item, index){
+                    bacapres_result += item;
+
+                    if (index !== bacapres.length - 1) {
+                        bacapres_result += ", ";
+                      }
+                });
                 const row = `<tr class="border-b hover:bg-[#c2c2c2]">
                 <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                     ${data[i].no}
                 </th>
-                <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('detailHistory')">
-                    ${data[i].bacapres}
+                <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('/sentiment/history/detail/${data[i].no}')">
+                    ${bacapres_result}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                    ${data[i].tgl_start}
+                    ${data[i].start_date}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
-                    ${data[i].tgl_end}
+                    ${data[i].end_date}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
                     <a id="btn-delete-history" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
@@ -46,9 +58,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Membuat tombol nomor halaman
             const pageButtons = $("#page-buttons");
-            for (let i = 1; i <= totalPages; i++) {
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+            if (endPage - startPage + 1 < maxVisibleButtons) {
+                startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
                 const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
                 pageButtons.append(button);
+            }
+
+            // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
+            if (startPage > 1) {
+                const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.prepend(ellipsisStart);
+            }
+
+            // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
+            if (endPage < totalPages) {
+                const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.append(ellipsisEnd);
             }
 
             // Menambahkan event listener untuk tombol nomor halaman

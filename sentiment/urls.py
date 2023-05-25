@@ -17,6 +17,7 @@ urlpatterns = [
     path('getTotalTweet/', views.getTotalTweet, name='getTotalTweet'),
     path('getTweets', views.getTweets, name='getTweets'),
     path('history', views.getHistoryList, name="getHistoryList"),
+    path('history/detail/<int:id>', views.getDetailHistory, name="getDetailHistory"),
     path('coba', views.coba, name="coba")
     # path('view', views.coba, name="index"),
 ]

@@ -48,6 +48,9 @@ def dashboard(request):
     
     if 'selected_end_date' in request.session:
         del request.session['selected_end_date']
+    
+    if 'history_id' in request.session:
+        del request.session['history_id']
 
     # get bacapres
     bacapres = Bacapres.objects.all().order_by('id')
