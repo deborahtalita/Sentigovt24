@@ -1,102 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
-from sentiment.crawl import crawl_tweet, MyStreamListener
 from sentiment.scrape import scrape_tweet
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from sentiment.models import Tweet, History
 from bacapres.models import Bacapres
-from .forms.bacapres_form import BacapresForm
 from accounts.models import User
-from django.contrib import messages
-from django.views.generic import CreateView
-from . import preprocessing
 from .preprocessing import TextPreprocessing
 from sentigovt2.decorators import role_required
-from django.db.models import Count
-import pickle
-import joblib
 import json
 import pytz 
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
-import os
+from .helpers.sentiment_helper import predict, orderLabel
+from .helpers.date_helper import convertDate, getDates
 
-vectorizer_path = os.path.join(os.path.dirname(__file__), '../utils/vectorizers/TFIDFvec.pickle')
-classifier_path = os.path.join(os.path.dirname(__file__), '../utils/models/MultinomialNBModel.joblib')
-
-vectorizer = pickle.load(open(vectorizer_path,"rb"))
-classifier = joblib.load(classifier_path)
-# get times
+# default time
 timezone = pytz.timezone('Asia/Jakarta')
-
 end_date = datetime.now(timezone).replace(hour=0, minute=0, second=0, microsecond=0)
-print(end_date)
 start_date = end_date - timedelta(days=6)
-print(start_date)
-
-timezone = pytz.timezone('Asia/Jakarta')
-
-def predict(text):
-    test = []
-    test.append(text)
-
-    vect = vectorizer.transform(test)
-    predicted = classifier.predict(vect)
-    sentiment = ' '.join(predicted)
-    
-    return sentiment
-
-def orderLabel(label):
-    if label == '2-negative':
-        return "negative"
-    elif label == '1-neutral':
-        return "neutral"
-    elif label == '3-positive':
-        return "positive"
-    
-def convertDate(date):
-    date = datetime.strptime((datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
-    date = date.replace(tzinfo=pytz.utc).astimezone(timezone)
-    date = date.replace(hour=0, minute=0, second=0, microsecond=0)
-    return date
-
-@csrf_exempt
-def crawl(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        query = data.get('query', None)
-        data = crawl_tweet(query)
-
-        result = []
-
-        for i in range(0, len(data)):
-            preprocessed = TextPreprocessing(data[i]['text'])
-            preprocessed_text = preprocessed.preprocessed_text
-            sentiment = predict(preprocessed_text)
-
-            obj_tweet = Tweet(
-                tweet_id = data[i]['tweet_id'],
-                text = data[i]['text'],
-                text_preprocessed = preprocessed_text,
-                created_at = data[i]['created_at'],
-                user_name = data[i]['user_name'],
-                sentiment = orderLabel(sentiment),
-            )
-
-            result.append(obj_tweet)
-        Tweet.objects.bulk_create(result)
-
-        return JsonResponse({
-            'code': 200, 
-            'status': 'success',
-            'data': []
-        })
-    return JsonResponse({
-        'code': 404, 
-        'status': 'not found',
-        'data': []
-    }) 
 
 @csrf_exempt
 def scrape(request):
@@ -134,20 +55,6 @@ def scrape(request):
         'status': 'not found',
         'data': []
     })
-
-def preprocess(request):
-    text = "b'Kekuatan Politik Besar Bisa Tercipta Bila Prabowo Berpasangan dengan Erick Thohir di Pilpres 2024. KoalisiKebangsaa\xe2\x80\xa6 https://t.co/2k0all7i6r'"
-
-    test = []
-    preprocessed = TextPreprocessing(text=text)
-    print(preprocessed.preprocessed_text)
-    test.append(preprocessed.preprocessed_text)
-
-    vect = vectorizer.transform(test)
-    predicted = classifier.predict(vect)
-    s = ' '.join(predicted)
-    # Print List
-    print(s)
 
 def search(request):
     context = {}
@@ -242,26 +149,6 @@ def getAllTotalTweet(request):
     
     return JsonResponse(context)
 
-def coba(request):
-    tweet = Tweet.objects.filter(created_at__gte=start_date)
-    cur_date = start_date + timedelta(days=1)
-    day = start_date + timedelta(days=2)
-    print(cur_date, " ", day)
-    total_tweet_per_day = Tweet.objects.filter(created_at__range=(cur_date,day)).count()
-    print(total_tweet_per_day)
-
-def getDates(start, end):
-    dates = []
-    i = 0
-
-    cur_date = start
-    while cur_date <= end:
-        date = cur_date.strftime('%Y-%m-%d')
-        # print(date) 
-        dates.append(date)
-        cur_date += timedelta(days=1)
-
-    return dates
 
 def getAllTotalSentiment(request):
     global start_date, end_date
