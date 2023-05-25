@@ -7,7 +7,6 @@ from bacapres.models import Bacapres
 from accounts.models import User
 from .preprocessing import TextPreprocessing
 from sentigovt2.decorators import role_required
-import json
 import pytz 
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
@@ -56,7 +55,7 @@ def scrape(request):
         'data': []
     })
 
-def search(request):
+def manualSearch(request):
     context = {}
     if request.method == 'POST':
         selected_options = request.POST.getlist('search_field')
@@ -71,28 +70,30 @@ def search(request):
         request.session['selected_end_date'] = end
 
         # get selected bacapres
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
+        bacapres = getBacapres(request.session)
         context['bacapres'] = bacapres
+
+        # get default selected bacapres
         active_item = bacapres.first()
         if active_item: context['active_item'] = active_item.id
         
-        print(active_item.id)
         context['result'] = 'true'
         
+        # set date to insert in history obj
         start_date = convertDate(start)
         end_date = convertDate(end)
-        tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
-        print(tweets)
 
-        # print(request.user)
+        # get tweet to insert in history obj
+        tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
+
+        #  get auth user
         user = User.objects.get(id=request.user.id)
 
+        #  save manual search to history
         history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
         history.bacapres.add(*bacapres)
         history.tweet.add(*tweets)
 
-    else:
-        options = request.session.get('selected_options')
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres_opt'] = bacapres 
 
@@ -100,34 +101,14 @@ def search(request):
     context['active_page'] = 'dashboard'
     return render(request, 'dashboard.html', context)
 
-def getAllTotalTweet(request):
-    global start_date, end_date
+def getTrenTotalTweet(request):
     context = {}
 
     # get bacapres
-    if request.session.get('selected_options') != None:
-        selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
-    else:
-        bacapres = Bacapres.objects.all().order_by('id')
+    bacapres = getBacapres(request.session)
 
-    # get tweets
-    if (request.session.get('selected_start_date') != None) and (request.session.get('selected_end_date') != None):
-        start_date = convertDate(request.session.get('selected_start_date'))
-        end_date = convertDate(request.session.get('selected_end_date'))
-        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
-        
-    elif request.session.get('history_id') != None:
-        history_id = request.session.get('history_id')
-        history = History.objects.get(id=history_id)
-
-        tweet = history.tweet.all()
-        tweet = tweet.filter(created_at__range=(history.start_date, history.end_date))
-
-        start_date = history.start_date
-        end_date = history.end_date
-    else:
-        tweet = Tweet.objects.filter(created_at__gte=start_date)
+    # get tweets and dates
+    tweet, start_date, end_date = getTweets(request.session)
 
     dates = getDates(start_date, end_date)
     context['dates'] = dates
@@ -150,34 +131,14 @@ def getAllTotalTweet(request):
     return JsonResponse(context)
 
 
-def getAllTotalSentiment(request):
-    global start_date, end_date
+def getTrenTotalSentiment(request):
     context = {}
 
     # get bacapres
-    if request.session.get('selected_options') != None:
-        selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
-    else:
-        bacapres = Bacapres.objects.all().order_by('id')
+    bacapres = getBacapres(request.session)
 
-    # get tweets
-    if (request.session.get('selected_start_date') != None) and (request.session.get('selected_end_date') != None):
-        start_date = convertDate(request.session.get('selected_start_date'))
-        end_date = convertDate(request.session.get('selected_end_date'))
-        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
-        
-    elif request.session.get('history_id') != None:
-        history_id = request.session.get('history_id')
-        history = History.objects.get(id=history_id)
-
-        tweet = history.tweet.all()
-        tweet = tweet.filter(created_at__range=(history.start_date, history.end_date))
-
-        start_date = history.start_date
-        end_date = history.end_date
-    else:
-        tweet = Tweet.objects.filter(created_at__gte=start_date)
+    # get tweets and dates
+    tweet, start_date, end_date = getTweets(request.session)
 
     dates = getDates(start_date, end_date)
     context['dates'] = dates
@@ -196,11 +157,8 @@ def getAllTotalSentiment(request):
             tokoh_tweets = tweet.filter(bacapres=res.id).filter(created_at__range=(cur_date,day))
 
             neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
-            # print("neg_sentiment",neg_sentiment)
             pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
-            # print("pos_sentiment",pos_sentiment)
             neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
-            # print("neu_sentiment",neu_sentiment)
             
             negative['data'].append(neg_sentiment)
             positive['data'].append(pos_sentiment)
@@ -215,35 +173,13 @@ def getAllTotalSentiment(request):
     return JsonResponse(context)
 
 def getTotalTweet(request):
-    global start_date, end_date
     context= {}
+    
     # get bacapres
-    if request.session.get('selected_options') != None:
-        selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
-    else:
-        bacapres = Bacapres.objects.all().order_by('id')
+    bacapres = getBacapres(request.session)
 
-    # get tweets
-    if (request.session.get('selected_start_date') != None) and (request.session.get('selected_end_date') != None):
-        start_date = convertDate(request.session.get('selected_start_date'))
-        end_date = convertDate(request.session.get('selected_end_date'))
-        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
-        
-    elif request.session.get('history_id') != None:
-        history_id = request.session.get('history_id')
-        history = History.objects.get(id=history_id)
-
-        tweet = history.tweet.all()
-        tweet = tweet.filter(created_at__range=(history.start_date, history.end_date))
-
-        start_date = history.start_date
-        end_date = history.end_date
-    else:
-        tweet = Tweet.objects.filter(created_at__gte=start_date)
-
-    dates = getDates(start_date, end_date)
-    context['dates'] = dates
+    # get tweets and dates
+    tweet, _, _ = getTweets(request.session)
     
     # total tweet & tweet per sentiment
     bacapres_total_tweet = {}
@@ -263,42 +199,21 @@ def getTotalTweet(request):
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
     return JsonResponse(context)
 
-def getTweets(request):
+def getTweetList(request):
     context = {}
     global start_date, end_date
 
-    #  get default selected bacapres
-    if request.session.get('selected_options') != None:
-        selected_options = request.session.get('selected_options')
-        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
-    else:
-        bacapres = Bacapres.objects.all().order_by('id')
+    # get bacapres
+    bacapres = getBacapres(request.session)
 
+    # get default selected bacapres
     bacapres = bacapres.first()
     active_item = bacapres.id
     
-    # get tweets
-    if (request.session.get('selected_start_date') != None) and (request.session.get('selected_end_date') != None):
-        start_date = convertDate(request.session.get('selected_start_date'))
-        end_date = convertDate(request.session.get('selected_end_date'))
-        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
-        
-    elif request.session.get('history_id') != None:
-        history_id = request.session.get('history_id')
-        history = History.objects.get(id=history_id)
+    # get tweets and dates
+    tweet, _, _ = getTweets(request.session)
 
-        tweet = history.tweet.all()
-        tweet = tweet.filter(created_at__range=(history.start_date, history.end_date))
-
-        start_date = history.start_date
-        end_date = history.end_date
-    else:
-        tweet = Tweet.objects.filter(created_at__gte=start_date)
-
-    dates = getDates(start_date, end_date)
-    context['dates'] = dates
-
-    # get selected bacapres
+    # get tweets by selected bacapres
     bacapres_id = int(request.GET.get('bacapres', active_item))
     tokoh_tweets = tweet.filter(bacapres=bacapres_id).order_by('-created_at')
 
@@ -326,6 +241,36 @@ def getTweets(request):
     
     return JsonResponse(context)
 
+def getTweets(session):
+    global start_date, end_date
+
+    # get tweets
+    if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
+        start_date = convertDate(session['selected_start_date'])
+        end_date = convertDate(session['selected_end_date'])
+        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
+        
+    elif 'history_id' in session: # for history detail
+        history_id = session['history_id']
+        history = History.objects.get(id=history_id)
+        tweet = history.tweet.all() # get tweet based on history
+
+        start_date = history.start_date
+        end_date = history.end_date
+    tweets = Tweet.objects.filter(created_at__range=(start_date,end_date))
+    return tweets, start_date, end_date
+
+def getBacapres(session):
+    # get bacapres
+    if 'selected_options' in session:
+        selected_options = session['selected_options']
+        bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
+    else:
+        bacapres = Bacapres.objects.all().order_by('id')
+    
+    return bacapres
+
+####################### HISTORY #######################
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}
@@ -365,24 +310,25 @@ def getHistoryList(request):
         context['active_page'] = 'history'
         return render(request, 'history/history.html', context)
 
-
+@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getDetailHistory(request, id):
     context = {}
 
     # belum ada pengecekan user id sesuai gak
     history = get_object_or_404(History, id=id)
 
-    # assign request to session
+    # assign history id and selected options to session
     bacapres = history.bacapres.all()
     selected_options = [obj.id for obj in bacapres]
-    print(selected_options)
 
     request.session['selected_options'] = selected_options
     request.session['history_id'] = history.id
 
     # get selected bacapres
-    bacapres = Bacapres.objects.filter(id__in=selected_options).order_by('id')
+    bacapres = getBacapres(request.session)
     context['bacapres'] = bacapres
+
+    # get default selected bacapres
     active_item = bacapres.first()
     if active_item: context['active_item'] = active_item.id
 
@@ -391,6 +337,7 @@ def getDetailHistory(request, id):
 
     return render(request, 'dashboard.html', context)
 
+@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def deleteHistory(request, id):
     context = {}
     try:
@@ -402,6 +349,3 @@ def deleteHistory(request, id):
         print("Object not found")
         # return redirect(reverse_lazy('sentiment:getHistoryList'))
         return JsonResponse({'message': 'Invalid request method'})
-
-
-

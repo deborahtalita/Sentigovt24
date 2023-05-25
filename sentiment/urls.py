@@ -9,11 +9,11 @@ app_name = 'sentiment'
 
 urlpatterns = [
     path('scrape', views.scrape, name="index"),
-    path('search', views.search, name="search"),
-    path('getAllTotalSentiment/', views.getAllTotalSentiment, name='getAllTotalSentiment'),
-    path('getAllTotalTweet/', views.getAllTotalTweet, name='getAllTotalTweet'),
+    path('search', views.manualSearch, name="manualSearch"),
+    path('getTrenTotalSentiment/', views.getTrenTotalSentiment, name='getTrenTotalSentiment'),
+    path('getTrenTotalTweet/', views.getTrenTotalTweet, name='getTrenTotalTweet'),
     path('getTotalTweet/', views.getTotalTweet, name='getTotalTweet'),
-    path('getTweets', views.getTweets, name='getTweets'),
+    path('getTweetList', views.getTweetList, name='getTweetList'),
     path('history', views.getHistoryList, name="getHistoryList"),
     path('history/detail/<int:id>', views.getDetailHistory, name="getDetailHistory"),
     path('history/delete/<int:id>', views.deleteHistory, name="deleteHistory"),

@@ -124,7 +124,7 @@ function displayChart(chartId, Id) {
 
 // Grafik Tren All Tweet
 function displayChartTotal() {
-    $.getJSON("/sentiment/getAllTotalTweet/", function (response) {
+    $.getJSON("/sentiment/getTrenTotalTweet/", function (response) {
         var options = {
             chart: {
                 width: "100%",

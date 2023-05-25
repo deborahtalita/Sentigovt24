@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a {% if active_page == 'manual search' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg" href="{% url 'sentiment:search' %}">
+                    <a {% if active_page == 'manual search' %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg bg-[#434343]" {% endif %} class="hover:bg-[#434343] flex items-center p-3 text-gray-900 rounded-lg" href="{% url 'sentiment:manualSearch' %}">
                         <img class="flex-shrink-0 w-6 h-6" src="{% static 'media/icons/analysisManual.svg' %}" alt="Manual Search"/>
                         <span class="ml-3 text-white ">Manual Search</span>
                     </a>

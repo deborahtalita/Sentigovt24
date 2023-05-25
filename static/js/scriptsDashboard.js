@@ -64,7 +64,7 @@ function dropdown() {
 function getDataDashboard(id, page) {
     // var id = getSelectedBacapresOption();
     // $.getJSON(`/sentiment/getTweets?bacapres=${id}&page=${page}`, function (response) {
-    $.getJSON(`/sentiment/getTweets?bacapres=${id}&page=${page}`, function (response) {
+    $.getJSON(`/sentiment/getTweetList?bacapres=${id}&page=${page}`, function (response) {
         
         var currentPage = page;
 

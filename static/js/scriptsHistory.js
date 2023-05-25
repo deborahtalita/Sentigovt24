@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }).then((result) => {
                 if (result.isConfirmed) {
                     const url = `/sentiment/history/delete/${id}`; // Ganti yourDataId dengan ID data yang ingin dihapus
-                    var token = '{{csrf_token}}';
+
                     $.ajax({
                         url: url,
                         type: "DELETE",
