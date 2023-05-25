@@ -444,7 +444,8 @@ def getHistoryList(request):
     context = {}
 
     # get history
-    history = History.objects.prefetch_related('bacapres').all().order_by('id')
+    user = User.objects.get(id=request.user.id)
+    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('id')
 
     #  pagination
     paginator = Paginator(history, 10)
@@ -474,7 +475,8 @@ def getHistoryList(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse(context, safe=False)
     else:
-        return render(request, 'history.html',{})
+        context['active_page'] = 'history'
+        return render(request, 'history.html', context)
 
 
 def getDetailHistory(request, id):
@@ -498,7 +500,7 @@ def getDetailHistory(request, id):
     if active_item: context['active_item'] = active_item.id
 
     context['title'] = 'History'
-    context['active_page'] = 'dashboard'
+    context['active_page'] = 'history'
 
     return render(request, 'dashboard.html', context)
 

@@ -66,7 +66,7 @@ def editUser(request, id):
     #         return redirect(reverse_lazy('bacapres:bacapres_list'))
     # context['form'] = form
     # context['object'] = bacapres
-    return render(request,'editBacapres.html', context)
+    return render(request,'editUser.html', context)
 
 class webLoginView(LoginView):
     form_class = LoginForm

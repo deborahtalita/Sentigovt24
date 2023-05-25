@@ -18,7 +18,7 @@ User Management
         <!-- End Header User -->
         <!-- Start Data User -->
         <div class="bg-white p-6 rounded-xl h-fit">
-            <form action="" method="PUT" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div id="photoProfile">
                     <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
@@ -81,7 +81,7 @@ User Management
                 </div>
                 <!-- Apakan muncul apabila telah klik tombol change password -->
                 <div class="flex justify-end items-center gap-5">
-                    <a href="{% url 'editUser' %}" class="font-bold text-[#1E1D4C]">Discard</a>
+                    <a href="{% url 'account:userManagement' %}" class="font-bold text-[#1E1D4C]">Discard</a>
                     <button id="saveEditUser" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
                 </div>
             </form>
