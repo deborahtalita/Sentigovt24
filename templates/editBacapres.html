@@ -21,10 +21,14 @@ Bacapres Management
             <form action="#" method="PUT" enctype="multipart/form-data">
                 <!-- Start Form Edit Foto Bacapres -->
                 <div id="photoProfile">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
-                            <img class="py-5" src="{% static 'media/icons/Ganjar.svg' %}" alt="ProfileEdit">
+                            <div class="w-[150px] h-[150px] rounded-full overflow-hidden">
+                                <div class="w-[100%] h-[100%] relative rounded-full overflow-hidden">
+                                    <img src="{% static 'media/images/alvin.jpg' %}" alt="GambarProfile" class="w-[100%] h-[100%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">
+                                </div>
+                            </div>
                             <div class="font-[poppins-semibold] text-[#1E1D4C]">Ganjar Pranowo</div>
                         </div>
                         <div class="w-[50%]">
