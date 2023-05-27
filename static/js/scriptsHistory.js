@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = response.results;
             const totalPages = response.total_pages;
 
+            // Untuk menghitung index per tweet
+            var startIndex = 10 * (currentPage - 1) + 1 ;
+            var counter = 0;
+
             // Menampilkan data di tabel
             const tableBody = $("#table-body");
             tableBody.empty();
@@ -24,9 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         bacapres_result += ", ";
                       }
                 });
+                index = startIndex + counter;
                 const row = `<tr class="border-b hover:bg-[#c2c2c2]">
                 <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                    ${data[i].no}
+                    ${index}
                 </th>
                 <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('/sentiment/history/detail/${data[i].no}')">
                     ${bacapres_result}
@@ -43,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
             </tr>`;
                 tableBody.append(row);
+                counter= counter + 1
             }
 
             // Menghapus tombol halaman sebelumnya dan nomor halaman

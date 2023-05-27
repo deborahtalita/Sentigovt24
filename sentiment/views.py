@@ -11,13 +11,13 @@ import pytz
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
-from .helpers.date_helper import convertDate, getDates
+from .helpers.date_helper import convertStartDate, convertEndDate, getDates
 from .helpers.session_helper import isGuestLimitAccess
 
 # default time
 timezone = pytz.timezone('Asia/Jakarta')
-end_date = datetime.now(timezone).replace(hour=0, minute=0, second=0, microsecond=0)
-start_date = end_date - timedelta(days=6)
+end_date = datetime.now(timezone).replace(hour=23, minute=59, second=59, microsecond=59)
+start_date = end_date.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=6)
 
 @csrf_exempt
 def scrape(request):
@@ -84,8 +84,8 @@ def manualSearch(request):
             context['result'] = 'true'
             
             # set date to insert in history obj
-            start_date = convertDate(start)
-            end_date = convertDate(end)
+            start_date = convertStartDate(start)
+            end_date = convertEndDate(end)
 
             # get tweet to insert in history obj
             tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
@@ -254,8 +254,8 @@ def getTweets(session):
 
     # get tweets
     if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
-        start_date = convertDate(session['selected_start_date'])
-        end_date = convertDate(session['selected_end_date'])
+        start_date = convertStartDate(session['selected_start_date'])
+        end_date = convertEndDate(session['selected_end_date'])
         tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
         
     elif 'history_id' in session: # for history detail
@@ -266,6 +266,7 @@ def getTweets(session):
         start_date = history.start_date
         end_date = history.end_date
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date))
+    print(tweets.query)
     return tweets, start_date, end_date
 
 def getBacapres(session):
@@ -297,7 +298,7 @@ def getHistoryList(request):
         bacapres_items = []
         startDate = item.start_date
         endDate = item.end_date
-        for b_item in item.bacapres.all():
+        for b_item in item.bacapres.all().order_by('name'):
             bacapres_items.append(b_item.name)
         data_item = {
             'no': item.id,
@@ -351,7 +352,7 @@ def deleteHistory(request, id):
     try:
         history = get_object_or_404(History, id=id)
         history.delete()
-        # return redirect(reverse_lazy('sentiment:getHistoryList'))
+        
         return JsonResponse({'message': 'Data deleted successfully'})
     except History.DoesNotExist:
         print("Object not found")

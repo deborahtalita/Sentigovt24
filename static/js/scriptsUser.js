@@ -5,34 +5,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
     function getDataUser(page) {
-        $.getJSON(`/get-data-table-user/?page=${page}`, function (response) {
+        $.getJSON(`/account?page=${page}`, function (response) {
             // Mendapatkan data dari response
             const data = response.results;
             const totalPages = response.total_pages;
+            
+            // Untuk menghitung index per tweet
+            var startIndex = 10 * (currentPage - 1) + 1 ;
+            var counter = 0;
 
             // Menampilkan data di tabel
             const tableBody = $("#table-body");
             tableBody.empty();
 
             for (let i = 0; i < data.length; i++) {
+                console.log(data[i])
+                index = startIndex + counter;
                 const row = `<tr class="border-b">
                 <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                    ${data[i].no}
+                    ${index}
                 </th>
                 <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
                     ${data[i].name}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-nowrap text-center">
-                    ${data[i].status}
+                    ${data[i].role}
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] py-4 ">
-                    <a id="btn-delete-User" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
+                    <a data-id="${data[i].id}" id="btn-delete-User" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
                 </td>
                 <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                    <a class="flex justify-center" href="{% url 'editUser' %}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
+                    <a class="flex justify-center" href="account/edit/${data[i].id}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
                 </td>
             </tr>`;
                 tableBody.append(row);
+                counter= counter + 1
             }
 
             // Menghapus tombol halaman sebelumnya dan nomor halaman
@@ -100,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $(document).on("click", "#btn-delete-User", function (event) {
             event.preventDefault(); // Mencegah aksi default dari link
             const deleteButton = $(this);
+            const id = deleteButton.data('id');
             // Tampilkan dialog konfirmasi SweetAlert2
             Swal.fire({
                 title: "Are you sure?",
@@ -111,15 +119,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirmButtonText: "Yes, delete it!",
             }).then((result) => {
                 if (result.isConfirmed) {
+                    const url = `/account/delete/${id}`; // Ganti yourDataId dengan ID data yang ingin dihapus
                     // Hapus baris dari tabel setelah penghapusan berhasil
-                    const row = deleteButton.closest("tr");
-                    row.remove();
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        headers: { "X-CSRFToken": getCookie("csrftoken") },
+                        success: function (response) {
+                            Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                            location.reload()
+                            // Lakukan tindakan tambahan setelah penghapusan data berhasil
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
+                            // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
+                        }
+                    });
                 }
             });
         });
@@ -143,7 +158,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// document.getElementById("file-input").addEventListener("change", function() {
-//     // Refresh the page when file input changes
-//     window.location.reload()
-//   });
+// Helper function to get the value of a cookie
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Check if the cookie name matches the given name
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }

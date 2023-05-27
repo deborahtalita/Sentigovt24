@@ -173,7 +173,7 @@
                 {% for tokoh in bacapres%}
                 <button id ="rankingBacapres" data-id="{{tokoh.id}}" {% if tokoh.id == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                     <div class="flex items-center gap-2">
-                        <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{{tokoh.avatar.url}}" alt="Photo Bacapres">
                         <h1 class="font-[poppins-regular] text-[12px] capitalize">{{tokoh.name}}</h1>
                     </div>
                     <div class="font-[poppins-bold] text-[12px] flex gap-4">

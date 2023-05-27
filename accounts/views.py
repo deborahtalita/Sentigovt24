@@ -3,10 +3,12 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth import logout
-from .forms import SignUpForm, LoginForm, UpdateProfileForm
+from .forms import SignUpForm, UpdateProfileForm
 from .models import User
 from sentigovt2.decorators import role_required
 from django.contrib.auth import login, authenticate
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -57,10 +59,33 @@ def editProfile(request):
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def userAccountList(request):
+    # get user
     user = User.objects.all().filter(is_active=True).order_by('id')
-    data = {}
-    data['obj_list'] = user
-    return render(request, 'accounts/userManagement.html', data)
+
+    # pagination
+    paginator = Paginator(user, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    data_items = []
+    for item in page_obj:
+        data_item = {
+            'id': item.id,
+            'name': item.first_name,
+            'role': item.role,
+        }
+        data_items.append(data_item)
+    print(data_items)
+    context = {
+        'total_pages':paginator.num_pages,
+        'results': data_items,
+    }
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse(context, safe=False)
+    else:
+        context['active_page'] = 'bacapres management'
+        return render(request, 'accounts/userManagement.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def deleteUser(request, id):

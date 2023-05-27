@@ -13,5 +13,5 @@ urlpatterns = [
     path('profile', views.editProfile, name="profile"),
     path('account', views.userAccountList, name="userManagement"),
     path('account/delete/<int:id>', views.deleteUser, name="deleteUser"),
-    path('editUser/<int:id>', views.editUser, name="editUser")
+    path('account/edit/<int:id>', views.editUser, name="editUser")
 ]
