@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from sentiment.scrape import scrape_tweet
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from sentiment.models import Tweet, History
 from bacapres.models import Bacapres
 from accounts.models import User
@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
 from .helpers.date_helper import convertStartDate, convertEndDate, getDates
 from .helpers.session_helper import isGuestLimitAccess
+import csv
 
 # default time
 timezone = pytz.timezone('Asia/Jakarta')
@@ -92,7 +93,6 @@ def manualSearch(request):
 
             #  get auth user
             if request.user.is_authenticated:
-                print(request.user.id)
                 user = User.objects.get(id=request.user.id)
                 history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
             else:
@@ -106,7 +106,7 @@ def manualSearch(request):
     context['bacapres_opt'] = bacapres 
 
     context['title'] = 'Manual Search'
-    context['active_page'] = 'dashboard'
+    context['active_page'] = 'manual search'
     return render(request, 'dashboard.html', context)
 
 def getTrenTotalTweet(request):
@@ -134,7 +134,6 @@ def getTrenTotalTweet(request):
             cur_date += timedelta(days=1)
         bacapres_total_tweet_per_day.append(series_data)       
     context['bacapres_total_tweet_per_day'] = bacapres_total_tweet_per_day
-    
     
     return JsonResponse(context)
 
@@ -249,6 +248,28 @@ def getTweetList(request):
     
     return JsonResponse(context)
 
+@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
+def generateCSV(request):
+    # get tweets and dates
+    tweet, start_date, end_date = getTweets(request.session)
+
+    # get tweets by selected bacapres
+    bacapres_id = request.GET.get('bacapres')
+    data = tweet.filter(bacapres=bacapres_id).order_by('-created_at')
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['No','User name', 'Tweet', 'Sentiment', 'Date'])  # Write header row
+
+    for index, obj in enumerate(data, start=1):
+        date = obj.created_at.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")
+        writer.writerow([index, obj.user_name, obj.text, obj.sentiment, date])  # Write each row with the desired fields
+
+    return response
+
+
 def getTweets(session):
     global start_date, end_date
 
@@ -256,17 +277,14 @@ def getTweets(session):
     if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
         start_date = convertStartDate(session['selected_start_date'])
         end_date = convertEndDate(session['selected_end_date'])
-        tweet = Tweet.objects.filter(created_at__range=(start_date,end_date))
         
     elif 'history_id' in session: # for history detail
         history_id = session['history_id']
         history = History.objects.get(id=history_id)
-        tweet = history.tweet.all() # get tweet based on history
 
         start_date = history.start_date
         end_date = history.end_date
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date))
-    print(tweets.query)
     return tweets, start_date, end_date
 
 def getBacapres(session):
@@ -280,6 +298,7 @@ def getBacapres(session):
     return bacapres
 
 ####################### HISTORY #######################
+
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}
@@ -307,7 +326,6 @@ def getHistoryList(request):
             'end_date': endDate.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
         }
         data_items.append(data_item)
-    print(data_items)
     context = {
         'total_pages':paginator.num_pages,
         'results': data_items,
@@ -356,5 +374,4 @@ def deleteHistory(request, id):
         return JsonResponse({'message': 'Data deleted successfully'})
     except History.DoesNotExist:
         print("Object not found")
-        # return redirect(reverse_lazy('sentiment:getHistoryList'))
         return JsonResponse({'message': 'Invalid request method'})

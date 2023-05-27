@@ -49,6 +49,7 @@ def create_bacapres(request):
             messages.error(request, 'Error saving form')
             print(form.errors.as_data())
     context['form'] = form
+    context['active_page'] = 'bacapres management'
     return render(request, 'bacapres/createBacapres.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
@@ -65,6 +66,7 @@ def edit_bacapres(request, id):
             
     context['form'] = form
     context['object'] = bacapres
+    context['active_page'] = 'bacapres management'
     return render(request,'bacapres/editBacapres.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])

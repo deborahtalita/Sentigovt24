@@ -84,7 +84,7 @@ def userAccountList(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse(context, safe=False)
     else:
-        context['active_page'] = 'bacapres management'
+        context['active_page'] = 'user management'
         return render(request, 'accounts/userManagement.html', context)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
@@ -109,6 +109,7 @@ def editUser(request, id):
         user.role = role
         user.save()
     context['user'] = user
+    context['active_page'] = 'user management'
     return render(request,'accounts/editUser.html', context)
 
 class LoginView(View):

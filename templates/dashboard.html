@@ -192,7 +192,7 @@
     <section class="p-6 rounded-2xl bg-gray-50">
         <div class="flex justify-between">
             <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">List Tweet Sentiment Analysis</div>
-            <button class="border-2 px-4 py-2 rounded-lg hover:bg-gray-300 hover:text-white">Download CSV</button>
+            <button id="generateCSV" {% if not auth_user.is_authenticated %} class="hidden" {% else %} class="border-2 px-4 py-2 rounded-lg hover:bg-gray-300 hover:text-white" {% endif %}>Download CSV</button>
         </div>
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500">

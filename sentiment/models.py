@@ -9,7 +9,7 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(default=None)
     text_preprocessed = models.TextField(default=None)
     sentiment = models.TextField(default=None)
-    bacapres = models.IntegerField(default=None)
+    bacapres = models.ForeignKey(Bacapres, on_delete=models.CASCADE)
 
 class History(models.Model):
     start_date = models.DateTimeField(default=None)

@@ -38,7 +38,7 @@
                 <li class="flex flex-col items-center mt-9">
                     <div class="w-[150px] h-[150px] rounded-full overflow-hidden">
                         <div class="w-[100%] h-[100%] relative rounded-full overflow-hidden">
-                            <img src="{{auth_user.avatar.url}}" alt="GambarProfile" class="w-[100%] h-[100%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">
+                            <img {% if not auth_user.is_authenticated %} src="{% static 'media/icons/ProfileDefault.svg' %}" {% else %} src="{{auth_user.avatar.url}}" {% endif %} alt="GambarProfile" class="w-[100%] h-[100%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">
                         </div>
                     </div>
                     <a {% if auth_user %} href="{% url 'account:profile' %}" {% endif %} class="text-center">

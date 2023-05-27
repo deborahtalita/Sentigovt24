@@ -30,8 +30,6 @@ def dashboard(request):
 
     active_item = bacapres.first()
     if active_item: context['active_item'] = active_item.id
-    
-    print(active_item.id)
 
     context['title'] = 'Dashboard'
     context['active_page'] = 'dashboard'

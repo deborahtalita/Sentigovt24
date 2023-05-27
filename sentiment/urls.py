@@ -17,6 +17,7 @@ urlpatterns = [
     path('history', views.getHistoryList, name="getHistoryList"),
     path('history/detail/<int:id>', views.getDetailHistory, name="getDetailHistory"),
     path('history/delete/<int:id>', views.deleteHistory, name="deleteHistory"),
+    path('generateCSV', views.generateCSV, name="generateCSV")
     # path('view', views.coba, name="index"),
 ]
         
