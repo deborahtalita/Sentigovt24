@@ -13,6 +13,7 @@
     <link href="{% static 'css/styles.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'ApexChart/dist/apexcharts.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'sweetalert2/sweetalert2.min.css' %}" type="text/css" rel="stylesheet">
+    <link rel="icon" href="{% static 'media/icons/Logo.svg' %}" type="image/icon type">
     <title>SENTIGOV24 | {% block title %}{% endblock %}</title>
 </head>
 
@@ -35,8 +36,12 @@
                     <a href="{% url 'home' %}" class="font-[BigShouldersDisplay-Bold] text-[30px] text-white hover:opacity-75 transition-opacity">SENTIGOV24</a>
                 </li>
                 <li class="flex flex-col items-center mt-9">
-                    <img src="{% static 'media/icons/ProfileDefault.svg' %}" alt="Profile">
-                    <a href="{% url 'account:profile' %}" class="text-center">
+                    <div class="w-[150px] h-[150px] rounded-full overflow-hidden">
+                        <div class="w-[100%] h-[100%] relative rounded-full overflow-hidden">
+                            <img src="{{auth_user.avatar.url}}" alt="GambarProfile" class="w-[100%] h-[100%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">
+                        </div>
+                    </div>
+                    <a {% if auth_user %} href="{% url 'account:profile' %}" {% endif %} class="text-center">
                         <div class="font-[Poppins-semibold] text-[15px] text-white mt-3">{% if auth_user %} {{auth_user.first_name}} {% else %} Guest {% endif %}</div>
                         <div class="font-[poppins-regular] text-[12px] text-white mb-9">{% if auth_user %} {{auth_user.role}} {% else %} Guest {% endif %}</div>
                     </a>

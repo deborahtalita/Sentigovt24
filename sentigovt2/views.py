@@ -39,7 +39,7 @@ def dashboard(request):
     rendered_html = render(request, 'dashboard.html', context)
 
     # set session for guest
-    session_id = request.COOKIES.get('session_id')
+    session_id = request.COOKIES.get('sessionid')
     if session_id:
         response = HttpResponse(rendered_html)
     else:
@@ -47,7 +47,7 @@ def dashboard(request):
         
         unique_id = str(uuid.uuid4())
         session_age = 3600 * 24 * 90 # 3 months
-        response.set_cookie('session_id', unique_id, max_age=session_age)
+        response.set_cookie('sessionid', unique_id, max_age=session_age)
         session = Session.objects.create(id=unique_id)
         session.save()
 

@@ -13,18 +13,23 @@ User Management
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
             <div class="titleUserManagement text-[40px] text-[#1E1D4C]">User Management</div>
             <hr class="border-[#C2C2C2] my-5">
-            <div class="nameBacapres text-[#1E1D4C] text-[15px]">Lorem Ipsum</div>
+            <div class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">Lorem Ipsum</div>
         </header>
         <!-- End Header User -->
         <!-- Start Data User -->
         <div class="bg-white p-6 rounded-xl h-fit">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" method="POSt" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div id="photoProfile">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
-                            <img class="py-5" src="{% static 'media/icons/ProfileDefault.svg' %}" alt="ProfileEdit">
-                            <div class="font-[poppins-semibold] text-[#1E1D4C]">Lorem Ipsum</div>
+                            <div class="w-[150px] h-[150px] rounded-full overflow-hidden">
+                                <div class="w-[100%] h-[100%] relative rounded-full overflow-hidden">
+                                    <img src="{{user.avatar.url}}" alt="GambarProfile" class="w-[100%] h-[100%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">
+                                </div>
+                            </div>
+                            <div class="font-[poppins-semibold] text-[#1E1D4C]">{{user.first_name}}</div>
                         </div>
                         <div class="w-[50%]">
                             <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
@@ -35,35 +40,28 @@ User Management
                 </div>
                 <hr class="border-[#C2C2C2] my-5">
                 <div id="personalInformation">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">User Information</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3 py-2">User Information</div>
                     <div class="flex flex-col gap-5">
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
-                            <input class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" type="text" name="name" placeholder="Masukan Nama" value="Lorem Ipsum" required>
+                            <input class="bg-gray-100 w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg cursor-not-allowed" type="text" name="name" placeholder="Masukan Nama" name="first_name" value="Lorem Ipsum" required>
                         </div>
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
-                            <input type="text" id="disabled-email" aria-label="disabled-email" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" value="lorem@gmail.com">
+                            <input type="text" id="disabled-email" aria-label="disabled-email" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" name="email" value="lorem@gmail.com">
                         </div>
                         <!-- Dropdown Select Status -->
                         <div>
                             <label class="text-gray-700 tracking-wide text-[15px]">Status</label>
-                            <select title="status" id="status" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
-                                <option {% if role_user == 'member' %} selected {% endif %} value="member">Member</option>
-                                <option {% if role_user == 'administrator' %} selected {% endif %} value="administrator">Administrator</option>
+                            <select title="status" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                                <option {% if user.role == 'MEMBER' %} selected {% endif %} value="MEMBER">Member</option>
+                                <option {% if user.role == 'ADMIN' %} selected {% endif %} value="ADMIN">Administrator</option>
                             </select>
                         </div>
                         <!-- Dropdown Select Status -->
                     </div>
                 </div>
                 <hr class="border-[#C2C2C2] my-5" />
-                <div id="changePassword">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3 py-2">Change Password</div>
-                    <div class="relative">
-                        <label class="text-gray-700 tracking-wide text-[15px]">Password</label>
-                        <input type="password" id="disabled-password" aria-label="disabled-password" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" value="12Lorem">
-                    </div>
-                </div>
                 <div class="mt-6">
                     <button id="btn-confirm" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
                 </div>
@@ -94,4 +92,5 @@ User Management
         <!-- End Footer -->
     </div>
 </div>
+<script defer src="{% static 'js/popupSweetAlert2.js' %}"></script>
 {% endblock %}

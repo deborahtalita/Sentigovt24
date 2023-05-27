@@ -7,10 +7,10 @@ from django.http.request import HttpRequest
 
 UserModel = get_user_model()
 
-class Login(ModelBackend):
-    def authenticate(self, request, username=None, password=None, **kwargs):
+class LoginBackend(ModelBackend):
+    def authenticate(self, request, email=None, password=None, **kwargs):
         try:
-            user = UserModel.objects.get(email=username)
+            user = UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
             return None
         else:

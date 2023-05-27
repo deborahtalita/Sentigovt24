@@ -9,11 +9,12 @@
 {% block content %}
 <!-- Start  Grid-->
 <div class="pl-[280px] pr-6 pb-6 pt-24">
-    <div {% if title != 'Manual Search' %} class="hidden" {% endif %}>
-        <header class="bg-white py-6 px-10 rounded-xl h-fit mb-5">
-            <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">{{title}}</div>
+    <header {% if title == 'Dashboard' %} class="hidden" {% endif %} class="bg-white py-6 px-10 rounded-xl h-fit mb-5">
+        <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">{{title}}</div>
+        <hr class="border-[#C2C2C2] my-5">
             <hr class="border-[#C2C2C2] my-5">
-            <form action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch">
+            <div {% if title == 'Dashboard' or title == 'Manual Search' %} class="hidden" {% endif %} class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">19/05/2023</div>
+            <form action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch" {% if title == 'History' %} class="hidden" {% endif %}>
             {% csrf_token %}
                 <!-- Multi Select bacapres -->
                 <select title="select" name="search_field" x-cloak id="select" multiple="" form="manualSearch">
@@ -103,8 +104,10 @@
                 </div>
             </form>
         </header>
-    </div>        
         <div {% if title == 'Manual Search' and result != 'true' %} class="h-screen p-6 rounded-2xl bg-white flex pb-10 mb-5 justify-center items-center font-[poppins-semibold] text-5xl" {% else %} class="hidden" {% endif %}>
+            No Result
+        </div>        
+    <div {% if title == 'Manual Search' and result != 'true' %} class="hidden" {% endif %}>
         </div>
         <div {% if title == 'Manual Search' and result != 'true' %} class="hidden" {% endif %}>
             <!-- <div {% if title == 'Dashboard' %} class="hidden" {% endif %}> -->

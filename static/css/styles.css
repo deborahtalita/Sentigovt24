@@ -95,10 +95,6 @@
     color: #ffffff;
 }
 
-.nameBacapres {
-    font-family: poppins-regular;
-}
-
 /* Start Multi Select */
 [x-cloak] {
     display: none;
@@ -119,4 +115,5 @@
     stroke: #4691f6;
     stroke-width: 1;
 }
+
 /* End Multi Select */

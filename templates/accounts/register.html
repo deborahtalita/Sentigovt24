@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     {% endcompress %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="icon" href="{% static 'media/icons/Logo.svg' %}" type="image/icon type">
     <title>SENTIGOV24 | Register</title>
 </head>
 
@@ -29,8 +30,8 @@
                             {% csrf_token %}
                             <div class="relative">
                                 <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Email<span class="text-red-500"> *</span></label>
-                                <input {% if verifikasi_email != "true" %} class="bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg focus:border-indigo-500" type="email" name="email"placeholder="mail@gmail.com" required>
-                                <div {% if verifikasi_email != "true" %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">Please enter a valid email address</div>
+                                <input {% if form.errors.email %} class="bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:outline-none rounded-lg focus:border-indigo-500" type="email" name="email"placeholder="mail@gmail.com" required>
+                                <div {% if form.errors.email %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.email.0}}</div>
                             </div>
                             <div class="mt-8 content-center">
                                 <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Name<span class="text-red-500"> *</span></label>
@@ -38,13 +39,13 @@
                             </div>
                             <div class="mt-8 content-center">
                                 <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Password<span class="text-red-500"> *</span></label>
-                                <input {% if verifikasi_password != "true" %} class="bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500" type="password" name="password1" placeholder="Enter your password" required>
-                                <div {% if verifikasi_password != "true" %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">Please enter a valid password</div>
+                                <input {% if form.errors.password1 %} class="bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500" type="password" name="password1" placeholder="Enter your password" required>
+                                <div {% if form.errors.password1 %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.password1.0}}</div>
                             </div>
                             <div class="mt-8 content-center">
                                 <label class="font-[Poppins-Medium] ml-3 text-gray-700 tracking-wide text-[15px]">Confirm Password<span class="text-red-500"> *</span></label>
-                                <input {% if verifikasi_confirmPassword != "true" %} class=" bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500" type="password" name="password2" placeholder="Enter your confirm password" required>
-                                <div {% if verifikasi_confirmPassword != "true" %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">Please enter a valid confirm password</div>
+                                <input {% if form.errors.password2 %} class=" bg-red-200 w-full text-base px-4 py-2 border-2 border-red-500 focus:outline-none rounded-lg focus:border-indigo-500" {% endif %} class="w-full content-center text-base px-4 py-2 border-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500" type="password" name="password2" placeholder="Enter your confirm password" required>
+                                <div {% if form.errors.password2 %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.password2.0}}</div>
                             </div>
                             <div>
                                 <button type="submit" class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600  hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4  rounded-lg tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">Register</button>

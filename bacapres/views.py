@@ -35,8 +35,11 @@ def edit_bacapres(request, id):
     form = BacapresForm(request.POST,request.FILES, instance=bacapres)
     if request.method == "POST":
         if form.is_valid():
+            new_img = form.cleaned_data['avatar']
+            if new_img:
+                form.cleaned_data['avatar'] = Bacapres.objects.get(id=id).avatar
             form.save()
-            return redirect(reverse_lazy('bacapres:bacapres_list'))
+            
     context['form'] = form
     context['object'] = bacapres
     return render(request,'bacapres/editBacapres.html', context)

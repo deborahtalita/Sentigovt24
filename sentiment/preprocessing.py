@@ -4,10 +4,6 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.tag import CRFTagger
 from nltk.corpus import stopwords
-import Sastrawi
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-import swifter
-from django.db import models
 import os
 
 

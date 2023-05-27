@@ -58,49 +58,50 @@ def scrape(request):
 
 def manualSearch(request):
     context = {}
-    if request.method == 'POST' and isGuestLimitAccess(request.COOKIES) == False:
-        selected_options = request.POST.getlist('search_field')
-        start = request.POST.get('start_date')
-        end = request.POST.get('end_date')
-        
-        selected_options = [int(x) for x in selected_options[0].split(',')]
-
-        # assign request to session
-        request.session['selected_options'] = selected_options
-        request.session['selected_start_date'] = start
-        request.session['selected_end_date'] = end
-
-        # get selected bacapres
-        bacapres = getBacapres(request.session)
-        context['bacapres'] = bacapres
-
-        # get default selected bacapres
-        active_item = bacapres.first()
-        if active_item: context['active_item'] = active_item.id
-        
-        context['result'] = 'true'
-        
-        # set date to insert in history obj
-        start_date = convertDate(start)
-        end_date = convertDate(end)
-
-        # get tweet to insert in history obj
-        tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
-
-        #  get auth user
-        if request.user.is_authenticated:
-            print(request.user.id)
-            user = User.objects.get(id=request.user.id)
-            history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
+    if request.method == 'POST':
+        if 'session_id' in request.COOKIES and isGuestLimitAccess(request.COOKIES):
+            context['result'] = False
         else:
-            history = History.objects.create(start_date=start_date,end_date=end_date)
+            selected_options = request.POST.getlist('search_field')
+            start = request.POST.get('start_date')
+            end = request.POST.get('end_date')
+            
+            selected_options = [int(x) for x in selected_options[0].split(',')]
 
-        #  save manual search to history
+            # assign request to session
+            request.session['selected_options'] = selected_options
+            request.session['selected_start_date'] = start
+            request.session['selected_end_date'] = end
 
-        history.bacapres.add(*bacapres)
-        history.tweet.add(*tweets)
-    # elif isGuestLimitAccess(request.COOKIES):
-    #     context['result'] = False
+            # get selected bacapres
+            bacapres = getBacapres(request.session)
+            context['bacapres'] = bacapres
+
+            # get default selected bacapres
+            active_item = bacapres.first()
+            if active_item: context['active_item'] = active_item.id
+            
+            context['result'] = 'true'
+            
+            # set date to insert in history obj
+            start_date = convertDate(start)
+            end_date = convertDate(end)
+
+            # get tweet to insert in history obj
+            tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
+
+            #  get auth user
+            if request.user.is_authenticated:
+                print(request.user.id)
+                user = User.objects.get(id=request.user.id)
+                history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
+            else:
+                history = History.objects.create(start_date=start_date,end_date=end_date)
+
+            #  save manual search to history
+            history.bacapres.add(*bacapres)
+            history.tweet.add(*tweets)
+    
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres_opt'] = bacapres 
 

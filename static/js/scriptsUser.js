@@ -142,3 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
         getDataUser(currentPage);
     });
 });
+
+// document.getElementById("file-input").addEventListener("change", function() {
+//     // Refresh the page when file input changes
+//     window.location.reload()
+//   });

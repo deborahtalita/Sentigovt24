@@ -1,27 +1,30 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.views import View
 from django.contrib.auth import logout
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, UpdateProfileForm
 from .models import User
 from sentigovt2.decorators import role_required
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 
 def register(request):
     context = {}
-    form = SignUpForm(request.POST)
     context['registered'] = False
     if request.method == "POST":
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request,user)
+            messages.success(request, f'Your account has been created. You can log in now!')
             return redirect(reverse_lazy('dashboard'))
-        else:
-            print(form.errors.as_data())
+    else:
+        form = SignUpForm()
+        # print(form.errors.as_data())
     context['form'] = form
-    print(form)
+    # print(form)
     return render(request, 'accounts/register.html',context)
 
 def logoutRequest(request):
@@ -29,9 +32,26 @@ def logoutRequest(request):
     print("berhasil logout")
     return redirect(reverse_lazy('home'))
 
-def getProfile(request):
+def editProfile(request):
     context = {}
-    user = request.user
+    auth_user = request.user
+
+    user = get_object_or_404(User,id=auth_user.id)
+    form = UpdateProfileForm(request.POST,request.FILES, instance=user)
+    print(form)
+    if request.method == "POST":
+        if form.is_valid():
+            user.first_name = form.cleaned_data['first_name']
+            user.email = form.cleaned_data['email']
+            user.avatar = form.cleaned_data['avatar']
+            user.username = form.cleaned_data['email']
+            if not user.avatar:
+                user.avatar = User.objects.get(id=auth_user.id).avatar
+            user.save()
+            return redirect(reverse_lazy('account:profile'))
+        else:
+            print(form.errors.as_data())
+    context['form'] = form
     context['user'] = user
     return render(request, 'accounts/profile.html', context)
 
@@ -40,7 +60,7 @@ def userAccountList(request):
     user = User.objects.all().filter(is_active=True).order_by('id')
     data = {}
     data['obj_list'] = user
-    return render(request, 'userManagement.html', data)
+    return render(request, 'accounts/userManagement.html', data)
 
 @role_required(allowed_roles=['ADMIN', 'SUPERADMIN'])
 def deleteUser(request, id):
@@ -58,16 +78,30 @@ def deleteUser(request, id):
 
 def editUser(request, id):
     context = {}
-    # bacapres = get_object_or_404(User,id=id)
-    # form = UserCreationForm(request.POST or None, instance=bacapres)
-    # if request.method == "POST":
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect(reverse_lazy('bacapres:bacapres_list'))
-    # context['form'] = form
-    # context['object'] = bacapres
-    return render(request,'editUser.html', context)
+    user = get_object_or_404(User,id=id)
+    if request.method == "POST":
+        role = request.POST.get('selected_role')
+        user.role = role
+        user.save()
+    context['user'] = user
+    return render(request,'accounts/editUser.html', context)
 
-class webLoginView(LoginView):
-    form_class = LoginForm
-    template_name = "accounts/login.html"
+class LoginView(View):
+    context = {}
+    template_name = 'accounts/login.html'
+
+    def get(self, request):
+        self.context['verifikasi'] = False
+        return render(request, self.template_name, self.context)
+
+    def post(self, request):
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')  
+        else:
+            self.context['verified'] = False
+            return render(request, self.template_name, self.context)
+

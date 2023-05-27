@@ -18,7 +18,14 @@ class SignUpForm(UserCreationForm):
             user.save()
         return user
 
-# class UpdateProfileForm(forms.ModelForm):
+class UpdateProfileForm(forms.ModelForm):
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=150)
+    avatar = forms.ImageField()
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'avatar')
 
 
 
