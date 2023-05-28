@@ -113,15 +113,13 @@
         No Result
     </div>
     <div {% if title == 'Manual Search' and result != 'true' %} class="hidden" {% endif %}>
-        <div {% if title == 'Dashboard' %} class="hidden" {% endif %}>
-            <section class="h-[542px] p-6 rounded-2xl bg-white col-span-4 pb-10 mb-5">
-                <div class="flex items-center justify-between">
-                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C]">Tren Total Tweet</div>
-                </div>
-                <!-- Chart Display -->
-                <div id="chart-display-Total" class="mt-7"></div>
-            </section>
-        </div>
+        <section class="h-[542px] p-6 rounded-2xl bg-white col-span-4 pb-10 mb-5">
+            <div class="flex items-center justify-between">
+                <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C]">Tren Total Tweet</div>
+            </div>
+            <!-- Chart Display -->
+            <div id="chart-display-Total" class="mt-7"></div>
+        </section>
         <div class="grid grid-cols-6 grid-flow-col gap-4">
             <!-- Start Count Tweet -->
             <section class="flex h-40 rounded-2xl bg-white col-span-4 items-center justify-between px-20">
