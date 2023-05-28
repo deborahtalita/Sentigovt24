@@ -13,7 +13,7 @@
         <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">{{title}}</div>
         <hr class="border-[#C2C2C2] my-5">
             <hr class="border-[#C2C2C2] my-5">
-            <div {% if title == 'Dashboard' or title == 'Manual Search' %} class="hidden" {% endif %} class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">19/05/2023</div>
+            <div {% if title == 'Dashboard' or title == 'Manual Search' %} class="hidden" {% endif %} class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">{{startDate}} - {{endDate}}</div>
             <form action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch" {% if title == 'History' %} class="hidden" {% endif %}>
             {% csrf_token %}
                 <!-- Multi Select bacapres -->

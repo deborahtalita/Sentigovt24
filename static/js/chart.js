@@ -42,8 +42,8 @@ function displayChart(chartId, Id) {
                 xaxis: {
                     categories: response.dates
                 },
-                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
-                strokeColors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                colors: ['#FF0000', '#00FF0A', '#7B7B7B'],
+                strokeColors: ['#FF0000', '#00FF0A', '#7B7B7B'],
             };
             const chart1 = new ApexCharts(document.getElementById('chart-display'), options);
             chart1.render();
@@ -75,7 +75,7 @@ function displayChart(chartId, Id) {
                         }
                     },
                 },
-                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                colors: ['#FF0000', '#00FF0A', '#7B7B7B'],
                 stroke: {
                     width: 2,
                     colors: ['#fff']
@@ -84,7 +84,7 @@ function displayChart(chartId, Id) {
                     categories: response.dates,
                     labels: {
                         formatter: function (val) {
-                            return val + "K"
+                            return val
                         }
                     }
                 },
@@ -96,7 +96,7 @@ function displayChart(chartId, Id) {
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return val + "K"
+                            return val
                         }
                     }
                 },
@@ -151,7 +151,7 @@ function displayChartTotal() {
             },
             xaxis: {
                 categories: response.dates,
-            }
+            },
         };
         const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
         chart.render();

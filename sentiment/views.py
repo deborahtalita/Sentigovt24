@@ -33,6 +33,8 @@ def scrape(request):
             preprocessed_text = preprocessor.getFinalPreprocessingResult(data[i]['text'])
             sentiment = predict(preprocessed_text)
 
+            bacapres = Bacapres.objects.get(id=data[i]['bacapres'])
+
             obj_tweet = Tweet(
                 tweet_id = data[i]['tweet_id'],
                 text = data[i]['text'],
@@ -40,7 +42,7 @@ def scrape(request):
                 created_at = data[i]['created_at'],
                 user_name = data[i]['user_name'],
                 sentiment = orderLabel(sentiment),
-                bacapres = data[i]['bacapres']
+                bacapres = bacapres
             )
 
             result.append(obj_tweet)
@@ -343,6 +345,10 @@ def getDetailHistory(request, id):
 
     # belum ada pengecekan user id sesuai gak
     history = get_object_or_404(History, id=id)
+    context = {
+        'startDate' : history.start_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
+        'endDate' : history.end_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
+    }
 
     # assign history id and selected options to session
     bacapres = history.bacapres.all()

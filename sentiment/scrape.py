@@ -40,6 +40,3 @@ def scrape_tweet():
             tweets.append(data)
 
     return tweets
-
-def get_time(date):
-    created_at = datetime.strftime(date)

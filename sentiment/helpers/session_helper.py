@@ -1,7 +1,7 @@
 from accounts.models import Session
 
 def isGuestLimitAccess(cookies):
-    session_id = cookies['session_id']
+    session_id = cookies['sessionid']
 
     session = Session.objects.get(id=session_id)
     if session:
