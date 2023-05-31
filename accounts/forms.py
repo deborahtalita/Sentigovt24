@@ -26,8 +26,3 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'avatar')
-
-
-
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='email')

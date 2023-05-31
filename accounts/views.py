@@ -227,7 +227,7 @@ class LoginView(View):
     template_name = 'accounts/login.html'
 
     def get(self, request):
-        self.context['verifikasi'] = False
+        self.context['verified'] = True
         return render(request, self.template_name, self.context)
 
     def post(self, request):
