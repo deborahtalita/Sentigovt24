@@ -86,23 +86,21 @@
                 </div>
                 <!-- Multi Select bacapres -->
             </div>
-            <div class="flex text-center">
+            <div date-rangepicker class="flex gap-5">
                 <!-- Date Picker -->
-                <div date-rangepicker class="flex items-center gap-5">
-                    <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
-                        </div>
-                        <input name="start" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date start">
+                <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
                     </div>
-                    <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
-                        </div>
-                        <input name="end" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date end">
-                    </div>
-                    <!-- Date Picker -->
+                    <input id="date-start" name="start" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date start">
                 </div>
+                <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
+                    </div>
+                    <input id="date-end" name="end" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date end">
+                </div>
+                <!-- Date Picker -->
                 <div>
                     <button type="submit" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                 </div>
@@ -171,19 +169,21 @@
                     <!-- Dropdown Select Filter -->
                 </div>
                 <div class="mt-3 space-y-2">
-                    {% for item in bacapres %}
-                    <button data-id="{{ item.id }}" {% if item.name == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
-                        <div class="flex items-center gap-2">
-                            <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
-                            <h1 class="font-[poppins-regular] text-[12px] capitalize">{{ item.name }}</h1>
-                        </div>
-                        <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                            <div>100%</div>
-                            <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
-                        </div>
-                    </button>
-                    <hr>
-                    {% endfor %}
+                    <div id="buttonContainer">
+                        {% for item in bacapres %}
+                        <button title="buttonRankingBacapres" data-id="{{ item.id }}" {% if item.name == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                            <div class="flex items-center gap-2">
+                                <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
+                                <h1 class="font-[poppins-regular] text-[12px] capitalize">{{ item.name }}</h1>
+                            </div>
+                            <div class="font-[poppins-bold] text-[12px] flex gap-4">
+                                <div>100%</div>
+                                <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
+                            </div>
+                        </button>
+                        <hr>
+                        {% endfor %}
+                    </div>
                 </div>
             </section>
             <!-- End Ranking -->
@@ -264,7 +264,7 @@
     </div>
     <!-- Start Footer -->
     <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] mt-5 ml-5 mr-5 flex justify-end">
-        Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+        Copyright &#169; 2023, KoTA 105
     </footer>
     <!-- End Footer -->
 </div>

@@ -14,6 +14,7 @@
     <link href="{% static 'ApexChart/dist/apexcharts.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'sweetalert2/sweetalert2.min.css' %}" type="text/css" rel="stylesheet">
     <link rel="icon" href="{% static 'media/icons/Logo.svg' %}" type="image/icon type">
+    <link href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" type="text/css" rel="stylesheet">
     <title>SENTIGOV24 | {% block title %}{% endblock %}</title>
 </head>
 
@@ -79,13 +80,13 @@
     <!-- Start Content -->
     {% block content %}{% endblock %}
     <!-- End Content -->
-    <script defer src="{% static 'js/alpine.js' %}"></script>
-    <script defer src="{% static 'ApexChart/dist/apexcharts.js' %}"></script>
-    <script defer src="{% static 'js/activePage.js' %}"></script>
-    <script defer src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-    <script defer src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="{% static 'js/alpine.js' %}"></script>
+    <script src="{% static 'ApexChart/dist/apexcharts.js' %}"></script>
+    <script src="{% static 'js/activePage.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'sweetalert2/sweetalert2.all.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 </body>
 
 </html>

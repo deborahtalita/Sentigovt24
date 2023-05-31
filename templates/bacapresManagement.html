@@ -27,7 +27,7 @@ Bacapres Management
                 </form>
                 <div class="flex gap-5 ml-6">
                     <a href="{% url 'createBacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
-                    <a href="#"><button class="font-medium text-sm bg-red-600 hover:bg-red-500 text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Delete All</button></a>
+                    <a href="#"><button id="deleteAllBacapres" class="font-medium text-sm bg-red-600 hover:bg-red-500 text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Delete All</button></a>
                 </div>
             </div>
         </header>
@@ -73,10 +73,11 @@ Bacapres Management
         </section>
         <!-- Start Footer Bacapres Management -->
         <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
-            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+            Copyright &#169; 2023, KoTA 105
         </footer>
         <!-- End Footer Bacapres Management -->
     </div>
 </div>
-<script defer src="{% static 'js/scriptsBacapres.js' %}"></script>
+<script defer  src="{% static 'js/scriptsBacapres.js' %}"></script>
+<script defer  src="{% static 'js/popupSweetAlert2.js' %}"></script>
 {% endblock %}

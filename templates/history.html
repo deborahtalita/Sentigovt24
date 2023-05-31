@@ -46,7 +46,7 @@ History
                     </div>
                 </form>
                 <div class="ml-6">
-                    <a href="#"><button class="font-medium text-sm bg-red-600 hover:bg-red-500 text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Delete All</button></a>
+                    <a href="#"><button id="deleteAllHistory" class="font-medium text-sm bg-red-600 hover:bg-red-500 text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Delete All</button></a>
                 </div>
             </div>
         </header>
@@ -92,10 +92,11 @@ History
         </section>
         <!-- Start Footer -->
         <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
-            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+            Copyright &#169; 2023, KoTA 105
         </footer>
         <!-- End Footer -->
     </div>
 </div>
 <script defer src="{% static 'js/scriptsHistory.js' %}"></script>
+<script defer src="{% static 'js/popupSweetAlert2.js' %}"></script>
 {% endblock %}

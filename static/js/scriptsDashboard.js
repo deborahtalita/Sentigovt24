@@ -1,3 +1,39 @@
+jQuery(document).ready(function () {
+    var dateStart = jQuery("#date-start");
+    var dateEnd = jQuery("#date-end");
+
+    dateStart.datepicker({
+        maxDate: "+0d",
+        dateFormat: "dd-mm-yy",
+        onSelect: function (selectedDate) {
+            var selected = jQuery(this).datepicker("getDate");
+            selected.setDate(selected.getDate() + 7); // Menambahkan 7 hari dari tanggal yang dipilih
+            dateEnd.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date end
+        },
+        beforeShowDay: function (date) {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return [date <= today];
+        }
+    });
+
+    dateEnd.datepicker({
+        maxDate: "+0d",
+        dateFormat: "dd-mm-yy",
+        onSelect: function (selectedDate) {
+            var selected = jQuery(this).datepicker("getDate");
+            selected.setDate(selected.getDate() - 7); // Mengurangi 7 hari dari tanggal yang dipilih
+            dateStart.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date start
+        },
+        beforeShowDay: function (date) {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return [date <= today];
+        }
+    });
+});
+
+
 const buttonsRanking = document.querySelectorAll('.rankingButton');
 
 // Active Button Ranking
