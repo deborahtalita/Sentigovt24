@@ -4,5 +4,5 @@ from django.db import models
 class Bacapres(models.Model):
     name = models.CharField(default=None, max_length=50, unique=True)
     desc = models.CharField(default=None, null=True)
-    keyword = models.CharField(default=None,max_length=50)
-    avatar = models.ImageField(upload_to='bacapres_pics/')
+    keyword = models.CharField(default=None,max_length=250)
+    avatar = models.ImageField(default="profile_pics/profileDefault.png",upload_to='bacapres_pics/')
