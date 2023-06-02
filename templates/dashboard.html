@@ -160,17 +160,17 @@
                 <div class="flex justify-end py-3 text-center text-[#1E1D4C]">
                     <!-- Dropdown Select Filter -->
                     <div>
-                        <select title="ranking" id="ranking" class="font-[Inter-Semibold] text-[12px] w-full px-4 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
-                            <option value="a_z">A-Z</option>
-                            <option value="persentage">Persentage</option>
-                            <option value="poltraking">Poltraking</option>
+                        <select title="ranking" id="dropdownSort" class="font-[Inter-Semibold] text-[12px] w-full px-4 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                            <option value="abjad">A - Z</option>
+                            <option value="topPositive">Top Positive</option>
+                            <option value="topNegative">Top Negative</option>
                         </select>
                     </div>
                     <!-- Dropdown Select Filter -->
                 </div>
                 <div class="mt-3 space-y-2">
-                    <div id="buttonContainer">
-                        {% for item in bacapres %}
+                    <div id="buttonContainerRanking">
+                        <!-- {% for item in bacapres %}
                         <button title="buttonRankingBacapres" data-id="{{ item.id }}" {% if item.name == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                             <div class="flex items-center gap-2">
                                 <img class="object-cover w-8 h-8 rounded-full" src="{% static 'media/icons/Ganjar.svg' %}" alt="Photo Bacapres">
@@ -178,11 +178,10 @@
                             </div>
                             <div class="font-[poppins-bold] text-[12px] flex gap-4">
                                 <div>100%</div>
-                                <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
                             </div>
                         </button>
                         <hr>
-                        {% endfor %}
+                        {% endfor %} -->
                     </div>
                 </div>
             </section>
@@ -269,5 +268,4 @@
     <!-- End Footer -->
 </div>
 <script defer src="{% static 'js/scriptsDashboard.js' %}"></script>
-<script defer src="{% static 'js/chart.js' %}"></script>
 {% endblock %}

@@ -3,7 +3,7 @@ jQuery(document).ready(function () {
     var dateEnd = jQuery("#date-end");
 
     dateStart.datepicker({
-        maxDate: "+0d",
+        maxDate: "0",
         dateFormat: "dd-mm-yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
     });
 
     dateEnd.datepicker({
-        maxDate: "+0d",
+        maxDate: "0",
         dateFormat: "dd-mm-yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
@@ -205,8 +205,112 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function getDataRanking() {
+        $.getJSON(`/get-data-ranking-dashboard/`, function (response) {
+            // Mendapatkan data dari response
+            const data = response.results;
+    
+            // Menampilkan data di tabel
+            const buttonContainerRanking = $("#buttonContainerRanking");
+            buttonContainerRanking.empty();
+    
+            // Buat elemen dropdown sort
+            const dropdownSort = `
+                <select id="dropdownSort">
+                    <option value="abjad">Urutkan Berdasarkan Abjad</option>
+                    <option value="mtk">Urutkan Berdasarkan Nilai MTK Tertinggi</option>
+                    <option value="ipa">Urutkan Berdasarkan Nilai IPA Tertinggi</option>
+                </select>
+            `;
+            buttonContainerRanking.append(dropdownSort);
+    
+            // Tambahkan event listener pada dropdown sort
+            $("#dropdownSort").on("change", function() {
+                const selectedSort = $(this).val();
+    
+                // Lakukan pengurutan sesuai dengan pilihan yang dipilih
+                if (selectedSort === "abjad") {
+                    data.sort((a, b) => a.name.localeCompare(b.name));
+                } else if (selectedSort === "topPositive") {
+                    data.sort((a, b) => b.positive - a.positive);
+                } else if (selectedSort === "topNegative") {
+                    data.sort((a, b) => b.negative - a.negative);
+                }
+    
+                // Tampilkan data yang sudah diurutkan
+                renderData(data);
+            });
+    
+            // Render data awal
+            data.sort((a, b) => a.name.localeCompare(b.name));
+            renderData(data);
+        });
+    }
+    
+    function renderData(data) {
+        const buttonContainerRanking = $("#buttonContainerRanking");
+        buttonContainerRanking.empty();
+    
+        for (let i = 0; i < data.length; i++) {
+            const isActive = i == 0; // Menandai button pertama sebagai aktif
+            const activeClass = isActive ? "bg-[#554fff] hover:bg-[#554fff] text-white" : ""; // Menambahkan kelas "active" jika button aktif
+
+            const row = `
+                <button title="buttonRankingBacapres" id="buttonRanking-${data[i].id}" class="rankingButton my-2 flex items-center w-full px-5 py-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between ${activeClass}">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="${data[i].img_bacapres}" alt="Photo Bacapres">
+                        <h1 class="font-[poppins-regular] text-[12px] capitalize">${data[i].name}</h1>
+                    </div>
+                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
+                        <div></div>
+                    </div>
+                </button>
+                <hr>`;
+            buttonContainerRanking.append(row);
+    
+            // Tambahkan event listener pada setiap button
+            $(`#buttonRanking-${data[i].id}`).on("click", function() {
+                // Hapus kelas "active" dari button sebelumnya
+                $(".rankingButton").removeClass("bg-[#554fff] hover:bg-[#554fff] text-white");
+                // Tambahkan kelas "active" pada button yang baru dipilih
+                $(this).addClass("bg-[#554fff] hover:bg-[#554fff] text-white");
+                displayTotalTweet(data[i].id);
+                var chartType = getCurrentChartType("id");
+                displayChart(chartType, data[i].id);
+            });
+            // Setel nilai ID aktif sebagai argumen default untuk displayTotalTweet
+            if (isActive) {
+                var chartType = getCurrentChartType();
+                displayChart(chartType, data[i].id);
+                displayTotalTweet(data[i].id);
+            }
+        }
+    }
+
+    // function menampilkan jumlah tweet dan sentiment
+    let currentTotal = null;
+    function displayTotalTweet(Id) {
+    if (currentTotal) {
+        delete currentTotal;
+    }
+    currentTotal = Id;
+    $.getJSON("/get-data/", function (response) {
+        // Menampilkan data total tweet
+        document.getElementById("total-display").innerText = response.total_tweet[currentTotal];
+        // Menampilkan data sentiment positive
+        document.getElementById("total-positive").innerText = response.total_sentiment[currentTotal]['positive'];
+        // Menampilkan data sentiment neutral
+        document.getElementById("total-neutral").innerText = response.total_sentiment[currentTotal]['neutral'];
+        // Menampilkan data sentiment negative
+        document.getElementById("total-negative").innerText = response.total_sentiment[currentTotal]['negative'];
+    })
+}
+    
+
     // Mengambil data saat halaman dimuat
     getDataDashboard(currentPage);
+    getDataRanking();
+    
 
     // Event listener untuk tombol sebelumnya
     $("#prev-button").on("click", function () {
@@ -221,4 +325,210 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPage++;
         getDataDashboard(currentPage);
     });
+});
+
+// function mengambil id untuk Type Chart
+function getCurrentChartType() {
+    var activeButton = document.querySelector(".chart-button.activeTren");
+    return activeButton ? activeButton.getAttribute("id") : null;
+}
+
+// Variabel menyimpan temporary data dari Chart
+let currentChart = null;
+// Variabel menyimpan temporary data-id dari Chart
+let currentId = null;
+
+// Grafik Tren
+function displayChart(chartId, Id) {
+    if (currentId && currentChart) {
+        delete currentId;
+        currentChart.destroy();
+    }
+    currentId = Id;
+
+    if (chartId === 'chart-button1') {
+        // Membuat grafik 1
+        $.getJSON("/get-data/", function (response) {
+            var options = {
+                chart: {
+                    width: "100%",
+                    height: "90%",
+                    type: "area",
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                series: response.series[Id],
+                stroke: {
+                    width: [2, 2, 2], // mengatur lebar garis
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0,
+                        opacityTo: 0,
+                        stops: [0, 90, 100]
+                    }
+                },
+                xaxis: {
+                    categories: response.dates,
+                },
+                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                strokeColors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+            };
+            const chart1 = new ApexCharts(document.getElementById('chart-display'), options);
+            chart1.render();
+            currentChart = chart1;
+        })
+    } else if (chartId === 'chart-button2') {
+        // Membuat grafik 2
+        $.getJSON("/get-data/", function (response) {
+            var options = {
+                series: response.series[Id],
+                chart: {
+                    type: 'bar',
+                    width: "100%",
+                    height: "90%",
+                    stacked: true,
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        dataLabels: {
+                            total: {
+                                enabled: true,
+                                offsetX: 0,
+                                style: {
+                                    fontSize: '13px',
+                                    fontWeight: 900
+                                }
+                            }
+                        }
+                    },
+                },
+                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                stroke: {
+                    width: 2,
+                    colors: ['#fff']
+                },
+                xaxis: {
+                    categories: response.dates,
+                    labels: {
+                        formatter: function (val) {
+                            return val + "K"
+                        }
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: undefined
+                    },
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return val + "K"
+                        }
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'left',
+                    offsetX: 40
+                }
+            };
+            const chart2 = new ApexCharts(document.getElementById('chart-display'), options);
+            chart2.render();
+            currentChart = chart2;
+        })
+    }
+
+    // ForEach untuk mengaktifkan button Type Chart Tren
+    const buttons = document.querySelectorAll('.chart-button');
+    buttons.forEach(button => {
+        button.classList.remove('activeTren');
+        if (button.id === chartId) {
+            button.classList.add('activeTren');
+        }
+    });
+}
+
+// Grafik All Tweet
+function displayChartTotal() {
+    // $.getJSON("/sentiment/getAllTotalTweet/", function (response) { // Tidak bisa karena belum ada
+    var options = {
+        chart: {
+            width: "100%",
+            height: "90%",
+            type: "area",
+        },
+        dataLabels: {
+            enabled: false
+        },
+        series: [{
+                name: "Airlangga Hartanto",
+                data: [45, 52, 38, 45, 19, 40, 47]
+            },
+            {
+                name: "Anies Baswedan",
+                data: [100, 67, 38, 80, 19, 30, 79]
+            },
+            {
+                name: "Gajar Pranowo",
+                data: [58, 50, 38, 90, 64, 53, 32]
+            },
+            {
+                name: "Khofifah Indar Parawansa",
+                data: [70, 102, 38, 20, 70, 23, 20]
+            },
+            {
+                name: "Sandiaga Uno",
+                data: [20, 100, 120, 45, 100, 24, 37]
+            },
+            {
+                name: "Prabowo Subianto",
+                data: [140, 40, 38, 45, 94, 43, 60]
+            },
+            {
+                name: "Prabowo Subianto",
+                data: [140, 40, 38, 45, 94, 43, 60]
+            }
+        ],
+        fill: {
+            type: "gradient",
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0,
+                opacityTo: 0,
+                stops: [0, 90, 100]
+            }
+        },
+        stroke: {
+            width: 2,
+        },
+        xaxis: {
+            categories: [
+                    "01/05/2023",
+                    "02/05/2023",
+                    "03/05/2023",
+                    "04/05/2023",
+                    "05/05/2023",
+                    "06/05/2023",
+                    "07/05/2023"
+                ],
+        }
+    };
+    const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
+    chart.render();
+    // })
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Menampilkan grafik default Tweet saat halaman dimuat
+    displayChartTotal();
 });

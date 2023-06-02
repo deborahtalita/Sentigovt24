@@ -30,6 +30,7 @@ urlpatterns = [
     path('get-data-table-history/', views.get_data_table_history, name='get_data_table_history'),
     path('get-data-table-user/', views.get_data_table_user, name='get_data_table_user'),
     path('get-data-table-bacapres/', views.get_data_table_bacapres, name='get_data_table_bacapres'),
+    path('get-data-ranking-dashboard/', views.get_data_ranking_dashboard, name='get_data_ranking_dashboard'),
     # path('delete-bacapres/<int:pk>/', views.delete_bacapres, name='delete_bacapres'),
     path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
