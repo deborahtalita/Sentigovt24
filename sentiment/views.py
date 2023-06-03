@@ -530,18 +530,3 @@ def deleteHistory(request, id):
     except History.DoesNotExist:
         print("Object not found")
         return JsonResponse({'message': 'Invalid request method'})
-    
-
-def get_data_ranking_dashboard(request):
-    data = [
-        {'id': 1, 'name': 'Ganjar Pranowo', 'img_bacapres':'/static/media/icons/Ganjar.svg', 'positive': 5, 'negative': 5},
-        {'id': 2, 'name': 'Anies Baswedan', 'img_bacapres':'/static/media/icons/Anies.svg', 'positive': 6, 'negative': 1},
-        {'id': 3, 'name': 'Puan Maharani', 'img_bacapres':'/static/media/icons/Puan.svg', 'positive': 7, 'negative': 2},
-        {'id': 4, 'name': 'Ridwan Kamil', 'img_bacapres':'/static/media/icons/Ridwan.svg', 'positive': 8, 'negative': 3},
-    ]
-
-    response = {
-        'results': data,
-    }
-    
-    return JsonResponse(response)

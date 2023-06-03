@@ -20,7 +20,6 @@ urlpatterns = [
     path('history/delete/<int:id>', views.deleteHistory, name="deleteHistory"),
     path('getBacapresRanking', views.getRankingBacapres, name="getRankingBacapres"),
     path('generateCSV', views.generateCSV, name="generateCSV"),
-    path('get-data-ranking-dashboard/', views.get_data_ranking_dashboard, name='get_data_ranking_dashboard'),
     # path('view', views.coba, name="index"),
 ]
         

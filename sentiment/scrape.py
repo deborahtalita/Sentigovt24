@@ -39,7 +39,7 @@ def scrape_tweet():
 def getScrapedTweetDB():
     tweets = []
     i = 1
-    scraped_tweet = ScrapedTweet.objects.filter(id__range=(102632,202632))
+    scraped_tweet = ScrapedTweet.objects.filter(id__range=(302633,352632))
 
     for item in scraped_tweet:
         bacapres = item.bacapres

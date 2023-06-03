@@ -24,7 +24,11 @@
     <header class="z-40 h-[67px] fixed flex justify-end items-center w-screen bg-white border-b-2 border-gray-300">
         <div class="mr-20 flex items-center">
             <div class="ml-6">
+                {% if auth_user %}
                 <a href="{% url 'account:logout' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log Out</button></a>
+                {% else %}
+                <a href="{% url 'account:login' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Log In</button></a>
+                {% endif %}
             </div>
         </div>
     </header>
