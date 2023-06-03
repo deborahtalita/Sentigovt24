@@ -11,8 +11,9 @@ Bacapres Management
     <div class="flex flex-col gap-5">
         <!-- Start Header Create Bacapres Management -->
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
-            <div class="titleUserManagement text-[40px] text-[#1E1D4C]">Bacapres Management</div>
+            <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">Bacapres Management</div>
             <hr class="border-[#C2C2C2] my-5">
+            <div class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">Create Bacapres</div>
         </header>
         <!-- End Header Create Bacapres Management -->
         <!-- Start Form Create Bacapres -->
@@ -21,7 +22,7 @@ Bacapres Management
                 {% csrf_token %}
                 <!-- Start Form Create Foto Bacapres -->
                 <div id="photoProfile">
-                    <div class="titleProfile text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
+                    <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
                     <div class="flex items-center justify-between px-5">
                         <div class="flex items-center gap-5">
                             <img class="py-5" src="{% static 'media/icons/ProfileDefault.svg' %}" alt="ProfileEdit">
@@ -60,7 +61,7 @@ Bacapres Management
         <!-- End Form Create Bacapres -->
         <!-- Start Footer Bacapres Management -->
         <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
-            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+            Copyright &#169; 2023, KoTA 105
         </footer>
         <!-- End Footer Bacapres Management -->
     </div>

@@ -78,12 +78,6 @@
     opacity: 1;
 }
 
-.activeRanking,
-.activeRanking:hover {
-    background-color: rgb(99 102 241);
-    color: #ffffff;
-}
-
 .activeTren {
     background-color: #ffffff;
     color: #1E1D4C;

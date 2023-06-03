@@ -12,7 +12,6 @@
     <header {% if title == 'Dashboard' %} class="hidden" {% endif %} class="bg-white py-6 px-10 rounded-xl h-fit mb-5">
         <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">{{title}}</div>
         <hr class="border-[#C2C2C2] my-5">
-            <hr class="border-[#C2C2C2] my-5">
             <div {% if title == 'Dashboard' or title == 'Manual Search' %} class="hidden" {% endif %} class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">{{startDate}} - {{endDate}}</div>
             <form action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch" {% if title == 'History' %} class="hidden" {% endif %}>
             {% csrf_token %}
@@ -40,7 +39,7 @@
                                     </div>
                                 </template>
                                 <div x-show="selected.length == 0" class="flex-1">
-                                    <input placeholder="Select Bacapres" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800" name="search_field" x-bind:value="selectedValues()">
+                                    <input placeholder="Select Bacapres" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800" name="search_field" x-bind:value="selectedValues()" required>
                                 </div>
                                 </div>
                                 <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
@@ -81,23 +80,21 @@
                     </div>
                     <!-- Multi Select bacapres -->
                 </div>
-                <div class="flex text-center">
+                <div date-rangepicker class="flex gap-5">
                     <!-- Date Picker -->
-                    <div date-rangepicker class="flex items-center gap-5">
-                        <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
-                            </div>
-                            <input name="start_date" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date start">
+                    <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
                         </div>
-                        <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
-                            </div>
-                            <input name="end_date" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date end">
-                        </div>
-                        <!-- Date Picker -->
+                        <input id="date-start" name="start_date" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date start" required>
                     </div>
+                    <div class="relative flex items-center h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <img src="{% static 'media/icons/calender.svg' %}" alt="calender">
+                        </div>
+                        <input id="date-end" name="end_date" type="text" class="text-gray-900 border-none border-transparent focus:border-transparent focus:ring-0 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date end" required>
+                    </div>
+                    <!-- Date Picker -->
                     <div>
                         <button type="submit" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                     </div>
@@ -161,28 +158,29 @@
             <div class="flex justify-end py-3 text-center text-[#1E1D4C]">
                 <!-- Dropdown Select Filter -->
                 <div>
-                    <select title="ranking" id="ranking" class="font-[Inter-Semibold] text-[12px] w-full px-4 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
-                        <option value="a_z">A-Z</option>
-                        <option value="persentage">Persentage</option>
-                        <option value="poltraking">Poltraking</option>
+                    <select title="ranking" id="dropdownSort" class="font-[Inter-Semibold] text-[12px] w-full px-4 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                        <option value="abjad">A - Z</option>
+                        <option value="topPositive">Top Positive</option>
+                        <option value="topNegative">Top Negative</option>
                     </select>
                 </div>
                 <!-- Dropdown Select Filter -->
             </div>
             <div class="mt-3 space-y-2">
+                <div id="buttonContainerRanking"></div>
                 {% for tokoh in bacapres%}
-                <button id ="rankingBacapres" data-id="{{tokoh.id}}" {% if tokoh.id == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
+                <!-- <button id ="rankingBacapres" data-id="{{tokoh.id}}" {% if tokoh.id == active_item %} class="rankingButton activeRanking flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between" {% endif %} class="rankingButton flex items-center w-full px-5 py-2 gap-x-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between">
                     <div class="flex items-center gap-2">
                         <img class="object-cover w-8 h-8 rounded-full" src="{{tokoh.avatar.url}}" alt="Photo Bacapres">
                         <h1 class="font-[poppins-regular] text-[12px] capitalize">{{tokoh.name}}</h1>
                     </div>
                     <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div>26,6%</div>
+                        <div id="sentimentRank">26,6%</div>
                         <img src="{% static 'media/icons/upGreen.svg' %}" alt="Up Green"/>
                     </div>
                 </button>
                 <hr>
-                {% endfor %}
+                {% endfor %} -->
             </div>
         </section>
         <!-- End Ranking -->
@@ -262,10 +260,10 @@
     <!-- End Table List Tweet -->
     <!-- Start Footer -->
     <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] mt-5 ml-5 mr-5 flex justify-end">
-        Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+        Copyright &#169; 2023, KoTA 105
     </footer>
     <!-- End Footer -->
 </div>
 <script defer src="{% static 'js/scriptsDashboard.js' %}"></script>
-<script defer src="{% static 'js/chart.js' %}"></script>
+<!-- <script defer src="{% static 'js/chart.js' %}"></script> -->
 {% endblock %}

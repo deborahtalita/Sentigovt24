@@ -2,19 +2,14 @@ import time
 import datetime
 import pytz
 import snscrape.modules.twitter as sntwitter
-from dotenv import load_dotenv
-from .models import Bacapres
-load_dotenv()
-
+from .models import Bacapres, ScrapedTweet
 
 until_time = int(time.time())
 since_time = until_time - 7200
 print(since_time, " ", until_time)
 
 dt_utc = datetime.datetime.utcnow()
-# print(dt_utc)
 timezone = pytz.timezone('Asia/Jakarta')
-# print(timezone)
 
 def scrape_tweet():
     tweets = []
@@ -39,4 +34,24 @@ def scrape_tweet():
             i=i+1
             tweets.append(data)
 
+    return tweets
+
+def getScrapedTweetDB():
+    tweets = []
+    i = 1
+    scraped_tweet = ScrapedTweet.objects.filter(id__range=(102632,202632))
+
+    for item in scraped_tweet:
+        bacapres = item.bacapres
+        data = {
+            'tweet_id':item.tweet_id,
+            'created_at':item.created_at,
+            'user_name':item.user_name,
+            'text':item.text,
+            'bacapres':bacapres.id,
+            'keyword':bacapres.keyword, 
+        }
+        print(i)
+        i=i+1
+        tweets.append(data)
     return tweets

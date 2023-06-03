@@ -1,18 +1,21 @@
 from django.shortcuts import render, get_object_or_404
-from sentiment.scrape import scrape_tweet
+from sentiment.scrape import scrape_tweet, getScrapedTweetDB
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from sentiment.models import Tweet, History
+from sentiment.models import Tweet, History, ScrapedTweet
 from bacapres.models import Bacapres
 from accounts.models import User
 from .preprocessing import TextPreprocessing
 from sentigovt2.decorators import role_required
+from django.urls import reverse_lazy
 import pytz 
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
 from .helpers.date_helper import convertStartDate, convertEndDate, getDates
 from .helpers.session_helper import isGuestLimitAccess
+from sentigovt2.mixin import RoleRequiredMixin
+from django.views import View
 import csv
 
 # default time
@@ -28,6 +31,7 @@ def scrape(request):
 
         data = preprocessor.removeIrrelevantTweet(data)
         result = []
+        i = 1
 
         for i in range(0, len(data)):
             preprocessed_text = preprocessor.getFinalPreprocessingResult(data[i]['text'])
@@ -44,7 +48,8 @@ def scrape(request):
                 sentiment = orderLabel(sentiment),
                 bacapres = bacapres
             )
-
+            print(i)
+            i=i+1
             result.append(obj_tweet)
         Tweet.objects.bulk_create(result)
 
@@ -59,10 +64,53 @@ def scrape(request):
         'data': []
     })
 
+@csrf_exempt
+def getScrapedTweet(request):
+    if request.method == 'POST':
+        preprocessor = TextPreprocessing()
+        data = getScrapedTweetDB()
+
+        data = preprocessor.removeIrrelevantTweet(data)
+        result = []
+        j = 1
+
+        for i in range(0, len(data)):
+            preprocessed_text = preprocessor.getFinalPreprocessingResult(data[i]['text'])
+            sentiment = predict(preprocessed_text)
+
+            bacapres = Bacapres.objects.get(id=data[i]['bacapres'])
+
+            obj_tweet = Tweet(
+                tweet_id = data[i]['tweet_id'],
+                text = data[i]['text'],
+                text_preprocessed = preprocessed_text,
+                created_at = data[i]['created_at'],
+                user_name = data[i]['user_name'],
+                sentiment = orderLabel(sentiment),
+                bacapres = bacapres
+            )
+            print(j)
+            j=j+1
+            result.append(obj_tweet)
+        Tweet.objects.bulk_create(result)
+
+        return JsonResponse({
+            'code': 200, 
+            'status': 'success',
+            'data': []
+        })
+    return JsonResponse({
+        'code': 404, 
+        'status': 'not found',
+        'data': []
+    })
+
+
+
 def manualSearch(request):
     context = {}
     if request.method == 'POST':
-        if 'session_id' in request.COOKIES and isGuestLimitAccess(request.COOKIES):
+        if 'session_guest' in request.COOKIES and isGuestLimitAccess(request):
             context['result'] = False
         else:
             selected_options = request.POST.getlist('search_field')
@@ -206,6 +254,35 @@ def getTotalTweet(request):
                                             'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
+    print(bacapres_total_sentiment)
+    return JsonResponse(context)
+
+def getRankingBacapres(request):
+    context = {}
+
+    # get bacapres
+    bacapres = getBacapres(request.session)
+    tweet, _, _ = getTweets(request.session)
+    # option = request.GET.get('option', 'positive')
+    
+    
+    bacapres_rank = []
+    for res in bacapres:
+        tokoh_tweets = tweet.filter(bacapres=res.id)
+        pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
+        neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
+        bacapres = {
+            'id':res.id,
+            'name': res.name,
+            'img_bacapres': res.avatar.url,
+            'positive': pos_sentiment,
+            'negative': neg_sentiment,
+        }
+        bacapres_rank.append(bacapres)
+        # sorted_data = sorted(bacapres_rank, key=lambda x: x['value'], reverse=True)
+    context['results'] = bacapres_rank
+    print(bacapres_rank)
+    
     return JsonResponse(context)
 
 def getTweetList(request):
@@ -301,6 +378,78 @@ def getBacapres(session):
 
 ####################### HISTORY #######################
 
+class HistoryView(RoleRequiredMixin, View):
+    required_roles = ['MEMBER', 'ADMIN', 'SUPERADMIN']
+    context = {}
+    context['active_page'] = 'history'
+    template_name = 'history/history.html'
+
+    def get(self, request):
+        # get history
+        user = User.objects.get(id=request.user.id)
+        history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('id')
+
+        #  pagination
+        paginator = Paginator(history, 10)
+        page_number = request.GET.get('page', 1)# Get the current page number from the request
+        page_obj = paginator.get_page(page_number)
+
+        data_items = []
+        for item in page_obj:
+            bacapres_items = []
+            startDate = item.start_date
+            endDate = item.end_date
+            for b_item in item.bacapres.all().order_by('name'):
+                bacapres_items.append(b_item.name)
+            data_item = {
+                'no': item.id,
+                'bacapres': bacapres_items,
+                'start_date': startDate.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
+                'end_date': endDate.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
+            }
+            data_items.append(data_item)
+
+        self.context['total_pages'] = paginator.num_pages
+        self.context['results'] = data_items
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse(self.context, safe=False)
+        else:
+            return render(request, self.template_name, self.context)
+        
+class HistoryDetailView(RoleRequiredMixin, View):
+    required_roles = ['MEMBER', 'ADMIN', 'SUPERADMIN']
+    context = {}
+    context['active_page'] = 'history'
+    context['title'] = 'History'
+    template_name = 'dashboard.html'
+
+    def get(self, request, id):
+        # belum ada pengecekan user id sesuai gak
+        history = get_object_or_404(History, id=id)
+
+        # get dates
+        self.context['startDate'] = history.start_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")
+        self.context['endDate'] = history.end_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")
+
+        # assign history id and selected options to session
+        bacapres = history.bacapres.all()
+        selected_options = [obj.id for obj in bacapres]
+
+        request.session['selected_options'] = selected_options
+        request.session['history_id'] = history.id
+
+        # get selected bacapres
+        bacapres = getBacapres(request.session)
+        self.context['bacapres'] = bacapres
+
+        # get default selected bacapres
+        active_item = bacapres.first()
+        if active_item: self.context['active_item'] = active_item.id
+
+        return render(request, self.template_name, self.context)
+
+
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):
     context = {}
@@ -381,3 +530,18 @@ def deleteHistory(request, id):
     except History.DoesNotExist:
         print("Object not found")
         return JsonResponse({'message': 'Invalid request method'})
+    
+
+def get_data_ranking_dashboard(request):
+    data = [
+        {'id': 1, 'name': 'Ganjar Pranowo', 'img_bacapres':'/static/media/icons/Ganjar.svg', 'positive': 5, 'negative': 5},
+        {'id': 2, 'name': 'Anies Baswedan', 'img_bacapres':'/static/media/icons/Anies.svg', 'positive': 6, 'negative': 1},
+        {'id': 3, 'name': 'Puan Maharani', 'img_bacapres':'/static/media/icons/Puan.svg', 'positive': 7, 'negative': 2},
+        {'id': 4, 'name': 'Ridwan Kamil', 'img_bacapres':'/static/media/icons/Ridwan.svg', 'positive': 8, 'negative': 3},
+    ]
+
+    response = {
+        'results': data,
+    }
+    
+    return JsonResponse(response)

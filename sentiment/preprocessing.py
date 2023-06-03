@@ -14,9 +14,8 @@ utils_path = os.path.join(os.path.dirname(__file__), '../utils/')
 class TextPreprocessing():
 
     def removeIrrelevantTweet(self, tweets):
-        tweets = [item for item in tweets if any(keyword.lower() in item.get('text').lower() for keyword in item.get('keyword').split(" "))]
-
-        return tweets
+        results = [item for item in tweets if any(keyword.lower() in item.get('text').lower() for keyword in re.split("|".join(map(re.escape, [";", " "])), item.get('keyword')))]
+        return results
 
     def removeNoiseText(self, text):
         text = str(text)

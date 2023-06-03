@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from sentiment.models import Bacapres
 import uuid
 from accounts.models import Session
+from sentiment.views import getBacapres, getTweets
 
 
 def home(request):
@@ -34,19 +35,35 @@ def dashboard(request):
     context['title'] = 'Dashboard'
     context['active_page'] = 'dashboard'
 
+
+    # bacapres = getBacapres(request.session)
+    # tweet, _, _ = getTweets(request.session)
+    # option = request.GET.get('option', 'positive')
+    
+    # bacapres_rank = []
+    # for res in bacapres:
+    #     tokoh_tweets = tweet.filter(bacapres=res.id)
+    #     selected_sentiment = tokoh_tweets.filter(sentiment=option).count()
+    #     bacapres = {'id':res.id, 'name':res.name, 'value':selected_sentiment, 'avatar':res.avatar.url}
+    #     bacapres_rank.append(bacapres)
+    # context['bacapres_rank'] = bacapres_rank
+    # sorted_data = sorted(bacapres_rank, key=lambda x: x['value'], reverse=True)
+    # context['sorted_data'] = sorted_data
+    # print(sorted_data)
     rendered_html = render(request, 'dashboard.html', context)
 
     # set session for guest
-    session_id = request.COOKIES.get('sessionid')
-    if session_id:
+    session_guest = request.COOKIES.get('session_guest')
+    if session_guest:
         response = HttpResponse(rendered_html)
     else:
         response = HttpResponse(rendered_html)
         
         unique_id = str(uuid.uuid4())
         session_age = 3600 * 24 * 90 # 3 months
-        response.set_cookie('sessionid', unique_id, max_age=session_age)
+        response.set_cookie('session_guest', unique_id, max_age=session_age)
         session = Session.objects.create(id=unique_id)
-        session.save()
+        print(unique_id)
+        # session.save()
 
     return response
