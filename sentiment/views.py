@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from sentiment.scrape import scrape_tweet, getScrapedTweetDB
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
@@ -145,12 +145,10 @@ def manualSearch(request):
             if request.user.is_authenticated:
                 user = User.objects.get(id=request.user.id)
                 history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
-            else:
-                history = History.objects.create(start_date=start_date,end_date=end_date)
 
-            #  save manual search to history
-            history.bacapres.add(*bacapres)
-            history.tweet.add(*tweets)
+                #  save manual search to history
+                history.bacapres.add(*bacapres)
+                history.tweet.add(*tweets)
     
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres_opt'] = bacapres 
@@ -449,6 +447,15 @@ class HistoryDetailView(RoleRequiredMixin, View):
 
         return render(request, self.template_name, self.context)
 
+class HistoryDeleteAllView(RoleRequiredMixin, View):
+    required_roles = ['MEMBER', 'ADMIN', 'SUPERADMIN']
+    context = {}
+    context['active_page'] = 'history'
+
+    def post(self, request):
+        user = User.objects.get(id=request.user.id)
+        History.objects.filter(user=user).delete()
+        return redirect(reverse_lazy('sentiment:getHistoryList'))
 
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
 def getHistoryList(request):

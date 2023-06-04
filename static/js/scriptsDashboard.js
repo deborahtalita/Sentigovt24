@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
         dateFormat: "mm/dd/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate() + 30); // Menambahkan 7 hari dari tanggal yang dipilih
+            selected.setDate(selected.getDate() + 7); // Menambahkan 7 hari dari tanggal yang dipilih
             dateEnd.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date end
         },
         beforeShowDay: function (date) {
@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
         dateFormat: "mm/dd/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate() - 30); // Mengurangi 7 hari dari tanggal yang dipilih
+            selected.setDate(selected.getDate() - 7); // Mengurangi 7 hari dari tanggal yang dipilih
             dateStart.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date start
         },
         beforeShowDay: function (date) {
@@ -223,12 +223,12 @@ function displayTotalTweet(Id) {
     $.getJSON("/sentiment/getTotalTweet/", function (response) {
         // Menampilkan data total tweet
         document.getElementById("total-display").innerText = response.bacapres_total_tweet[currentTotal];
+        // Menampilkan data sentiment negative
+        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment[currentTotal]['negative'];
         // Menampilkan data sentiment positive
         document.getElementById("total-positive").innerText = response.bacapres_total_sentiment[currentTotal]['positive'];
         // Menampilkan data sentiment neutral
         document.getElementById("total-neutral").innerText = response.bacapres_total_sentiment[currentTotal]['neutral'];
-        // Menampilkan data sentiment negative
-        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment[currentTotal]['negative'];
     })
 }
 
@@ -260,18 +260,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
     
                 // Tampilkan data yang sudah diurutkan
-                renderData(data);
+                renderData(data, selectedSort);
             });
     
             // Render data awal
             data.sort((a, b) => a.name.localeCompare(b.name));
-            renderData(data);
+            renderData(data, "abjad");
         });
     }
     
-    function renderData(data) {
+    function renderData(data, selectedSort) {
         const buttonContainerRanking = $("#buttonContainerRanking");
         buttonContainerRanking.empty();
+        console.log(selectedSort)
     
         for (let i = 0; i < data.length; i++) {
             const isActive = i == 0; // Menandai button pertama sebagai aktif
@@ -284,7 +285,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         <h1 class="font-[poppins-regular] text-[12px] capitalize">${data[i].name}</h1>
                     </div>
                     <div class="font-[poppins-bold] text-[12px] flex gap-4">
-                        <div></div>
+                    ${selectedSort === "abjad" ? '<div></div>' : ''}
+                    ${selectedSort === "topPositive" ? `<div class="text-[#05FF00]">${data[i].positive}</div>` : ''}
+                    ${selectedSort === "topNegative" ? `<div class="text-[#FF0000]">${data[i].negative}</div>` : ''}
                     </div>
                 </button>
                 <hr>`;

@@ -74,12 +74,21 @@ document.addEventListener('DOMContentLoaded', function () {
             confirmButtonText: "Yes, delete All!",
         }).then((result) => {
             if (result.isConfirmed) {
-    
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                const url = `/sentiment/history/delete/all/`;
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    success: function (response) {
+                        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                        location.reload()
+                        // Lakukan tindakan tambahan setelah penghapusan data berhasil
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
+                        // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
+                    }
+                });
             }
         });
     });
@@ -89,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var myButton = document.getElementById('deleteAllHistory');
 
     myButton.addEventListener('click', function () {
+        console.log("deleteAllHistory")
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -99,13 +109,39 @@ document.addEventListener('DOMContentLoaded', function () {
             confirmButtonText: "Yes, delete All!",
         }).then((result) => {
             if (result.isConfirmed) {
-    
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                const url = `/sentiment/history/delete/all/`;
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    success: function (response) {
+                        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+                        location.reload()
+                        // Lakukan tindakan tambahan setelah penghapusan data berhasil
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
+                        // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
+                    }
+                });
             }
         });
     });
 });
+
+// Helper function to get the value of a cookie
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Check if the cookie name matches the given name
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
