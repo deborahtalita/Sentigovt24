@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'django_extensions',
+    'django_crontab',
 
     # apps
     'sentiment',
@@ -160,4 +161,8 @@ MEDIA_URL = '/media/'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_HTTPONLY = True
+
+CRONJOBS = [
+    ('*/5 * * * *','sentiment.scrape.scrape')
+]
 
