@@ -232,9 +232,21 @@ function displayTotalTweet(Id) {
     })
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async () => {
     let currentPage = 1;
     // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
+    const taskRanking = () => {
+        return new Promise((resolve) => {
+            getDataRanking();
+            resolve();
+        })
+    }
+    const displayTrenTotal = () => {
+        return new Promise((resolve) => {
+            displayChartTotal();
+            resolve();
+        })
+    }
 
     function getDataRanking() {
         $.getJSON(`/sentiment/getBacapresRanking`, function (response) {
@@ -316,7 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Mengambil data saat halaman dimuat
-    getDataRanking();
+    // getDataRanking();
+    await taskRanking();
+    await displayTrenTotal();
     
     // Event listener untuk tombol sebelumnya
     $("#prev-button").on("click", function () {
@@ -522,5 +536,5 @@ function displayChartTotal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    displayChartTotal();
+    // displayChartTotal();
 });

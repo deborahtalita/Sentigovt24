@@ -234,13 +234,13 @@ def getTotalTweet(request):
     bacapres = getBacapres(request.session)
 
     # get tweets and dates
-    tweet, _, _ = getTweets(request.session)
+    tweet, _, _ = getTweetSentiment(request.session)
     
     # total tweet & tweet per sentiment
     bacapres_total_tweet = {}
     bacapres_total_sentiment = {}
     for res in bacapres:
-        tokoh_tweets = tweet.filter(bacapres=res.id)
+        tokoh_tweets = tweet.filter(bacapres=res.id).values('sentiment')
         total = tokoh_tweets.count()
         bacapres_total_tweet[res.id] = total
 
@@ -252,7 +252,6 @@ def getTotalTweet(request):
                                             'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
-    print(bacapres_total_sentiment)
     return JsonResponse(context)
 
 def getRankingBacapres(request):
@@ -279,7 +278,6 @@ def getRankingBacapres(request):
         bacapres_rank.append(bacapres)
         # sorted_data = sorted(bacapres_rank, key=lambda x: x['value'], reverse=True)
     context['results'] = bacapres_rank
-    print(bacapres_rank)
     
     return JsonResponse(context)
 
@@ -308,12 +306,12 @@ def getTweetList(request):
     
     data_items = []
     for item in page_obj:
-        date = item.created_at
+        date = item['created_at']
         data_item = {
-            'no': item.id,
-            'name': item.user_name,
-            'tweet': item.text,
-            'sentiment': item.sentiment,
+            'no': item['id'],
+            'name': item['user_name'],
+            'tweet': item['text'],
+            'sentiment': item['sentiment'],
             'date': date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
         }
         data_items.append(data_item)
@@ -361,7 +359,24 @@ def getTweets(session):
 
         start_date = history.start_date
         end_date = history.end_date
-    tweets = Tweet.objects.filter(created_at__range=(start_date,end_date))
+    tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
+    return tweets, start_date, end_date
+
+def getTweetSentiment(session):
+    global start_date, end_date
+
+    # get tweets
+    if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
+        start_date = convertStartDate(session['selected_start_date'])
+        end_date = convertEndDate(session['selected_end_date'])
+        
+    elif 'history_id' in session: # for history detail
+        history_id = session['history_id']
+        history = History.objects.get(id=history_id)
+
+        start_date = history.start_date
+        end_date = history.end_date
+    tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('created_at','sentiment','bacapres')
     return tweets, start_date, end_date
 
 def getBacapres(session):
