@@ -25,6 +25,7 @@ def dashboard(request):
     if 'history_id' in request.session:
         del request.session['history_id']
 
+    request.session.modified = True
     # get bacapres
     bacapres = Bacapres.objects.all().order_by('id')
     context['bacapres'] = bacapres

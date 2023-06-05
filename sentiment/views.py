@@ -339,8 +339,8 @@ def generateCSV(request):
     writer.writerow(['No','User name', 'Tweet', 'Sentiment', 'Date'])  # Write header row
 
     for index, obj in enumerate(data, start=1):
-        date = obj.created_at.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")
-        writer.writerow([index, obj.user_name, obj.text, obj.sentiment, date])  # Write each row with the desired fields
+        date = obj['created_at'].astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S")
+        writer.writerow([index, obj['user_name'], obj['text'], obj['sentiment'], date])  # Write each row with the desired fields
 
     return response
 

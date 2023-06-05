@@ -7,8 +7,8 @@ from sentiment.helpers.sentiment_helper import predict, orderLabel
 from bacapres.models import Bacapres
 from sentiment.models import Tweet, ScrapedTweet
 
-until_time = 1685897999
-since_time = 1685811600
+until_time = 1685998800
+since_time = 1685984400
 print(since_time, " ", until_time)
 
 dt_utc = datetime.datetime.utcnow()

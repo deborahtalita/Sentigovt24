@@ -538,3 +538,24 @@ function displayChartTotal() {
 document.addEventListener("DOMContentLoaded", function () {
     // displayChartTotal();
 });
+
+const csvButton = document.getElementById('generateCSV');
+csvButton.addEventListener('click', function() {
+    // Make the AJAX request using getJSON
+    var id = getSelectedBacapresOption();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', `/sentiment/generateCSV?bacapres=${id}`, true);
+    xhr.responseType = 'blob';
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Create a download link for the CSV file
+            var downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(xhr.response);
+            downloadLink.download = 'data.csv';
+            downloadLink.click();
+        }
+    };
+
+    xhr.send();
+  });

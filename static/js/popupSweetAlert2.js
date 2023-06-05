@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             icon: 'success',
             title: 'Bacapres has been added',
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000
         })
     });
 });
@@ -116,7 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     headers: { "X-CSRFToken": getCookie("csrftoken") },
                     success: function (response) {
                         Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
-                        location.reload()
+                        setTimeout(function() {
+                            // Reload the current page
+                            location.reload();
+                          }, 1500);
                         // Lakukan tindakan tambahan setelah penghapusan data berhasil
                     },
                     error: function (xhr, status, error) {
