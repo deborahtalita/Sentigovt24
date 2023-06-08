@@ -3,7 +3,7 @@ jQuery(document).ready(function () {
     var dateEnd = jQuery("#date-end");
 
     dateStart.datepicker({
-        maxDate: "0",
+        maxDate: "15",
         dateFormat: "mm/dd/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
     });
 
     dateEnd.datepicker({
-        maxDate: "0",
+        maxDate: "15",
         dateFormat: "mm/dd/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
@@ -235,12 +235,12 @@ function displayTotalTweet(Id) {
 document.addEventListener("DOMContentLoaded", async () => {
     let currentPage = 1;
     // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
-    const taskRanking = () => {
-        return new Promise((resolve) => {
-            getDataRanking();
-            resolve();
-        })
-    }
+    // const taskRanking = () => {
+    //     return new Promise((resolve) => {
+    //         getDataRanking();
+    //         resolve();
+    //     })
+    // }
     const displayTrenTotal = () => {
         return new Promise((resolve) => {
             displayChartTotal();
@@ -328,8 +328,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Mengambil data saat halaman dimuat
-    // getDataRanking();
-    await taskRanking();
+    getDataRanking();
+    // await taskRanking();
     await displayTrenTotal();
     
     // Event listener untuk tombol sebelumnya

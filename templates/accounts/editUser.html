@@ -53,10 +53,14 @@ User Management
                         <!-- Dropdown Select Status -->
                         <div>
                             <label class="text-gray-700 tracking-wide text-[15px]">Status</label>
+                            {% if auth_user.role == 'SUPERADMIN' %}
                             <select title="status" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                            {% else %}
+                            <select title="status" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" disabled>
                                 <option {% if user.role == 'MEMBER' %} selected {% endif %} value="MEMBER">Member</option>
                                 <option {% if user.role == 'ADMIN' %} selected {% endif %} value="ADMIN">Administrator</option>
                             </select>
+                            {% endif %}
                         </div>
                         <!-- Dropdown Select Status -->
                     </div>

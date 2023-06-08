@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth import logout
 from .forms import SignUpForm, UpdateProfileForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from .models import User
 from sentigovt2.decorators import role_required
 from django.contrib.auth import login, authenticate
@@ -120,6 +122,28 @@ class RegisterView(View):
             login(request,user)
             messages.success(request, f'Your account has been created. You can log in now!')
             return redirect(reverse_lazy('dashboard'))
+        else:
+            self.context['form'] = form
+            return render(request, 'accounts/register.html',self.context)
+        
+class ChangePasswordView(View):
+    context = {}
+    template_name = 'account/profile.html'
+
+    def get(self, request):
+        form = PasswordChangeForm(request.user)
+        self.context['form'] = form
+        return render(request, self.template_name, self.context)
+    
+    def post(self, request):
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
 
 # FBV #
 

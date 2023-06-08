@@ -60,12 +60,16 @@ Profile
                 <div class="changePasswordHidden mt-8 rounded-lg p-6 bg-blue-400 hidden mb-8">
                     <div class="mb-6 text-lg font-bold text-white">Change password</div>
                     <div class="mb-5">
-                        <label class="tracking-wide text-[15px] font-bold">Confirm Current Password</label>
-                        <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Lama">
+                        <label class="tracking-wide text-[15px] font-bold">Current Password</label>
+                        <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" name="old_password" placeholder="Masukan Password Lama">
                     </div>
                     <div>
                         <label class="tracking-wide text-[15px] font-bold">New Password</label>
-                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Terbaru">
+                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" name="new_password1" placeholder="Masukan Password Terbaru">
+                    </div>
+                    <div>
+                        <label class="tracking-wide text-[15px] font-bold">Confirm New Password</label>
+                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" name="new_password2" placeholder="Masukan Password Terbaru">
                     </div>
                 </div>
                 <!-- Apakan muncul apabila telah klik tombol change password -->
