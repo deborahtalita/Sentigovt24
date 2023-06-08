@@ -51,22 +51,27 @@ Profile
                     </div>
                 </div>
                 <hr class="border-[#C2C2C2] my-5" />
+                <div class="popup" id="changePassword">
+                    <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] z-[1] hidden"></div>
+                    <div class="content rounded-2xl fixed top-[270px] left-1/2 bg-white z-[2] py-[50px] px-[80px]  box-border transform -translate-x-1/2 -translate-y-1/2 scale-0 shadow-2xl border-2">
+                        <button type="button" class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="changePassword(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
+                        <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3 py-2">Change Password</div>
+                        <form action="#" method="post">
+                            <div class="mb-5">
+                                <label class="text-gray-700 tracking-wide text-[15px]">Confirm Current Password</label>
+                                <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-4 py-2 w-[500px]" placeholder="Masukan Password Lama">
+                            </div>
+                            <div>
+                                <label class="text-gray-700 tracking-wide text-[15px]">New Password</label>
+                                <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-4 py-2 w-[500px]" placeholder="Masukan Password Terbaru">
+                            </div>
+                        </form>
+                        <button id="saveChangePassword" type="submit" class=" mt-5 font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Save Change Password</button>
+                    </div>
+                </div>
                 <div class="mt-6">
-                    <button id="btn-confirm" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
+                    <button onclick="changePassword()" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
                 </div>
-                <!-- Apakan muncul apabila telah klik tombol change password -->
-                <div class="changePasswordHidden mt-8 rounded-lg p-6 bg-blue-400 hidden mb-8">
-                    <div class="mb-6 text-lg font-bold text-white">Change password</div>
-                    <div class="mb-5">
-                        <label class="tracking-wide text-[15px] font-bold">Confirm Current Password</label>
-                        <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Lama">
-                    </div>
-                    <div>
-                        <label class="tracking-wide text-[15px] font-bold">New Password</label>
-                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Terbaru">
-                    </div>
-                </div>
-                <!-- Apakan muncul apabila telah klik tombol change password -->
                 <div class="flex justify-end items-center gap-5">
                     <a href="{% url 'profile' %}" class="font-bold text-[#1E1D4C]">Discard</a>
                     <button id="saveEdit" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
@@ -81,5 +86,5 @@ Profile
         <!-- End Footer -->
     </div>
 </div>
-<script defer src="{% static 'js/popupSweetAlert2.js' %}"></script>
+<script src="{% static 'js/scriptsProfile.js' %}"></script>
 {% endblock %}
