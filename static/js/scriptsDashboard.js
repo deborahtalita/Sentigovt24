@@ -220,15 +220,15 @@ function displayTotalTweet(Id) {
         delete currentTotal;
     }
     currentTotal = Id;
-    $.getJSON("/sentiment/getTotalTweet/", function (response) {
+    $.getJSON(`/sentiment/getTotalTweet?bacapres=${currentTotal}`, function (response) {
         // Menampilkan data total tweet
-        document.getElementById("total-display").innerText = response.bacapres_total_tweet[currentTotal];
+        document.getElementById("total-display").innerText = response.bacapres_total_tweet;
         // Menampilkan data sentiment negative
-        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment[currentTotal]['negative'];
+        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment['negative'];
         // Menampilkan data sentiment positive
-        document.getElementById("total-positive").innerText = response.bacapres_total_sentiment[currentTotal]['positive'];
+        document.getElementById("total-positive").innerText = response.bacapres_total_sentiment['positive'];
         // Menampilkan data sentiment neutral
-        document.getElementById("total-neutral").innerText = response.bacapres_total_sentiment[currentTotal]['neutral'];
+        document.getElementById("total-neutral").innerText = response.bacapres_total_sentiment['neutral'];
     })
 }
 
@@ -393,7 +393,7 @@ function displayChart(chartId, Id) {
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
-        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
+        $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
             var options = {
                 chart: {
                     width: "100%",
@@ -403,7 +403,7 @@ function displayChart(chartId, Id) {
                 dataLabels: {
                     enabled: false
                 },
-                series: response.total_sentiment_per_day[Id],
+                series: response.total_sentiment_per_day,
                 stroke: {
                     width: [2, 2, 2], // mengatur lebar garis
                 },
@@ -428,7 +428,7 @@ function displayChart(chartId, Id) {
         })
     } else if (chartId === 'chart-button2') {
         // Membuat grafik 2
-        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
+        $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
             var options = {
                 series: response.total_sentiment_per_day[Id],
                 chart: {

@@ -192,6 +192,14 @@ def getTrenTotalSentiment(request):
     # get bacapres
     bacapres = getBacapres(request.session)
 
+    # get default selected bacapres
+    bacapres = bacapres.first()
+    active_item = bacapres.id
+
+    # get selected bacapres
+    bacapres_id = int(request.GET.get('bacapres', active_item))
+    bacapres = Bacapres.objects.filter(id=bacapres_id)
+
     # get tweets and dates
     tweet, start_date, end_date = getTweets(request.session)
 
@@ -199,32 +207,31 @@ def getTrenTotalSentiment(request):
     context['dates'] = dates
     
     # get total tweet per classification per day
-    total_sentiment_per_day = {}
-    for res in bacapres:
-        total_sentiment_per_day[res.id] = []
-        negative = {'name':'Negative', 'data':[]}
-        positive = {'name':'Positive', 'data':[]}
-        neutral = {'name':'Neutral', 'data':[]}
+    total_sentiment_per_day = []
+    negative = {'name':'Negative', 'data':[]}
+    positive = {'name':'Positive', 'data':[]}
+    neutral = {'name':'Neutral', 'data':[]}
 
-        cur_date = start_date
-        while cur_date <= end_date:
-            day = cur_date + timedelta(days=1)
-            tokoh_tweets = tweet.filter(bacapres=res.id).filter(created_at__range=(cur_date,day))
+    cur_date = start_date
+    while cur_date <= end_date:
+        day = cur_date + timedelta(days=1)
+        tokoh_tweets = tweet.filter(bacapres=bacapres_id).filter(created_at__range=(cur_date,day))
 
-            neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
-            pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
-            neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
-            
-            negative['data'].append(neg_sentiment)
-            positive['data'].append(pos_sentiment)
-            neutral['data'].append(neu_sentiment)
-            cur_date += timedelta(days=1)
+        neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
+        pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
+        neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
+        
+        negative['data'].append(neg_sentiment)
+        positive['data'].append(pos_sentiment)
+        neutral['data'].append(neu_sentiment)
+        cur_date += timedelta(days=1)
 
-        total_sentiment_per_day[res.id].append(negative)
-        total_sentiment_per_day[res.id].append(positive)
-        total_sentiment_per_day[res.id].append(neutral)
+    total_sentiment_per_day.append(negative)
+    total_sentiment_per_day.append(positive)
+    total_sentiment_per_day.append(neutral)
     
     context['total_sentiment_per_day'] = total_sentiment_per_day
+    print(total_sentiment_per_day)
     return JsonResponse(context)
 
 def getTotalTweet(request):
@@ -233,25 +240,32 @@ def getTotalTweet(request):
     # get bacapres
     bacapres = getBacapres(request.session)
 
+    # get default selected bacapres
+    bacapres = bacapres.first()
+    active_item = bacapres.id
+
+    # get selected bacapres
+    bacapres_id = int(request.GET.get('bacapres', active_item))
+    bacapres = Bacapres.objects.filter(id=bacapres_id)
+
     # get tweets and dates
-    tweet, _, _ = getTweetSentiment(request.session)
+    tweet, _, _ = getTweets(request.session)
     
     # total tweet & tweet per sentiment
-    bacapres_total_tweet = {}
-    bacapres_total_sentiment = {}
-    for res in bacapres:
-        tokoh_tweets = tweet.filter(bacapres=res.id).values('sentiment')
-        total = tokoh_tweets.count()
-        bacapres_total_tweet[res.id] = total
+    tokoh_tweets = tweet.filter(bacapres=bacapres_id)
+    total = tokoh_tweets.count()
+    bacapres_total_tweet = total
 
-        neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
-        pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
-        neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
-        bacapres_total_sentiment[res.id] = {'negative':neg_sentiment,
-                                            'positive':pos_sentiment,
-                                            'neutral':neu_sentiment}
+    neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
+    pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
+    neu_sentiment = tokoh_tweets.filter(sentiment='neutral').count()
+    bacapres_total_sentiment= {'negative':neg_sentiment,
+                                'positive':pos_sentiment,
+                                'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
+    print(bacapres_total_tweet)
+    print(bacapres_total_sentiment)
     return JsonResponse(context)
 
 def getRankingBacapres(request):
@@ -360,23 +374,6 @@ def getTweets(session):
         start_date = history.start_date
         end_date = history.end_date
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
-    return tweets, start_date, end_date
-
-def getTweetSentiment(session):
-    global start_date, end_date
-
-    # get tweets
-    if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
-        start_date = convertStartDate(session['selected_start_date'])
-        end_date = convertEndDate(session['selected_end_date'])
-        
-    elif 'history_id' in session: # for history detail
-        history_id = session['history_id']
-        history = History.objects.get(id=history_id)
-
-        start_date = history.start_date
-        end_date = history.end_date
-    tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('created_at','sentiment','bacapres')
     return tweets, start_date, end_date
 
 def getBacapres(session):
