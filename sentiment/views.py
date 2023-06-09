@@ -12,7 +12,7 @@ import pytz
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
-from .helpers.date_helper import convertStartDate, convertEndDate, getDates
+from .helpers.date_helper import convertStartDate, convertEndDate, getDates, today, last_seven_days
 from .helpers.session_helper import isGuestLimitAccess
 from sentigovt2.mixin import RoleRequiredMixin
 from django.views import View
@@ -63,49 +63,6 @@ def scrape(request):
         'status': 'not found',
         'data': []
     })
-
-@csrf_exempt
-def getScrapedTweet(request):
-    if request.method == 'POST':
-        preprocessor = TextPreprocessing()
-        data = getScrapedTweetDB()
-
-        data = preprocessor.removeIrrelevantTweet(data)
-        result = []
-        j = 1
-
-        for i in range(0, len(data)):
-            preprocessed_text = preprocessor.getFinalPreprocessingResult(data[i]['text'])
-            sentiment = predict(preprocessed_text)
-
-            bacapres = Bacapres.objects.get(id=data[i]['bacapres'])
-
-            obj_tweet = Tweet(
-                tweet_id = data[i]['tweet_id'],
-                text = data[i]['text'],
-                text_preprocessed = preprocessed_text,
-                created_at = data[i]['created_at'],
-                user_name = data[i]['user_name'],
-                sentiment = orderLabel(sentiment),
-                bacapres = bacapres
-            )
-            print(j)
-            j=j+1
-            result.append(obj_tweet)
-        Tweet.objects.bulk_create(result)
-
-        return JsonResponse({
-            'code': 200, 
-            'status': 'success',
-            'data': []
-        })
-    return JsonResponse({
-        'code': 404, 
-        'status': 'not found',
-        'data': []
-    })
-
-
 
 def manualSearch(request):
     context = {}
@@ -360,8 +317,6 @@ def generateCSV(request):
 
 
 def getTweets(session):
-    global start_date, end_date
-
     # get tweets
     if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
         start_date = convertStartDate(session['selected_start_date'])
@@ -373,6 +328,9 @@ def getTweets(session):
 
         start_date = history.start_date
         end_date = history.end_date
+    else:
+        start_date = last_seven_days # from date_helper to get current dates
+        end_date = today
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
     return tweets, start_date, end_date
 

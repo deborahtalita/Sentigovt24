@@ -9,7 +9,6 @@ app_name = 'sentiment'
 
 urlpatterns = [
     path('scrape', views.scrape, name="index"),
-    path('getscrapedtweet', views.getScrapedTweet, name="getScrapedTweet"),
     path('search', views.manualSearch, name="manualSearch"),
     path('getTrenTotalSentiment', views.getTrenTotalSentiment, name='getTrenTotalSentiment'),
     path('getTrenTotalTweet/', views.getTrenTotalTweet, name='getTrenTotalTweet'),

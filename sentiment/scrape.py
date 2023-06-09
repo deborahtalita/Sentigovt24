@@ -7,16 +7,15 @@ from sentiment.helpers.sentiment_helper import predict, orderLabel
 from bacapres.models import Bacapres
 from sentiment.models import Tweet, ScrapedTweet
 
-# until_time = int(time.time())
-# since_time = until_time - 7200
-until_time = 1686013200
-since_time = 1686009600
+until_time = int(time.time())
+since_time = until_time - 300
 print(since_time, " ", until_time)
 
 dt_utc = datetime.datetime.utcnow()
 timezone = pytz.timezone('Asia/Jakarta')
 
 def scrape():
+    print("start scrape")
     preprocessor = TextPreprocessing()
     data = scrape_tweet()
 
