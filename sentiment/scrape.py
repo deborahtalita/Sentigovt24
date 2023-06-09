@@ -66,23 +66,3 @@ def scrape_tweet():
             tweets.append(data)
 
     return tweets
-
-def getScrapedTweetDB():
-    tweets = []
-    i = 1
-    scraped_tweet = ScrapedTweet.objects.filter(id__range=(302633,352632))
-
-    for item in scraped_tweet:
-        bacapres = item.bacapres
-        data = {
-            'tweet_id':item.tweet_id,
-            'created_at':item.created_at,
-            'user_name':item.user_name,
-            'text':item.text,
-            'bacapres':bacapres.id,
-            'keyword':bacapres.keyword, 
-        }
-        print(i)
-        i=i+1
-        tweets.append(data)
-    return tweets

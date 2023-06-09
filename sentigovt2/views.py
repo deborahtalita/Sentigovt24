@@ -13,14 +13,14 @@ def home(request):
 def dashboard(request):
     context = {}
 
-    if 'selected_options' in request.session:
-        del request.session['selected_options']
-    
     if 'selected_start_date' in request.session:
         del request.session['selected_start_date']
     
     if 'selected_end_date' in request.session:
         del request.session['selected_end_date']
+        
+    if 'selected_options' in request.session:
+        del request.session['selected_options']
     
     if 'history_id' in request.session:
         del request.session['history_id']
@@ -36,21 +36,6 @@ def dashboard(request):
     context['title'] = 'Dashboard'
     context['active_page'] = 'dashboard'
 
-
-    # bacapres = getBacapres(request.session)
-    # tweet, _, _ = getTweets(request.session)
-    # option = request.GET.get('option', 'positive')
-    
-    # bacapres_rank = []
-    # for res in bacapres:
-    #     tokoh_tweets = tweet.filter(bacapres=res.id)
-    #     selected_sentiment = tokoh_tweets.filter(sentiment=option).count()
-    #     bacapres = {'id':res.id, 'name':res.name, 'value':selected_sentiment, 'avatar':res.avatar.url}
-    #     bacapres_rank.append(bacapres)
-    # context['bacapres_rank'] = bacapres_rank
-    # sorted_data = sorted(bacapres_rank, key=lambda x: x['value'], reverse=True)
-    # context['sorted_data'] = sorted_data
-    # print(sorted_data)
     rendered_html = render(request, 'dashboard.html', context)
 
     # set session for guest

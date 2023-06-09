@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from sentiment.scrape import scrape_tweet, getScrapedTweetDB
+from sentiment.scrape import scrape_tweet
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from sentiment.models import Tweet, History, ScrapedTweet
