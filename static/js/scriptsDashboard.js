@@ -430,7 +430,7 @@ function displayChart(chartId, Id) {
         // Membuat grafik 2
         $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
             var options = {
-                series: response.total_sentiment_per_day[Id],
+                series: response.total_sentiment_per_day,
                 chart: {
                     type: 'bar',
                     width: "100%",
