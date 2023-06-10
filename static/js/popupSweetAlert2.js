@@ -90,44 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    var myButton = document.getElementById('deleteAllHistory');
-
-    myButton.addEventListener('click', function () {
-        console.log("deleteAllHistory")
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: "Yes, delete All!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const url = `/sentiment/history/delete/all/`;
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    headers: { "X-CSRFToken": getCookie("csrftoken") },
-                    success: function (response) {
-                        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
-                        setTimeout(function() {
-                            // Reload the current page
-                            location.reload();
-                          }, 1500);
-                        // Lakukan tindakan tambahan setelah penghapusan data berhasil
-                    },
-                    error: function (xhr, status, error) {
-                        Swal.fire('Error!', 'An error occurred while deleting the data.', 'error');
-                        // Lakukan tindakan tambahan jika terjadi kesalahan saat menghapus data
-                    }
-                });
-            }
-        });
-    });
-});
-
 // Add an event listener to the form submit event
 document.getElementById("createBacapres").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent the form from submitting normally
