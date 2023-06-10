@@ -18,7 +18,7 @@ Bacapres Management
         <!-- End Header Edit Bacapres Management -->
         <!-- Start Form Edit Bacapres -->
         <section class="bg-white p-6 rounded-xl h-fit">
-            <form action="{% url 'bacapres:edit_bacapres' id=object.id %}" method="POST" enctype="multipart/form-data">
+            <form id="editBacapres" action="{% url 'bacapres:edit_bacapres' id=object.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- Start Form Edit Foto Bacapres -->
                 <div id="photoProfile">
@@ -58,7 +58,7 @@ Bacapres Management
                 <!-- End Edit Data Bacapres -->
                 <div class="flex justify-end items-center gap-5 mt-8">
                     <a href="{% url 'bacapres:bacapres_list' %}" class="font-bold text-[#1E1D4C]">Discard</a>
-                    <button id="saveEditBacapres" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
+                    <button id="saveEditBacapres" data-id="{{object.id}}" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
                 </div>
             </form>
         </section>
@@ -70,4 +70,5 @@ Bacapres Management
         <!-- End Footer Bacapres Management -->
     </div>
 </div>
+<script defer  src="{% static 'js/popupSweetAlert2.js' %}"></script>
 {% endblock %}

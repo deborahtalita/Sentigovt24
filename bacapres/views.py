@@ -82,7 +82,7 @@ class BacapresDetailView(RoleRequiredMixin, View):
             if new_img:
                 form.cleaned_data['avatar'] = Bacapres.objects.get(id=id).avatar
             form.save()
-            return redirect(reverse_lazy('bacapres:bacapres_list'))
+            return JsonResponse({"success": True})
         self.context['form'] = form
         self.context['object'] = bacapres
         return render(request, self.template_name, self.context)
@@ -102,8 +102,8 @@ class BacapresCreateView(RoleRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.success(request, ('Bacapres was succesfully added!'))
-            return redirect(reverse_lazy('bacapres:bacapres_list'))
+            return JsonResponse({"success": True})
         else:
             messages.error(request, 'Error saving form')
             print(form.errors.as_data())
-        self.context['form'] = form
+            return JsonResponse({"error": "Invalid request method"}, status=400)

@@ -18,7 +18,7 @@ Bacapres Management
         <!-- End Header Create Bacapres Management -->
         <!-- Start Form Create Bacapres -->
         <section class="bg-white p-6 rounded-xl h-fit">
-            <form action="{% url 'bacapres:create_bacapres' %}" method="POST" enctype="multipart/form-data">
+            <form id="createBacapres" action="{% url 'bacapres:create_bacapres' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- Start Form Create Foto Bacapres -->
                 <div id="photoProfile">
