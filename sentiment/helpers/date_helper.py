@@ -6,13 +6,13 @@ today = datetime.now(timezone).replace(hour=23, minute=59, second=59, microsecon
 last_seven_days = today.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=6)
 
 def convertStartDate(date): # function to format hour ins start date to 00:00:00
-    date = datetime.strptime((datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
+    date = datetime.strptime((datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
     date = date.replace(tzinfo=pytz.utc).astimezone(timezone)
     date = date.replace(hour=0, minute=0, second=0, microsecond=0)
     return date
 
 def convertEndDate(date): # function to format hour ins start date to 23:59:59
-    date = datetime.strptime((datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
+    date = datetime.strptime((datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
     date = date.replace(tzinfo=pytz.utc).astimezone(timezone)
     date = date.replace(hour=23, minute=59, second=59, microsecond=59)
     return date

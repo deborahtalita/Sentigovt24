@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
 
     dateStart.datepicker({
         maxDate: "15",
-        dateFormat: "mm/dd/yy",
+        dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
             selected.setDate(selected.getDate() + 7); // Menambahkan 7 hari dari tanggal yang dipilih
@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 
     dateEnd.datepicker({
         maxDate: "15",
-        dateFormat: "mm/dd/yy",
+        dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
             selected.setDate(selected.getDate() - 7); // Mengurangi 7 hari dari tanggal yang dipilih

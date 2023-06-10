@@ -51,8 +51,15 @@ Profile
                         </div>
                     </div>
                 </div>
-            </form>
             <hr class="border-[#C2C2C2] my-5" />
+            <div class="flex justify-end items-center gap-5">
+                <a href="{% url 'dashboard' %}" class="font-bold text-[#1E1D4C]">Discard</a>
+                <button id="saveEdit" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
+            </div>
+            </form>
+            <div class="mt-6">
+                <button id="popup-password" onclick="changePassword()" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
+            </div>
             <div class="popup" id="changePassword">
                 <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] z-[1] hidden"></div>
                 <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px]  box-border transform -translate-x-1/2 -translate-y-1/2 scale-0 shadow-2xl border-2">
@@ -79,13 +86,7 @@ Profile
                 </form>
                 </div>
             </div>
-            <div class="mt-6">
-                <button id="popup-password" onclick="changePassword()" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
-            </div>
-            <div class="flex justify-end items-center gap-5">
-                <!-- <a href="{% url 'account:profile' %}" class="font-bold text-[#1E1D4C]">Discard</a>
-                <button id="saveEdit" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button> -->
-            </div>
+        </div>
         </div>
         <!-- End Data Profile -->
         <!-- Start Footer -->
