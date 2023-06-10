@@ -7,7 +7,6 @@ from .forms import SignUpForm, UpdateProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import User
-from sentigovt2.decorators import role_required
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 from django.http import JsonResponse

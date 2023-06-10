@@ -1,5 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
 from accounts.models import User
 
 class SignUpForm(UserCreationForm):
@@ -12,7 +15,6 @@ class SignUpForm(UserCreationForm):
         user = super(UserCreationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
-        self.instance.username = user.email
 
         if commit:
             user.save()
@@ -26,3 +28,12 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'avatar')
+
+class PasswordChangeForm(PasswordChangeForm):
+    def clean_new_password2(self):
+        email = self.user.email
+        new_password2 = self.cleaned_data.get('new_password2')
+
+        validate_password(new_password2)
+
+        return new_password2
