@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from sentiment.scrape import scrape_tweet
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from sentiment.models import Tweet, History, ScrapedTweet
+from sentiment.models import Tweet, History
 from bacapres.models import Bacapres
 from accounts.models import User
 from .preprocessing import TextPreprocessing
@@ -433,7 +433,7 @@ def getHistoryList(request):
 
     # get history
     user = User.objects.get(id=request.user.id)
-    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('id')
+    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-created_at')
 
     #  pagination
     paginator = Paginator(history, 10)
