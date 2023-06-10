@@ -13,7 +13,7 @@ class User(AbstractUser):
     base_role = Role.MEMBER
 
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=50, choices=Role.choices, default=base_role)
+    role = models.CharField(max_length=15, choices=Role.choices, default=base_role)
     avatar = models.ImageField(default="profile_pics/profileDefault.png",upload_to='profile_pics/')
         
 class Session(models.Model):
