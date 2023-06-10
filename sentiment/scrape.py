@@ -5,7 +5,7 @@ import snscrape.modules.twitter as sntwitter
 from .preprocessing import TextPreprocessing
 from sentiment.helpers.sentiment_helper import predict, orderLabel
 from bacapres.models import Bacapres
-from sentiment.models import Tweet, ScrapedTweet
+from sentiment.models import Tweet
 
 until_time = int(time.time())
 since_time = until_time - 300
