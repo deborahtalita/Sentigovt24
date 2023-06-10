@@ -354,8 +354,12 @@ class HistoryView(RoleRequiredMixin, View):
 
     def get(self, request):
         # get history
+        query = self.request.GET.get('search')
         user = User.objects.get(id=request.user.id)
-        history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-id')
+        if query:
+            history = History.objects.filter(user=user).prefetch_related('bacapres').filter(bacapres__name__icontains=query).order_by('-id')    
+        else:
+            history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-id')
 
         #  pagination
         paginator = Paginator(history, 10)
