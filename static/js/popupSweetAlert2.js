@@ -1,48 +1,3 @@
-// Add an event listener to the form submit event
-document.getElementById("createBacapres").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-  
-    // Perform the form submission using AJAX or fetch
-    // Replace the URL and other parameters with your actual values
-    fetch("/bacapres/create", {
-      method: "POST",
-      body: new FormData(event.target) // Use FormData to get form data
-    })
-    .then(response => {
-      if (response.ok) {
-        // Form submission was successful, show success popup
-        Swal.fire({
-            icon: 'success',
-            title: 'Bacapres has been added',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        setTimeout(function() {
-            // Reload the current page
-            window.location.href = '/bacapres';
-          }, 2000);
-      } else {
-        // Form submission failed, show error popup
-        Swal.fire({
-            icon: 'error',
-            title: 'Bacapres creation failed',
-            showConfirmButton: false,
-            timer: 3000
-        });
-      }
-    })
-    .catch(error => {
-      // Handle any error that occurred during form submission
-      console.error("Error:", error);
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred during form submission",
-        icon: "error"
-      });
-    });
-  });
-
-  
 // document.getElementById("editBacapres").addEventListener("submit", function(event) {
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     var myButton = document.getElementById("saveEditBacapres");
@@ -172,6 +127,50 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Add an event listener to the form submit event
+document.getElementById("createBacapres").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+  
+    // Perform the form submission using AJAX or fetch
+    // Replace the URL and other parameters with your actual values
+    fetch("/bacapres/create", {
+      method: "POST",
+      body: new FormData(event.target) // Use FormData to get form data
+    })
+    .then(response => {
+      if (response.ok) {
+        // Form submission was successful, show success popup
+        Swal.fire({
+            icon: 'success',
+            title: 'Bacapres has been added',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setTimeout(function() {
+            // Reload the current page
+            window.location.href = '/bacapres';
+          }, 2000);
+      } else {
+        // Form submission failed, show error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Bacapres creation failed',
+            showConfirmButton: false,
+            timer: 3000
+        });
+      }
+    })
+    .catch(error => {
+      // Handle any error that occurred during form submission
+      console.error("Error:", error);
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred during form submission",
+        icon: "error"
+      });
+    });
+  });
 
 // Helper function to get the value of a cookie
 function getCookie(name) {
