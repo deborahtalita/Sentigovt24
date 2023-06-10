@@ -23,7 +23,12 @@ class AccountListView(RoleRequiredMixin,View):
 
     def get(self, request):
         # get user
-        user = User.objects.all().filter(is_active=True).order_by('id')
+        query = self.request.GET.get('search')
+        if query:
+            user = User.objects.filter(is_active=True,first_name__icontains=query).order_by('id')
+            print(user)
+        else:
+            user = User.objects.all().filter(is_active=True).order_by('id')
 
         # pagination
         paginator = Paginator(user, 10)
@@ -41,6 +46,7 @@ class AccountListView(RoleRequiredMixin,View):
         context = {
             'total_pages':paginator.num_pages,
             'results': data_items,
+            'query': query,
         }
 
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
