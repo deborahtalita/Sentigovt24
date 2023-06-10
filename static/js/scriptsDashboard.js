@@ -548,11 +548,22 @@ csvButton.addEventListener('click', function() {
 
     xhr.onload = function() {
         if (xhr.status === 200) {
+            var csvFile = xhr.response;
             // Create a download link for the CSV file
-            var downloadLink = document.createElement('a');
-            downloadLink.href = window.URL.createObjectURL(xhr.response);
-            downloadLink.download = 'data.csv';
-            downloadLink.click();
+            var disposition = xhr.getResponseHeader('Content-Disposition');
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) {
+                    filename = matches[1].replace(/['"]/g, '');
+            }
+            }
+
+            var downloadUrl = URL.createObjectURL(csvFile);
+            var link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = filename || 'data.csv';
+            link.click();
         }
     };
 

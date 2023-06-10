@@ -301,10 +301,16 @@ def generateCSV(request):
 
     # get tweets by selected bacapres
     bacapres_id = request.GET.get('bacapres')
+    bacapres = Bacapres.objects.get(id=bacapres_id)
     data = tweet.filter(bacapres=bacapres_id).order_by('-created_at')
 
+    # get dates y-m-d format
+    start_date = start_date.strftime('%Y-%m-%d')
+    end_date = end_date.strftime('%Y-%m-%d')
+
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+    filename = f"{bacapres.name} {start_date} - {end_date}.csv"
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
     writer = csv.writer(response)
     writer.writerow(['No','User name', 'Tweet', 'Sentiment', 'Date'])  # Write header row
@@ -314,7 +320,6 @@ def generateCSV(request):
         writer.writerow([index, obj['user_name'], obj['text'], obj['sentiment'], date])  # Write each row with the desired fields
 
     return response
-
 
 def getTweets(session):
     # get tweets
