@@ -433,7 +433,7 @@ def getHistoryList(request):
 
     # get history
     user = User.objects.get(id=request.user.id)
-    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-created_at')
+    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-id')
 
     #  pagination
     paginator = Paginator(history, 10)
