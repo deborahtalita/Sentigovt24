@@ -14,17 +14,17 @@ Bacapres Management
             <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">Bacapres Management</div>
             <hr class="border-[#C2C2C2] my-5">
             <div class="flex items-center justify-between mb-5">
-                <form action="#" class="flex">
+                <div class="flex">
                     <div class='max-w-md'>
                         <div class="relative flex items-center w-full h-9 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
                             <div class="grid place-items-center h-full w-12 text-gray-300">
                                 <img class="h-5 w-5" src="{% static 'media/icons/search.svg' %}" alt="search">
                             </div>
-                            <input class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
+                            <input id="searchQuery" class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
                         </div>
                     </div>
-                    <button type="submit" class="font-[poppins-light] font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
-                </form>
+                    <button onclick="getDataBacapres(1)" class="font-[poppins-light] font-medium flex justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                </div>
                 <div class="ml-6">
                     <a href="{% url 'bacapres:create_bacapres' %}"><button class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Create</button></a>
                 </div>

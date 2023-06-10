@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
-    // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
-    const maxVisibleButtons = 5;
 
     // Mengambil data saat halaman dimuat
     getDataUser(currentPage);
@@ -23,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataUser(page) {
+    // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
     const maxVisibleButtons = 5;
+
     const searchQuery = document.getElementById('searchQuery').value;
     console.log(searchQuery)
     let url = `/account?page=${page}`

@@ -46,7 +46,6 @@ class AccountListView(RoleRequiredMixin,View):
         context = {
             'total_pages':paginator.num_pages,
             'results': data_items,
-            'query': query,
         }
 
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':

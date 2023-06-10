@@ -15,7 +15,11 @@ class BacapresView(RoleRequiredMixin, View):
     context['active_page'] = 'bacapres management'
 
     def get(self, request):
-        bacapres = Bacapres.objects.all().order_by('id')
+        query = self.request.GET.get('search')
+        if query:
+            bacapres = Bacapres.objects.filter(name__icontains=query).order_by('id')
+        else: 
+            bacapres = Bacapres.objects.all().order_by('id')
         # pagination
         paginator = Paginator(bacapres, 10)
         page_number = request.GET.get('page', 1)
