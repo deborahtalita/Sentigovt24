@@ -31,11 +31,6 @@ User Management
                             </div>
                             <div class="font-[poppins-semibold] text-[#1E1D4C]">{{user.first_name}}</div>
                         </div>
-                        <div class="w-[50%]">
-                            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
-                            <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF</p>
-                        </div>
                     </div>
                 </div>
                 <hr class="border-[#C2C2C2] my-5">
@@ -57,31 +52,16 @@ User Management
                             <select title="status" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
                             {% else %}
                             <select title="status" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" disabled>
+                            {% endif %}
                                 <option {% if user.role == 'MEMBER' %} selected {% endif %} value="MEMBER">Member</option>
                                 <option {% if user.role == 'ADMIN' %} selected {% endif %} value="ADMIN">Administrator</option>
                             </select>
-                            {% endif %}
+                            
                         </div>
                         <!-- Dropdown Select Status -->
                     </div>
                 </div>
                 <hr class="border-[#C2C2C2] my-5" />
-                <div class="mt-6">
-                    <button id="btn-confirm" type="button" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-5 py-3 rounded-lg text-white transition-all duration-500">Change Password</button>
-                </div>
-                <!-- Apakan muncul apabila telah klik tombol change password -->
-                <div class="changePasswordHidden mt-8 rounded-lg p-6 bg-blue-400 hidden mb-8">
-                    <div class="mb-6 text-lg font-bold text-white">Change password</div>
-                    <div class="mb-5">
-                        <label class="tracking-wide text-[15px] font-bold">Confirm Current Password</label>
-                        <input type="password" id="change-password-lama" aria-label="change-password-lama" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Lama">
-                    </div>
-                    <div>
-                        <label class="tracking-wide text-[15px] font-bold">New Password</label>
-                        <input type="password" id="change-password-baru" aria-label="change-password-baru" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Password Terbaru">
-                    </div>
-                </div>
-                <!-- Apakan muncul apabila telah klik tombol change password -->
                 <div class="flex justify-end items-center gap-5">
                     <a href="{% url 'account:userManagement' %}" class="font-bold text-[#1E1D4C]">Discard</a>
                     <button id="saveEditUser" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
