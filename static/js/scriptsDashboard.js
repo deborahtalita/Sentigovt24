@@ -97,8 +97,6 @@ function dropdown() {
 
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataDashboard(id, page) {
-    // var id = getSelectedBacapresOption();
-    // $.getJSON(`/sentiment/getTweets?bacapres=${id}&page=${page}`, function (response) {
     $.getJSON(`/sentiment/getTweetList?bacapres=${id}&page=${page}`, function (response) {
         
         var currentPage = page;
@@ -234,22 +232,18 @@ function displayTotalTweet(Id) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     let currentPage = 1;
-    // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
-    // const taskRanking = () => {
-    //     return new Promise((resolve) => {
-    //         getDataRanking();
-    //         resolve();
-    //     })
-    // }
     const displayTrenTotal = () => {
         return new Promise((resolve) => {
             displayChartTotal();
             resolve();
         })
     }
-
+    var gdr
     function getDataRanking() {
-        $.getJSON(`/sentiment/getBacapresRanking`, function (response) {
+        if (gdr){
+            gdr.abort();
+        } 
+        gdr = $.getJSON(`/sentiment/getBacapresRanking`, function (response) {
             // Mendapatkan data dari response
             const data = response.results;
     
@@ -382,10 +376,15 @@ let currentChart = null;
 let currentId = null;
 
 // Grafik Tren
+var dc;
 function displayChart(chartId, Id) {
     if (currentId && currentChart) {
         delete currentId;
         currentChart.destroy();
+    }
+
+    if (dc){
+        dc.abort();
     }
 
     currentId = Id;
@@ -393,7 +392,7 @@ function displayChart(chartId, Id) {
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
-        $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
+        dc = $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
             var options = {
                 chart: {
                     width: "100%",
@@ -428,7 +427,7 @@ function displayChart(chartId, Id) {
         })
     } else if (chartId === 'chart-button2') {
         // Membuat grafik 2
-        $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
+        dc = $.getJSON(`/sentiment/getTrenTotalSentiment?bacapres=${Id}`, function (response) {
             var options = {
                 series: response.total_sentiment_per_day,
                 chart: {
