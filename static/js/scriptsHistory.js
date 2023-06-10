@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
-
     // Mengambil data saat halaman dimuat
     getDataHistory(currentPage);
 
