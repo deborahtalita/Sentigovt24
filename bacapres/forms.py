@@ -7,6 +7,10 @@ class BacapresForm(forms.ModelForm):
     class Meta:
         model = Bacapres
         fields = ('name', 'desc', 'keyword', 'avatar')
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['desc'].required = False
 
 # class BacapresKeywordForm(forms.ModelForm):
 
