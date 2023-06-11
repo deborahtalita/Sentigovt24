@@ -56,7 +56,7 @@ function getDataBacapres(page) {
                 ${index}
             </th>
             <td class="py-4">
-                <img class="mx-auto w-12 h-12" src="${data[i].avatar}" alt="Photo Bacapres">
+                <img class="mx-auto w-12 h-12 rounded-full" src="${data[i].avatar}" alt="Photo Bacapres">
             </td>
             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                 ${data[i].name}

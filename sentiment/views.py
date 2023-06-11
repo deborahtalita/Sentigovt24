@@ -75,6 +75,7 @@ class ManualSearchView(View):
     def post(self, request):
         if 'session_guest' in request.COOKIES and isGuestLimitAccess(request):
             self.context['result'] = False
+            return JsonResponse({"message": 'Failed'},status=400)
         else:
             selected_options = request.POST.getlist('search_field')
             start = request.POST.get('start_date')

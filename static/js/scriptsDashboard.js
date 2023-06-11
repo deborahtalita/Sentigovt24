@@ -125,7 +125,7 @@ function getDataDashboard(id, page) {
         }
 
         console.log(url)
-        if (gdd){
+        if (gdd) {
             gdd.abort();
         }
         gdd = $.getJSON(url, function (response) {
@@ -609,4 +609,36 @@ csvButton.addEventListener('click', function () {
     };
 
     xhr.send();
+});
+
+
+
+// Add an event listener to the form submit event
+document.getElementById("manualSearch").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    console.log('manualsearch')
+    // Perform the form submission using AJAX or fetch
+    // Replace the URL and other parameters with your actual values
+    fetch("/sentiment/search", {
+            method: "POST",
+            body: new FormData(event.target) // Use FormData to get form data
+        })
+        .then(function (response) {
+            if (response.ok){
+                window.location.href ="/sentiment/search"
+            }
+            else if (response.status === 400) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Manual Search limit reached!',
+                    showConfirmButton: true,
+                    timer: 1500
+                });
+            }
+        }
+        )
+        .catch(function (errors) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again later.");
+        })
 });

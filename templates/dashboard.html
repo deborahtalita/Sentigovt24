@@ -13,7 +13,7 @@
         <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">{{title}}</div>
         <hr class="border-[#C2C2C2] my-5">
             <div {% if title == 'Dashboard' or title == 'Manual Search' %} class="hidden" {% endif %} class="font-[poppins-regular] text-[#1E1D4C] text-[15px]">{{startDate}} - {{endDate}}</div>
-            <form action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch" {% if title == 'History' %} class="hidden" {% endif %}>
+            <form id="manualSearch" action="{% url 'sentiment:manualSearch' %}" method="POST" id="manualSearch" {% if title == 'History' %} class="hidden" {% endif %}>
             {% csrf_token %}
                 <!-- Multi Select bacapres -->
                 <select title="select" name="search_field" x-cloak id="select" multiple="" form="manualSearch">
@@ -96,7 +96,7 @@
                     </div>
                     <!-- Date Picker -->
                     <div>
-                        <button type="submit" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                        <button id="submitSearch" type="submit" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
                     </div>
                 </div>
             </form>

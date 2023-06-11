@@ -102,7 +102,7 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
       method: "POST",
       body: new FormData(event.target) // Use FormData to get form data
     })
-    .then(function(response) {
+    .then(function (response) {
       if (response.status === 400) {
         return response.json();
       } else {
@@ -142,15 +142,7 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
         timer: 3000
       });
     })
-    .catch(function (errors) {
-      // Handle any error that occurred during form submission
-      // console.error("Error:", errors);
-      // Swal.fire({
-      //   title: "Error",
-      //   text: "An error occurred during form submission",
-      //   icon: "error"
-      // });
-    })
+    .catch(function (errors) {})
 });
 
 // Helper function to get the value of a cookie
