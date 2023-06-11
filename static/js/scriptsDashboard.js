@@ -3,13 +3,23 @@ jQuery(document).ready(function () {
     var dateEnd = jQuery("#date-end");
 
     dateStart.datepicker({
-        minDate: "-30",
+        // minDate: "-30",
         maxDate: "+30",
         dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate()); // Menambahkan 7 hari dari tanggal yang dipilih
-            dateEnd.datepicker("option", "minDate", selected); /// Set the minimum date for dateEnd
+            var maxDate = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate() + 30);
+            
+            // Calculate the maximum date for dateEnd
+            var endDate = dateEnd.datepicker("getDate");
+            if (endDate && endDate > maxDate) {
+                console.log(endDate)
+                console.log(maxDate)
+                dateEnd.datepicker("setDate", maxDate);
+            }
+            
+            // Set the minimum date for dateEnd
+            dateEnd.datepicker("option", "minDate", selected);
         },
         beforeShowDay: function (date) {
             var today = new Date();
@@ -24,8 +34,16 @@ jQuery(document).ready(function () {
         dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate()); // Mengurangi 7 hari dari tanggal yang dipilih
-            dateStart.datepicker("option", "maxDate", selected); // Set the maximum date for dateStart
+            var minDate = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate() - 30);
+            
+            // Calculate the minimum date for dateStart
+            var startDate = dateStart.datepicker("getDate");
+            if (startDate && startDate < minDate) {
+                dateStart.datepicker("setDate", minDate);
+            }
+            
+            // Set the maximum date for dateStart
+            dateStart.datepicker("option", "maxDate", selected);
         },
         beforeShowDay: function (date) {
             var today = new Date();
