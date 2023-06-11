@@ -107,6 +107,7 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
         return response.json();
       } else if (response.status === 413) {
         // Request Entity Too Large error handling
+        document.getElementById("avatar_err").innerText = 'The file you are trying to upload is too large'
         Swal.fire({
           icon: 'error',
           title: 'Request Entity Too Large',
