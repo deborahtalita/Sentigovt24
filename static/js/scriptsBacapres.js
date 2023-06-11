@@ -65,7 +65,7 @@ function getDataBacapres(page) {
                 <a data-id="${data[i].id}" id="btn-delete-bacapres" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
             </td>
             <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                <a class="flex justify-center" href="edit/${data[i].id}"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
+                <a class="flex justify-center" href="${data[i].id}/edit"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
             </td>
         </tr>`;
             tableBody.append(row);
@@ -150,7 +150,7 @@ function getDataBacapres(page) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `/bacapres/delete/${id}`; // Ganti yourDataId dengan ID data yang ingin dihapus
+                const url = `/bacapres/${id}/delete`; // Ganti yourDataId dengan ID data yang ingin dihapus
                 // Hapus baris dari tabel setelah penghapusan berhasil
                 $.ajax({
                     url: url,
