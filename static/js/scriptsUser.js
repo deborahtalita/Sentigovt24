@@ -30,7 +30,7 @@ function getDataUser(page) {
 
     if (searchQuery) {
         url += '&search=' + encodeURIComponent(searchQuery);
-      }
+    }
 
     $.getJSON(url, function (response) {
         // Mendapatkan data dari response
@@ -38,9 +38,9 @@ function getDataUser(page) {
         const totalPages = response.total_pages;
 
         var currentPage = page;
-        
+
         // Untuk menghitung index per tweet
-        var startIndex = 10 * (currentPage - 1) + 1 ;
+        var startIndex = 10 * (currentPage - 1) + 1;
         var counter = 0;
 
         // Menampilkan data di tabel
@@ -68,7 +68,7 @@ function getDataUser(page) {
             </td>
         </tr>`;
             tableBody.append(row);
-            counter= counter + 1
+            counter = counter + 1
         }
 
         // Menghapus tombol halaman sebelumnya dan nomor halaman
@@ -153,10 +153,21 @@ function getDataUser(page) {
                 $.ajax({
                     url: url,
                     type: "POST",
-                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    headers: {
+                        "X-CSRFToken": getCookie("csrftoken")
+                    },
                     success: function (response) {
-                        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
-                        location.reload()
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'Your data has been deleted.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(function () {
+                            // Reload the current page
+                            location.reload();
+                        }, 3000);
                         // Lakukan tindakan tambahan setelah penghapusan data berhasil
                     },
                     error: function (xhr, status, error) {
@@ -169,56 +180,55 @@ function getDataUser(page) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("updateRole");
-  
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();  // Prevent default form submission
-  
-      var url = form.action;
-      var formData = new FormData(form);
-  
-      fetch(url, {
-        method: "POST",
-        body: formData
-      })
-      .then(function(response) {
-        if (response.status === 400) {
-          return response.json();
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: 'User role already updated!',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          setTimeout(function () {
-            // Reload the current page
-            window.location.href = '/account'
-          }, 2000);
-        }
-      })
-      .then(function(errors) {
-      })
-      .catch(function(error) {
-        // Handle network or other errors
-      });
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var url = form.action;
+        var formData = new FormData(form);
+
+        fetch(url, {
+                method: "POST",
+                body: formData
+            })
+            .then(function (response) {
+                if (response.status === 400) {
+                    return response.json();
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'User role already updated!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(function () {
+                        // Reload the current page
+                        window.location.href = '/account'
+                    }, 2000);
+                }
+            })
+            .then(function (errors) {})
+            .catch(function (error) {
+                // Handle network or other errors
+            });
     });
-  });
+});
 
 // Helper function to get the value of a cookie
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Check if the cookie name matches the given name
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Check if the cookie name matches the given name
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
-      }
     }
     return cookieValue;
-  }
+}

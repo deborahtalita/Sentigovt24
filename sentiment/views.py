@@ -117,57 +117,6 @@ class ManualSearchView(View):
                 history.tweet.add(*tweets)
             return render(request, self.template_name, self.context)
 
-def manualSearch(request):
-    context = {}
-    if request.method == 'POST':
-        if 'session_guest' in request.COOKIES and isGuestLimitAccess(request):
-            context['result'] = False
-            return JsonResponse({"message": 'Failed'},status=400)
-        else:
-            selected_options = request.POST.getlist('search_field')
-            start = request.POST.get('start_date')
-            end = request.POST.get('end_date')
-            
-            selected_options = [int(x) for x in selected_options[0].split(',')]
-
-            # assign request to session
-            request.session['selected_options'] = selected_options
-            request.session['selected_start_date'] = start
-            request.session['selected_end_date'] = end
-
-            # get selected bacapres
-            bacapres = getBacapres(request.session)
-            context['bacapres'] = bacapres
-
-            # get default selected bacapres
-            active_item = bacapres.first()
-            if active_item: context['active_item'] = active_item.id
-            
-            context['result'] = 'true'
-            
-            # set date to insert in history obj
-            start_date = convertStartDate(start)
-            end_date = convertEndDate(end)
-
-            # get tweet to insert in history obj
-            tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
-
-            #  get auth user
-            if request.user.is_authenticated:
-                user = User.objects.get(id=request.user.id)
-                history = History.objects.create(start_date=start_date,end_date=end_date,user=user)
-
-                #  save manual search to history
-                history.bacapres.add(*bacapres)
-                history.tweet.add(*tweets)
-    
-    bacapres = Bacapres.objects.all().order_by('id')
-    context['bacapres_opt'] = bacapres 
-
-    context['title'] = 'Manual Search'
-    context['active_page'] = 'manual search'
-    return render(request, 'dashboard.html', context)
-
 def getTrenTotalTweet(request):
     context = {}
 
