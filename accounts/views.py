@@ -129,6 +129,7 @@ class RegisterView(View):
             messages.success(request, f'Your account has been created. You can log in now!')
             return redirect(reverse_lazy('dashboard'))
         else:
+            print(form.errors.as_data())
             self.context['form'] = form
             return render(request, 'accounts/register.html',self.context)
 

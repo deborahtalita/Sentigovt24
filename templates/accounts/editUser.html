@@ -39,11 +39,11 @@ User Management
                     <div class="flex flex-col gap-5">
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
-                            <input class="bg-gray-100 w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg cursor-not-allowed" type="text" name="name" placeholder="Masukan Nama" name="first_name" value="{{user.first_name}}" required>
+                            <input class="bg-gray-100 w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg cursor-not-allowed" type="text" name="name" placeholder="Masukan Nama" name="first_name" value="{{user.first_name}}" disabled>
                         </div>
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
-                            <input type="text" id="disabled-email" aria-label="disabled-email" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" name="email" value="{{user.email}}">
+                            <input type="text" id="disabled-email" aria-label="disabled-email" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2 cursor-not-allowed" name="email" value="{{user.email}}" disabled>
                         </div>
                         <!-- Dropdown Select Status -->
                         <div>
@@ -63,8 +63,10 @@ User Management
                 </div>
                 <hr class="border-[#C2C2C2] my-5" />
                 <div class="flex justify-end items-center gap-5">
+                    {% if auth_user.role == 'SUPERADMIN' %}
                     <a href="{% url 'account:userManagement' %}" class="font-bold text-[#1E1D4C]">Discard</a>
                     <button id="saveEditUser" type="submit" class="font-medium text-sm bg-[#7B5BFF] hover:bg-[#7054E0] text-[13px] px-10 py-3 rounded-lg text-white transition-all duration-500">Save</button>
+                    {% else %}{% endif %}
                 </div>
             </form>
         </div>
