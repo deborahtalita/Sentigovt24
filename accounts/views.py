@@ -109,6 +109,8 @@ class UserProfileView(RoleRequiredMixin,View):
             return redirect(reverse_lazy('account:profile'))
         else:
             print(form.errors.as_data())
+            self.context['form'] = form
+            return render(request, self.template_name, self.context)
 
 class RegisterView(View):
     context = {}
