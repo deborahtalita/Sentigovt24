@@ -105,7 +105,16 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
     .then(function (response) {
       if (response.status === 400) {
         return response.json();
-      } else {
+      } else if (response.status === 413) {
+        // Request Entity Too Large error handling
+        Swal.fire({
+          icon: 'error',
+          title: 'Request Entity Too Large',
+          text: 'The file you are trying to upload is too large',
+          showConfirmButton: true
+        });
+      }
+      else {
         // Form submission was successful, show success popup
         Swal.fire({
           icon: 'success',
@@ -123,12 +132,16 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
       console.log(errors)
       document.getElementById("name_err").innerText = ""
       document.getElementById("keyword_err").innerText = ""
+      document.getElementById("avatar_err").innerText = ""
 
       if (errors.hasOwnProperty('name')) {
         document.getElementById("name_err").innerText = errors.name[0].message
       }
       if (errors.hasOwnProperty('keyword')) {
         document.getElementById("keyword_err").innerText = errors.keyword[0].message
+      }
+      if (errors.hasOwnProperty('avatar')) {
+        document.getElementById("avatar_err").innerText = errors.avatar[0].message
       }
         // Form submission failed, show error popup
       Swal.fire({

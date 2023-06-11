@@ -36,6 +36,7 @@ Bacapres Management
                             <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
                             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" name="avatar" id="file_input" type="file">
                             <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG or GIF</p>
+                            <div {% if form.errors.avatar %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.avatar.0}}</div>
                         </div>
                     </div>
                 </div>
