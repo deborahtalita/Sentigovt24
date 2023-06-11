@@ -26,7 +26,7 @@ urlpatterns = [
     path('sentiment/', include('sentiment.urls', namespace='sentiment')),
     path('bacapres/', include('bacapres.urls', namespace='bacapres')),
     path('', include('accounts.urls', namespace='account')),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
 ]
 
 if settings.DEBUG:

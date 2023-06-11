@@ -9,18 +9,19 @@ app_name = 'sentiment'
 
 urlpatterns = [
     path('scrape', views.scrape, name="index"),
-    path('search', views.manualSearch, name="manualSearch"),
+    # sentiment
+    path('search', views.ManualSearchView.as_view(), name="manualSearch"),
     path('getTrenTotalSentiment', views.getTrenTotalSentiment, name='getTrenTotalSentiment'),
     path('getTrenTotalTweet/', views.getTrenTotalTweet, name='getTrenTotalTweet'),
     path('getTotalTweet/', views.getTotalTweet, name='getTotalTweet'),
     path('getTweetList', views.getTweetList, name='getTweetList'),
-    path('history', views.HistoryView.as_view(), name="getHistoryList"),
-    path('history/detail/<int:id>', views.HistoryDetailView.as_view(), name="getDetailHistory"),
-    path('history/delete/<int:id>', views.deleteHistory, name="deleteHistory"),
-    path('history/delete/all/', views.HistoryDeleteAllView.as_view(), name="deleteAllHistory"),
     path('getBacapresRanking', views.getRankingBacapres, name="getRankingBacapres"),
     path('generateCSV', views.generateCSV, name="generateCSV"),
-    # path('view', views.coba, name="index"),
+    # history
+    path('history', views.HistoryView.as_view(), name="getHistoryList"),
+    path('history/<int:id>/detail', views.HistoryDetailView.as_view(), name="getDetailHistory"),
+    path('history/<int:id>/delete', views.HistoryView.as_view(), name="deleteHistory"),
+    path('history/delete/all/', views.HistoryDeleteAllView.as_view(), name="deleteAllHistory"),
 ]
         
         

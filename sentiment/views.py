@@ -18,10 +18,7 @@ from sentigovt2.mixin import RoleRequiredMixin
 from django.views import View
 import csv
 
-# default time
 timezone = pytz.timezone('Asia/Jakarta')
-end_date = datetime.now(timezone).replace(hour=23, minute=59, second=59, microsecond=59)
-start_date = end_date.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=6)
 
 @csrf_exempt
 def scrape(request):
@@ -64,11 +61,20 @@ def scrape(request):
         'data': []
     })
 
-def manualSearch(request):
+class ManualSearchView(View):
     context = {}
-    if request.method == 'POST':
+    template_name = "dashboard.html"
+    context['title'] = 'Manual Search'
+    context['active_page'] = 'manual search'
+
+    def get(self, request):
+        bacapres = Bacapres.objects.all().order_by('id')
+        self.context['bacapres_opt'] = bacapres
+        return render(request, self.template_name, self.context)
+    
+    def post(self, request):
         if 'session_guest' in request.COOKIES and isGuestLimitAccess(request):
-            context['result'] = False
+            self.context['result'] = False
         else:
             selected_options = request.POST.getlist('search_field')
             start = request.POST.get('start_date')
@@ -83,13 +89,13 @@ def manualSearch(request):
 
             # get selected bacapres
             bacapres = getBacapres(request.session)
-            context['bacapres'] = bacapres
+            self.context['bacapres'] = bacapres
 
             # get default selected bacapres
             active_item = bacapres.first()
-            if active_item: context['active_item'] = active_item.id
+            if active_item: self.context['active_item'] = active_item.id
             
-            context['result'] = 'true'
+            self.context['result'] = 'true'
             
             # set date to insert in history obj
             start_date = convertStartDate(start)
@@ -106,13 +112,7 @@ def manualSearch(request):
                 #  save manual search to history
                 history.bacapres.add(*bacapres)
                 history.tweet.add(*tweets)
-    
-    bacapres = Bacapres.objects.all().order_by('id')
-    context['bacapres_opt'] = bacapres 
-
-    context['title'] = 'Manual Search'
-    context['active_page'] = 'manual search'
-    return render(request, 'dashboard.html', context)
+            return render(request, self.template_name, self.context)
 
 def getTrenTotalTweet(request):
     context = {}
@@ -188,7 +188,6 @@ def getTrenTotalSentiment(request):
     total_sentiment_per_day.append(neutral)
     
     context['total_sentiment_per_day'] = total_sentiment_per_day
-    print(total_sentiment_per_day)
     return JsonResponse(context)
 
 def getTotalTweet(request):
@@ -210,8 +209,7 @@ def getTotalTweet(request):
     
     # total tweet & tweet per sentiment
     tokoh_tweets = tweet.filter(bacapres=bacapres_id)
-    total = tokoh_tweets.count()
-    bacapres_total_tweet = total
+    bacapres_total_tweet = tokoh_tweets.count()
 
     neg_sentiment = tokoh_tweets.filter(sentiment='negative').count()
     pos_sentiment = tokoh_tweets.filter(sentiment='positive').count()
@@ -221,17 +219,14 @@ def getTotalTweet(request):
                                 'neutral':neu_sentiment}
     context['bacapres_total_tweet'] = bacapres_total_tweet
     context['bacapres_total_sentiment'] = bacapres_total_sentiment
-    print(bacapres_total_tweet)
-    print(bacapres_total_sentiment)
     return JsonResponse(context)
 
 def getRankingBacapres(request):
     context = {}
 
-    # get bacapres
+    # get bacapres and tweets
     bacapres = getBacapres(request.session)
     tweet, _, _ = getTweets(request.session)
-    # option = request.GET.get('option', 'positive')
     
     bacapres_rank = []
     for res in bacapres:
@@ -246,7 +241,6 @@ def getRankingBacapres(request):
             'negative': neg_sentiment,
         }
         bacapres_rank.append(bacapres)
-        # sorted_data = sorted(bacapres_rank, key=lambda x: x['value'], reverse=True)
     context['results'] = bacapres_rank
     
     return JsonResponse(context)
@@ -297,7 +291,6 @@ def getTweetList(request):
         'total_pages':paginator.num_pages,
         'results': data_items,
     }
-    
     return JsonResponse(context)
 
 @role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
@@ -400,6 +393,14 @@ class HistoryView(RoleRequiredMixin, View):
         else:
             return render(request, self.template_name, self.context)
         
+    def delete(self, request, id):
+        try:
+            history = get_object_or_404(History, id=id)
+            history.delete()
+            return JsonResponse({'message': 'Data deleted successfully'})
+        except History.DoesNotExist:
+            return JsonResponse({'message': 'Invalid request method'})
+        
 class HistoryDetailView(RoleRequiredMixin, View):
     required_roles = ['MEMBER', 'ADMIN', 'SUPERADMIN']
     context = {}
@@ -441,84 +442,3 @@ class HistoryDeleteAllView(RoleRequiredMixin, View):
         user = User.objects.get(id=request.user.id)
         History.objects.filter(user=user).delete()
         return redirect(reverse_lazy('sentiment:getHistoryList'))
-
-@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
-def getHistoryList(request):
-    context = {}
-
-    # get history
-    user = User.objects.get(id=request.user.id)
-    history = History.objects.filter(user=user).prefetch_related('bacapres').all().order_by('-id')
-
-    #  pagination
-    paginator = Paginator(history, 10)
-    page_number = request.GET.get('page', 1)# Get the current page number from the request
-    page_obj = paginator.get_page(page_number)
-
-    data_items = []
-    for item in page_obj:
-        bacapres_items = []
-        startDate = item.start_date
-        endDate = item.end_date
-        for b_item in item.bacapres.all().order_by('name'):
-            bacapres_items.append(b_item.name)
-        data_item = {
-            'no': item.id,
-            'bacapres': bacapres_items,
-            'start_date': startDate.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
-            'end_date': endDate.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
-        }
-        data_items.append(data_item)
-    context = {
-        'total_pages':paginator.num_pages,
-        'results': data_items,
-    }
-
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse(context, safe=False)
-    else:
-        context['active_page'] = 'history'
-        return render(request, 'history/history.html', context)
-
-@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
-def getDetailHistory(request, id):
-    context = {}
-
-    # belum ada pengecekan user id sesuai gak
-    history = get_object_or_404(History, id=id)
-    context = {
-        'startDate' : history.start_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
-        'endDate' : history.end_date.astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"),
-    }
-
-    # assign history id and selected options to session
-    bacapres = history.bacapres.all()
-    selected_options = [obj.id for obj in bacapres]
-
-    request.session['selected_options'] = selected_options
-    request.session['history_id'] = history.id
-
-    # get selected bacapres
-    bacapres = getBacapres(request.session)
-    context['bacapres'] = bacapres
-
-    # get default selected bacapres
-    active_item = bacapres.first()
-    if active_item: context['active_item'] = active_item.id
-
-    context['title'] = 'History'
-    context['active_page'] = 'history'
-
-    return render(request, 'dashboard.html', context)
-
-@role_required(allowed_roles=['MEMBER', 'ADMIN', 'SUPERADMIN'])
-def deleteHistory(request, id):
-    context = {}
-    try:
-        history = get_object_or_404(History, id=id)
-        history.delete()
-        
-        return JsonResponse({'message': 'Data deleted successfully'})
-    except History.DoesNotExist:
-        print("Object not found")
-        return JsonResponse({'message': 'Invalid request method'})

@@ -61,7 +61,7 @@ function getDataHistory(page) {
             <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                 ${index}
             </th>
-            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('/sentiment/history/detail/${data[i].no}')">
+            <td class="font-[Inter-Regular] text-[12px] text-black py-4 whitespace-normal text-center" onclick="goToDetailPage('/sentiment/history/${data[i].no}/detail')">
                 ${bacapres_result}
             </td>
             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
@@ -157,7 +157,7 @@ function getDataHistory(page) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `/sentiment/history/delete/${id}`; // Ganti yourDataId dengan ID data yang ingin dihapus
+                const url = `/sentiment/history/${id}/delete`; // Ganti yourDataId dengan ID data yang ingin dihapus
 
                 $.ajax({
                     url: url,
