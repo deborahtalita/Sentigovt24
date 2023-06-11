@@ -643,7 +643,7 @@ document.getElementById("manualSearch").addEventListener("submit", function (eve
         })
         .then(function (response) {
             if (response.ok){
-                window.location.href ="/sentiment/search"
+                location.reload();
             }
             else if (response.status === 400) {
                 Swal.fire({
