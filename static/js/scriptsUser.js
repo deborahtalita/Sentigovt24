@@ -169,6 +169,43 @@ function getDataUser(page) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("updateRole");
+  
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();  // Prevent default form submission
+  
+      var url = form.action;
+      var formData = new FormData(form);
+  
+      fetch(url, {
+        method: "POST",
+        body: formData
+      })
+      .then(function(response) {
+        if (response.status === 400) {
+          return response.json();
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'User role already updated!',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setTimeout(function () {
+            // Reload the current page
+            window.location.href = '/account'
+          }, 2000);
+        }
+      })
+      .then(function(errors) {
+      })
+      .catch(function(error) {
+        // Handle network or other errors
+      });
+    });
+  });
+
 // Helper function to get the value of a cookie
 function getCookie(name) {
     var cookieValue = null;

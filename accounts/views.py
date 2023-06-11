@@ -80,7 +80,7 @@ class AccountDetailView(RoleRequiredMixin,View):
         user = get_object_or_404(User,id=id)
         user.role = role
         user.save()
-        return redirect(reverse_lazy('account:userManagement'))
+        return JsonResponse({"success": True}, status=200)
     
 class UserProfileView(RoleRequiredMixin,View):
     required_roles = ['MEMBER','ADMIN', 'SUPERADMIN']

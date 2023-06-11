@@ -18,7 +18,7 @@ User Management
         <!-- End Header User -->
         <!-- Start Data User -->
         <div class="bg-white p-6 rounded-xl h-fit">
-            <form action="" method="POSt" enctype="multipart/form-data">
+            <form id="updateRole" action="" method="POSt" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div id="photoProfile">
                     <div class="font-[poppins-semibold] text-[12px] text-[#1E1D4C] mb-3">Display Picture</div>
@@ -78,5 +78,6 @@ User Management
         <!-- End Footer -->
     </div>
 </div>
-<script defer src="{% static 'js/popupSweetAlert2.js' %}"></script>
+<script defer src="{% static 'js/popupSweetAlert2.js' %}?v={{ STATICFILES_TIMESTAMP }}"></script>
+<script src="{% static 'js/scriptsUser.js' %}?v={{ STATICFILES_TIMESTAMP }}"></script>
 {% endblock %}

@@ -44,19 +44,6 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  var myButton = document.getElementById('saveEditUser');
-
-  myButton.addEventListener('click', function () {
-    Swal.fire({
-      icon: 'success',
-      title: 'User has been Edited',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
   var myButton = document.getElementById('deleteAllBacapres');
 
   myButton.addEventListener('click', function () {
