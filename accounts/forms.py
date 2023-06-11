@@ -21,13 +21,12 @@ class SignUpForm(UserCreationForm):
         return user
 
 class UpdateProfileForm(forms.ModelForm):
-    email = forms.EmailField()
     first_name = forms.CharField(max_length=150)
     avatar = forms.ImageField()
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'avatar')
+        fields = ('first_name', 'avatar')
 
 class PasswordChangeForm(PasswordChangeForm):
     def clean_new_password2(self):

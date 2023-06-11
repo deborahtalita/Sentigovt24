@@ -100,9 +100,7 @@ class UserProfileView(RoleRequiredMixin,View):
         form = UpdateProfileForm(request.POST,request.FILES, instance=user)
         if form.is_valid():
             user.first_name = form.cleaned_data['first_name']
-            user.email = form.cleaned_data['email']
             user.avatar = form.cleaned_data['avatar']
-            user.username = form.cleaned_data['email']
             if not user.avatar:
                 user.avatar = User.objects.get(id=auth_user.id).avatar
             user.save()
