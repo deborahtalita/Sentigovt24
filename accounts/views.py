@@ -106,11 +106,11 @@ class UserProfileView(RoleRequiredMixin,View):
             if not user.avatar:
                 user.avatar = User.objects.get(id=auth_user.id).avatar
             user.save()
-            return redirect(reverse_lazy('account:profile'))
+            return JsonResponse({"success": True}, status=200)
         else:
-            print(form.errors.as_data())
-            self.context['form'] = form
-            return render(request, self.template_name, self.context)
+            errors = form.errors.get_json_data()
+            print(errors)
+            return JsonResponse(errors,status=400,safe=False)
 
 class RegisterView(View):
     context = {}

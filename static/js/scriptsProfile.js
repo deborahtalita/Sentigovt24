@@ -8,8 +8,6 @@ function closeModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    var popupContainer = document.getElementById("popup");
-    var openPopupButton = document.getElementById("popup-password");
     var form = document.getElementById("change-password");
   
     form.addEventListener("submit", function(e) {
@@ -26,7 +24,12 @@ document.addEventListener("DOMContentLoaded", function() {
         if (response.status === 400) {
           return response.json();
         } else {
-            window.location.href = 'profile'
+          Swal.fire({
+            icon: 'success',
+            title: 'Password already updated!',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       })
       .then(function(errors) {
@@ -49,4 +52,45 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
 });
-  
+
+document.addEventListener("DOMContentLoaded", function() {
+  var form = document.getElementById("editProfile");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();  // Prevent default form submission
+
+    var url = form.action;
+    var formData = new FormData(form);
+
+    fetch(url, {
+      method: "POST",
+      body: formData
+    })
+    .then(function(response) {
+      if (response.status === 400) {
+        return response.json();
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile already updated!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .then(function(errors) {
+      document.getElementById("avatar_err").innerText = ""
+      document.getElementById("name_err").innerText = ""
+      
+      if (errors.hasOwnProperty('avatar')){
+          document.getElementById("avatar_err").innerText = errors.avatar[0].message
+      }
+      if (errors.hasOwnProperty('first_name')) {
+          document.getElementById("name_err").innerText = errors.name[0].message
+      }
+    })
+    .catch(function(error) {
+      // Handle network or other errors
+    });
+  });
+});
