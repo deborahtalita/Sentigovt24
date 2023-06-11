@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
           document.getElementById("avatar_err").innerText = errors.avatar[0].message
       }
       if (errors.hasOwnProperty('first_name')) {
-          document.getElementById("name_err").innerText = errors.name[0].message
+          document.getElementById("name_err").innerText = errors.first_name[0].message
       }
     })
     .catch(function(error) {

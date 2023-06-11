@@ -34,7 +34,7 @@ Profile
                             <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload Image Profile</label>
                             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" name="avatar" value="{{user.avatar.url}}" type="file">
                             <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG or GIF</p>
-                            <div {% if form.errors.avatar %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.avatar.0}}</div>
+                            <div id="avatar_err" class="font-bold text-red-500 block" ></div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ Profile
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Name</label>
                             <input class=" w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" type="text" name="first_name" placeholder="Masukan Nama" value="{{user.first_name}}" required>
-                            <div {% if form.errors.first_name %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.first_name.0}}</div>
+                            <div id="name_err" class="font-bold text-red-500 block" ></div>
                         </div>
                         <div class="relative">
                             <label class="text-gray-700 tracking-wide text-[15px]">Email</label>
