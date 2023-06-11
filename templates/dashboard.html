@@ -200,7 +200,7 @@
                                     <img class="w-5 h-5 mx-1" src="{% static 'media/icons/dropSentiment.svg' %}" alt="Drop Sentiment"/>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div
+                                <div id="tableDropdown"
                                     x-show="isOpen" 
                                     @click="isOpen = false" 
                                     @click.away="isOpen = false"
@@ -211,16 +211,16 @@
                                     x-transition:leave-start="opacity-100 scale-100"
                                     x-transition:leave-end="opacity-0 scale-90"
                                     class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
-                                    <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                    <a id="all_sentiment" class="selected sentiment-dropdown font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                         All Sentiment
                                     </a>
-                                    <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                    <a id="pos_sentiment" class="sentiment-dropdown font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                         Positive
                                     </a>
-                                    <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                    <a id="neg_sentiment" class="sentiment-dropdown font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                         Negative
                                     </a>
-                                    <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
+                                    <a id="neu_sentiment" class="sentiment-dropdown font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                         Netral
                                     </a>
                                 </div>

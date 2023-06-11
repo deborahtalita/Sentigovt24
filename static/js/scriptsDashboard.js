@@ -97,122 +97,155 @@ function dropdown() {
 
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataDashboard(id, page) {
-    $.getJSON(`/sentiment/getTweetList?bacapres=${id}&page=${page}`, function (response) {
-        
-        var currentPage = page;
+    let url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`
 
-        // Untuk menghitung index per tweet
-        var startIndex = 10 * (currentPage - 1) + 1 ;
-        var counter = 0;
-        // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
-        const maxVisibleButtons = 5;
-
-        // Mendapatkan data dari response
-        const data = response.results;
-        const totalPages = response.total_pages;
-
-        // Menampilkan data di tabel
-        const tableBody = $("#table-body");
-        tableBody.empty();
-        for (let i = 0; i < data.length; i++) {
-            let bgColor = "";
-            if (data[i].sentiment === "positive") {
-                bgColor = "bg-green-300";
-            } else if (data[i].sentiment === "neutral") {
-                bgColor = "bg-gray-300";
-            } else if (data[i].sentiment === "negative") {
-                bgColor = "bg-red-300";
+    document.getElementById("tableDropdown").addEventListener("click", function (event) {
+        if (event.target.tagName === 'A') {
+            var selectedValue = event.target.id;
+            console.log(selectedValue);
+            if (selectedValue === "pos_sentiment") {
+                filterOpt = "positive";
+            } else if (selectedValue === "neg_sentiment") {
+                filterOpt = "negative";
+            } else if (selectedValue === "neu_sentiment") {
+                filterOpt = "neutral";
+            } else {
+                filterOpt = "default";
             }
-
-            index = startIndex + counter;
-
-            const row = `<tr class="border-b">
-            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                ${index}
-            </th>
-            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                ${data[i].name}
-            </td>
-            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                ${data[i].tweet}
-            </td>
-            <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
-                <div class="${bgColor} p-1 rounded-full">
-                    ${data[i].sentiment}
-                </div>
-            </td>
-            <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                ${data[i].date}
-            </td>
-        </tr>`;
-            tableBody.append(row);
-            counter= counter + 1
+            console.log(filterOpt);
         }
 
-        // Menghapus tombol halaman sebelumnya dan nomor halaman
-        $(".page-button").remove();
+        if (filterOpt !== "default") {
+            url = `/sentiment/getTweetList?bacapres=${id}&page=${page}&sentiment=${encodeURIComponent(filterOpt)}`;
+        } else {
+            url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`;
+        }
 
-        // Event listener untuk tombol nomor halaman
-        $(document).on("click", ".page-button", function () {
-            const page = parseInt($(this).text());
-            if (page !== currentPage) {
-                currentPage = page;
-                getDataDashboard(id, currentPage);
+        console.log(url)
+        $.getJSON(url, function (response) {
+
+            var currentPage = page;
+
+            // Untuk menghitung index per tweet
+            var startIndex = 10 * (currentPage - 1) + 1;
+            var counter = 0;
+            // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
+            const maxVisibleButtons = 5;
+
+            // Mendapatkan data dari response
+            const data = response.results;
+            const totalPages = response.total_pages;
+
+            // Menampilkan data di tabel
+            const tableBody = $("#table-body");
+            tableBody.empty();
+            for (let i = 0; i < data.length; i++) {
+                let bgColor = "";
+                if (data[i].sentiment === "positive") {
+                    bgColor = "bg-green-300";
+                } else if (data[i].sentiment === "neutral") {
+                    bgColor = "bg-gray-300";
+                } else if (data[i].sentiment === "negative") {
+                    bgColor = "bg-red-300";
+                }
+
+                index = startIndex + counter;
+
+                const row = `<tr class="border-b">
+                <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                    ${index}
+                </th>
+                <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                    ${data[i].name}
+                </td>
+                <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                    ${data[i].tweet}
+                </td>
+                <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
+                    <div class="${bgColor} p-1 rounded-full">
+                        ${data[i].sentiment}
+                    </div>
+                </td>
+                <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
+                    ${data[i].date}
+                </td>
+            </tr>`;
+                tableBody.append(row);
+                counter = counter + 1
             }
+
+            // Menghapus tombol halaman sebelumnya dan nomor halaman
+            $(".page-button").remove();
+
+            // Event listener untuk tombol nomor halaman
+            $(document).on("click", ".page-button", function () {
+                const page = parseInt($(this).text());
+                if (page !== currentPage) {
+                    currentPage = page;
+                    getDataDashboard(id, currentPage);
+                }
+            });
+
+            // Membuat tombol nomor halaman
+            const pageButtons = $("#page-buttons");
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+            if (endPage - startPage + 1 < maxVisibleButtons) {
+                startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
+                pageButtons.append(button);
+            }
+
+            // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
+            if (startPage > 1) {
+                const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.prepend(ellipsisStart);
+            }
+
+            // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
+            if (endPage < totalPages) {
+                const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+                pageButtons.append(ellipsisEnd);
+            }
+
+            // Menambahkan event listener untuk tombol nomor halaman
+            $(".page-button").on("click", function () {
+                const page = parseInt($(this).text());
+                if (page !== currentPage) {
+                    currentPage = page;
+                    getDataDashboard(id, currentPage);
+                    // Menghapus kelas "active" dari semua tombol halaman
+                    $(".page-button").removeClass("activePagination");
+                    // Menambahkan kelas "active" pada tombol halaman yang dipilih
+                    $(this).addClass("activePagination");
+                }
+            });
+
+            // Mengatur status button prev dan next berdasarkan halaman saat ini
+            $("#prev-button").prop("disabled", currentPage === 1);
+            $("#next-button").prop("disabled", currentPage === totalPages);
+
+            // Menghapus kelas "active" dari semua tombol halaman
+            $(".page-button").removeClass("activePagination");
+            // Menambahkan kelas "active" pada tombol halaman saat ini
+            $(`.page-button:contains(${currentPage})`).addClass("activePagination");
         });
-
-        // Membuat tombol nomor halaman
-        const pageButtons = $("#page-buttons");
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
-
-        if (endPage - startPage + 1 < maxVisibleButtons) {
-            startPage = Math.max(1, endPage - maxVisibleButtons + 1);
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-            const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
-            pageButtons.append(button);
-        }
-
-        // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
-        if (startPage > 1) {
-            const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
-            pageButtons.prepend(ellipsisStart);
-        }
-
-        // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
-        if (endPage < totalPages) {
-            const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
-            pageButtons.append(ellipsisEnd);
-        }
-
-        // Menambahkan event listener untuk tombol nomor halaman
-        $(".page-button").on("click", function () {
-            const page = parseInt($(this).text());
-            if (page !== currentPage) {
-                currentPage = page;
-                getDataDashboard(id, currentPage);
-                // Menghapus kelas "active" dari semua tombol halaman
-                $(".page-button").removeClass("activePagination");
-                // Menambahkan kelas "active" pada tombol halaman yang dipilih
-                $(this).addClass("activePagination");
-            }
-        });
-
-        // Mengatur status button prev dan next berdasarkan halaman saat ini
-        $("#prev-button").prop("disabled", currentPage === 1);
-        $("#next-button").prop("disabled", currentPage === totalPages);
-
-        // Menghapus kelas "active" dari semua tombol halaman
-        $(".page-button").removeClass("activePagination");
-        // Menambahkan kelas "active" pada tombol halaman saat ini
-        $(`.page-button:contains(${currentPage})`).addClass("activePagination");
     });
+
+    // Get the default selected option element
+    var defaultOption = document.querySelector(".selected");
+
+    // Trigger a click event on the default selected option
+    defaultOption.click();
 }
 
 // function menampilkan jumlah tweet dan sentiment
 let currentTotal = null;
+
 function displayTotalTweet(Id) {
     if (currentTotal) {
         delete currentTotal;
@@ -239,23 +272,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         })
     }
     var gdr
+
     function getDataRanking() {
-        if (gdr){
+        if (gdr) {
             gdr.abort();
-        } 
+        }
         gdr = $.getJSON(`/sentiment/getBacapresRanking`, function (response) {
             // Mendapatkan data dari response
             const data = response.results;
-    
+
             // Menampilkan data di tabel
             const buttonContainerRanking = $("#buttonContainerRanking");
             buttonContainerRanking.empty();
-    
+
             // Tambahkan event listener pada dropdown sort
-            $("#dropdownSort").on("change", function() {
+            $("#dropdownSort").on("change", function () {
                 const selectedSort = $(this).val();
                 console.log(selectedSort)
-    
+
                 // Lakukan pengurutan sesuai dengan pilihan yang dipilih
                 if (selectedSort === "abjad") {
                     data.sort((a, b) => a.name.localeCompare(b.name));
@@ -264,22 +298,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 } else if (selectedSort === "topNegative") {
                     data.sort((a, b) => b.negative - a.negative);
                 }
-    
+
                 // Tampilkan data yang sudah diurutkan
                 renderData(data, selectedSort);
             });
-    
+
             // Render data awal
             data.sort((a, b) => a.name.localeCompare(b.name));
             renderData(data, "abjad");
         });
     }
-    
+
     function renderData(data, selectedSort) {
         const buttonContainerRanking = $("#buttonContainerRanking");
         buttonContainerRanking.empty();
         console.log(selectedSort)
-    
+
         for (let i = 0; i < data.length; i++) {
             const isActive = i == 0; // Menandai button pertama sebagai aktif
             const activeClass = isActive ? "bg-[#554fff] hover:bg-[#554fff] text-white" : ""; // Menambahkan kelas "active" jika button aktif
@@ -298,9 +332,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </button>
                 <hr>`;
             buttonContainerRanking.append(row);
-    
+
             // Tambahkan event listener pada setiap button
-            $(`#buttonRanking-${data[i].id}`).on("click", function() {
+            $(`#buttonRanking-${data[i].id}`).on("click", function () {
                 // Hapus kelas "active" dari button sebelumnya
                 $(".rankingButton").removeClass("bg-[#554fff] hover:bg-[#554fff] text-white");
                 // Tambahkan kelas "active" pada button yang baru dipilih
@@ -325,7 +359,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     getDataRanking();
     // await taskRanking();
     await displayTrenTotal();
-    
+
     // Event listener untuk tombol sebelumnya
     $("#prev-button").on("click", function () {
         if (currentPage > 1) {
@@ -342,12 +376,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // function untuk menambahkan event listener pada chart-button dgn tetap terkait dengan rankingButton
-document.querySelectorAll(".chart-button").forEach(function(button) {
-    button.addEventListener("click", function() {
+document.querySelectorAll(".chart-button").forEach(function (button) {
+    button.addEventListener("click", function () {
         var chartType = button.getAttribute("id");
-        console.log("chart-button",chartType)
+        console.log("chart-button", chartType)
         var displayOption = getSelectedBacapresOption();
-        console.log("display-option",displayOption)
+        console.log("display-option", displayOption)
         displayChart(chartType, displayOption);
     });
 });
@@ -360,14 +394,14 @@ function getCurrentChartType() {
 
 // funtion untuk mengambil data-id pada rankingButton dengan class active
 function getSelectedBacapresOption() {
-    $(".rankingButton").each(function() {
+    $(".rankingButton").each(function () {
         if ($(this).hasClass("bg-[#554fff] hover:bg-[#554fff] text-white")) {
-          currentButtonId = $(this).data("id");;
-          return false; // Exit the loop after finding the first matching element
+            currentButtonId = $(this).data("id");;
+            return false; // Exit the loop after finding the first matching element
         }
-      });
-    
-      return currentButtonId;
+    });
+
+    return currentButtonId;
 }
 
 // Variabel menyimpan temporary data dari Chart
@@ -377,13 +411,14 @@ let currentId = null;
 
 // Grafik Tren
 var dc;
+
 function displayChart(chartId, Id) {
     if (currentId && currentChart) {
         delete currentId;
         currentChart.destroy();
     }
 
-    if (dc){
+    if (dc) {
         dc.abort();
     }
 
@@ -531,7 +566,7 @@ function displayChartTotal() {
         };
         const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
         chart.render();
-    })  
+    })
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -539,14 +574,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const csvButton = document.getElementById('generateCSV');
-csvButton.addEventListener('click', function() {
+csvButton.addEventListener('click', function () {
     // Make the AJAX request using getJSON
     var id = getSelectedBacapresOption();
     var xhr = new XMLHttpRequest();
     xhr.open('GET', `/sentiment/generateCSV?bacapres=${id}`, true);
     xhr.responseType = 'blob';
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             var csvFile = xhr.response;
             // Create a download link for the CSV file
@@ -556,7 +591,7 @@ csvButton.addEventListener('click', function() {
                 var matches = filenameRegex.exec(disposition);
                 if (matches != null && matches[1]) {
                     filename = matches[1].replace(/['"]/g, '');
-            }
+                }
             }
 
             var downloadUrl = URL.createObjectURL(csvFile);
@@ -568,4 +603,4 @@ csvButton.addEventListener('click', function() {
     };
 
     xhr.send();
-  });
+});

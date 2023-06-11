@@ -233,7 +233,6 @@ def getRankingBacapres(request):
     tweet, _, _ = getTweets(request.session)
     # option = request.GET.get('option', 'positive')
     
-    
     bacapres_rank = []
     for res in bacapres:
         tokoh_tweets = tweet.filter(bacapres=res.id)
@@ -268,7 +267,14 @@ def getTweetList(request):
 
     # get tweets by selected bacapres
     bacapres_id = int(request.GET.get('bacapres', active_item))
-    tokoh_tweets = tweet.filter(bacapres=bacapres_id).order_by('-created_at')
+
+    # get selected sentiment option
+    sentiment = request.GET.get('sentiment')
+    print("this ",sentiment)
+    if sentiment:
+        tokoh_tweets = tweet.filter(bacapres=bacapres_id,sentiment=sentiment).order_by('-created_at')
+    else:
+        tokoh_tweets = tweet.filter(bacapres=bacapres_id).order_by('-created_at')
 
     # pagination
     paginator = Paginator(tokoh_tweets, 10)  # 10 items per page
