@@ -95,6 +95,7 @@ function dropdown() {
     }
 }
 
+var gdd;
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataDashboard(id, page) {
     let url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`
@@ -122,7 +123,10 @@ function getDataDashboard(id, page) {
         }
 
         console.log(url)
-        $.getJSON(url, function (response) {
+        if (gdd){
+            gdd.abort();
+        }
+        gdd = $.getJSON(url, function (response) {
 
             var currentPage = page;
 
