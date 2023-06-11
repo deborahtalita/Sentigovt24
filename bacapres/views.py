@@ -104,7 +104,7 @@ class BacapresCreateView(RoleRequiredMixin, View):
         if form.is_valid():
             form.save()
             messages.success(request, ('Bacapres was succesfully added!'))
-            return JsonResponse({"success": True})
+            return JsonResponse({"success": True}, status=200)
         else:
             errors = form.errors.get_json_data()
             print(errors)

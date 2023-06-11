@@ -102,20 +102,10 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
       method: "POST",
       body: new FormData(event.target) // Use FormData to get form data
     })
-    .then(function (response) {
+    .then(function(response) {
       if (response.status === 400) {
         return response.json();
-      } else if (response.status === 413) {
-        // Request Entity Too Large error handling
-        document.getElementById("avatar_err").innerText = 'The file you are trying to upload is too large'
-        Swal.fire({
-          icon: 'error',
-          title: 'Request Entity Too Large',
-          text: 'The file you are trying to upload is too large',
-          showConfirmButton: true
-        });
-      }
-      else {
+      } else {
         // Form submission was successful, show success popup
         Swal.fire({
           icon: 'success',
@@ -144,7 +134,7 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
       if (errors.hasOwnProperty('avatar')) {
         document.getElementById("avatar_err").innerText = errors.avatar[0].message
       }
-        // Form submission failed, show error popup
+      // Form submission failed, show error popup
       Swal.fire({
         icon: 'error',
         title: 'Bacapres creation failed',
@@ -154,12 +144,12 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
     })
     .catch(function (errors) {
       // Handle any error that occurred during form submission
-      console.error("Error:", errors);
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred during form submission",
-        icon: "error"
-      });
+      // console.error("Error:", errors);
+      // Swal.fire({
+      //   title: "Error",
+      //   text: "An error occurred during form submission",
+      //   icon: "error"
+      // });
     })
 });
 

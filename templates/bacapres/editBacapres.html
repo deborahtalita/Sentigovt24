@@ -51,7 +51,7 @@ Bacapres Management
                     <div class="relative">
                         <label class="text-gray-700 tracking-wide text-[15px]">Keyword</label><label class="text-gray-700 tracking-wide text-[15px]"><b> (Jika keyword lebih dari 1, gunakan separator ";" tanpa spasi. Misal: Joko Widodo;Jokowi)</b></label>
                         <input type="text" aria-label="keyword" class="border-2 border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2" placeholder="Masukan Keyword" name="keyword" value="{{object.keyword}}" required>
-                        <div {% if form.errors.keyword %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.keyword.name.0}}</div>
+                        <div {% if form.errors.keyword %} class="font-bold text-red-500 block" {% endif %} class="font-bold text-red-500 hidden">{{form.errors.keyword.0}}</div>
                     </div>
                     <div class="relative">
                         <label class="text-gray-700 tracking-wide text-[15px]">Description</label>
