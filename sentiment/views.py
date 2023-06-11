@@ -68,7 +68,7 @@ class ManualSearchView(View):
     context['active_page'] = 'manual search'
 
     def get(self, request):
-        bacapres = Bacapres.objects.all().order_by('id')
+        bacapres = Bacapres.objects.all().order_by('name')
         self.context['bacapres_opt'] = bacapres
         return render(request, self.template_name, self.context)
     

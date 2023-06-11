@@ -3,12 +3,13 @@ jQuery(document).ready(function () {
     var dateEnd = jQuery("#date-end");
 
     dateStart.datepicker({
-        maxDate: "15",
+        minDate: "-30",
+        maxDate: "+30",
         dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate() + 7); // Menambahkan 7 hari dari tanggal yang dipilih
-            dateEnd.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date end
+            selected.setDate(selected.getDate()); // Menambahkan 7 hari dari tanggal yang dipilih
+            dateEnd.datepicker("option", "minDate", selected); /// Set the minimum date for dateEnd
         },
         beforeShowDay: function (date) {
             var today = new Date();
@@ -18,12 +19,13 @@ jQuery(document).ready(function () {
     });
 
     dateEnd.datepicker({
-        maxDate: "15",
+        minDate: "-30",
+        maxDate: "+30",
         dateFormat: "dd/mm/yy",
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
-            selected.setDate(selected.getDate() - 7); // Mengurangi 7 hari dari tanggal yang dipilih
-            dateStart.datepicker("option", "maxDate", selected); // Mengatur tanggal maksimal pada date start
+            selected.setDate(selected.getDate()); // Mengurangi 7 hari dari tanggal yang dipilih
+            dateStart.datepicker("option", "maxDate", selected); // Set the maximum date for dateStart
         },
         beforeShowDay: function (date) {
             var today = new Date();
