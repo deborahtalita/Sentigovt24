@@ -154,6 +154,7 @@ document.getElementById("createBacapres").addEventListener("submit", function (e
     })
     .catch(function (errors) {
       // Handle any error that occurred during form submission
+      document.getElementById("avatar_err").innerText = 'The file you are trying to upload is too large'
       console.error("Error:", errors);
       Swal.fire({
         title: "Error",
