@@ -49,7 +49,12 @@ User Management
                         <div>
                             <label class="text-gray-700 tracking-wide text-[15px]">Role</label>
                             {% if auth_user.role == 'SUPERADMIN' %}
-                            <select title="role" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                            {% if auth_user.id == user.id %}
+                            <select title="role" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" disabled>
+                            <option {% if user.role == 'SUPERADMIN' %} selected {% endif %} value="SUPERADMIN" >Super Administrator</option>
+                            {% else %}
+                                <select title="role" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg">
+                                {% endif %}
                             {% else %}
                             <select title="role" id="status" name="selected_role" class="w-full text-base px-4 py-2 border-2 border-gray-300 focus:border-blue-500 block rounded-lg" disabled>
                             {% endif %}
