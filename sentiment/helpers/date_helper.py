@@ -5,6 +5,13 @@ timezone = pytz.timezone('Asia/Jakarta')
 today = datetime.now(timezone).replace(hour=23, minute=59, second=59, microsecond=59)
 last_seven_days = today.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=6)
 
+def getTodayDate():
+    return datetime.now(timezone).replace(hour=23, minute=59, second=59, microsecond=59)
+
+def getLastSevenDays():
+    today = getTodayDate()
+    return today.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=6)
+
 def convertStartDate(date): # function to format hour ins start date to 00:00:00
     date = datetime.strptime((datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')),('%Y-%m-%d'))
     date = date.replace(tzinfo=pytz.utc).astimezone(timezone)

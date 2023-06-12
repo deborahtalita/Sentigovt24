@@ -12,7 +12,7 @@ import pytz
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
-from .helpers.date_helper import convertStartDate, convertEndDate, getDates, today, last_seven_days
+from .helpers.date_helper import convertStartDate, convertEndDate, getDates, getTodayDate, getLastSevenDays
 from .helpers.session_helper import isGuestLimitAccess
 from sentigovt2.mixin import RoleRequiredMixin
 from django.views import View
@@ -336,8 +336,8 @@ def getTweets(session):
         start_date = history.start_date
         end_date = history.end_date
     else:
-        start_date = last_seven_days # from date_helper to get current dates
-        end_date = today
+        start_date = getLastSevenDays() # from date_helper to get current dates
+        end_date = getTodayDate()
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
     return tweets, start_date, end_date
 
