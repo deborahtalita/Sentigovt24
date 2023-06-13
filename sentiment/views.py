@@ -12,7 +12,7 @@ import pytz
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 from .helpers.sentiment_helper import predict, orderLabel
-from .helpers.date_helper import convertStartDate, convertEndDate, getDates, getTodayDate, getLastSevenDays
+from .helpers.date_helper import DateHelper
 from .helpers.session_helper import isGuestLimitAccess
 from sentigovt2.mixin import RoleRequiredMixin
 from django.views import View
@@ -81,7 +81,9 @@ class ManualSearchView(View):
         else:
             selected_options = request.POST.getlist('search_field')
             start = request.POST.get('start_date')
+            print(start)
             end = request.POST.get('end_date')
+            print(end)
             
             selected_options = [int(x) for x in selected_options[0].split(',')]
 
@@ -101,8 +103,8 @@ class ManualSearchView(View):
             self.context['result'] = 'true'
             
             # set date to insert in history obj
-            start_date = convertStartDate(start)
-            end_date = convertEndDate(end)
+            start_date = DateHelper.convertStartDate(start)
+            end_date = DateHelper.convertEndDate(end)
 
             # get tweet to insert in history obj
             tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).filter(bacapres__in=selected_options)
@@ -126,7 +128,7 @@ def getTrenTotalTweet(request):
     # get tweets and dates
     tweet, start_date, end_date = getTweets(request.session)
 
-    dates = getDates(start_date, end_date)
+    dates = DateHelper.getDates(start_date, end_date)
     context['dates'] = dates
 
     # get tren total tweet per bacapres per day
@@ -163,7 +165,7 @@ def getTrenTotalSentiment(request):
     # get tweets and dates
     tweet, start_date, end_date = getTweets(request.session)
 
-    dates = getDates(start_date, end_date)
+    dates = DateHelper.getDates(start_date, end_date)
     context['dates'] = dates
     
     # get total tweet per classification per day
@@ -324,10 +326,11 @@ def generateCSV(request):
     return response
 
 def getTweets(session):
+    dh = DateHelper()
     # get tweets
     if ('selected_start_date' in session) and ('selected_end_date' in session): # for manual search
-        start_date = convertStartDate(session['selected_start_date'])
-        end_date = convertEndDate(session['selected_end_date'])
+        start_date = DateHelper.convertStartDate(session['selected_start_date'])
+        end_date = DateHelper.convertEndDate(session['selected_end_date'])
         
     elif 'history_id' in session: # for history detail
         history_id = session['history_id']
@@ -336,8 +339,8 @@ def getTweets(session):
         start_date = history.start_date
         end_date = history.end_date
     else:
-        start_date = getLastSevenDays() # from date_helper to get current dates
-        end_date = getTodayDate()
+        start_date = dh.getLastSevenDays() # from date_helper to get current dates
+        end_date = dh.getTodayDate()
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
     return tweets, start_date, end_date
 
