@@ -3,17 +3,20 @@ let currentChart = null;
 // Variabel menyimpan temporary data-id dari Chart
 let currentId = null;
 
-// Grafik Tren
+const csvButton = document.getElementById('generateCSV');
+
 function displayChart(chartId, Id) {
     if (currentId && currentChart) {
         delete currentId;
         currentChart.destroy();
     }
+
     currentId = Id;
+    console.log(currentId);
 
     if (chartId === 'chart-button1') {
         // Membuat grafik 1
-        $.getJSON("/get-data/", function (response) {
+        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
             var options = {
                 chart: {
                     width: "100%",
@@ -23,7 +26,7 @@ function displayChart(chartId, Id) {
                 dataLabels: {
                     enabled: false
                 },
-                series: response.series[Id],
+                series: response.total_sentiment_per_day[Id],
                 stroke: {
                     width: [2, 2, 2], // mengatur lebar garis
                 },
@@ -37,10 +40,10 @@ function displayChart(chartId, Id) {
                     }
                 },
                 xaxis: {
-                    categories: response.dates,
+                    categories: response.dates
                 },
-                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
-                strokeColors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                colors: ['#FF0000', '#00FF0A', '#7B7B7B'],
+                strokeColors: ['#FF0000', '#00FF0A', '#7B7B7B'],
             };
             const chart1 = new ApexCharts(document.getElementById('chart-display'), options);
             chart1.render();
@@ -48,9 +51,9 @@ function displayChart(chartId, Id) {
         })
     } else if (chartId === 'chart-button2') {
         // Membuat grafik 2
-        $.getJSON("/get-data/", function (response) {
+        $.getJSON("/sentiment/getTrenTotalSentiment/", function (response) {
             var options = {
-                series: response.series[Id],
+                series: response.total_sentiment_per_day[Id],
                 chart: {
                     type: 'bar',
                     width: "100%",
@@ -72,7 +75,7 @@ function displayChart(chartId, Id) {
                         }
                     },
                 },
-                colors: ['#00FF0A', '#7B7B7B', '#FF0000'],
+                colors: ['#FF0000', '#00FF0A', '#7B7B7B'],
                 stroke: {
                     width: 2,
                     colors: ['#fff']
@@ -81,7 +84,7 @@ function displayChart(chartId, Id) {
                     categories: response.dates,
                     labels: {
                         formatter: function (val) {
-                            return val + "K"
+                            return val
                         }
                     }
                 },
@@ -93,7 +96,7 @@ function displayChart(chartId, Id) {
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return val + "K"
+                            return val
                         }
                     }
                 },
@@ -112,7 +115,6 @@ function displayChart(chartId, Id) {
         })
     }
 
-    // ForEach untuk mengaktifkan button Type Chart Tren
     const buttons = document.querySelectorAll('.chart-button');
     buttons.forEach(button => {
         button.classList.remove('activeTren');
@@ -122,37 +124,85 @@ function displayChart(chartId, Id) {
     });
 }
 
-// Button Event Listener untuk mengganti type Chart
-document.querySelectorAll(".chart-button").forEach(function (button) {
-    button.addEventListener("click", function () {
+// Grafik Tren All Tweet
+function displayChartTotal() {
+    $.getJSON("/sentiment/getTrenTotalTweet/", function (response) {
+        var options = {
+            chart: {
+                width: "100%",
+                height: "90%",
+                type: "area",
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: response.bacapres_total_tweet_per_day,
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                }
+            },
+            stroke: {
+                width: 2,
+            },
+            xaxis: {
+                categories: response.dates,
+            },
+        };
+        const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
+        chart.render();
+    })  
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    displayChartTotal();
+});
+
+// Menampilkan grafik default saat halaman dimuat
+document.addEventListener("DOMContentLoaded", function () {
+    var chartType = getCurrentChartType();
+    var displayOption = getSelectedBacapresOption();
+    displayChart(chartType, displayOption);
+    displayTotalTweet(displayOption);
+    }
+);
+
+document.querySelectorAll(".chart-button").forEach(function(button) {
+    button.addEventListener("click", function() {
         var chartType = button.getAttribute("id");
-        var displayOption = getCurrentDisplayOption();
-        // Mengambil type yang berbeda
+        console.log(chartType)
+        var displayOption = getSelectedBacapresOption();
+        console.log(displayOption)
         displayChart(chartType, displayOption);
     });
 });
 
-// Button Event Listener untuk mengganti data-id bacapres
-document.querySelectorAll(".rankingButton").forEach(function (button) {
-    button.addEventListener("click", function () {
+document.querySelectorAll(".rankingButton").forEach(function(button) {
+    button.addEventListener("click", function() {
         var chartType = getCurrentChartType();
+        console.log(chartType)
         var displayOption = button.getAttribute("data-id");
-        // Mengambil data-id yang baru untuk chart
+        console.log(displayOption)
         displayChart(chartType, displayOption);
         // Mengambil data-id yang baru untuk jumlah tweet dan sentiment
         displayTotalTweet(displayOption)
+        // Display data tweet
+        getDataDashboard(displayOption, 1)
     });
 });
 
-// function mengambil id untuk Type Chart
 function getCurrentChartType() {
     var activeButton = document.querySelector(".chart-button.activeTren");
     return activeButton ? activeButton.getAttribute("id") : null;
 }
 
-// function mengambil Attribute data-id bacapres
-function getCurrentDisplayOption() {
+function getSelectedBacapresOption() {
     var activeButton = document.querySelector(".rankingButton.activeRanking");
+    console.log(activeButton)
     return activeButton ? activeButton.getAttribute("data-id") : null;
 }
 
@@ -163,105 +213,34 @@ function displayTotalTweet(Id) {
         delete currentTotal;
     }
     currentTotal = Id;
-    $.getJSON("/get-data/", function (response) {
+    $.getJSON("/sentiment/getTotalTweet/", function (response) {
         // Menampilkan data total tweet
-        document.getElementById("total-display").innerText = response.total_tweet[currentTotal];
+        document.getElementById("total-display").innerText = response.bacapres_total_tweet[currentTotal];
         // Menampilkan data sentiment positive
-        document.getElementById("total-positive").innerText = response.total_sentiment[currentTotal]['positive'];
+        document.getElementById("total-positive").innerText = response.bacapres_total_sentiment[currentTotal]['positive'];
         // Menampilkan data sentiment neutral
-        document.getElementById("total-neutral").innerText = response.total_sentiment[currentTotal]['neutral'];
+        document.getElementById("total-neutral").innerText = response.bacapres_total_sentiment[currentTotal]['neutral'];
         // Menampilkan data sentiment negative
-        document.getElementById("total-negative").innerText = response.total_sentiment[currentTotal]['negative'];
+        document.getElementById("total-negative").innerText = response.bacapres_total_sentiment[currentTotal]['negative'];
     })
 }
 
-// Grafik All Tweet
-function displayChartTotal() {
-    // $.getJSON("/sentiment/getAllTotalTweet/", function (response) { // Tidak bisa karena belum ada
-    var options = {
-        chart: {
-            width: "100%",
-            height: "90%",
-            type: "area",
-        },
-        dataLabels: {
-            enabled: false
-        },
-        series: [{
-                name: "Airlangga Hartanto",
-                data: [45, 52, 38, 45, 19, 40, 47]
-            },
-            {
-                name: "Anies Baswedan",
-                data: [100, 67, 38, 80, 19, 30, 79]
-            },
-            {
-                name: "Gajar Pranowo",
-                data: [58, 50, 38, 90, 64, 53, 32]
-            },
-            {
-                name: "Khofifah Indar Parawansa",
-                data: [70, 102, 38, 20, 70, 23, 20]
-            },
-            {
-                name: "Sandiaga Uno",
-                data: [20, 100, 120, 45, 100, 24, 37]
-            },
-            {
-                name: "Prabowo Subianto",
-                data: [140, 40, 38, 45, 94, 43, 60]
-            },
-            {
-                name: "Prabowo Subianto",
-                data: [140, 40, 38, 45, 94, 43, 60]
-            }
-        ],
-        fill: {
-            type: "gradient",
-            gradient: {
-                shadeIntensity: 1,
-                opacityFrom: 0,
-                opacityTo: 0,
-                stops: [0, 90, 100]
-            }
-        },
-        stroke: {
-            width: 2,
-        },
-        xaxis: {
-            categories: [
-                    "01/05/2023",
-                    "02/05/2023",
-                    "03/05/2023",
-                    "04/05/2023",
-                    "05/05/2023",
-                    "06/05/2023",
-                    "07/05/2023"
-                ],
+csvButton.addEventListener('click', function() {
+    // Make the AJAX request using getJSON
+    var id = getSelectedBacapresOption();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', `/sentiment/generateCSV?bacapres=${id}`, true);
+    xhr.responseType = 'blob';
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Create a download link for the CSV file
+            var downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(xhr.response);
+            downloadLink.download = 'data.csv';
+            downloadLink.click();
         }
     };
-    const chart = new ApexCharts(document.querySelector("#chart-display-Total"), options);
-    chart.render();
-    // })
-}
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Menampilkan total Tweet
-    var idBacapres = getCurrentDisplayOption();
-    displayTotalTweet(idBacapres);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Menampilkan grafik default Tweet saat halaman dimuat
-    displayChartTotal();
-});
-
-// Menampilkan grafik default saat halaman dimuat
-document.addEventListener("DOMContentLoaded", function () {
-    // variabel mengambil id untuk Type Chart
-    var chartType = getCurrentChartType();
-    // variabel mengambil Attribute data-id bacapres
-    var displayOption = getCurrentDisplayOption();
-    // Menampilkan grafik default Tren saat halaman dimuat
-    displayChart(chartType, displayOption);
-});
+    xhr.send();
+  });

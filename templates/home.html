@@ -12,7 +12,7 @@
     {% endcompress %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <link rel="icon" href="{% static 'media/icons/Logo.svg' %}" type="image/icon type">
-    <title>SENTIGOV24</title>
+    <title>SENTIGOVT24</title>
 </head>
 
 <body class="bg-white">
@@ -22,15 +22,15 @@
     <!-- Start Navigasi -->
     <div class="container mx-auto">
         <nav class="flex justify-between items-center mt-4 mx-20" id="navbarId">
-            <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOV24</a></div>
-            <ul class="font-[Poppins-Medium] text-[13px] text-black flex gap-16 pl-20">
+            <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOVT24</a></div>
+            <ul class="font-[Poppins-Medium] text-[13px] text-black flex lg:gap-16 md:gap-6">
                 <li class="hover:opacity-75 transition-opacity"><a href="#headerId">HOME</a></li>
                 <li class="hover:opacity-75 transition-opacity"><a href="#featuresId">FEATURES</a></li>
                 <li class="hover:opacity-75 transition-opacity"><a href="#faqId">FAQ</a></li>
             </ul>
             <div class="flex gap-6 items-center">
-                <a href="{% url 'login' %}" class="font-[Poppins-Semibold] text-[13px] hover:opacity-75 transition-opacity">Log In</a>
-                <a href="{% url 'register' %}"><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Register</button></a>
+                <a {% if auth_user %} href="{% url 'dashboard' %}" {% else %} href="{% url 'account:login' %}" {% endif %} class="font-[Poppins-Semibold] text-[13px] hover:opacity-75 transition-opacity">Log In</a>
+                <a {% if auth_user %} href="{% url 'dashboard' %}" {% else %} href="{% url 'account:register' %}" {% endif %}><button class="font-[Poppins-Semibold] bg-[#7B5BFF] text-[13px] px-10 py-3 rounded-lg text-white">Register</button></a>
             </div>
         </nav>
     </div>
@@ -40,22 +40,22 @@
         <div class="relative headerContent mx-8 mt-4" id="headerContentId">
             <div class="bg-gradient-to-br from-purple-700 to-blue-500 bg-pink-500 h-[120vh] w-full bg-no-repeat rounded-2xl">
                 <div class="text-center absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <div class="font-[Poppins-Regular] text-[20px] text-white mt-16">Website Sentiment Analysis</div>
-                    <div class="font-[Poppins-Semibold] text-[55px] text-white mt-3"><span class="typing"></span></div>
+                    <div class="font-[Poppins-Regular] text-white mt-16 md:text-[15px] lg:text-[20px]">Website Sentiment Analysis</div>
+                    <div class="font-[Poppins-Semibold] text-white mt-3 md:text-[28px] lg:text-[55px]"><span class="typing"></span></div>
                 </div>
-                <div class="absolute top-[250px] left-1/2 transform -translate-x-1/2">
-                    <div class="font-[Poppins-Regular] text-[12px] text-white mt-8 text-center">Navigate the upcoming presidential election with our <span class="font-[Poppins-Bold]">powerful</span> <br> sentiment analysis app, providing <span>insights</span> you can <span>trust</span></div>
+                <div class="absolute left-1/2 transform -translate-x-1/2 md:top-[160px] lg:top-[250px]">
+                    <div class="font-[Poppins-Regular] text-white mt-8 text-center md:text-[10px] lg:text-[12px]">Navigate the upcoming presidential election with our <span class="font-[Poppins-Bold]">powerful</span> <br> sentiment analysis app, providing <span>insights</span> you can <span>trust</span></div>
                     <a href="{% url 'dashboard' %}">
                         <button type="button" class="font-[Poppins-SemiBold] text-[12px] text-white mt-9 items-center flex justify-center border-2 rounded-lg mx-auto py-3 px-9">Get Started<img src="{% static 'media/icons/started.svg' %}" class="w-5 h-5 ml-2 -mr-1" alt="Get Started"/></button>
                     </a>
                 </div>
             </div>
-            <img class="absolute -bottom-20 left-1/2 pr-10  transform -translate-x-1/2" src="{% static 'media/icons/modelBackground2.svg' %}" alt="modelBackground">
-            <img class="absolute top-24 left-24" src="{% static 'media/icons/like1.svg' %}" alt="like 1">
-            <img class="absolute top-44 right-24" src="{% static 'media/icons/like2.svg' %}" alt="like 2">
-            <img class="absolute bottom-64 left-36" src="{% static 'media/icons/bar.svg' %}" alt="bar">
-            <img class="absolute -bottom-20 right-0" src="{% static 'media/icons/line.svg' %}" alt="line">
-            <img class="absolute right-96 top-80" src="{% static 'media/icons/pie.svg' %}" alt="pie">
+            <img class="absolute left-1/2 transform -translate-x-1/2 md:w-[300px] md:-bottom-14 lg:-bottom-20 lg:w-[729px]" src="{% static 'media/icons/modelBackground2.svg' %}" alt="modelBackground">
+            <img class="absolute top-24 left-24 md:hidden lg:block" src="{% static 'media/icons/like1.svg' %}" alt="like 1">
+            <img class="absolute top-44 right-24 md:hidden lg:block" src="{% static 'media/icons/like2.svg' %}" alt="like 2">
+            <img class="absolute bottom-64 left-36 md:hidden lg:block" src="{% static 'media/icons/bar.svg' %}" alt="bar">
+            <img class="absolute -bottom-20 right-0 md:hidden lg:block" src="{% static 'media/icons/line.svg' %}" alt="line">
+            <img class="absolute right-96 top-80 md:hidden lg:block" src="{% static 'media/icons/pie.svg' %}" alt="pie">
         </div>
     </header>
     <!-- End Header -->
@@ -63,19 +63,41 @@
     <section class="bacapres" id="bacapresId">
         <div class="bacapresContent" id="bacapresContentId">
             <div class="container mx-auto">
-                <div class="font-[Poppins-SemiBold] text-[35px] text-[#1E1D4C] flex justify-center mt-44">Presidential Candidate</div>
-                <div class="font-[Poppins-Regular] text-[15px] text-[#1E1D4C] flex justify-center">This presidential candidate has been determined by the trusted survey agency <span class="font-[Poppins-Bold]">"Poltracking"</span></div>
-                <div class="flex gap-5 justify-center mt-12">
-                    <img src="{% static 'media/icons/Agus.svg' %}" alt="Agus Harimurti">
-                    <img src="{% static 'media/icons/Airlangga.svg' %}" alt="Airlangga Hartanto">
-                    <img src="{% static 'media/icons/Anies.svg' %}" alt="Anies Baswedan">
-                    <img src="{% static 'media/icons/Erick.svg' %}" alt="Erick Thohir">
-                    <img src="{% static 'media/icons/Ganjar.svg' %}" alt="Ganjar Pranowo">
-                    <img src="{% static 'media/icons/Khofifah.svg' %}" alt="Khofifah Indar">
-                    <img src="{% static 'media/icons/Prabowo.svg' %}" alt="Prabowo Subianto">
-                    <img src="{% static 'media/icons/Puan.svg' %}" alt="Puan Maharani">
-                    <img src="{% static 'media/icons/Ridwan.svg' %}" alt="Ridwan Kamil">
-                    <img src="{% static 'media/icons/Sandiaga.svg' %}" alt="Sandiaga Uno">
+                <div class="font-[Poppins-SemiBold] text-[#1E1D4C] flex justify-center mt-44 md:text-[30px] lg:text-[35px]">Presidential Candidate</div>
+                <div class="font-[Poppins-Regular] text-[#1E1D4C] flex justify-center md:text-[10px] lg:text-[15px]">This presidential candidate has been determined by the trusted survey agency <span class="font-[Poppins-Bold]">"Poltracking"</span></div>
+                <div class="container my-12 mx-auto md:px-12 lg:px-4">
+                    <div class="flex md:flex-wrap -mx-1 lg:-mx-4 justify-center">
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Agus.svg' %}" alt="Agus Harimurti">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Airlangga.svg' %}" alt="Airlangga Hartanto">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Anies.svg' %}" alt="Anies Baswedan">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Erick.svg' %}" alt="Erick Thohir">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Ganjar.svg' %}" alt="Ganjar Pranowo">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Khofifah.svg' %}" alt="Khofifah Indar">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Prabowo.svg' %}" alt="Prabowo Subianto">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Puan.svg' %}" alt="Puan Maharani">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Ridwan.svg' %}" alt="Ridwan Kamil">
+                        </div>
+                        <div class="my-1 px-1 md:w-1/4 md:my-4 lg:my-4 lg:px-4 lg:w-1/12 justify-center flex">
+                            <img src="{% static 'media/icons/Sandiaga.svg' %}" alt="Sandiaga Uno">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,7 +106,7 @@
     <!-- Start Features -->
     <div class="popup" id="popupId-1">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
-        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
+        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] lg:px-[80px] md:px-[40px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup1(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
             <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari. Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari anggota.</p>
@@ -92,7 +114,7 @@
     </div>
     <div class="popup" id="popupId-2">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
-        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
+        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] lg:px-[80px] md:px-[40px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup2(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Ranking Of Presidential Candidate</div>
             <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, tersedia peringkat dari bakal calon presiden yang telah ditetapkan pada aplikasi. Fitur ini akan selalu berubah setiap 1 hari terakhir secara otomatis dengan menampilkan setiap persen keunggulan dari masing - masing bakal calon presiden serta jumlah persen naik dan turunnya bakal calon presiden. Selain itu, fitur ini juga memberitahukan secara langsung bahwa bakal calon presiden siapakah yang selalu diunggulkan dan tidak diunggulkan dari sisi pandang opini sosial media.</p>
@@ -100,7 +122,7 @@
     </div>
     <div class="popup" id="popupId-3">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
-        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
+        <div class="content rounded-2xl fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] lg:px-[80px] md:px-[40px] text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup3(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
             <div class="font-[Poppins-semibold] text-[40px] mb-[25px]">Real - Time Prediction</div>
             <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, data yang ditampilkan akan selalu bersifat terbaru, oleh karena itu pengguna tidak perlu melakukannya secara manual melainkan hanya dengan memasuki aplikasi maka akan terlihat data terbaru secara otomatis. Namun, walaupun begitu pengguna masih dapat melakukan prediksi secara manual jika ingin melakukannya hanya untuk 1 bakal calon presiden atau lebih dalam kurun waktu tertentu selama 7 hari terakhir.</p>
@@ -108,27 +130,33 @@
     </div>
     <section class="features" id="featuresId">
         <div class="featuresContent" id="featuresContentId">
-            <div class="container mx-auto">
-                <div class="font-[Poppins-SemiBold] text-[35px] text-[#1E1D4C] flex justify-center mt-28">Best Features</div>
-                <div class="font-[Poppins-Regular] text-[15px] text-[#1E1D4C] flex justify-center">There are several features available to assist in sentiment analysis</div>
-                <div class="grid grid-cols-3 gap-8 mx-32 mt-12">
-                    <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
-                        <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1"/>
-                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
-                        <button onclick="togglePopup1()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+            <div class="container my-12 mx-auto md:px-12 lg:px-4">
+                <div class="font-[Poppins-SemiBold] text-[#1E1D4C] flex justify-center mt-28 md:text-[30px] lg:text-[35px]">Best Features</div>
+                <div class="font-[Poppins-Regular] text-[#1E1D4C] flex justify-center mb-14 md:text-[10px] lg:text-[15px]">There are several features available to assist in sentiment analysis</div>
+                <div class="flex flex-wrap -mx-1 lg:-mx-4 justify-center">
+                    <div class="my-1 w-full md:w-full md:mx-9 md:mb-10 lg:my-4 lg:px-3 lg:w-[400px]">
+                        <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
+                            <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
+                            <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1"/>
+                            <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
+                            <button onclick="togglePopup1()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+                        </div>
                     </div>
-                    <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Ranking Of Presidential <br> Candidate</div>
-                        <img class="m-auto" src="{% static 'media/icons/Features2.svg' %}" alt="Features 2"/>
-                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Referring to the process of evaluating and ranking presidential candidates based on various criteria</div>
-                        <button onclick="togglePopup2()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+                    <div class="my-1 w-full md:w-full md:mx-9 md:mb-10 lg:my-4 lg:px-3 lg:w-[400px]">
+                        <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
+                            <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Ranking Of Presidential <br> Candidate</div>
+                            <img class="m-auto" src="{% static 'media/icons/Features2.svg' %}" alt="Features 2"/>
+                            <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Referring to the process of evaluating and ranking presidential candidates based on various criteria</div>
+                            <button onclick="togglePopup2()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+                        </div>
                     </div>
-                    <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                        <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Real - Time Prediction</div>
-                        <img class="m-auto" src="{% static 'media/icons/Features3.svg' %}" alt="Features 3"/>
-                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">This feature can help users to understand possible future outcomes or scenarios and make more informed decisions in real time</div>
-                        <button onclick="togglePopup3()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+                    <div class="my-1 w-full md:w-full md:mx-9 lg:my-4 lg:px-3 lg:w-[400px]">
+                        <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
+                            <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Real - Time Prediction</div>
+                            <img class="m-auto" src="{% static 'media/icons/Features3.svg' %}" alt="Features 3"/>
+                            <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">This feature can help users to understand possible future outcomes or scenarios and make more informed decisions in real time</div>
+                            <button onclick="togglePopup3()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,7 +166,7 @@
     <!-- Start FAQ -->
     <section class="faq" id="faqId">
         <div class="faqContent relative mx-8 mt-40" id="faqContentId">
-            <div class="bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 h-[85vh] w-full bg-no-repeat rounded-2xl">
+            <div class="bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 h-[85vh] w-full bg-no-repeat rounded-2xl md:h-[150vh]">
                 <div class="flex flex-col text-center mx-32">
                     <div class="font-[Poppins-Semibold] text-[35px] text-white mt-20 ">FAQ</div>
                     <div class="font-[Poppins-Regular] text-[15px] text-white mb-16">Frequently asked questions about the application</div>
@@ -201,7 +229,7 @@
         <div class="footerContent relative mx-8 mt-40 mb-10" id="footerContentId">
             <div class="footerBackground h-[45vh] w-full bg-no-repeat rounded-2xl">
                 <div class="flex flex-col mx-14">
-                    <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-white mt-12 "><a href="#">SENTIGOV24</a></div>
+                    <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-white mt-12 "><a href="#">SENTIGOVT24</a></div>
                     <div class="flex gap-10 font-[Poppins-SemiBold] text-[15px] mt-10 text-white">
                         <a href="#">Overview</a>
                         <a href="#">Features</a>
