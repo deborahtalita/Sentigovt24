@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
             var maxDate = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate() + 30);
-            
+
             // Calculate the maximum date for dateEnd
             var endDate = dateEnd.datepicker("getDate");
             if (endDate && endDate > maxDate) {
@@ -17,7 +17,7 @@ jQuery(document).ready(function () {
                 console.log(maxDate)
                 dateEnd.datepicker("setDate", maxDate);
             }
-            
+
             // Set the minimum date for dateEnd
             dateEnd.datepicker("option", "minDate", selected);
         },
@@ -35,13 +35,13 @@ jQuery(document).ready(function () {
         onSelect: function (selectedDate) {
             var selected = jQuery(this).datepicker("getDate");
             var minDate = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate() - 30);
-            
+
             // Calculate the minimum date for dateStart
             var startDate = dateStart.datepicker("getDate");
             if (startDate && startDate < minDate) {
                 dateStart.datepicker("setDate", minDate);
             }
-            
+
             // Set the maximum date for dateStart
             dateStart.datepicker("option", "maxDate", selected);
         },
@@ -115,9 +115,8 @@ function dropdown() {
     }
 }
 
-var gdd;
-// Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
-function getDataDashboard(id, page) {
+var filterOpt = "default";
+$(document).ready(function () {
     document.getElementById("tableDropdown").addEventListener("click", function (event) {
         if (event.target.tagName === 'A') {
             var selectedValue = event.target.id;
@@ -134,46 +133,63 @@ function getDataDashboard(id, page) {
             console.log(filterOpt);
         }
 
-        if (filterOpt !== "default") {
-            url = `/sentiment/getTweetList?bacapres=${id}&page=${page}&sentiment=${encodeURIComponent(filterOpt)}`;
-        } else {
-            url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`;
-        }
+        var id = getSelectedBacapresOption();
+        var currentPage = 1; // Replace this with your logic to get the current page
+        getDataDashboard(id, currentPage);
+    });
+});
 
-        console.log(url)
-        if (gdd) {
-            gdd.abort();
-        }
-        gdd = $.getJSON(url, function (response) {
+var gdd;
+var lastID;
+// Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
+function getDataDashboard(id, page) {
+    console.log(id);
+    if (lastID != id){
+        filterOpt = "default";
+    }
+    lastID = id;
 
-            var currentPage = page;
+    if (filterOpt !== "default") {
+        url = `/sentiment/getTweetList?bacapres=${id}&page=${page}&sentiment=${encodeURIComponent(filterOpt)}`;
+    } else {
+        url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`;
+    }
 
-            // Untuk menghitung index per tweet
-            var startIndex = 10 * (currentPage - 1) + 1;
-            var counter = 0;
-            // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
-            const maxVisibleButtons = 5;
+    console.log(url)
+    if (gdd) {
+        gdd.abort();
+    }
+    
+    gdd = $.getJSON(url, function (response) {
 
-            // Mendapatkan data dari response
-            const data = response.results;
-            const totalPages = response.total_pages;
+        var currentPage = page;
 
-            // Menampilkan data di tabel
-            const tableBody = $("#table-body");
-            tableBody.empty();
-            for (let i = 0; i < data.length; i++) {
-                let bgColor = "";
-                if (data[i].sentiment === "positive") {
-                    bgColor = "bg-green-300";
-                } else if (data[i].sentiment === "neutral") {
-                    bgColor = "bg-gray-300";
-                } else if (data[i].sentiment === "negative") {
-                    bgColor = "bg-red-300";
-                }
+        // Untuk menghitung index per tweet
+        var startIndex = 10 * (currentPage - 1) + 1;
+        var counter = 0;
+        // Mendefinisikan jumlah maksimum tombol halaman yang ditampilkan sekaligus
+        const maxVisibleButtons = 5;
 
-                index = startIndex + counter;
+        // Mendapatkan data dari response
+        const data = response.results;
+        const totalPages = response.total_pages;
 
-                const row = `<tr class="border-b">
+        // Menampilkan data di tabel
+        const tableBody = $("#table-body");
+        tableBody.empty();
+        for (let i = 0; i < data.length; i++) {
+            let bgColor = "";
+            if (data[i].sentiment === "positive") {
+                bgColor = "bg-green-300";
+            } else if (data[i].sentiment === "neutral") {
+                bgColor = "bg-gray-300";
+            } else if (data[i].sentiment === "negative") {
+                bgColor = "bg-red-300";
+            }
+
+            index = startIndex + counter;
+
+            const row = `<tr class="border-b">
                 <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
                     ${index}
                 </th>
@@ -192,78 +208,69 @@ function getDataDashboard(id, page) {
                     ${data[i].date}
                 </td>
             </tr>`;
-                tableBody.append(row);
-                counter = counter + 1
+            tableBody.append(row);
+            counter = counter + 1
+        }
+
+        // Menghapus tombol halaman sebelumnya dan nomor halaman
+        $(".page-button").remove();
+
+        // Membuat tombol nomor halaman
+        const pageButtons = $("#page-buttons");
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+        if (endPage - startPage + 1 < maxVisibleButtons) {
+            startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
+            pageButtons.append(button);
+        }
+
+        // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
+        if (startPage > 1) {
+            const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+            pageButtons.prepend(ellipsisStart);
+        }
+
+        // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
+        if (endPage < totalPages) {
+            const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
+            pageButtons.append(ellipsisEnd);
+        }
+
+        // Menambahkan event listener untuk tombol nomor halaman
+        $(".page-button").on("click", function () {
+            const page = parseInt($(this).text());
+            if (page !== currentPage) {
+                currentPage = page;
+                var id = getSelectedBacapresOption()
+                getDataDashboard(id, currentPage);
+                // Menghapus kelas "active" dari semua tombol halaman
+                $(".page-button").removeClass("activePagination");
+                // Menambahkan kelas "active" pada tombol halaman yang dipilih
+                $(this).addClass("activePagination");
             }
-
-            // Menghapus tombol halaman sebelumnya dan nomor halaman
-            $(".page-button").remove();
-
-            // Event listener untuk tombol nomor halaman
-            $(document).on("click", ".page-button", function () {
-                const page = parseInt($(this).text());
-                if (page !== currentPage) {
-                    currentPage = page;
-                    getDataDashboard(id, currentPage);
-                }
-            });
-
-            // Membuat tombol nomor halaman
-            const pageButtons = $("#page-buttons");
-            let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
-            let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
-
-            if (endPage - startPage + 1 < maxVisibleButtons) {
-                startPage = Math.max(1, endPage - maxVisibleButtons + 1);
-            }
-
-            for (let i = startPage; i <= endPage; i++) {
-                const button = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md hover:bg-gray-400 hover:text-white">${i}</button>`;
-                pageButtons.append(button);
-            }
-
-            // Menambahkan tombol ellipsis di awal jika halaman awal tidak terlihat
-            if (startPage > 1) {
-                const ellipsisStart = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
-                pageButtons.prepend(ellipsisStart);
-            }
-
-            // Menambahkan tombol ellipsis di akhir jika halaman akhir tidak terlihat
-            if (endPage < totalPages) {
-                const ellipsisEnd = `<button class="page-button font-[Inter-Regular] mx-1 px-2 py-1 text-sm text-gray-500 rounded-md" disabled>...</button>`;
-                pageButtons.append(ellipsisEnd);
-            }
-
-            // Menambahkan event listener untuk tombol nomor halaman
-            $(".page-button").on("click", function () {
-                const page = parseInt($(this).text());
-                if (page !== currentPage) {
-                    currentPage = page;
-                    getDataDashboard(id, currentPage);
-                    // Menghapus kelas "active" dari semua tombol halaman
-                    $(".page-button").removeClass("activePagination");
-                    // Menambahkan kelas "active" pada tombol halaman yang dipilih
-                    $(this).addClass("activePagination");
-                }
-            });
-
-            // Mengatur status button prev dan next berdasarkan halaman saat ini
-            $("#prev-button").prop("disabled", currentPage === 1);
-            $("#next-button").prop("disabled", currentPage === totalPages);
-
-            // Menghapus kelas "active" dari semua tombol halaman
-            $(".page-button").removeClass("activePagination");
-            // Menambahkan kelas "active" pada tombol halaman saat ini
-            $(`.page-button:contains(${currentPage})`).addClass("activePagination");
         });
+
+        // Mengatur status button prev dan next berdasarkan halaman saat ini
+        $("#prev-button").prop("disabled", currentPage === 1);
+        $("#next-button").prop("disabled", currentPage === totalPages);
+
+        // Menghapus kelas "active" dari semua tombol halaman
+        $(".page-button").removeClass("activePagination");
+        // Menambahkan kelas "active" pada tombol halaman saat ini
+        $(`.page-button:contains(${currentPage})`).addClass("activePagination");
     });
-
-    // Get the default selected option element
-    var defaultOption = document.querySelector(".selected");
-
-    // Trigger a click event on the default selected option
-    defaultOption.click();
 }
+
+// Get the default selected option element
+var defaultOption = document.querySelector(".selectedSent");
+
+// Trigger a click event on the default selected option
+defaultOption.click();
 
 // function menampilkan jumlah tweet dan sentiment
 let currentTotal = null;
@@ -642,10 +649,9 @@ document.getElementById("manualSearch").addEventListener("submit", function (eve
             body: new FormData(event.target) // Use FormData to get form data
         })
         .then(function (response) {
-            if (response.ok){
+            if (response.ok) {
                 location.reload();
-            }
-            else if (response.status === 400) {
+            } else if (response.status === 400) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Manual Search limit reached!',
@@ -653,8 +659,7 @@ document.getElementById("manualSearch").addEventListener("submit", function (eve
                     timer: 1500
                 });
             }
-        }
-        )
+        })
         .catch(function (errors) {
             console.error("Error:", error);
             alert("An error occurred. Please try again later.");
