@@ -266,6 +266,8 @@ def getTweetList(request):
 
     # get tweets by selected bacapres
     bacapres_id = int(request.GET.get('bacapres', active_item))
+    print("active_item ",active_item)
+    print("bacapres ",bacapres_id)
 
     # get selected sentiment option
     sentiment = request.GET.get('sentiment')

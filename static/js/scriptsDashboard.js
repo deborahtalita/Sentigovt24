@@ -118,8 +118,6 @@ function dropdown() {
 var gdd;
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataDashboard(id, page) {
-    let url = `/sentiment/getTweetList?bacapres=${id}&page=${page}`
-
     document.getElementById("tableDropdown").addEventListener("click", function (event) {
         if (event.target.tagName === 'A') {
             var selectedValue = event.target.id;
@@ -388,6 +386,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("#prev-button").on("click", function () {
         if (currentPage > 1) {
             currentPage--;
+            var id = getSelectedBacapresOption()
             getDataDashboard(id, currentPage);
         }
     });
@@ -395,6 +394,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Event listener untuk tombol selanjutnya
     $("#next-button").on("click", function () {
         currentPage++;
+        var id = getSelectedBacapresOption()
         getDataDashboard(id, currentPage);
     });
 });
