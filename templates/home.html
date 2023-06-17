@@ -12,7 +12,7 @@
     {% endcompress %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <link rel="icon" href="{% static 'media/icons/Logo.svg' %}" type="image/icon type">
-    <title>SENTIGOV24</title>
+    <title>SENTIGOVT24</title>
 </head>
 
 <body class="bg-white">
@@ -22,7 +22,7 @@
     <!-- Start Navigasi -->
     <div class="container mx-auto">
         <nav class="flex justify-between items-center mt-4 mx-20" id="navbarId">
-            <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOV24</a></div>
+            <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-black hover:opacity-75 transition-opacity"><a href="#">SENTIGOVT24</a></div>
             <ul class="font-[Poppins-Medium] text-[13px] text-black flex gap-16 pl-20">
                 <li class="hover:opacity-75 transition-opacity"><a href="#headerId">HOME</a></li>
                 <li class="hover:opacity-75 transition-opacity"><a href="#featuresId">FEATURES</a></li>
@@ -59,28 +59,6 @@
         </div>
     </header>
     <!-- End Header -->
-    <!-- Start Bacapres -->
-    <section class="bacapres" id="bacapresId">
-        <div class="bacapresContent" id="bacapresContentId">
-            <div class="container mx-auto">
-                <div class="font-[Poppins-SemiBold] text-[35px] text-[#1E1D4C] flex justify-center mt-44">Presidential Candidate</div>
-                <div class="font-[Poppins-Regular] text-[15px] text-[#1E1D4C] flex justify-center">This presidential candidate has been determined by the trusted survey agency <span class="font-[Poppins-Bold]">"Poltracking"</span></div>
-                <div class="flex gap-5 justify-center mt-12">
-                    <img src="{% static 'media/icons/Agus.svg' %}" alt="Agus Harimurti">
-                    <img src="{% static 'media/icons/Airlangga.svg' %}" alt="Airlangga Hartanto">
-                    <img src="{% static 'media/icons/Anies.svg' %}" alt="Anies Baswedan">
-                    <img src="{% static 'media/icons/Erick.svg' %}" alt="Erick Thohir">
-                    <img src="{% static 'media/icons/Ganjar.svg' %}" alt="Ganjar Pranowo">
-                    <img src="{% static 'media/icons/Khofifah.svg' %}" alt="Khofifah Indar">
-                    <img src="{% static 'media/icons/Prabowo.svg' %}" alt="Prabowo Subianto">
-                    <img src="{% static 'media/icons/Puan.svg' %}" alt="Puan Maharani">
-                    <img src="{% static 'media/icons/Ridwan.svg' %}" alt="Ridwan Kamil">
-                    <img src="{% static 'media/icons/Sandiaga.svg' %}" alt="Sandiaga Uno">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Bacapres -->
     <!-- Start Features -->
     <div class="popup" id="popupId-1">
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
@@ -115,7 +93,7 @@
                     <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
                         <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
                         <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1"/>
-                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
+                        <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the manual search for more accurate <br> analysis!</div>
                         <button onclick="togglePopup1()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                     </div>
                     <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
@@ -147,7 +125,7 @@
                             <ul class="flex flex-col">
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular] text-[15px]" x-data="accordion(1)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Apakah aplikasi ini berbayar ?</span><svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
+                                        <span>Apakah aplikasi ini berbayar?</span><svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
                                     </h2>
@@ -158,7 +136,7 @@
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(2)">
                                     <h2 @click="handleClick()"
                                         class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Apakah pengguna dapat menggunakan tanpa daftar terlebih dahulu ?</span>
+                                        <span>Apakah pengguna dapat menggunakan tanpa daftar terlebih dahulu?</span>
                                         <svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
@@ -169,13 +147,13 @@
                                 </li>
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(3)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Untuk apa aplikasi ini digunakan ?</span>
+                                        <span>Untuk apa aplikasi ini digunakan?</span>
                                         <svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
                                     </h2>
                                     <div class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all" x-ref="tab" :style="handleToggle()">
-                                        <p class="p-5 text-gray-900">Aplikasi ini digunakan untuk melakukan memantauan opini serta analisis sentimen terkait bakal calon presiden diperiode yang akan datang</p>
+                                        <p class="p-5 text-gray-900">Aplikasi ini digunakan untuk memvisualisasikan hasil analisis sentimen pada setiap opini pada media sosial Twitter terhadap bakal calon presiden di periode yang akan datang</p>
                                     </div>
                                 </li>
                             </ul>
@@ -201,7 +179,7 @@
         <div class="footerContent relative mx-8 mt-40 mb-10" id="footerContentId">
             <div class="footerBackground h-[45vh] w-full bg-no-repeat rounded-2xl">
                 <div class="flex flex-col mx-14">
-                    <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-white mt-12 "><a href="#">SENTIGOV24</a></div>
+                    <div class="font-[BigShouldersDisplay-Bold] text-[30px] text-white mt-12 "><a href="#">SENTIGOVT24</a></div>
                     <div class="flex gap-10 font-[Poppins-SemiBold] text-[15px] mt-10 text-white">
                         <a href="#">Overview</a>
                         <a href="#">Features</a>
