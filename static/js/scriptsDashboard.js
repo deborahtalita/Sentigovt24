@@ -757,7 +757,7 @@ document.getElementById("manualSearch").addEventListener("submit", function (eve
         .then(function (response) {
             if (response.ok) {
                 console.log('manual search: true')
-                location.reload();
+                window.location.href = '/sentiment/search'
             } else if (response.status === 400) {
                 console.log('manual search: false')
                 Swal.fire({
