@@ -1620,6 +1620,10 @@ input:checked + .toggle-bg {
   display: none;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .h-1 {
   height: 0.25rem;
 }
@@ -1721,8 +1725,40 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
-.h-0 {
-  height: 0px;
+.h-\[170px\] {
+  height: 170px;
+}
+
+.h-\[300px\] {
+  height: 300px;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
+.h-\[700px\] {
+  height: 700px;
+}
+
+.h-\[690px\] {
+  height: 690px;
+}
+
+.h-\[695px\] {
+  height: 695px;
+}
+
+.h-\[692px\] {
+  height: 692px;
+}
+
+.h-\[800\] {
+  height: 800;
+}
+
+.h-\[800px\] {
+  height: 800px;
 }
 
 .max-h-0 {
@@ -1823,11 +1859,6 @@ input:checked + .toggle-bg {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .max-w-full {
@@ -2264,10 +2295,6 @@ input:checked + .toggle-bg {
 
 .grid-flow-col-dense {
   grid-auto-flow: column dense;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-4 {
@@ -3359,11 +3386,6 @@ input:checked + .toggle-bg {
   padding-right: 1rem;
 }
 
-.px-40 {
-  padding-left: 10rem;
-  padding-right: 10rem;
-}
-
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -4317,6 +4339,42 @@ input:checked + .toggle-bg {
   }
 }
 
+@media (min-width: 768px) {
+  .md\:container {
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .md\:container {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .md\:container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .md\:container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .md\:container {
+      max-width: 1536px;
+    }
+  }
+}
+
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -4909,6 +4967,10 @@ input:checked + .toggle-bg {
     grid-auto-flow: column;
   }
 
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -4933,6 +4995,11 @@ input:checked + .toggle-bg {
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .md\:px-40 {
+    padding-left: 10rem;
+    padding-right: 10rem;
   }
 
   .md\:px-5 {
