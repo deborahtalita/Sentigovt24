@@ -19,6 +19,11 @@ document.addEventListener('alpine:init', () => {
     }));
 })
 
+function toggleMenuHome() {
+    document.getElementById("menuHome").classList.toggle("activeMenuHome");
+    $('body').addClass('overflow-hidden');
+}
+
 function togglePopup1() {
     document.getElementById("popupId-1").classList.toggle("active");
     $('body').addClass('overflow-hidden');
@@ -52,7 +57,7 @@ window.onload = function () {
 
 // typing text animation script
 var typed = new Typed(".typing", {
-    strings: ["See Beyond the Noise in <br/> The 2024 Race", "Your voice is yours,<br/> use it wisely", "Together we can change the future"],
+    strings: ["See Beyond the Noise in <br/> The 2024 Race", "Your voice is yours,<br/> use it wisely", "Together we can change<br/> the future"],
     typeSpeed: 100,
     backSpeed: 60,
     loop: true

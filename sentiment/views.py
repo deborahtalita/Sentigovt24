@@ -10,7 +10,7 @@ from sentigovt2.decorators import role_required
 from django.urls import reverse_lazy
 import pytz 
 from django.core.paginator import Paginator
-from datetime import datetime, timedelta
+from datetime import timedelta
 from .helpers.sentiment_helper import predict, orderLabel
 from .helpers.date_helper import DateHelper
 from .helpers.session_helper import isGuestLimitAccess

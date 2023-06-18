@@ -116,3 +116,8 @@
     width: 100vw;
     transition: 0.1s ease-in-out;
 }
+
+.activeMenuHome {
+    height: fit-content;
+    transition: 0.1s ease-in-out;
+}
