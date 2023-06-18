@@ -111,3 +111,8 @@
 }
 
 /* End Multi Select */
+
+.activeMenuMobile {
+    width: 100vw;
+    transition: 0.1s ease-in-out;
+}

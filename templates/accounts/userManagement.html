@@ -7,22 +7,24 @@ User Management
 {% endblock %}
 
 {% block content %}
-<div class="pl-[280px] pr-6 pb-6 pt-24 ">
+<div class="sm:pl-[100px] md:pl-[280px] px-6 pb-6 pt-24 ">
     <div class="flex flex-col gap-5">
         <!-- Start Header User Management -->
         <header class="bg-white py-6 px-10 rounded-xl h-fit">
-            <div class="font-[poppins-medium] text-[40px] text-[#1E1D4C]">User Management</div>
-            <hr class="border-[#C2C2C2] my-5" />
-            <div class="flex">
+            <div class="font-[poppins-medium] text-[20px] sm:text-[40px] text-[#1E1D4C]">User Management</div>
+            <hr class="border-[#C2C2C2] my-2 sm:my-5" />
+            <div class="flex flex-col sm:flex-row sm:gap-5 mt-4">
                 <div class='max-w-md'>
                     <div class="relative flex items-center w-full h-9 mb-5 bg-white overflow-hidden border-2 border-[#C2C2C2] rounded-full">
                         <div class="grid place-items-center h-full w-12 text-gray-300">
                             <img class="h-5 w-5" src="{% static 'media/icons/search.svg' %}" alt="search">
                         </div>
-                        <input id="searchQuery" class="h-full w-[232px] outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
+                        <input id="searchQuery" class="h-full w-full outline-none text-sm text-gray-700 pr-4 border-none border-transparent focus:border-transparent focus:ring-0" type="text" name="search" placeholder="Search" />
                     </div>
                 </div>
-                <button onclick="getDataUser(1)" class="font-[poppins-light] flex font-medium justify-center ml-5 h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                <div class="flex justify-center">
+                    <button onclick="getDataUser(1)" class="font-[poppins-light] flex font-medium justify-center h-[28px] py-[18px] px-8 text-[13px] items-center bg-[#7B5BFF] hover:bg-[#7054E0] text-white rounded-full tracking-wide cursor-pointer transition-all duration-500">Search</button>
+                </div>
             </div>
         </header>
         <!-- End Header User Management -->
@@ -57,7 +59,7 @@ User Management
                                         x-transition:leave="transition ease-in duration-100"
                                         x-transition:leave-start="opacity-100 scale-100"
                                         x-transition:leave-end="opacity-0 scale-90"
-                                        class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
+                                        class="absolute right-0 z-20 w-30 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-xl shadow-xl border-2">
                                         <a href="#" class="font-[Inter-Regular] text-[12px] block mx-3 rounded-lg py-3 capitalize transition-colors duration-300 transform hover:bg-gray-100">
                                             All Role
                                         </a>
@@ -96,7 +98,7 @@ User Management
         </section>
         <!-- Start Footer -->
         <footer class="font-[poppins-regular] text-[12px] text-[#1E1D4C] ml-5 mr-5 flex justify-end">
-            Sentigov24 | Website Sentiment Analysis Bakal Calon Presiden
+            Copyright &#169; 2023, KoTA 105
         </footer>
         <!-- End Footer -->
     </div>

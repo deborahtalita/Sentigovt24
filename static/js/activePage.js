@@ -10,3 +10,17 @@ const navLinks = document.querySelectorAll('.itemActive').forEach(link => {
 function goToDetailPage(url) {
     window.location.href = url;
 }
+
+function toggleMenuMobile() {
+    document.getElementById("menuMobile").classList.toggle("activeMenuMobile");
+    $('body').addClass('overflow-hidden');
+}
+
+function toggleRankingMobile() {
+    document.getElementById("rankingMobile").classList.toggle("activeMenuMobile");
+    $('body').addClass('overflow-hidden');
+}
+
+function closeModal() {
+    $('body').removeClass('overflow-hidden');
+}

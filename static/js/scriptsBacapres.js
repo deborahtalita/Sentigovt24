@@ -56,7 +56,7 @@ function getDataBacapres(page) {
                 ${index}
             </th>
             <td class="py-4">
-                <img class="mx-auto w-12 h-12 rounded-full" src="${data[i].avatar}" alt="Photo Bacapres">
+                <img class="mx-auto w-[48px] h-[45px] sm:h-[48px] rounded-full" src="${data[i].avatar}" alt="Photo Bacapres">
             </td>
             <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-nowrap text-center">
                 ${data[i].name}
@@ -65,7 +65,7 @@ function getDataBacapres(page) {
                 <a data-id="${data[i].id}" id="btn-delete-bacapres" class="flex justify-center" href="#"><img src="/static/media/icons/btn-delete.svg" alt="Delete"></a>
             </td>
             <td class="font-[Inter-Regular] text-[12px] px-6 py-4">
-                <a class="flex justify-center" href="${data[i].id}/edit"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
+                <a class="flex justify-center w-20 sm:w-full" href="${data[i].id}/edit"><img src="/static/media/icons/btn-edit.svg" alt="Edit"></a>
             </td>
         </tr>`;
             tableBody.append(row);

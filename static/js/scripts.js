@@ -45,7 +45,7 @@ window.onload = function () {
 
 // typing text animation script
 var typed = new Typed(".typing", {
-    strings: ["See Beyond the Noise in <br/> The 2024 Race", "Your voice is yours,<br/> use it wisely", "Together we can change the future"],
+    strings: ["See Beyond the Noise in <br/> The 2024 Race", "Your voice is yours,<br/> use it wisely", "Together we can change<br/> the future"],
     typeSpeed: 100,
     backSpeed: 60,
     loop: true

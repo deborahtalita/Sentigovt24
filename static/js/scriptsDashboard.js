@@ -144,7 +144,7 @@ var lastID;
 // Fungsi untuk mengambil data dengan AJAX menggunakan getJSON
 function getDataDashboard(id, page) {
     console.log(id);
-    if (lastID != id){
+    if (lastID != id) {
         filterOpt = "default";
     }
     lastID = id;
@@ -159,7 +159,7 @@ function getDataDashboard(id, page) {
     if (gdd) {
         gdd.abort();
     }
-    
+
     gdd = $.getJSON(url, function (response) {
 
         var currentPage = page;
@@ -190,24 +190,24 @@ function getDataDashboard(id, page) {
             index = startIndex + counter;
 
             const row = `<tr class="border-b">
-                <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
-                    ${index}
-                </th>
-                <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
-                    ${data[i].name}
-                </td>
-                <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
-                    ${data[i].tweet}
-                </td>
-                <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
-                    <div class="${bgColor} p-1 rounded-full">
-                        ${data[i].sentiment}
-                    </div>
-                </td>
-                <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
-                    ${data[i].date}
-                </td>
-            </tr>`;
+            <th scope="row" class="font-[Inter-Semibold] text-[12px] px-6 py-4 text-center font-medium text-gray-900">
+                ${index}
+            </th>
+            <td class="font-[Inter-Regular] text-[12px] text-black mx-10 py-4 whitespace-nowrap text-center">
+                ${data[i].name}
+            </td>
+            <td class="font-[Inter-Regular] text-[12px] text-black px-10 py-4 whitespace-normal text-justify">
+                ${data[i].tweet}
+            </td>
+            <td class="font-[Inter-Regular] text-[12px] text-black py-4 text-center ">
+                <div class="${bgColor} p-1 rounded-full">
+                    ${data[i].sentiment}
+                </div>
+            </td>
+            <td class="font-[Inter-Regular] text-[12px] text-black px-6 py-4 text-center">
+                ${data[i].date}
+            </td>
+        </tr>`;
             tableBody.append(row);
             counter = counter + 1
         }
@@ -246,7 +246,6 @@ function getDataDashboard(id, page) {
             const page = parseInt($(this).text());
             if (page !== currentPage) {
                 currentPage = page;
-                var id = getSelectedBacapresOption()
                 getDataDashboard(id, currentPage);
                 // Menghapus kelas "active" dari semua tombol halaman
                 $(".page-button").removeClass("activePagination");
@@ -312,6 +311,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Menampilkan data di tabel
             const buttonContainerRanking = $("#buttonContainerRanking");
+            const buttonContainerRankingMobile = $("#buttonContainerRankingMobile");
+            buttonContainerRankingMobile.empty();
             buttonContainerRanking.empty();
 
             // Tambahkan event listener pada dropdown sort
@@ -332,9 +333,28 @@ document.addEventListener("DOMContentLoaded", async () => {
                 renderData(data, selectedSort);
             });
 
+            // Tambahkan event listener pada dropdown sort
+            $("#dropdownSortMobile").on("change", function () {
+                const selectedSort = $(this).val();
+                console.log(selectedSort)
+
+                // Lakukan pengurutan sesuai dengan pilihan yang dipilih
+                if (selectedSort === "abjad") {
+                    data.sort((a, b) => a.name.localeCompare(b.name));
+                } else if (selectedSort === "topPositive") {
+                    data.sort((a, b) => b.positive - a.positive);
+                } else if (selectedSort === "topNegative") {
+                    data.sort((a, b) => b.negative - a.negative);
+                }
+
+                // Tampilkan data yang sudah diurutkan
+                renderDataMobile(data, selectedSort);
+            });
+
             // Render data awal
             data.sort((a, b) => a.name.localeCompare(b.name));
             renderData(data, "abjad");
+            renderDataMobile(data, "abjad");
         });
     }
 
@@ -348,7 +368,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const activeClass = isActive ? "bg-[#554fff] hover:bg-[#554fff] text-white" : ""; // Menambahkan kelas "active" jika button aktif
 
             const row = `
-                <button title="buttonRankingBacapres" id="buttonRanking-${data[i].id}" data-id="${data[i].id}" class="rankingButton my-2 flex items-center w-full px-5 py-2 hover:bg-gray-100 focus:outline-none rounded-lg justify-between ${activeClass}">
+                <button title="buttonRankingBacapres" id="buttonRanking-${data[i].id}" data-id="${data[i].id}" class="rankingButton my-2 flex items-center w-full px-5 py-2 focus:outline-none rounded-lg justify-between ${activeClass}">
                     <div class="flex items-center gap-2">
                         <img class="object-cover w-8 h-8 rounded-full" src="${data[i].img_bacapres}" alt="Photo Bacapres">
                         <h1 class="font-[poppins-regular] text-[12px] capitalize">${data[i].name}</h1>
@@ -384,6 +404,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    function renderDataMobile(data, selectedSort) {
+        const buttonContainerRankingMobile = $("#buttonContainerRankingMobile");
+        buttonContainerRankingMobile.empty();
+        console.log(selectedSort)
+
+        for (let i = 0; i < data.length; i++) {
+            const isActive = i == 0; // Menandai button pertama sebagai aktif
+            const activeClass = isActive ? "bg-[#554fff] hover:bg-[#554fff] text-white" : ""; // Menambahkan kelas "active" jika button aktif
+
+            const row = `
+                <button title="buttonRankingBacapres" id="buttonRankingMobile-${data[i].id}" data-id="${data[i].id}" class="rankingButton my-2 flex items-center w-full px-5 py-2 focus:outline-none rounded-lg justify-between ${activeClass}">
+                    <div class="flex items-center gap-2">
+                        <img class="object-cover w-8 h-8 rounded-full" src="${data[i].img_bacapres}" alt="Photo Bacapres">
+                        <h1 class="font-[poppins-regular] text-[12px] capitalize">${data[i].name}</h1>
+                    </div>
+                    <div class="font-[poppins-bold] text-[12px] flex gap-4">
+                    ${selectedSort === "abjad" ? '<div></div>' : ''}
+                    ${selectedSort === "topPositive" ? `<div class="text-[#05FF00]">${data[i].positive}</div>` : ''}
+                    ${selectedSort === "topNegative" ? `<div class="text-[#FF0000]">${data[i].negative}</div>` : ''}
+                    </div>
+                </button>
+                <hr>`;
+            buttonContainerRankingMobile.append(row);
+
+            // Tambahkan event listener pada setiap button
+            $(`#buttonRankingMobile-${data[i].id}`).on("click", function () {
+                // Hapus kelas "active" dari button sebelumnya
+                $(".rankingButton").removeClass("bg-[#554fff] hover:bg-[#554fff] text-white");
+                // Tambahkan kelas "active" pada button yang baru dipilih
+                $(this).addClass("bg-[#554fff] hover:bg-[#554fff] text-white");
+                displayTotalTweet(data[i].id);
+                var chartType = getCurrentChartType();
+                console.log(chartType)
+                displayChart(chartType, data[i].id);
+                getDataDashboard(data[i].id, 1)
+            });
+            // Setel nilai ID aktif sebagai argumen default untuk displayTotalTweet
+            if (isActive) {
+                var chartType = getCurrentChartType();
+                displayChart(chartType, data[i].id);
+                displayTotalTweet(data[i].id);
+                getDataDashboard(data[i].id, 1)
+            }
+        }
+    }
+
     // Mengambil data saat halaman dimuat
     getDataRanking();
     // await taskRanking();
@@ -393,7 +459,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("#prev-button").on("click", function () {
         if (currentPage > 1) {
             currentPage--;
-            var id = getSelectedBacapresOption()
             getDataDashboard(id, currentPage);
         }
     });
@@ -401,7 +466,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Event listener untuk tombol selanjutnya
     $("#next-button").on("click", function () {
         currentPage++;
-        var id = getSelectedBacapresOption()
         getDataDashboard(id, currentPage);
     });
 });
@@ -472,6 +536,20 @@ function displayChart(chartId, Id) {
                 stroke: {
                     width: [2, 2, 2], // mengatur lebar garis
                 },
+                title: {
+                    text: 'Chart Line Tren Sentiment',
+                    align: 'left',
+                    margin: 10,
+                    offsetX: 0,
+                    offsetY: 0,
+                    floating: false,
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: undefined,
+                        color: '#263238'
+                    },
+                },
                 fill: {
                     type: "gradient",
                     gradient: {
@@ -521,6 +599,20 @@ function displayChart(chartId, Id) {
                 stroke: {
                     width: 2,
                     colors: ['#fff']
+                },
+                title: {
+                    text: 'Chart Bar Tren Sentiment',
+                    align: 'left',
+                    margin: 10,
+                    offsetX: 0,
+                    offsetY: 0,
+                    floating: false,
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: undefined,
+                        color: '#263238'
+                    },
                 },
                 xaxis: {
                     categories: response.dates,
@@ -577,6 +669,20 @@ function displayChartTotal() {
             },
             dataLabels: {
                 enabled: false
+            },
+            title: {
+                text: 'Tren Total Tweet',
+                align: 'left',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: '#263238'
+                },
             },
             series: response.bacapres_total_tweet_per_day,
             fill: {
