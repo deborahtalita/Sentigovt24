@@ -19,6 +19,11 @@ document.addEventListener('alpine:init', () => {
     }));
 })
 
+function toggleMenuHome() {
+    document.getElementById("menuHome").classList.toggle("activeMenuHome");
+    $('body').addClass('overflow-hidden');
+}
+
 function togglePopup1() {
     document.getElementById("popupId-1").classList.toggle("active");
     $('body').addClass('overflow-hidden');
