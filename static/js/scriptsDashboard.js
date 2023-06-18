@@ -756,8 +756,10 @@ document.getElementById("manualSearch").addEventListener("submit", function (eve
         })
         .then(function (response) {
             if (response.ok) {
+                console.log('manual search: true')
                 location.reload();
             } else if (response.status === 400) {
+                console.log('manual search: false')
                 Swal.fire({
                     icon: 'error',
                     title: 'Manual Search limit reached!',

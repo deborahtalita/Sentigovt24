@@ -72,8 +72,8 @@
         <div class="overlay fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#2c2c2c] opacity-[70%] z-[1] hidden"></div>
         <div class="overflow-y-auto content fixed top-1/2 left-1/2 bg-white z-[2] py-[50px] px-[80px] w-screen h-screen text-center box-border transform -translate-x-1/2 -translate-y-1/2 scale-0">
             <button class="absolute right-[20px] top-[20px] w-[30px] h-[30px] bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 text-white text-[25px] font-[600] pl-[3px] rounded-full" onclick="togglePopup1(); closeModal();"><img src="{% static 'media/icons/close.svg' %}" alt="close"/></button>
-            <div class="font-[Poppins-semibold] text-[25px] sm:text-[40px] mb-[25px]">Manual Prediction Sentiment Analysis</div>
-            <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan selama 7 hari. Selain itu, fitur ini menyediakan <i>generate excel</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai anggota dan apabila status anda hanyalah tamu, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari anggota.</p>
+            <div class="font-[Poppins-semibold] text-[25px] sm:text-[40px] mb-[25px]">Manual Search Sentiment Analysis</div>
+            <p class="font-[poppins-regular] text-[18px] text-justify leading-loose">Pada fitur ini, anda dapat melakukan prediksi sesuai dengan nama bakal calon presiden yang telah ditentuan serta memilih waktu yang anda inginkan maksimal 30 hari. Selain itu, fitur ini menyediakan <i>generate csv</i> dari hasil yang telah anda lakukan sehingga hasil tersebut dapat anda lihat secara lokal dikomputer anda. Fitur ini dapat diakses secara bebas oleh seluruh pengguna yang berstatus sebagai Member dan apabila status anda hanyalah Guest, maka fitur ini hanya dapat digunakan maksimal selama 3 kali, untuk selanjutnya dimohon untuk mendaftarkan diri menjadi bagian dari Member.</p>
         </div>
     </div>
     <div class="popup" id="popupId-2">
@@ -100,9 +100,9 @@
                 <div class="flex flex-wrap -mx-1 lg:-mx-4 justify-center gap-10">
                     <div class="my-1 w-full sm:mx-9 sm:mb-10 md:my-4 md:px-3 md:w-[400px]">
                         <div class="flex flex-col justify-between relative h-[542px] border-[#C2C2C2] border-2 rounded-2xl shadow-xl py-14">
-                            <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Prediction Sentiment <br> Analysis</div>
+                            <div class="font-[Poppins-SemiBold] text-[20px] text-[#1E1D4C] text-center">Manual Search Sentiment <br> Analysis</div>
                             <img class="m-auto" src="{% static 'media/icons/Features1.svg' %}" alt="Features 1"/>
-                            <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the prediction manual for more accurate <br> analysis!</div>
+                            <div class="mx-14 pb-10 text-center font-[Poppins-Regular] text-[12px] text-[#1E1D4C]">Don't let sentiment get overlooked, use the manual search for more accurate <br> analysis!</div>
                             <button onclick="togglePopup1()" class="border-[#C2C2C2] absolute border-2 p-3 rounded-lg bottom-5 right-5"><img src="{% static 'media/icons/more.svg' %}" alt="More"></button>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                             <ul class="flex flex-col">
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular] text-[15px]" x-data="accordion(1)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Apakah aplikasi ini berbayar ?</span><svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
+                                        <span>Apakah aplikasi ini berbayar?</span><svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
                                     </h2>
@@ -150,7 +150,7 @@
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(2)">
                                     <h2 @click="handleClick()"
                                         class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Apakah pengguna dapat menggunakan tanpa daftar terlebih dahulu ?</span>
+                                        <span>Apakah pengguna dapat menggunakan aplikasi tanpa daftar terlebih dahulu?</span>
                                         <svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
@@ -161,13 +161,13 @@
                                 </li>
                                 <li class="bg-white my-2 shadow-lg font-[Poppins-Regular]" x-data="accordion(3)">
                                     <h2 @click="handleClick()" class="flex flex-row justify-between items-center font-semibold p-5 cursor-pointer">
-                                        <span>Untuk apa aplikasi ini digunakan ?</span>
+                                        <span>Untuk apa aplikasi ini digunakan?</span>
                                         <svg :class="handleRotate()" class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500" viewBox="0 0 20 20">
                                             <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
                                         </svg>
                                     </h2>
                                     <div class="border-l-2 border-purple-600 overflow-hidden max-h-0 duration-500 transition-all" x-ref="tab" :style="handleToggle()">
-                                        <p class="p-5 text-gray-900">Aplikasi ini digunakan untuk melakukan memantauan opini serta analisis sentimen terkait bakal calon presiden diperiode yang akan datang</p>
+                                        <p class="p-5 text-gray-900">Aplikasi ini digunakan untuk menampilkan dan memvisualisasikan hasil analisis sentimen pada setiap opini pada media sosial Twitter terhadap bakal calon presiden di periode yang akan datang</p>
                                     </div>
                                 </li>
                             </ul>
