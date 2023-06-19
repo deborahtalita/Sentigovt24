@@ -70,7 +70,7 @@ class ManualSearchView(View):
     def get(self, request):
         if 'history_id' in request.session:
             del request.session['history_id']
-            
+
         if 'selected_options' not in request.session:
             self.context['result']= False
 
@@ -85,9 +85,7 @@ class ManualSearchView(View):
         else:
             selected_options = request.POST.getlist('search_field')
             start = request.POST.get('start_date')
-            print(start)
             end = request.POST.get('end_date')
-            print(end)
             
             selected_options = [int(x) for x in selected_options[0].split(',')]
 
@@ -270,12 +268,9 @@ def getTweetList(request):
 
     # get tweets by selected bacapres
     bacapres_id = int(request.GET.get('bacapres'))
-    print("active_item ",active_item)
-    print("bacapres ",bacapres_id)
 
     # get selected sentiment option
     sentiment = request.GET.get('sentiment')
-    print("this ",sentiment)
     if sentiment:
         tokoh_tweets = tweet.filter(bacapres=bacapres_id,sentiment=sentiment).order_by('-created_at')
     else:
@@ -342,8 +337,8 @@ def getTweets(session):
         history_id = session['history_id']
         history = History.objects.get(id=history_id)
 
-        start_date = history.start_date
-        end_date = history.end_date
+        start_date = history.start_date.replace(tzinfo=pytz.utc).astimezone(timezone)
+        end_date = history.end_date.replace(tzinfo=pytz.utc).astimezone(timezone)
     else:
         start_date = dh.getLastSevenDays() # from date_helper to get current dates
         end_date = dh.getTodayDate()
