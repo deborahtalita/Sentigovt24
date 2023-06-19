@@ -68,10 +68,10 @@ class ManualSearchView(View):
     context['active_page'] = 'manual search'
 
     def get(self, request):
-        if 'selected_options' not in request.session:
-            self.context['result']= False
-
         if 'history_id' in request.session:
+            del request.session['history_id']
+            
+        if 'selected_options' not in request.session:
             self.context['result']= False
 
         bacapres = Bacapres.objects.all().order_by('name')
@@ -427,7 +427,7 @@ class HistoryDetailView(RoleRequiredMixin, View):
     
         if 'selected_end_date' in request.session:
             del request.session['selected_end_date']
-            
+
         history = get_object_or_404(History, id=id)
 
         # get dates
