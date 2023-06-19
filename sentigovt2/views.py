@@ -17,6 +17,19 @@ class DashboardView(View):
     context['active_page'] = 'dashboard'
 
     def get(self, request):
+        # set session for guest
+        rendered_html = render(request, self.template_name, self.context)
+        session_guest = request.COOKIES.get('session_guest')
+        if session_guest:
+            response = HttpResponse(rendered_html)
+        else:
+            response = HttpResponse(rendered_html)
+            
+            unique_id = str(uuid.uuid4())
+            session_age = 3600 * 24 * 90 # 3 months
+            response.set_cookie('session_guest', unique_id, max_age=session_age)
+            Session.objects.create(id=unique_id)
+
         # clear all session from other view
         if 'selected_start_date' in request.session:
             del request.session['selected_start_date']
@@ -31,19 +44,5 @@ class DashboardView(View):
             del request.session['history_id']
         
         request.session.modified = True
-
-        rendered_html = render(request, self.template_name, self.context)
-
-        # set session for guest
-        session_guest = request.COOKIES.get('session_guest')
-        if session_guest:
-            response = HttpResponse(rendered_html)
-        else:
-            response = HttpResponse(rendered_html)
-            
-            unique_id = str(uuid.uuid4())
-            session_age = 3600 * 24 * 90 # 3 months
-            response.set_cookie('session_guest', unique_id, max_age=session_age)
-            Session.objects.create(id=unique_id)
 
         return response

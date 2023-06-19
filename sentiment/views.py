@@ -70,6 +70,10 @@ class ManualSearchView(View):
     def get(self, request):
         if 'selected_options' not in request.session:
             self.context['result']= False
+
+        if 'history_id' in request.session:
+            self.context['result']= False
+
         bacapres = Bacapres.objects.all().order_by('name')
         self.context['bacapres_opt'] = bacapres
         return render(request, self.template_name, self.context)
@@ -418,6 +422,12 @@ class HistoryDetailView(RoleRequiredMixin, View):
 
     def get(self, request, id):
         # belum ada pengecekan user id sesuai gak
+        if 'selected_start_date' in request.session:
+            del request.session['selected_start_date']
+    
+        if 'selected_end_date' in request.session:
+            del request.session['selected_end_date']
+            
         history = get_object_or_404(History, id=id)
 
         # get dates

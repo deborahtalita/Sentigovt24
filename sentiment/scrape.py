@@ -50,7 +50,7 @@ def scrape_tweet():
 
     for query in bacapres:
         print(query.name)
-        for tweet in sntwitter.TwitterSearchScraper(query.name+f" since_time:{since_time} until_time:{until_time}").get_items():
+        for tweet in sntwitter.TwitterSearchScraper(query.name+f" since_time:{since_time} until_time:{until_time} lang:id").get_items():
             tweet_date = tweet.date
             tweet_id = str(tweet.id)
             data = {
