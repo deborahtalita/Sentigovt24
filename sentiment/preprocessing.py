@@ -14,7 +14,8 @@ utils_path = os.path.join(os.path.dirname(__file__), '../utils/')
 class TextPreprocessing():
 
     def removeIrrelevantTweet(self, tweets):
-        blacklist_words=[line.rstrip() for line in open('blacklist_words.txt')]
+        file_path = os.path.join(os.path.dirname(__file__), '../utils/dictionaries/blacklist_words.txt')
+        blacklist_words=[line.rstrip() for line in open(file_path)]
         results1 = [item for item in tweets if any(keyword.lower() in item.get('text').lower() for keyword in re.split("|".join(map(re.escape, [";", " "])), item.get('keyword')))]
         results2 = [item for item in results1 if all(bl_word.lower() not in item.get('text').lower() for bl_word in blacklist_words)]
         return results2
