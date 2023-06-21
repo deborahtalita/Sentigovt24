@@ -261,7 +261,6 @@ def getTweetList(request):
 
     # get default selected bacapres
     bacapres = bacapres.first()
-    active_item = bacapres.id
     
     # get tweets and dates
     tweet, _, _ = getTweets(request.session)
@@ -342,7 +341,12 @@ def getTweets(session):
     else:
         start_date = dh.getLastSevenDays() # from date_helper to get current dates
         end_date = dh.getTodayDate()
+
     tweets = Tweet.objects.filter(created_at__range=(start_date,end_date)).values('id','user_name','text','created_at','sentiment','bacapres')
+
+    if 'selected_options' in session:
+        selected_options = session['selected_options']
+        tweets = tweets.filter(bacapres_id__in=selected_options)
     return tweets, start_date, end_date
 
 def getBacapres(session):
